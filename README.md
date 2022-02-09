@@ -1,8 +1,5 @@
-- 👋 Hi, I’m @Chandhana01
-- 👀 I’m interested in MedTech
-- 🌱 I’m currently learning Brain-Computer Interfaces
-- 💞️ I’m looking to collaborate on developing with muse 2
-- 📫 How to reach me- Twitter @chandhana01
+-Hi, I’m @Chandhana01
+- 
 
 <!---
 Chandhana01/Chandhana01 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
