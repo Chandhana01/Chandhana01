@@ -200,6 +200,88 @@ a { color: var(--accent-2); }
 .hover-card .hc-meta { margin-top: 7px; display: flex; gap: 5px; flex-wrap: wrap; }
 .hover-card .pill { font-size: 10px; padding: 1px 6px; border-radius: 10px; background: var(--bg-3); color: var(--text-dim); }
 
+/* ---------- Filter bar ---------- */
+#filterbar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 9px 16px; border-bottom: 1px solid var(--line); background: var(--panel);
+  position: relative; z-index: 25;
+}
+.fb-search {
+  width: 240px; padding: 8px 11px; background: var(--bg-2); border: 1px solid var(--line);
+  border-radius: 9px; color: var(--text); font-size: 13px;
+}
+.fb-search:focus { outline: none; border-color: var(--accent-2); }
+.fb-spacer { flex: 1; }
+.fb-btn {
+  background: var(--bg-3); color: var(--text); border: 1px solid var(--line);
+  padding: 7px 12px; border-radius: 9px; font-size: 13px; font-weight: 600;
+}
+.fb-btn:hover { border-color: var(--line-strong); }
+.fb-btn.on, .fb-btn[aria-expanded="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; background: var(--bg-2); }
+.seg button { border: none; background: transparent; color: var(--text-dim); font-size: 12.5px; font-weight: 600; padding: 7px 12px; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button:hover { color: var(--text); background: var(--bg-3); }
+.seg button.on { background: var(--accent); color: #fff; }
+
+.dropdown { position: relative; }
+.dropdown > summary {
+  list-style: none; cursor: pointer; background: var(--bg-3); color: var(--text);
+  border: 1px solid var(--line); padding: 7px 12px; border-radius: 9px; font-size: 13px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.dropdown > summary::-webkit-details-marker { display: none; }
+.dropdown > summary::after { content: "▾"; color: var(--text-faint); font-size: 11px; }
+.dropdown[open] > summary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.dropdown[open] > summary::after { color: #fff; }
+.dropdown .count-badge { background: rgba(255,255,255,.25); border-radius: 10px; padding: 0 6px; font-size: 11px; }
+.dd-panel {
+  position: absolute; top: calc(100% + 6px); left: 0; min-width: 210px; max-height: 340px; overflow-y: auto;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 11px; padding: 8px; box-shadow: var(--shadow); z-index: 55;
+}
+.dd-actions { display: flex; justify-content: flex-end; margin-bottom: 4px; }
+
+/* ---------- Side panel: prize list ---------- */
+#sidePanel {
+  width: 304px; flex-shrink: 0; border-right: 1px solid var(--line);
+  background: var(--bg-2); display: flex; flex-direction: column; min-height: 0;
+}
+.sp-head { display: flex; align-items: center; justify-content: space-between; padding: 9px 13px; border-bottom: 1px solid var(--line); }
+#spCount { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-faint); font-weight: 700; }
+#spSort { background: var(--bg-3); border: 1px solid var(--line); border-radius: 8px; color: var(--text); font-size: 12px; padding: 4px 7px; }
+.prize-list { flex: 1; overflow-y: auto; }
+.prize-row {
+  display: flex; align-items: center; gap: 10px; padding: 9px 13px; cursor: pointer;
+  border-bottom: 1px solid var(--line); border-left: 3px solid transparent;
+}
+.prize-row:hover { background: var(--bg-3); }
+.prize-row.active { background: var(--bg-3); border-left-color: var(--accent); }
+.pr-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; border: 1.5px solid; }
+.pr-year { font-weight: 800; font-size: 12px; color: var(--text-dim); width: 30px; flex-shrink: 0; }
+.pr-body { min-width: 0; flex: 1; }
+.pr-laur { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pr-one { font-size: 11px; color: var(--text-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+.sp-group { font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-faint); padding: 9px 13px 5px; background: var(--bg-2); position: sticky; top: 0; font-weight: 700; border-bottom: 1px solid var(--line); }
+
+/* ---------- Study by vibe popover ---------- */
+.vibe-pop {
+  position: fixed; width: 340px; max-height: 76vh; overflow-y: auto;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  padding: 14px; box-shadow: var(--shadow); z-index: 60;
+}
+.vibe-pop textarea {
+  width: 100%; min-height: 64px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 9px;
+  color: var(--text); padding: 9px 11px; font-size: 13px; font-family: var(--sans); line-height: 1.45; resize: vertical;
+}
+.vibe-pop textarea:focus { outline: none; border-color: var(--accent-2); }
+.vibe-pop .vp-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+.vibe-pop .vp-close { background: none; border: none; color: var(--text-dim); font-size: 18px; }
+
+@media (max-width: 1100px) {
+  #sidePanel { width: 230px; }
+}
+
 /* ---------- Detail drawer ---------- */
 .detail {
   width: 560px; flex-shrink: 0; background: var(--panel); border-left: 1px solid var(--line);
@@ -467,44 +549,41 @@ a { color: var(--accent-2); }
     </div>
   </header>
 
+  <!-- Filter bar -->
+  <div id="filterbar">
+    <input type="search" id="searchBox" class="fb-search" placeholder="Search laureate, topic, tag…" autocomplete="off" />
+    <div class="seg" id="engageSeg">
+      <button data-engage="all" class="on">All</button>
+      <button data-engage="studied">Studied</button>
+      <button data-engage="empty">Not started</button>
+      <button data-engage="due">Due</button>
+    </div>
+    <details class="dropdown" id="subDrop">
+      <summary>Subfield</summary>
+      <div class="dd-panel"><div class="dd-actions"><button class="mini-link" id="subAll">clear</button></div><div id="subfieldFilters" class="chk-list"></div></div>
+    </details>
+    <details class="dropdown" id="catDrop">
+      <summary>Category</summary>
+      <div class="dd-panel"><div class="dd-actions"><button class="mini-link" id="catAll">clear</button></div><div id="categoryFilters" class="chk-list"></div></div>
+    </details>
+    <button class="fb-btn" id="vibeToggle" aria-expanded="false">✨ Study by vibe</button>
+    <span class="fb-spacer"></span>
+    <button class="fb-btn ghost" id="clearAll" hidden>✕ clear filters</button>
+  </div>
+
   <div id="main">
-    <!-- Left rail: filters / legend -->
-    <aside id="rail">
-      <div class="rail-section">
-        <input type="search" id="searchBox" placeholder="Search laureate, topic, tag…" autocomplete="off" />
-        <button class="vibe-toggle" id="vibeToggle" aria-expanded="false">✨ Study by vibe</button>
-        <div id="vibePanel" class="vibe-panel" hidden></div>
+    <!-- Left: list of all prizes -->
+    <aside id="sidePanel">
+      <div class="sp-head">
+        <span id="spCount">117 prizes</span>
+        <select id="spSort" title="Sort the list">
+          <option value="year-asc">Oldest first</option>
+          <option value="year-desc">Newest first</option>
+          <option value="subfield">By subfield</option>
+          <option value="mastery">By my mastery</option>
+        </select>
       </div>
-
-      <div class="rail-section">
-        <h3>Engagement</h3>
-        <label class="radio"><input type="radio" name="engage" value="all" checked /> All prizes</label>
-        <label class="radio"><input type="radio" name="engage" value="studied" /> ✦ Has my notes</label>
-        <label class="radio"><input type="radio" name="engage" value="empty" /> ○ Not started</label>
-        <label class="radio"><input type="radio" name="engage" value="due" /> 🎴 Cards due</label>
-      </div>
-
-      <div class="rail-section">
-        <h3>Subfields <button class="mini-link" id="subAll">all</button></h3>
-        <div id="subfieldFilters" class="chk-list"></div>
-      </div>
-
-      <div class="rail-section">
-        <h3>Categories <button class="mini-link" id="catAll">all</button></h3>
-        <div id="categoryFilters" class="chk-list"></div>
-      </div>
-
-      <div class="rail-section">
-        <h3>Tags</h3>
-        <div id="tagCloud" class="tag-cloud"></div>
-      </div>
-
-      <div class="rail-section legend">
-        <h3>How to read the graph</h3>
-        <p><span class="legend-dot pale"></span> Pale = not studied yet</p>
-        <p><span class="legend-dot bright"></span> Bright = your notes are filling in</p>
-        <p>Color = subfield. Lines = related work. Drag to rearrange, scroll to zoom.</p>
-      </div>
+      <div id="prizeList" class="prize-list"></div>
     </aside>
 
     <!-- Graph canvas -->
@@ -523,6 +602,9 @@ a { color: var(--accent-2); }
     <section id="detail" class="detail collapsed" aria-live="polite"></section>
   </div>
 </div>
+
+<!-- Study-by-vibe popover -->
+<div id="vibePanel" class="vibe-pop" hidden></div>
 
 <!-- Trail focus banner (shown on graph when a trail is active) -->
 <div id="trailBanner" class="trail-banner" hidden></div>
@@ -11041,10 +11123,22 @@ window.NOBEL_TRAIL_INTRO =
     graph.reheat();
     document.getElementById("graphHint").textContent =
       n === DATA.length ? "Click any node to enter its world →" : `${n} of ${DATA.length} prizes shown · click a node`;
+    renderPrizeList();
+    updateFilterChrome();
   }
 
-  // ---------- Left rail rendering ----------
-  function renderRail() {
+  function updateFilterChrome() {
+    const sb = document.querySelector("#subDrop > summary");
+    const cb = document.querySelector("#catDrop > summary");
+    if (sb) sb.innerHTML = "Subfield" + (filter.subfields.size ? ` <span class="count-badge">${filter.subfields.size}</span>` : "");
+    if (cb) cb.innerHTML = "Category" + (filter.categories.size ? ` <span class="count-badge">${filter.categories.size}</span>` : "");
+    document.querySelectorAll("#engageSeg button").forEach(b => b.classList.toggle("on", b.dataset.engage === filter.engage));
+    const active = filter.subfields.size || filter.categories.size || filter.tags.size || filter.search || filter.engage !== "all" || filter.trail;
+    document.getElementById("clearAll").hidden = !active;
+  }
+
+  // ---------- Filter dropdowns ----------
+  function renderFilters() {
     const sf = document.getElementById("subfieldFilters");
     sf.innerHTML = "";
     subfieldKeys.forEach(k => {
@@ -11072,19 +11166,40 @@ window.NOBEL_TRAIL_INTRO =
       if (e.target.checked) filter.categories.add(k); else filter.categories.delete(k);
       applyFilter();
     });
+  }
 
-    const tc = document.getElementById("tagCloud");
-    tc.innerHTML = "";
-    Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]).slice(0, 40).forEach(t => {
-      const el = document.createElement("span");
-      el.className = "tag"; el.textContent = t; el.dataset.tag = t;
-      el.onclick = () => {
-        if (filter.tags.has(t)) { filter.tags.delete(t); el.classList.remove("active"); }
-        else { filter.tags.add(t); el.classList.add("active"); }
-        applyFilter();
-      };
-      tc.appendChild(el);
+  // ---------- Side panel: prize list ----------
+  let listSort = "year-asc";
+  function sortedPrizes(arr) {
+    const a = arr.slice();
+    if (listSort === "year-asc") a.sort((x, y) => x.year - y.year);
+    else if (listSort === "year-desc") a.sort((x, y) => y.year - x.year);
+    else if (listSort === "subfield") a.sort((x, y) => (x.subfield).localeCompare(y.subfield) || x.year - y.year);
+    else if (listSort === "mastery") a.sort((x, y) => Store.getMastery(y.id) - Store.getMastery(x.id) || x.year - y.year);
+    return a;
+  }
+  function renderPrizeList() {
+    const list = document.getElementById("prizeList");
+    const scroll = list.scrollTop;
+    const shown = sortedPrizes(DATA.filter(matches));
+    document.getElementById("spCount").textContent = shown.length === DATA.length ? `${DATA.length} prizes` : `${shown.length} of ${DATA.length}`;
+    let html = "", lastGroup = null;
+    shown.forEach(d => {
+      if (listSort === "subfield" && d.subfield !== lastGroup) { lastGroup = d.subfield; html += `<div class="sp-group" style="color:${colorFor(d)}">${d.subfield}</div>`; }
+      const fill = Store.fillScore(d.id, d);
+      const col = colorFor(d);
+      const dotStyle = fill > 0.05
+        ? `background:${col};border-color:${col};box-shadow:0 0 6px ${col}`
+        : `background:transparent;border-color:${col};opacity:.6`;
+      html += `<div class="prize-row${d.id === currentId ? " active" : ""}" data-id="${d.id}">
+        <span class="pr-dot" style="${dotStyle}"></span>
+        <span class="pr-year">${String(d.year).slice(2)}</span>
+        <span class="pr-body"><div class="pr-laur">${esc((d.laureates || [])[0] || "")}${(d.laureates || []).length > 1 ? " +" + ((d.laureates.length) - 1) : ""}</div><div class="pr-one">${esc(d.oneLiner || "")}</div></span>
+      </div>`;
     });
+    list.innerHTML = html || `<div class="empty-state" style="padding:20px;font-size:13px">No prizes match these filters.</div>`;
+    list.querySelectorAll(".prize-row").forEach(el => el.onclick = () => openDetail(el.dataset.id));
+    list.scrollTop = scroll;
   }
 
   // ---------- Hover card ----------
@@ -11121,6 +11236,14 @@ window.NOBEL_TRAIL_INTRO =
     renderDetail();
     detail.classList.remove("collapsed");
     graph.centerOn(id);
+    highlightRow(id);
+  }
+  function highlightRow(id) {
+    const list = document.getElementById("prizeList");
+    if (!list) return;
+    list.querySelectorAll(".prize-row").forEach(r => r.classList.toggle("active", r.dataset.id === id));
+    const row = list.querySelector(`.prize-row[data-id="${id}"]`);
+    if (row) row.scrollIntoView({ block: "nearest" });
   }
   function closeDetail() { detail.classList.add("collapsed"); currentId = null; }
 
@@ -11164,7 +11287,7 @@ window.NOBEL_TRAIL_INTRO =
     if (ms) ms.querySelectorAll("button").forEach(b => b.onclick = () => {
       const lvl = parseInt(b.dataset.l);
       Store.setMastery(d.id, Store.getMastery(d.id) === lvl ? lvl - 1 : lvl);  // click current level to step down
-      refreshFill(d.id); updateProgress(); renderDetail();
+      refreshFill(d.id); updateProgress(); renderDetail(); renderPrizeList();
     });
     const lb = detail.querySelector("#learnBtn");
     if (lb) lb.onclick = () => startLearn(d.id);
@@ -11412,9 +11535,23 @@ window.NOBEL_TRAIL_INTRO =
     document.getElementById("helpBtn").onclick = showHelp;
 
     document.getElementById("searchBox").addEventListener("input", e => { filter.search = e.target.value; applyFilter(); });
-    document.querySelectorAll('input[name="engage"]').forEach(r => r.addEventListener("change", e => { filter.engage = e.target.value; applyFilter(); }));
+    document.querySelectorAll('#engageSeg button').forEach(b => b.onclick = () => { filter.engage = b.dataset.engage; applyFilter(); });
     document.getElementById("subAll").onclick = () => { filter.subfields.clear(); document.querySelectorAll('[data-sf]').forEach(c => c.checked = false); applyFilter(); };
     document.getElementById("catAll").onclick = () => { filter.categories.clear(); document.querySelectorAll('[data-cat]').forEach(c => c.checked = false); applyFilter(); };
+    document.getElementById("clearAll").onclick = () => {
+      filter.subfields.clear(); filter.categories.clear(); filter.tags.clear(); filter.search = ""; filter.engage = "all";
+      if (activeTrail) clearTrail();
+      document.getElementById("searchBox").value = "";
+      document.querySelectorAll('[data-sf],[data-cat]').forEach(c => c.checked = false);
+      applyFilter();
+    };
+    document.getElementById("spSort").onchange = e => { listSort = e.target.value; renderPrizeList(); };
+    // close open dropdowns / vibe popover when clicking outside
+    document.addEventListener("click", e => {
+      document.querySelectorAll(".dropdown[open]").forEach(d => { if (!d.contains(e.target)) d.removeAttribute("open"); });
+      const vp = document.getElementById("vibePanel"), vt = document.getElementById("vibeToggle");
+      if (!vp.hidden && !vp.contains(e.target) && !vt.contains(e.target)) { vp.hidden = true; vt.setAttribute("aria-expanded", "false"); }
+    });
 
     document.getElementById("zoomIn").onclick = () => graph.zoomBy(1.2);
     document.getElementById("zoomOut").onclick = () => graph.zoomBy(1 / 1.2);
@@ -11454,8 +11591,8 @@ window.NOBEL_TRAIL_INTRO =
         <p>Not sure what order to learn in? Trails are curated, ordered prerequisite paths through each thread (Foundations, Bonding, Structure, Synthesis, Life, Nucleus, Materials). Each step says <i>why it comes next</i>. "Focus this trail" draws the numbered path on the graph and dims everything else; use <b>prev/next</b> to walk it. Inside any prize, a banner shows which trail(s) it sits on and what comes before/after.</p>
         <h3>Study by vibe (✨ under search)</h3>
         <p>Optional and collapsed by default. Open it and describe in plain language what you want to learn — “how drugs are made as single mirror-image molecules”, “the chemistry behind AI predicting proteins” — and it backtracks across every prize's tags, concepts, mechanisms and scope to rank the best matches, with a note on <i>why</i> each matched. Hit “Make these a path on the graph” to walk them in order. With the box empty it shows <b>recommended next</b> steps based on what you've already studied.</p>
-        <h3>Filters</h3>
-        <p>Use the left rail to filter by engagement (studied / not started / cards due), subfield, category, and tags, or search anything.</p>
+        <h3>The list &amp; filters</h3>
+        <p>The left panel lists every prize — your table of contents. Click any row (or any graph node) to open it; the dot shows subfield colour and brightens with mastery. Sort the list by year, subfield, or mastery. The top bar filters everything at once: search, engagement (All / Studied / Not started / Due), subfield, and category. "✕ clear filters" resets them.</p>
         <h3>Your data</h3>
         <p>Everything you write lives in this browser's local storage. Use <b>Export</b> to back it up or move it to another device, and <b>Import</b> to restore.</p>
       </div></div>`;
@@ -11708,23 +11845,32 @@ window.NOBEL_TRAIL_INTRO =
   function wireFinder() {
     const toggle = document.getElementById("vibeToggle");
     const panel = document.getElementById("vibePanel");
-    toggle.onclick = () => {
+    toggle.onclick = (e) => {
+      e.stopPropagation();
       const open = panel.hidden;
       panel.hidden = !open;
       toggle.setAttribute("aria-expanded", String(open));
-      if (open && !panel.dataset.built) buildPanel();
-      if (open) setTimeout(() => panel.querySelector("textarea").focus(), 50);
+      if (open) {
+        if (!panel.dataset.built) buildPanel();
+        const r = toggle.getBoundingClientRect();
+        panel.style.left = Math.min(r.left, window.innerWidth - 356) + "px";
+        panel.style.top = (r.bottom + 6) + "px";
+        renderRecs();
+        setTimeout(() => panel.querySelector("textarea").focus(), 50);
+      }
     };
 
     function buildPanel() {
       panel.dataset.built = "1";
       panel.innerHTML = `
-        <textarea id="vibeInput" placeholder="Describe what you want to learn… e.g. 'I want to understand how drugs are made selectively' or 'the chemistry behind AI predicting proteins'"></textarea>
+        <div class="vp-title">Study by vibe <button class="vp-close" id="vibeClose">×</button></div>
+        <textarea id="vibeInput" placeholder="Describe what you want to learn… e.g. 'how drugs are made as single mirror-image molecules' or 'the chemistry behind AI predicting proteins'"></textarea>
         <div class="vibe-examples">
           ${["drug synthesis", "how we see molecules", "AI & proteins", "batteries & energy", "DNA editing", "quantum bonding"].map(x => `<span class="vibe-ex">${x}</span>`).join("")}
         </div>
         <button class="btn primary vibe-go" id="vibeGo">Find my path →</button>
         <div class="vibe-results" id="vibeResults"></div>`;
+      panel.querySelector("#vibeClose").onclick = () => { panel.hidden = true; toggle.setAttribute("aria-expanded", "false"); };
       const input = panel.querySelector("#vibeInput");
       panel.querySelectorAll(".vibe-ex").forEach(c => c.onclick = () => { input.value = c.textContent; runVibe(); });
       panel.querySelector("#vibeGo").onclick = runVibe;
@@ -11745,7 +11891,7 @@ window.NOBEL_TRAIL_INTRO =
             <div class="vh-one">${esc(d.oneLiner || "")}</div>
             <div class="vh-why">${esc(r.reason)}</div></div>`;
         }).join("");
-      box.querySelectorAll(".vibe-hit").forEach(el => el.onclick = () => openDetail(el.dataset.goto));
+      box.querySelectorAll(".vibe-hit").forEach(el => el.onclick = () => { panel.hidden = true; toggle.setAttribute("aria-expanded", "false"); openDetail(el.dataset.goto); });
     }
 
     function runVibe() {
@@ -11767,8 +11913,9 @@ window.NOBEL_TRAIL_INTRO =
             <div class="vh-why">↳ ${esc(whyText(h.hits))}</div></div>`;
         }).join("") +
         `<button class="btn vibe-path-btn" id="vibePath">🧭 Make these a path on the graph</button>`;
-      box.querySelectorAll(".vibe-hit").forEach(el => el.onclick = () => openDetail(el.dataset.goto));
+      box.querySelectorAll(".vibe-hit").forEach(el => el.onclick = () => { panel.hidden = true; toggle.setAttribute("aria-expanded", "false"); openDetail(el.dataset.goto); });
       box.querySelector("#vibePath").onclick = () => {
+        panel.hidden = true; toggle.setAttribute("aria-expanded", "false");
         const ordered = hits.map(h => h.prize).sort((a, b) => a.year - b.year);
         focusTrailObj({
           id: "vibe", color: "#f4c95d",
@@ -11872,7 +12019,7 @@ window.NOBEL_TRAIL_INTRO =
   }
   function exitLearn() {
     learnEl.hidden = true; learn = null;
-    refreshFill(currentId); updateProgress(); updateDue();
+    refreshFill(currentId); updateProgress(); updateDue(); renderPrizeList();
     if (currentId) renderDetail();
   }
   function renderLearn() {
@@ -11994,10 +12141,11 @@ window.NOBEL_TRAIL_INTRO =
       return;
     }
     applyTheme(Store.getTheme());
-    renderRail();
+    renderFilters();
     wireHeader();
     wireFinder();
     buildGraph();
+    renderPrizeList();
     updateProgress();
     updateDue();
   }

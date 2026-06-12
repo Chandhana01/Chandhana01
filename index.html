@@ -36,44 +36,41 @@
     </div>
   </header>
 
+  <!-- Filter bar -->
+  <div id="filterbar">
+    <input type="search" id="searchBox" class="fb-search" placeholder="Search laureate, topic, tag…" autocomplete="off" />
+    <div class="seg" id="engageSeg">
+      <button data-engage="all" class="on">All</button>
+      <button data-engage="studied">Studied</button>
+      <button data-engage="empty">Not started</button>
+      <button data-engage="due">Due</button>
+    </div>
+    <details class="dropdown" id="subDrop">
+      <summary>Subfield</summary>
+      <div class="dd-panel"><div class="dd-actions"><button class="mini-link" id="subAll">clear</button></div><div id="subfieldFilters" class="chk-list"></div></div>
+    </details>
+    <details class="dropdown" id="catDrop">
+      <summary>Category</summary>
+      <div class="dd-panel"><div class="dd-actions"><button class="mini-link" id="catAll">clear</button></div><div id="categoryFilters" class="chk-list"></div></div>
+    </details>
+    <button class="fb-btn" id="vibeToggle" aria-expanded="false">✨ Study by vibe</button>
+    <span class="fb-spacer"></span>
+    <button class="fb-btn ghost" id="clearAll" hidden>✕ clear filters</button>
+  </div>
+
   <div id="main">
-    <!-- Left rail: filters / legend -->
-    <aside id="rail">
-      <div class="rail-section">
-        <input type="search" id="searchBox" placeholder="Search laureate, topic, tag…" autocomplete="off" />
-        <button class="vibe-toggle" id="vibeToggle" aria-expanded="false">✨ Study by vibe</button>
-        <div id="vibePanel" class="vibe-panel" hidden></div>
+    <!-- Left: list of all prizes -->
+    <aside id="sidePanel">
+      <div class="sp-head">
+        <span id="spCount">117 prizes</span>
+        <select id="spSort" title="Sort the list">
+          <option value="year-asc">Oldest first</option>
+          <option value="year-desc">Newest first</option>
+          <option value="subfield">By subfield</option>
+          <option value="mastery">By my mastery</option>
+        </select>
       </div>
-
-      <div class="rail-section">
-        <h3>Engagement</h3>
-        <label class="radio"><input type="radio" name="engage" value="all" checked /> All prizes</label>
-        <label class="radio"><input type="radio" name="engage" value="studied" /> ✦ Has my notes</label>
-        <label class="radio"><input type="radio" name="engage" value="empty" /> ○ Not started</label>
-        <label class="radio"><input type="radio" name="engage" value="due" /> 🎴 Cards due</label>
-      </div>
-
-      <div class="rail-section">
-        <h3>Subfields <button class="mini-link" id="subAll">all</button></h3>
-        <div id="subfieldFilters" class="chk-list"></div>
-      </div>
-
-      <div class="rail-section">
-        <h3>Categories <button class="mini-link" id="catAll">all</button></h3>
-        <div id="categoryFilters" class="chk-list"></div>
-      </div>
-
-      <div class="rail-section">
-        <h3>Tags</h3>
-        <div id="tagCloud" class="tag-cloud"></div>
-      </div>
-
-      <div class="rail-section legend">
-        <h3>How to read the graph</h3>
-        <p><span class="legend-dot pale"></span> Pale = not studied yet</p>
-        <p><span class="legend-dot bright"></span> Bright = your notes are filling in</p>
-        <p>Color = subfield. Lines = related work. Drag to rearrange, scroll to zoom.</p>
-      </div>
+      <div id="prizeList" class="prize-list"></div>
     </aside>
 
     <!-- Graph canvas -->
@@ -92,6 +89,9 @@
     <section id="detail" class="detail collapsed" aria-live="polite"></section>
   </div>
 </div>
+
+<!-- Study-by-vibe popover -->
+<div id="vibePanel" class="vibe-pop" hidden></div>
 
 <!-- Trail focus banner (shown on graph when a trail is active) -->
 <div id="trailBanner" class="trail-banner" hidden></div>

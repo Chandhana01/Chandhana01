@@ -109,10 +109,22 @@
     graph.reheat();
     document.getElementById("graphHint").textContent =
       n === DATA.length ? "Click any node to enter its world →" : `${n} of ${DATA.length} prizes shown · click a node`;
+    renderPrizeList();
+    updateFilterChrome();
   }
 
-  // ---------- Left rail rendering ----------
-  function renderRail() {
+  function updateFilterChrome() {
+    const sb = document.querySelector("#subDrop > summary");
+    const cb = document.querySelector("#catDrop > summary");
+    if (sb) sb.innerHTML = "Subfield" + (filter.subfields.size ? ` <span class="count-badge">${filter.subfields.size}</span>` : "");
+    if (cb) cb.innerHTML = "Category" + (filter.categories.size ? ` <span class="count-badge">${filter.categories.size}</span>` : "");
+    document.querySelectorAll("#engageSeg button").forEach(b => b.classList.toggle("on", b.dataset.engage === filter.engage));
+    const active = filter.subfields.size || filter.categories.size || filter.tags.size || filter.search || filter.engage !== "all" || filter.trail;
+    document.getElementById("clearAll").hidden = !active;
+  }
+
+  // ---------- Filter dropdowns ----------
+  function renderFilters() {
     const sf = document.getElementById("subfieldFilters");
     sf.innerHTML = "";
     subfieldKeys.forEach(k => {
@@ -140,19 +152,40 @@
       if (e.target.checked) filter.categories.add(k); else filter.categories.delete(k);
       applyFilter();
     });
+  }
 
-    const tc = document.getElementById("tagCloud");
-    tc.innerHTML = "";
-    Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]).slice(0, 40).forEach(t => {
-      const el = document.createElement("span");
-      el.className = "tag"; el.textContent = t; el.dataset.tag = t;
-      el.onclick = () => {
-        if (filter.tags.has(t)) { filter.tags.delete(t); el.classList.remove("active"); }
-        else { filter.tags.add(t); el.classList.add("active"); }
-        applyFilter();
-      };
-      tc.appendChild(el);
+  // ---------- Side panel: prize list ----------
+  let listSort = "year-asc";
+  function sortedPrizes(arr) {
+    const a = arr.slice();
+    if (listSort === "year-asc") a.sort((x, y) => x.year - y.year);
+    else if (listSort === "year-desc") a.sort((x, y) => y.year - x.year);
+    else if (listSort === "subfield") a.sort((x, y) => (x.subfield).localeCompare(y.subfield) || x.year - y.year);
+    else if (listSort === "mastery") a.sort((x, y) => Store.getMastery(y.id) - Store.getMastery(x.id) || x.year - y.year);
+    return a;
+  }
+  function renderPrizeList() {
+    const list = document.getElementById("prizeList");
+    const scroll = list.scrollTop;
+    const shown = sortedPrizes(DATA.filter(matches));
+    document.getElementById("spCount").textContent = shown.length === DATA.length ? `${DATA.length} prizes` : `${shown.length} of ${DATA.length}`;
+    let html = "", lastGroup = null;
+    shown.forEach(d => {
+      if (listSort === "subfield" && d.subfield !== lastGroup) { lastGroup = d.subfield; html += `<div class="sp-group" style="color:${colorFor(d)}">${d.subfield}</div>`; }
+      const fill = Store.fillScore(d.id, d);
+      const col = colorFor(d);
+      const dotStyle = fill > 0.05
+        ? `background:${col};border-color:${col};box-shadow:0 0 6px ${col}`
+        : `background:transparent;border-color:${col};opacity:.6`;
+      html += `<div class="prize-row${d.id === currentId ? " active" : ""}" data-id="${d.id}">
+        <span class="pr-dot" style="${dotStyle}"></span>
+        <span class="pr-year">${String(d.year).slice(2)}</span>
+        <span class="pr-body"><div class="pr-laur">${esc((d.laureates || [])[0] || "")}${(d.laureates || []).length > 1 ? " +" + ((d.laureates.length) - 1) : ""}</div><div class="pr-one">${esc(d.oneLiner || "")}</div></span>
+      </div>`;
     });
+    list.innerHTML = html || `<div class="empty-state" style="padding:20px;font-size:13px">No prizes match these filters.</div>`;
+    list.querySelectorAll(".prize-row").forEach(el => el.onclick = () => openDetail(el.dataset.id));
+    list.scrollTop = scroll;
   }
 
   // ---------- Hover card ----------
@@ -189,6 +222,14 @@
     renderDetail();
     detail.classList.remove("collapsed");
     graph.centerOn(id);
+    highlightRow(id);
+  }
+  function highlightRow(id) {
+    const list = document.getElementById("prizeList");
+    if (!list) return;
+    list.querySelectorAll(".prize-row").forEach(r => r.classList.toggle("active", r.dataset.id === id));
+    const row = list.querySelector(`.prize-row[data-id="${id}"]`);
+    if (row) row.scrollIntoView({ block: "nearest" });
   }
   function closeDetail() { detail.classList.add("collapsed"); currentId = null; }
 
@@ -232,7 +273,7 @@
     if (ms) ms.querySelectorAll("button").forEach(b => b.onclick = () => {
       const lvl = parseInt(b.dataset.l);
       Store.setMastery(d.id, Store.getMastery(d.id) === lvl ? lvl - 1 : lvl);  // click current level to step down
-      refreshFill(d.id); updateProgress(); renderDetail();
+      refreshFill(d.id); updateProgress(); renderDetail(); renderPrizeList();
     });
     const lb = detail.querySelector("#learnBtn");
     if (lb) lb.onclick = () => startLearn(d.id);
@@ -480,9 +521,23 @@
     document.getElementById("helpBtn").onclick = showHelp;
 
     document.getElementById("searchBox").addEventListener("input", e => { filter.search = e.target.value; applyFilter(); });
-    document.querySelectorAll('input[name="engage"]').forEach(r => r.addEventListener("change", e => { filter.engage = e.target.value; applyFilter(); }));
+    document.querySelectorAll('#engageSeg button').forEach(b => b.onclick = () => { filter.engage = b.dataset.engage; applyFilter(); });
     document.getElementById("subAll").onclick = () => { filter.subfields.clear(); document.querySelectorAll('[data-sf]').forEach(c => c.checked = false); applyFilter(); };
     document.getElementById("catAll").onclick = () => { filter.categories.clear(); document.querySelectorAll('[data-cat]').forEach(c => c.checked = false); applyFilter(); };
+    document.getElementById("clearAll").onclick = () => {
+      filter.subfields.clear(); filter.categories.clear(); filter.tags.clear(); filter.search = ""; filter.engage = "all";
+      if (activeTrail) clearTrail();
+      document.getElementById("searchBox").value = "";
+      document.querySelectorAll('[data-sf],[data-cat]').forEach(c => c.checked = false);
+      applyFilter();
+    };
+    document.getElementById("spSort").onchange = e => { listSort = e.target.value; renderPrizeList(); };
+    // close open dropdowns / vibe popover when clicking outside
+    document.addEventListener("click", e => {
+      document.querySelectorAll(".dropdown[open]").forEach(d => { if (!d.contains(e.target)) d.removeAttribute("open"); });
+      const vp = document.getElementById("vibePanel"), vt = document.getElementById("vibeToggle");
+      if (!vp.hidden && !vp.contains(e.target) && !vt.contains(e.target)) { vp.hidden = true; vt.setAttribute("aria-expanded", "false"); }
+    });
 
     document.getElementById("zoomIn").onclick = () => graph.zoomBy(1.2);
     document.getElementById("zoomOut").onclick = () => graph.zoomBy(1 / 1.2);
@@ -522,8 +577,8 @@
         <p>Not sure what order to learn in? Trails are curated, ordered prerequisite paths through each thread (Foundations, Bonding, Structure, Synthesis, Life, Nucleus, Materials). Each step says <i>why it comes next</i>. "Focus this trail" draws the numbered path on the graph and dims everything else; use <b>prev/next</b> to walk it. Inside any prize, a banner shows which trail(s) it sits on and what comes before/after.</p>
         <h3>Study by vibe (✨ under search)</h3>
         <p>Optional and collapsed by default. Open it and describe in plain language what you want to learn — “how drugs are made as single mirror-image molecules”, “the chemistry behind AI predicting proteins” — and it backtracks across every prize's tags, concepts, mechanisms and scope to rank the best matches, with a note on <i>why</i> each matched. Hit “Make these a path on the graph” to walk them in order. With the box empty it shows <b>recommended next</b> steps based on what you've already studied.</p>
-        <h3>Filters</h3>
-        <p>Use the left rail to filter by engagement (studied / not started / cards due), subfield, category, and tags, or search anything.</p>
+        <h3>The list &amp; filters</h3>
+        <p>The left panel lists every prize — your table of contents. Click any row (or any graph node) to open it; the dot shows subfield colour and brightens with mastery. Sort the list by year, subfield, or mastery. The top bar filters everything at once: search, engagement (All / Studied / Not started / Due), subfield, and category. "✕ clear filters" resets them.</p>
         <h3>Your data</h3>
         <p>Everything you write lives in this browser's local storage. Use <b>Export</b> to back it up or move it to another device, and <b>Import</b> to restore.</p>
       </div></div>`;
@@ -776,23 +831,32 @@
   function wireFinder() {
     const toggle = document.getElementById("vibeToggle");
     const panel = document.getElementById("vibePanel");
-    toggle.onclick = () => {
+    toggle.onclick = (e) => {
+      e.stopPropagation();
       const open = panel.hidden;
       panel.hidden = !open;
       toggle.setAttribute("aria-expanded", String(open));
-      if (open && !panel.dataset.built) buildPanel();
-      if (open) setTimeout(() => panel.querySelector("textarea").focus(), 50);
+      if (open) {
+        if (!panel.dataset.built) buildPanel();
+        const r = toggle.getBoundingClientRect();
+        panel.style.left = Math.min(r.left, window.innerWidth - 356) + "px";
+        panel.style.top = (r.bottom + 6) + "px";
+        renderRecs();
+        setTimeout(() => panel.querySelector("textarea").focus(), 50);
+      }
     };
 
     function buildPanel() {
       panel.dataset.built = "1";
       panel.innerHTML = `
-        <textarea id="vibeInput" placeholder="Describe what you want to learn… e.g. 'I want to understand how drugs are made selectively' or 'the chemistry behind AI predicting proteins'"></textarea>
+        <div class="vp-title">Study by vibe <button class="vp-close" id="vibeClose">×</button></div>
+        <textarea id="vibeInput" placeholder="Describe what you want to learn… e.g. 'how drugs are made as single mirror-image molecules' or 'the chemistry behind AI predicting proteins'"></textarea>
         <div class="vibe-examples">
           ${["drug synthesis", "how we see molecules", "AI & proteins", "batteries & energy", "DNA editing", "quantum bonding"].map(x => `<span class="vibe-ex">${x}</span>`).join("")}
         </div>
         <button class="btn primary vibe-go" id="vibeGo">Find my path →</button>
         <div class="vibe-results" id="vibeResults"></div>`;
+      panel.querySelector("#vibeClose").onclick = () => { panel.hidden = true; toggle.setAttribute("aria-expanded", "false"); };
       const input = panel.querySelector("#vibeInput");
       panel.querySelectorAll(".vibe-ex").forEach(c => c.onclick = () => { input.value = c.textContent; runVibe(); });
       panel.querySelector("#vibeGo").onclick = runVibe;
@@ -813,7 +877,7 @@
             <div class="vh-one">${esc(d.oneLiner || "")}</div>
             <div class="vh-why">${esc(r.reason)}</div></div>`;
         }).join("");
-      box.querySelectorAll(".vibe-hit").forEach(el => el.onclick = () => openDetail(el.dataset.goto));
+      box.querySelectorAll(".vibe-hit").forEach(el => el.onclick = () => { panel.hidden = true; toggle.setAttribute("aria-expanded", "false"); openDetail(el.dataset.goto); });
     }
 
     function runVibe() {
@@ -835,8 +899,9 @@
             <div class="vh-why">↳ ${esc(whyText(h.hits))}</div></div>`;
         }).join("") +
         `<button class="btn vibe-path-btn" id="vibePath">🧭 Make these a path on the graph</button>`;
-      box.querySelectorAll(".vibe-hit").forEach(el => el.onclick = () => openDetail(el.dataset.goto));
+      box.querySelectorAll(".vibe-hit").forEach(el => el.onclick = () => { panel.hidden = true; toggle.setAttribute("aria-expanded", "false"); openDetail(el.dataset.goto); });
       box.querySelector("#vibePath").onclick = () => {
+        panel.hidden = true; toggle.setAttribute("aria-expanded", "false");
         const ordered = hits.map(h => h.prize).sort((a, b) => a.year - b.year);
         focusTrailObj({
           id: "vibe", color: "#f4c95d",
@@ -940,7 +1005,7 @@
   }
   function exitLearn() {
     learnEl.hidden = true; learn = null;
-    refreshFill(currentId); updateProgress(); updateDue();
+    refreshFill(currentId); updateProgress(); updateDue(); renderPrizeList();
     if (currentId) renderDetail();
   }
   function renderLearn() {
@@ -1062,10 +1127,11 @@
       return;
     }
     applyTheme(Store.getTheme());
-    renderRail();
+    renderFilters();
     wireHeader();
     wireFinder();
     buildGraph();
+    renderPrizeList();
     updateProgress();
     updateDue();
   }
