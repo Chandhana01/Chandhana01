@@ -230,6 +230,10 @@
         if (n && this.opts.onClick) this.opts.onClick(n);
       });
 
+      c.addEventListener("mouseleave", () => {
+        if (this.hovered && this.opts.onHover) { this.hovered = null; this.opts.onHover(null, { x: 0, y: 0 }); }
+      });
+
       c.addEventListener("wheel", e => {
         e.preventDefault();
         const { x, y } = rel(e);

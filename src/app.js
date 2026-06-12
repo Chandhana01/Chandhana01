@@ -20,7 +20,7 @@
     theory: "Theory / law", equipment: "Equipment / apparatus", technique: "Technique / method",
     "discovery-element": "Element / particle discovery", "structure-determination": "Structure determination",
     materials: "Materials", biomolecule: "Biomolecule", "reaction-method": "Reaction method",
-    measurement: "Measurement"
+    measurement: "Measurement", discovery: "Discovery / phenomenon"
   };
 
   const colorFor = d => SUBFIELD_COLOR[d.subfield] || SUBFIELD_COLOR.Other;

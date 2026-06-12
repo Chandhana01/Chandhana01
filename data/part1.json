@@ -1,0 +1,2766 @@
+[
+  {
+    "id": "chem-1901",
+    "year": 1901,
+    "awarded": true,
+    "laureates": [
+      "Jacobus Henricus van 't Hoff"
+    ],
+    "motivation": "in recognition of the extraordinary services he has rendered by the discovery of the laws of chemical dynamics and osmotic pressure in solutions",
+    "field": "Chemistry",
+    "subfield": "Physical Chemistry",
+    "categories": [
+      "theory",
+      "pathway"
+    ],
+    "tags": [
+      "thermodynamics",
+      "osmotic pressure",
+      "reaction kinetics",
+      "chemical dynamics",
+      "solutions",
+      "physical chemistry"
+    ],
+    "related": [
+      "chem-1903",
+      "chem-1909"
+    ],
+    "oneLiner": "First chemistry Nobel: laws of chemical dynamics and osmotic pressure in solutions.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1901",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1901/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Van 't Hoff won the inaugural Nobel Prize in Chemistry for founding physical chemistry through two linked achievements: the laws of chemical dynamics (reaction rates, chemical equilibrium, and the temperature dependence of equilibrium captured in the van 't Hoff equation) and the law of osmotic pressure in dilute solutions. His 1884 book 'Etudes de dynamique chimique' (Studies in Chemical Dynamics) established quantitative reaction kinetics and equilibrium, while his 1886 work showed that dissolved solutes obey a gas-like law, p = cRT.",
+      "history": "Working in the late 19th century alongside Arrhenius and Ostwald, van 't Hoff helped create physical chemistry as a discipline distinct from classical descriptive chemistry. Earlier he had also proposed (1874) the tetrahedral carbon atom, founding stereochemistry, though the Nobel honored his thermodynamic and kinetic work specifically.",
+      "chemistryLogic": "Van 't Hoff treated dissolved molecules as analogous to gas molecules. He showed that the osmotic pressure of a dilute solution equals the pressure the solute would exert as an ideal gas occupying the same volume: pi = cRT, where c is molar concentration, R the gas constant, and T absolute temperature. This unified solution behavior with the kinetic theory of gases.\n\nIn chemical dynamics he formalized how reaction rate depends on concentration and how equilibrium constants shift with temperature. The van 't Hoff equation, d(ln K)/dT = DeltaH/(RT^2), relates the temperature dependence of an equilibrium constant to the reaction enthalpy, providing a thermodynamic bridge between heat and chemical change.\n\nHe distinguished forward and reverse reactions reaching a dynamic equilibrium where rates balance, and connected equilibrium constants to free energy. This gave chemists predictive, quantitative tools rather than purely empirical rules.\n\nNotably, anomalies in osmotic pressure for salts (which gave pressures too high by a factor i) hinted that solutes could split into multiple particles, a clue that fed directly into Arrhenius's dissociation theory honored two years later.",
+      "concepts": [
+        "Osmotic pressure: the pressure needed to stop solvent flowing into a solution through a semipermeable membrane, proportional to solute concentration.",
+        "Chemical equilibrium: a dynamic state where forward and reverse reaction rates are equal.",
+        "van 't Hoff equation: relates how an equilibrium constant changes with temperature to the reaction enthalpy."
+      ],
+      "jargon": [
+        {
+          "term": "osmotic pressure",
+          "definition": "The 'pull' a solution exerts on pure solvent across a membrane; more dissolved particles means stronger pull."
+        },
+        {
+          "term": "chemical dynamics",
+          "definition": "The study of how fast reactions go and where they settle (equilibrium)."
+        },
+        {
+          "term": "van 't Hoff factor",
+          "definition": "A number i counting how many particles one dissolved formula unit becomes in solution."
+        }
+      ],
+      "whyItMatters": "Van 't Hoff's laws gave chemistry a rigorous thermodynamic and kinetic foundation, enabling prediction of reaction direction, yield, and rate. Osmotic theory underpins biology (cell turgor, dialysis) and the van 't Hoff equation remains standard in every physical chemistry course.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1901",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1901/summary/",
+          "note": "Official summary and biography."
+        },
+        {
+          "title": "van 't Hoff Nobel Lecture",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1901/hoff/lecture/",
+          "note": "His own account of osmotic theory."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What two discoveries earned van 't Hoff the first chemistry Nobel?",
+          "back": "The laws of chemical dynamics and the law of osmotic pressure in solutions."
+        },
+        {
+          "front": "State the osmotic pressure law for dilute solutions.",
+          "back": "pi = cRT, treating solute like an ideal gas."
+        },
+        {
+          "front": "What does the van 't Hoff equation describe?",
+          "back": "How an equilibrium constant K varies with temperature, via the reaction enthalpy."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1902",
+    "year": 1902,
+    "awarded": true,
+    "laureates": [
+      "Hermann Emil Fischer"
+    ],
+    "motivation": "in recognition of the extraordinary services he has rendered by his work on sugar and purine syntheses",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": [
+      "synthesis",
+      "structure-determination"
+    ],
+    "tags": [
+      "sugars",
+      "purines",
+      "stereochemistry",
+      "organic synthesis",
+      "carbohydrates",
+      "fischer projection"
+    ],
+    "related": [
+      "chem-1901",
+      "chem-1907"
+    ],
+    "oneLiner": "Synthesis and stereochemistry of sugars and purines; founded biomolecular organic chemistry.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1902",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1902/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Emil Fischer won for elucidating and synthesizing two central classes of biological molecules: sugars (carbohydrates) and purines (the base skeleton of caffeine, uric acid, and the nucleic-acid bases adenine and guanine). He determined the stereochemical configurations of the hexose sugars and devised total syntheses of glucose, fructose, and mannose, and synthesized the parent purine and many derivatives.",
+      "history": "In the 1880s-1890s the three-dimensional structure of molecules was newly understood (after van 't Hoff). Fischer applied this to the dauntingly complex sugar molecules, each with multiple stereocenters, and to the purine family he named. His work bridged synthetic organic chemistry and biochemistry.",
+      "chemistryLogic": "Sugars like glucose have several chiral carbons, giving many stereoisomers that are otherwise nearly identical chemically. Fischer used systematic chemical reactions (oxidation, reduction, the Kiliani-Fischer chain extension, and osazone formation with phenylhydrazine) to interrelate the sugars and deduce their relative configurations, work for which he devised the Fischer projection notation still used today.\n\nHe assigned configurations to all 16 aldohexoses and synthesized glucose from glycerol, a landmark total synthesis of a natural product. His phenylhydrazine osazone reactions let him distinguish and connect sugars that differ only at certain carbons.\n\nFor purines, Fischer recognized that uric acid, xanthine, caffeine, theobromine, and the nucleobases share a common bicyclic skeleton he called 'purine.' He synthesized this core and converted it into dozens of derivatives, proving their structures by synthesis.\n\nThis 'lock and key' insight into molecular shape and specificity (which he articulated for enzyme-substrate recognition) anchored the idea that biological function follows precise three-dimensional structure.",
+      "concepts": [
+        "Stereochemistry of sugars: sugars differ by the spatial arrangement of -OH groups around chiral carbons.",
+        "Fischer projection: a 2D way of drawing 3D configuration at chiral centers.",
+        "Purine skeleton: the fused-ring core shared by caffeine, uric acid, adenine, and guanine."
+      ],
+      "jargon": [
+        {
+          "term": "stereoisomer",
+          "definition": "Molecules with the same atoms and bonds but different 3D arrangements."
+        },
+        {
+          "term": "purine",
+          "definition": "A two-ring nitrogen-containing structure forming the basis of several biomolecules."
+        },
+        {
+          "term": "osazone",
+          "definition": "A crystalline derivative formed when a sugar reacts with phenylhydrazine, used to identify sugars."
+        }
+      ],
+      "whyItMatters": "Fischer turned carbohydrate and purine chemistry from confusion into ordered science, founded biochemistry's structural approach, and his lock-and-key concept shaped enzymology. The Fischer projection and his sugar nomenclature remain textbook standards.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1902",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1902/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What classes of molecules did Emil Fischer's Nobel work cover?",
+          "back": "Sugars (carbohydrates) and purines."
+        },
+        {
+          "front": "What notation did Fischer invent for sugar stereochemistry?",
+          "back": "The Fischer projection."
+        },
+        {
+          "front": "Name two biomolecules built on the purine skeleton.",
+          "back": "Adenine and guanine (also caffeine, uric acid)."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1903",
+    "year": 1903,
+    "awarded": true,
+    "laureates": [
+      "Svante August Arrhenius"
+    ],
+    "motivation": "in recognition of the extraordinary services he has rendered to the advancement of chemistry by his electrolytic theory of dissociation",
+    "field": "Chemistry",
+    "subfield": "Physical Chemistry",
+    "categories": [
+      "theory",
+      "mechanism"
+    ],
+    "tags": [
+      "electrolytes",
+      "ionic dissociation",
+      "acids and bases",
+      "conductivity",
+      "physical chemistry",
+      "ions"
+    ],
+    "related": [
+      "chem-1901",
+      "chem-1909"
+    ],
+    "oneLiner": "Electrolytic theory of dissociation: salts split into mobile ions in solution.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1903",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1903/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Arrhenius won for his theory of electrolytic dissociation, the idea (advanced in his 1884 doctoral thesis and developed through 1887) that electrolytes such as salts, acids, and bases spontaneously split into electrically charged ions when dissolved in water, even without an applied current. This explained electrical conductivity of solutions and reframed acids and bases in terms of H+ and OH- ions.",
+      "history": "Arrhenius's dissertation was received coolly (a low passing grade) because the notion of free charged ions seemed radical. Support from van 't Hoff and Ostwald helped vindicate it; together the three are considered founders of physical chemistry. The anomalous van 't Hoff factor i for salts had foreshadowed dissociation.",
+      "chemistryLogic": "Arrhenius proposed that in solution a compound like NaCl exists not as intact molecules but as separated Na+ and Cl- ions. These mobile charges carry current, explaining why solutions conduct electricity, with conductivity rising as dilution increases the fraction dissociated.\n\nThe theory explained colligative anomalies: a salt that splits into two ions depresses freezing point and raises osmotic pressure roughly twice as much as a non-dissociating solute of the same molarity, matching van 't Hoff's factor i.\n\nIt also recast acid-base chemistry: an acid is a substance that releases H+ ions in water, a base one that releases OH-, and neutralization is simply H+ + OH- forming water. Strong acids dissociate nearly completely; weak ones only partially, defined by a dissociation constant.\n\nThis ionic picture connected chemistry to electricity and thermodynamics, underpinning electrochemistry, pH, and reaction-rate theory (Arrhenius later gave the famous activation-energy rate equation, though the Nobel cited dissociation).",
+      "concepts": [
+        "Electrolytic dissociation: dissolved electrolytes separate into free ions.",
+        "Acid/base in Arrhenius terms: acids give H+, bases give OH- in water.",
+        "Degree of dissociation: the fraction of dissolved molecules that have split into ions, rising with dilution."
+      ],
+      "jargon": [
+        {
+          "term": "electrolyte",
+          "definition": "A substance whose water solution conducts electricity because it forms ions."
+        },
+        {
+          "term": "ion",
+          "definition": "An atom or molecule carrying a net electric charge."
+        },
+        {
+          "term": "dissociation",
+          "definition": "The splitting of a compound into smaller charged pieces in solution."
+        }
+      ],
+      "whyItMatters": "Arrhenius's ion theory is foundational to all of electrochemistry, acid-base chemistry, pH, biological ion transport, and analytical chemistry. The concept that solutions teem with free ions is now so basic it is taught in introductory courses.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1903",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1903/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What is Arrhenius's electrolytic theory of dissociation?",
+          "back": "Electrolytes split into free ions when dissolved in water."
+        },
+        {
+          "front": "How did Arrhenius define an acid?",
+          "back": "A substance that releases H+ ions in water."
+        },
+        {
+          "front": "Why do salt solutions conduct electricity?",
+          "back": "Mobile dissociated ions carry the current."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1904",
+    "year": 1904,
+    "awarded": true,
+    "laureates": [
+      "Sir William Ramsay"
+    ],
+    "motivation": "in recognition of his services in the discovery of the inert gaseous elements in air, and his determination of their place in the periodic system",
+    "field": "Chemistry",
+    "subfield": "Inorganic Chemistry",
+    "categories": [
+      "discovery-element",
+      "technique"
+    ],
+    "tags": [
+      "noble gases",
+      "argon",
+      "neon",
+      "krypton",
+      "xenon",
+      "periodic table",
+      "inert gases"
+    ],
+    "related": [
+      "chem-1906"
+    ],
+    "oneLiner": "Discovered the noble gases and placed them in a new group of the periodic table.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1904",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1904/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Ramsay won for discovering the inert (noble) gases, argon, neon, krypton, and xenon, and helping identify helium on Earth, and for establishing that they form a new group of the periodic system. Working with Lord Rayleigh he isolated argon (1894), then over 1895-1898 the others.",
+      "history": "Rayleigh noticed that nitrogen from air was slightly denser than nitrogen made chemically, hinting at an unknown heavier component. Ramsay removed oxygen and nitrogen from air and found a chemically unreactive residue, argon, an entirely new kind of element with no known reactions.",
+      "chemistryLogic": "Ramsay isolated the gases by fractional distillation of liquefied air and by chemically stripping away reactive components, leaving residues that refused to combine with anything. Their inertness and atomic spectra (bright characteristic emission lines) confirmed them as new elements.\n\nThe puzzle was where they fit in Mendeleev's periodic table. Their zero valence and monatomic, unreactive character placed them in a new vertical group (group 0/18) between the halogens and the alkali metals, completing each period.\n\nThis required and validated an extension of the periodic law: a whole family of elements with closed, stable electron arrangements (later understood as filled electron shells) that explains their reluctance to react.\n\nRamsay also identified terrestrial helium (previously seen only in the Sun's spectrum) emanating from uranium minerals, linking the noble gases to radioactivity.",
+      "concepts": [
+        "Noble gases: chemically inert elements forming group 18 of the periodic table.",
+        "Fractional distillation of air: separating gases by their different boiling points.",
+        "Periodic completeness: the inert gases fill the gap between halogens and alkali metals."
+      ],
+      "jargon": [
+        {
+          "term": "inert gas",
+          "definition": "A gas that essentially does not undergo chemical reactions."
+        },
+        {
+          "term": "atomic spectrum",
+          "definition": "The unique set of light wavelengths an element emits, used as a fingerprint."
+        },
+        {
+          "term": "monatomic",
+          "definition": "Existing as single, unbonded atoms rather than molecules."
+        }
+      ],
+      "whyItMatters": "Discovering an entire new column of the periodic table confirmed and extended the periodic law and later helped explain chemical bonding through filled electron shells. Noble gases are now vital in lighting, cryogenics, lasers, and inert atmospheres.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1904",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1904/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "Which gases did Ramsay discover?",
+          "back": "Argon, neon, krypton, xenon (and isolated terrestrial helium)."
+        },
+        {
+          "front": "Where did the noble gases fit in the periodic table?",
+          "back": "A new group (group 0/18) between halogens and alkali metals."
+        },
+        {
+          "front": "What property defines the noble gases?",
+          "back": "Chemical inertness from stable, filled electron shells."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1905",
+    "year": 1905,
+    "awarded": true,
+    "laureates": [
+      "Johann Friedrich Wilhelm Adolf von Baeyer"
+    ],
+    "motivation": "in recognition of his services in the advancement of organic chemistry and the chemical industry, through his work on organic dyes and hydroaromatic compounds",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": [
+      "synthesis",
+      "structure-determination"
+    ],
+    "tags": [
+      "dyes",
+      "indigo",
+      "aromatic compounds",
+      "organic synthesis",
+      "hydroaromatic compounds",
+      "strain theory"
+    ],
+    "related": [
+      "chem-1910"
+    ],
+    "oneLiner": "Synthesized indigo and advanced organic dye and hydroaromatic chemistry.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1905",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1905/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Baeyer won for advancing organic chemistry and industry through his work on organic dyes, especially the synthesis and structure determination of indigo, and on hydroaromatic compounds. He achieved the laboratory synthesis of indigo and elucidated its structure, and contributed the strain theory of carbon rings.",
+      "history": "Natural indigo was a major dye commodity; Baeyer's structural and synthetic work (from the 1870s-1880s) opened the path to synthetic indigo, which BASF later commercialized, transforming the dye industry and the global indigo trade.",
+      "chemistryLogic": "Baeyer determined the chemical structure of indigo and developed synthetic routes to it, demonstrating that a complex natural colorant could be built from simpler aromatic precursors. This proved the power of structural organic chemistry to reproduce and improve on nature.\n\nHis study of hydroaromatic compounds (partially saturated ring systems) and of polyacetylenes led to his strain theory, which related the stability of carbocyclic rings to the deviation of their bond angles from the ideal tetrahedral angle, explaining why five- and six-membered rings form most readily.\n\nHe also studied phthalein and fluorescein dyes, connecting molecular structure to color, the basis of chromophore theory.\n\nTogether this work tied molecular architecture to both physical properties (color) and reactivity/stability (ring strain), guiding synthetic strategy.",
+      "concepts": [
+        "Dye synthesis: building colored molecules (chromophores) by organic synthesis.",
+        "Baeyer strain theory: ring stability depends on how much bond angles deviate from ideal.",
+        "Structure determination: deducing a molecule's connectivity by chemical reactions."
+      ],
+      "jargon": [
+        {
+          "term": "chromophore",
+          "definition": "The part of a molecule responsible for its color."
+        },
+        {
+          "term": "hydroaromatic compound",
+          "definition": "A ring compound related to aromatics but with some added hydrogens (partially saturated)."
+        },
+        {
+          "term": "ring strain",
+          "definition": "Extra energy in a ring when its bond angles are forced away from ideal."
+        }
+      ],
+      "whyItMatters": "Synthetic indigo revolutionized the dye industry and showcased industrial organic synthesis. Baeyer's strain theory remains central to understanding ring chemistry and conformational analysis.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1905",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1905/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What famous dye did Baeyer synthesize and structurally elucidate?",
+          "back": "Indigo."
+        },
+        {
+          "front": "What does Baeyer strain theory relate?",
+          "back": "Ring stability to deviation of bond angles from the ideal tetrahedral angle."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1906",
+    "year": 1906,
+    "awarded": true,
+    "laureates": [
+      "Henri Moissan"
+    ],
+    "motivation": "in recognition of the great services rendered by him in his investigation and isolation of the element fluorine, and for the adoption in the service of science of the electric furnace called after him",
+    "field": "Chemistry",
+    "subfield": "Inorganic Chemistry",
+    "categories": [
+      "discovery-element",
+      "equipment"
+    ],
+    "tags": [
+      "fluorine",
+      "electrolysis",
+      "electric furnace",
+      "halogens",
+      "inorganic chemistry",
+      "high temperature"
+    ],
+    "related": [
+      "chem-1904"
+    ],
+    "oneLiner": "Isolated fluorine by electrolysis and developed the high-temperature electric furnace.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1906",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1906/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Moissan won for isolating elemental fluorine, the most reactive element, which had defeated chemists for decades, and for developing the Moissan electric arc furnace for high-temperature chemistry. He first isolated fluorine in 1886 by low-temperature electrolysis of anhydrous hydrogen fluoride.",
+      "history": "Fluorine's extreme reactivity had injured or killed several earlier experimenters and resisted all isolation attempts. Moissan succeeded where others failed, then turned to the electric furnace to reach temperatures (around 3500 C) enabling new high-temperature syntheses, including artificial gemstone attempts and metal carbides.",
+      "chemistryLogic": "Free fluorine cannot be obtained by ordinary chemical oxidation because no common oxidizer is strong enough, so Moissan used electrolysis. He electrolyzed a solution of potassium hydrogen fluoride in anhydrous liquid hydrogen fluoride at low temperature (about -50 C) in a platinum apparatus, liberating pale-yellow fluorine gas at the anode.\n\nThe low temperature and anhydrous conditions were essential: water would react instantly, and the apparatus had to resist fluorine's corrosiveness, hence platinum-iridium and fluorspar components.\n\nHis electric furnace passed a powerful arc between carbon electrodes to reach extreme temperatures, letting him vaporize and recombine refractory materials, prepare carbides (e.g., calcium carbide, silicon carbide) and study refractory metals.\n\nThis married electrochemistry and high-temperature inorganic chemistry, expanding the range of conditions chemists could exploit.",
+      "concepts": [
+        "Electrolytic isolation: using electric current to drive a non-spontaneous redox separation.",
+        "Reactivity of fluorine: it is the strongest common oxidizer, so it must be made electrolytically.",
+        "Electric arc furnace: a device reaching thousands of degrees for refractory chemistry."
+      ],
+      "jargon": [
+        {
+          "term": "electrolysis",
+          "definition": "Using electricity to force a chemical reaction that won't happen on its own."
+        },
+        {
+          "term": "anhydrous",
+          "definition": "Containing no water."
+        },
+        {
+          "term": "refractory",
+          "definition": "Able to withstand very high temperatures without melting or decomposing."
+        }
+      ],
+      "whyItMatters": "Isolating fluorine completed the halogen family experimentally and opened fluorine chemistry (now vital for refrigerants, Teflon, pharmaceuticals, uranium enrichment). The electric furnace enabled industrial production of carbides and abrasives.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1906",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1906/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "How did Moissan isolate fluorine?",
+          "back": "Low-temperature electrolysis of anhydrous HF containing potassium hydrogen fluoride."
+        },
+        {
+          "front": "What apparatus is named after Moissan?",
+          "back": "The Moissan electric (arc) furnace."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1907",
+    "year": 1907,
+    "awarded": true,
+    "laureates": [
+      "Eduard Buchner"
+    ],
+    "motivation": "for his biochemical researches and his discovery of cell-free fermentation",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": [
+      "biomolecule",
+      "mechanism"
+    ],
+    "tags": [
+      "fermentation",
+      "enzymes",
+      "zymase",
+      "biochemistry",
+      "yeast",
+      "catalysis"
+    ],
+    "related": [
+      "chem-1929"
+    ],
+    "oneLiner": "Showed fermentation is driven by enzymes (zymase), not living cells, founding biochemistry.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1907",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1907/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Buchner won for discovering cell-free fermentation: in 1897 he showed that a cell-free extract pressed from yeast could ferment sugar into alcohol and carbon dioxide, proving that fermentation is caused by soluble enzymes (which he attributed to a substance he called 'zymase') rather than requiring intact living cells.",
+      "history": "A long debate (Pasteur vs. Liebig) pitted 'vitalist' views, that fermentation needed living cells, against chemical views. Buchner's accidental discovery, while preserving yeast juice with sugar, settled it decisively in favor of chemistry: enzymes do the work.",
+      "chemistryLogic": "Buchner ground yeast with sand and pressed out a cell-free juice containing no living cells. When he added sugar (to preserve the extract), it bubbled, producing alcohol and CO2, fermentation without any organism.\n\nThis demonstrated that the catalytic agents of fermentation are molecules, enzymes, that function outside the cell. He named the active principle zymase; later work showed fermentation is actually a cascade of many enzymes.\n\nThe result generalized: biological transformations are chemical reactions catalyzed by specific protein enzymes, which can be studied in vitro. This founded modern biochemistry and enzymology.\n\nIt connected to Fischer's lock-and-key enzyme specificity and set the stage for the 1929 Harden/Euler-Chelpin Nobel on the detailed enzymatic steps of sugar fermentation.",
+      "concepts": [
+        "Cell-free fermentation: sugar can be fermented by extracts lacking living cells.",
+        "Enzyme catalysis: biological reactions are sped by specific protein catalysts.",
+        "Mechanism over vitalism: life's chemistry obeys ordinary chemical principles."
+      ],
+      "jargon": [
+        {
+          "term": "fermentation",
+          "definition": "The breakdown of sugar into alcohol and CO2 (or other products) by enzymes."
+        },
+        {
+          "term": "enzyme",
+          "definition": "A biological catalyst, usually a protein, that speeds a specific reaction."
+        },
+        {
+          "term": "zymase",
+          "definition": "Buchner's name for the soluble fermenting agent of yeast (now known to be many enzymes)."
+        }
+      ],
+      "whyItMatters": "Buchner's experiment launched biochemistry by showing life's reactions can be reproduced in a test tube with enzymes, enabling the entire field of metabolic and enzyme research.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1907",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1907/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Buchner discover about fermentation?",
+          "back": "It can occur cell-free, driven by enzymes (zymase), not living cells."
+        },
+        {
+          "front": "Why is Buchner's work foundational?",
+          "back": "It founded biochemistry by showing biological reactions are enzyme-catalyzed chemistry."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1908",
+    "year": 1908,
+    "awarded": true,
+    "laureates": [
+      "Ernest Rutherford"
+    ],
+    "motivation": "for his investigations into the disintegration of the elements, and the chemistry of radioactive substances",
+    "field": "Chemistry",
+    "subfield": "Nuclear/Radiochemistry",
+    "categories": [
+      "mechanism",
+      "theory",
+      "measurement"
+    ],
+    "tags": [
+      "radioactivity",
+      "radioactive decay",
+      "alpha particles",
+      "transmutation",
+      "half-life",
+      "isotopes"
+    ],
+    "related": [
+      "chem-1911",
+      "chem-1921",
+      "chem-1935"
+    ],
+    "oneLiner": "Showed radioactivity is atomic disintegration, transmuting one element into another.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1908",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1908/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Rutherford won for his investigations into the disintegration of the elements and the chemistry of radioactive substances. With Frederick Soddy he formulated (around 1902-1903) the disintegration theory of radioactivity: radioactive atoms spontaneously transform into different elements by emitting radiation, a genuine transmutation. He also classified alpha and beta rays and introduced the half-life concept.",
+      "history": "After Becquerel and the Curies discovered radioactivity, its nature was unclear. Rutherford, a physicist, brought rigorous experiments to bear, distinguishing types of radiation and proving radioactive change is atomic, not chemical. (He later, in 1911, discovered the atomic nucleus, but the Nobel honored the transmutation chemistry.)",
+      "chemistryLogic": "Rutherford showed radioactivity involves atoms breaking apart: an unstable atom emits an alpha particle (a helium nucleus) or beta particle (an electron) and becomes an atom of a different element, a daughter product. This was transmutation, long deemed impossible, occurring spontaneously.\n\nHe and Soddy traced decay series in which a parent element decays through a chain of radioactive daughters, each with a characteristic rate. Rutherford introduced the half-life: the time for half a sample to decay, a constant for each species, reflecting the probabilistic, first-order nature of decay.\n\nHe distinguished alpha rays (positively charged, heavy, stopped by paper), beta rays (light, negative), and later gamma rays, and identified alpha particles as helium nuclei by collecting the gas they form.\n\nBecause decay rates are fixed and follow exponential kinetics, radioactivity became a clock (radiometric dating) and a probe of atomic structure, blurring the line between physics and chemistry of the atom.",
+      "concepts": [
+        "Radioactive disintegration: unstable atoms decay into different elements by emitting radiation.",
+        "Half-life: the fixed time for half of a radioactive sample to decay.",
+        "Alpha and beta particles: the helium-nucleus and electron emissions of radioactive decay."
+      ],
+      "jargon": [
+        {
+          "term": "transmutation",
+          "definition": "The change of one element into another, here by radioactive decay."
+        },
+        {
+          "term": "alpha particle",
+          "definition": "A helium nucleus (2 protons + 2 neutrons) ejected in some radioactive decays."
+        },
+        {
+          "term": "decay series",
+          "definition": "A chain of successive radioactive transformations from a parent to a stable end product."
+        }
+      ],
+      "whyItMatters": "Rutherford established that atoms are not immutable, founding nuclear chemistry and physics. Half-lives enable radiometric dating; the transmutation idea underlies nuclear energy, medicine, and the discovery of isotopes (Soddy, 1921) and artificial radioactivity (Joliot-Curies, 1935).",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1908",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1908/summary/",
+          "note": "Official summary."
+        },
+        {
+          "title": "Rutherford Nobel Lecture",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1908/rutherford/lecture/",
+          "note": "On the chemical nature of alpha particles."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Rutherford and Soddy's disintegration theory state?",
+          "back": "Radioactive atoms spontaneously transmute into different elements by emitting radiation."
+        },
+        {
+          "front": "What is a half-life?",
+          "back": "The constant time for half of a radioactive sample to decay."
+        },
+        {
+          "front": "What is an alpha particle?",
+          "back": "A helium nucleus emitted in certain radioactive decays."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1909",
+    "year": 1909,
+    "awarded": true,
+    "laureates": [
+      "Wilhelm Ostwald"
+    ],
+    "motivation": "in recognition of his work on catalysis and for his investigations into the fundamental principles governing chemical equilibria and rates of reaction",
+    "field": "Chemistry",
+    "subfield": "Physical Chemistry",
+    "categories": [
+      "theory",
+      "mechanism",
+      "reaction-method"
+    ],
+    "tags": [
+      "catalysis",
+      "chemical equilibrium",
+      "reaction rates",
+      "physical chemistry",
+      "ostwald process",
+      "kinetics"
+    ],
+    "related": [
+      "chem-1901",
+      "chem-1903",
+      "chem-1918"
+    ],
+    "oneLiner": "Defined catalysis and the principles of chemical equilibria and reaction rates.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1909",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1909/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Ostwald won for his work on catalysis and on the fundamental principles of chemical equilibrium and reaction rates. He gave catalysis its modern definition, a catalyst speeds a reaction without being consumed and without changing the equilibrium position, and was a principal founder of physical chemistry alongside van 't Hoff and Arrhenius.",
+      "history": "Ostwald systematized physical chemistry, founded its first major journal, and trained many leading chemists. His catalysis concept underpinned industrial chemistry; the Ostwald process for nitric acid (catalytic oxidation of ammonia) is named for him.",
+      "chemistryLogic": "Ostwald clarified that a catalyst alters the rate of a reaction by providing an easier pathway but is regenerated, so it is not consumed and does not shift the equilibrium it merely helps the system reach equilibrium faster, speeding forward and reverse reactions equally.\n\nHe quantified reaction rates and how they depend on concentration and on catalysts, and applied dissociation theory to define acid and base strengths via their catalytic and conductivity behavior (Ostwald dilution law relates a weak electrolyte's dissociation constant to its concentration).\n\nHe distinguished thermodynamic questions (where equilibrium lies) from kinetic ones (how fast it is reached), a crucial conceptual separation, and showed catalysts affect only the latter.\n\nIndustrially, this framework enabled the catalytic Ostwald process oxidizing ammonia over platinum gauze to nitric oxide and ultimately nitric acid, linking his theory to large-scale synthesis (and complementing Haber's ammonia).",
+      "concepts": [
+        "Catalysis: speeding a reaction with a substance that is not consumed.",
+        "Equilibrium vs kinetics: where a reaction settles versus how fast it gets there.",
+        "Ostwald dilution law: relates a weak electrolyte's dissociation to its concentration."
+      ],
+      "jargon": [
+        {
+          "term": "catalyst",
+          "definition": "A substance that accelerates a reaction without being used up."
+        },
+        {
+          "term": "reaction rate",
+          "definition": "How fast reactants are converted to products."
+        },
+        {
+          "term": "chemical equilibrium",
+          "definition": "The balanced state where forward and reverse reaction rates are equal."
+        }
+      ],
+      "whyItMatters": "Ostwald's catalysis concept is central to virtually all industrial chemistry and biochemistry (enzymes). Separating kinetics from thermodynamics shaped how chemists design and control reactions; the Ostwald process remains key to fertilizer and explosives manufacture.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1909",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1909/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "How does a catalyst affect equilibrium?",
+          "back": "It does not shift equilibrium; it only speeds the approach to it."
+        },
+        {
+          "front": "What industrial process is named for Ostwald?",
+          "back": "The Ostwald process for making nitric acid from ammonia."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1910",
+    "year": 1910,
+    "awarded": true,
+    "laureates": [
+      "Otto Wallach"
+    ],
+    "motivation": "in recognition of his services to organic chemistry and the chemical industry by his pioneer work in the field of alicyclic compounds",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": [
+      "structure-determination",
+      "synthesis"
+    ],
+    "tags": [
+      "terpenes",
+      "alicyclic compounds",
+      "essential oils",
+      "organic chemistry",
+      "isoprene",
+      "natural products"
+    ],
+    "related": [
+      "chem-1905",
+      "chem-1939"
+    ],
+    "oneLiner": "Pioneered the chemistry of terpenes and alicyclic compounds from essential oils.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1910",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1910/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Wallach won for pioneering work on alicyclic compounds, especially the terpenes, the fragrant hydrocarbons of essential oils (from turpentine, citrus, mint, camphor). He brought order to a confusing mass of natural oils by systematically separating, characterizing, and interconverting terpenes and establishing their structures.",
+      "history": "Essential oils were industrially important (perfumes, flavors, camphor) but chemically chaotic, many compounds had different names but identical structures. Wallach's careful work from the 1880s onward rationalized the field and supported the fragrance and camphor industries.",
+      "chemistryLogic": "Wallach used systematic chemical methods, controlled reactions with reagents like hydrogen chloride, nitrosyl chloride, and bromine to form crystalline derivatives, to distinguish terpenes that were otherwise hard to separate and to prove their structures.\n\nHe recognized that many terpenes are built from isoprene-like five-carbon units (foreshadowing the isoprene rule later developed by Ruzicka), and that they form ring (alicyclic) as well as open-chain structures.\n\nBy interconverting terpenes and relating them through their reactions, he established a coherent structural framework for the class and clarified relationships among camphor, pinene, limonene, and related molecules.\n\nThis structural chemistry of saturated and partially saturated rings (alicyclic compounds) complemented aromatic chemistry and underpinned synthetic fragrance and natural-product chemistry.",
+      "concepts": [
+        "Terpenes: natural hydrocarbons built from isoprene units, abundant in essential oils.",
+        "Alicyclic compounds: ring compounds that are not aromatic.",
+        "Derivatization: making crystalline derivatives to identify and separate similar compounds."
+      ],
+      "jargon": [
+        {
+          "term": "terpene",
+          "definition": "A class of fragrant natural hydrocarbons assembled from five-carbon isoprene units."
+        },
+        {
+          "term": "alicyclic",
+          "definition": "Describing a ring molecule that is saturated/non-aromatic."
+        },
+        {
+          "term": "essential oil",
+          "definition": "A volatile, fragrant plant oil rich in terpenes."
+        }
+      ],
+      "whyItMatters": "Wallach founded systematic terpene chemistry, important for perfumes, flavors, camphor, and later for understanding biosynthesis of steroids and rubber. His structural rigor became a model for natural-product chemistry.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1910",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1910/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What class of natural compounds did Wallach pioneer?",
+          "back": "Terpenes (alicyclic compounds of essential oils)."
+        },
+        {
+          "front": "From what repeating unit are terpenes built?",
+          "back": "Five-carbon isoprene units."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1911",
+    "year": 1911,
+    "awarded": true,
+    "laureates": [
+      "Marie Curie"
+    ],
+    "motivation": "in recognition of her services to the advancement of chemistry by the discovery of the elements radium and polonium, by the isolation of radium and the study of the nature and compounds of this remarkable element",
+    "field": "Chemistry",
+    "subfield": "Nuclear/Radiochemistry",
+    "categories": [
+      "discovery-element",
+      "technique"
+    ],
+    "tags": [
+      "radium",
+      "polonium",
+      "radioactivity",
+      "pitchblende",
+      "isolation",
+      "radiochemistry"
+    ],
+    "related": [
+      "chem-1908",
+      "chem-1921",
+      "chem-1935"
+    ],
+    "oneLiner": "Discovered radium and polonium, isolated metallic radium, and characterized its chemistry.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1911",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1911/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Marie Curie won her second Nobel (first in physics, 1903) for the discovery of the elements radium and polonium, the isolation of pure metallic radium, and the study of radium's nature and chemical compounds. This 1911 prize honored specifically the chemical achievement of isolating and characterizing a new element.",
+      "history": "Investigating why uranium minerals were more radioactive than uranium alone, Curie (with Pierre Curie) hypothesized undiscovered radioactive elements. In 1898 they announced polonium and radium. Isolating weighable radium required processing tons of pitchblende residues over years of grueling labor.",
+      "chemistryLogic": "Curie used radioactivity itself as an analytical tool: she tracked the radioactivity through chemical separations (fractional crystallization) of pitchblende, following which fractions concentrated the activity, a pioneering use of radiotracing to find new elements.\n\nRadium co-precipitated with barium because of their chemical similarity (both group 2). She separated them by repeated fractional crystallization of their chlorides/bromides, exploiting tiny solubility differences, until she obtained pure radium salts and determined radium's atomic weight (about 226).\n\nIn 1910, with Andre Debierne, she isolated radium as a metal by electrolysis of molten radium chloride, proving it a genuine new element and placing it in the periodic table below barium.\n\nShe characterized radium's emission (its glow, heat output, and gas, radon) and its compounds, establishing radiochemistry as the chemistry of elements identified and tracked by their radioactivity.",
+      "concepts": [
+        "Radiotracing: using radioactivity to follow an element through chemical separations.",
+        "Fractional crystallization: separating similar salts by repeated selective crystallization.",
+        "Element isolation: proving a new element by obtaining it pure and measuring its atomic weight."
+      ],
+      "jargon": [
+        {
+          "term": "pitchblende",
+          "definition": "A uranium-rich ore from which radium and polonium were extracted."
+        },
+        {
+          "term": "radioactivity",
+          "definition": "Spontaneous emission of radiation from unstable atomic nuclei."
+        },
+        {
+          "term": "fractional crystallization",
+          "definition": "Separating substances by their slightly different tendencies to crystallize."
+        }
+      ],
+      "whyItMatters": "Curie's isolation of radium proved radioactivity is an atomic property and created radiochemistry. Radium enabled cancer radiotherapy and research into the atom; her tracer methods became standard. She remains the only person to win Nobels in two different sciences.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1911",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1911/summary/",
+          "note": "Official summary."
+        },
+        {
+          "title": "Marie Curie Nobel Lecture",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1911/marie-curie/lecture/",
+          "note": "On radium and the new radioactive substances."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "Which two elements did Marie Curie discover?",
+          "back": "Radium and polonium."
+        },
+        {
+          "front": "How was radium separated from chemically similar barium?",
+          "back": "Repeated fractional crystallization of their salts."
+        },
+        {
+          "front": "Why is Marie Curie historically unique?",
+          "back": "She won Nobel Prizes in two different sciences (Physics 1903, Chemistry 1911)."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1912",
+    "year": 1912,
+    "awarded": true,
+    "laureates": [
+      "Victor Grignard",
+      "Paul Sabatier"
+    ],
+    "motivation": "Victor Grignard \"for the discovery of the so-called Grignard reagent, which in recent years has greatly advanced the progress of organic chemistry\"; Paul Sabatier \"for his method of hydrogenating organic compounds in the presence of finely disintegrated metals whereby the progress of organic chemistry has been greatly advanced in recent years\"",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": [
+      "reaction-method",
+      "synthesis",
+      "technique"
+    ],
+    "tags": [
+      "grignard reagent",
+      "organometallics",
+      "catalytic hydrogenation",
+      "organic synthesis",
+      "nickel catalyst",
+      "carbon-carbon bonds"
+    ],
+    "related": [
+      "chem-1909",
+      "chem-1931"
+    ],
+    "oneLiner": "Grignard organometallic reagents and Sabatier's metal-catalyzed hydrogenation.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1912",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1912/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "The 1912 prize was shared. Grignard won for discovering organomagnesium halide reagents (Grignard reagents, RMgX), versatile tools for forming carbon-carbon bonds. Sabatier won for his method of catalytically hydrogenating organic compounds using finely divided metals such as nickel, enabling addition of hydrogen to unsaturated molecules.",
+      "history": "Both advances (around 1900-1905) gave synthetic organic chemistry powerful, general new methods. Grignard's reagent came from his doctoral work under Barbier; Sabatier developed gas-phase catalytic hydrogenation that became central to industry (e.g., hardening fats).",
+      "chemistryLogic": "A Grignard reagent forms when an alkyl or aryl halide reacts with magnesium metal in dry ether, giving RMgX. The carbon bonded to magnesium is strongly nucleophilic (carbanion-like). It attacks electrophilic carbons, notably the carbonyl carbon of aldehydes, ketones, esters, and CO2, forming new C-C bonds and, after workup, alcohols or carboxylic acids. This made building complex carbon skeletons routine.\n\nSabatier showed that finely divided metals (especially nickel) catalyze the addition of hydrogen gas across carbon-carbon double bonds and other unsaturations. The metal surface dissociates H2 and the unsaturated molecule adsorbs and is hydrogenated, all heterogeneously at the catalyst surface.\n\nTogether the prizes recognized two complementary strategies: building molecules up (Grignard C-C bond formation) and selectively saturating them (Sabatier hydrogenation).\n\nBoth methods are mild, general, and scalable, and both connect to broader catalysis (Sabatier) and organometallic (Grignard) chemistry that dominate modern synthesis.",
+      "concepts": [
+        "Grignard reagent: an organomagnesium compound that acts as a carbon nucleophile.",
+        "Carbonyl addition: Grignard reagents add to C=O to form alcohols.",
+        "Catalytic hydrogenation: metals catalyze adding H2 across double bonds."
+      ],
+      "jargon": [
+        {
+          "term": "organometallic",
+          "definition": "A compound containing a carbon-metal bond."
+        },
+        {
+          "term": "nucleophile",
+          "definition": "An electron-rich species that attacks electron-poor centers."
+        },
+        {
+          "term": "hydrogenation",
+          "definition": "Adding hydrogen atoms across a double or triple bond."
+        }
+      ],
+      "whyItMatters": "Grignard reagents remain among the most used reactions for forming C-C bonds in synthesis. Sabatier hydrogenation is fundamental to petrochemicals, pharmaceuticals, and food (margarine), and helped found heterogeneous catalysis.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1912",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1912/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What does a Grignard reagent do in synthesis?",
+          "back": "Acts as a carbon nucleophile to form new C-C bonds, e.g., adding to carbonyls to give alcohols."
+        },
+        {
+          "front": "What was Sabatier's method?",
+          "back": "Catalytic hydrogenation of organic compounds using finely divided metals like nickel."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1913",
+    "year": 1913,
+    "awarded": true,
+    "laureates": [
+      "Alfred Werner"
+    ],
+    "motivation": "in recognition of his work on the linkage of atoms in molecules by which he has thrown new light on earlier investigations and opened up new fields of research especially in inorganic chemistry",
+    "field": "Chemistry",
+    "subfield": "Inorganic Chemistry",
+    "categories": [
+      "theory",
+      "structure-determination"
+    ],
+    "tags": [
+      "coordination chemistry",
+      "complexes",
+      "ligands",
+      "stereochemistry",
+      "inorganic chemistry",
+      "isomerism"
+    ],
+    "related": [
+      "chem-1936"
+    ],
+    "oneLiner": "Founded coordination chemistry: the 3D structure of metal-ligand complexes.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1913",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1913/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Werner won for his coordination theory of the linkage of atoms in molecules, explaining the structure of metal complexes (coordination compounds). He proposed that metal ions possess a secondary valence (coordination number) through which they bind a defined number of surrounding groups (ligands) arranged in specific three-dimensional geometries.",
+      "history": "Compounds like cobalt-ammine complexes (CoCl3.6NH3 and variants) had baffled chemists, classical valence could not explain why they existed or why isomers occurred. Werner's 1893 coordination theory (he conceived it, the story goes, on waking) resolved this and founded inorganic stereochemistry.",
+      "chemistryLogic": "Werner distinguished a metal's primary valence (oxidation state, satisfied by ions) from its secondary valence (coordination number), the fixed number of groups directly bonded to the metal, typically six (octahedral) or four (tetrahedral/square planar).\n\nIn a complex like [Co(NH3)6]Cl3, six ammonia ligands occupy the metal's coordination sphere octahedrally, and three chloride ions sit outside as counterions. Replacing ligands changes how many chlorides are ionizable, explaining the series of cobalt-ammine compounds and their conductivities.\n\nCrucially, the octahedral geometry predicts isomers: for [Co(NH3)4Cl2]+ there are cis and trans forms, and for certain complexes optical isomers (non-superimposable mirror images). Werner painstakingly prepared and resolved such isomers, even an entirely carbon-free chiral complex, proving the 3D arrangement.\n\nThis established that bonding geometry, not just composition, governs inorganic compounds, extending stereochemistry from carbon to metals.",
+      "concepts": [
+        "Coordination number: the number of ligands directly bonded to a metal center.",
+        "Ligand: an ion or molecule that donates electrons to bond to a metal.",
+        "Geometric and optical isomerism in complexes: spatial arrangements give cis/trans and chiral forms."
+      ],
+      "jargon": [
+        {
+          "term": "coordination compound",
+          "definition": "A metal center surrounded by bound ligands."
+        },
+        {
+          "term": "ligand",
+          "definition": "A molecule or ion attached to a central metal atom."
+        },
+        {
+          "term": "octahedral",
+          "definition": "A geometry with six ligands at the corners of an octahedron around the metal."
+        }
+      ],
+      "whyItMatters": "Werner's coordination theory founded modern inorganic and organometallic chemistry, essential to catalysis, bioinorganic chemistry (hemoglobin, chlorophyll), materials, and metallurgy. The concepts of ligands and coordination geometry are universal.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1913",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1913/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Werner's coordination theory introduce?",
+          "back": "The idea of secondary valence (coordination number) and 3D ligand arrangement around metals."
+        },
+        {
+          "front": "How did Werner prove complex geometry?",
+          "back": "By preparing and resolving geometric and optical isomers, including a carbon-free chiral complex."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1914",
+    "year": 1914,
+    "awarded": true,
+    "laureates": [
+      "Theodore William Richards"
+    ],
+    "motivation": "in recognition of his accurate determinations of the atomic weight of a large number of chemical elements",
+    "field": "Chemistry",
+    "subfield": "Analytical Chemistry",
+    "categories": [
+      "measurement",
+      "technique"
+    ],
+    "tags": [
+      "atomic weights",
+      "precision measurement",
+      "analytical chemistry",
+      "isotopes",
+      "lead",
+      "gravimetric analysis"
+    ],
+    "related": [
+      "chem-1921",
+      "chem-1922"
+    ],
+    "oneLiner": "Made the most accurate atomic-weight determinations, revealing isotopic mass differences in lead.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1914",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1914/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Richards won for exceptionally accurate determinations of the atomic weights of many elements. He redetermined some 25 elements' atomic weights with unprecedented precision, correcting earlier values and notably showing that lead from different radioactive sources has different atomic weights, direct chemical evidence for isotopes.",
+      "history": "Accurate atomic weights were foundational to chemistry and the periodic table, yet many literature values were flawed. Richards developed meticulous techniques to eliminate systematic errors, becoming the first American to win the chemistry Nobel.",
+      "chemistryLogic": "Richards identified and eliminated subtle sources of error in classic gravimetric atomic-weight work: contamination, moisture and gases adsorbed on precipitates, occluded solvent, and impure reagents. He invented apparatus (the nephelometer to compare turbidities, and the bottling apparatus to handle hygroscopic samples without air contact) to achieve precision to several significant figures.\n\nBy carefully converting weighed amounts of pure compounds (e.g., silver salts) and comparing masses, he refined values for silver, chlorine, and many other elements, putting atomic weights on a reliable footing.\n\nMost strikingly, he found that lead extracted from uranium ores (an endpoint of uranium decay) had a measurably lower atomic weight than ordinary lead, and lead from thorium ores differed too. Since these leads were chemically identical, the mass difference could only mean atoms of the same element can have different masses, isotopes, confirming Soddy's concept chemically.",
+      "concepts": [
+        "Atomic weight determination: measuring the average mass of an element's atoms by precise chemical conversions.",
+        "Systematic error control: the heart of high-precision measurement.",
+        "Isotopic mass variation: lead from different sources has different atomic weight."
+      ],
+      "jargon": [
+        {
+          "term": "atomic weight",
+          "definition": "The average mass of an element's atoms relative to a standard."
+        },
+        {
+          "term": "gravimetric analysis",
+          "definition": "Determining amounts by precise weighing of pure compounds."
+        },
+        {
+          "term": "isotopes",
+          "definition": "Atoms of the same element with different masses (different neutron counts)."
+        }
+      ],
+      "whyItMatters": "Reliable atomic weights are bedrock data for all of chemistry. Richards's discovery that lead's atomic weight depends on its origin gave the first chemical proof of isotopes, linking analytical precision to atomic structure.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1914",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1914/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Richards win the Nobel for?",
+          "back": "Highly accurate determinations of the atomic weights of many elements."
+        },
+        {
+          "front": "What did lead from radioactive ores reveal?",
+          "back": "Different atomic weights, chemical evidence for isotopes."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1915",
+    "year": 1915,
+    "awarded": true,
+    "laureates": [
+      "Richard Martin Willstätter"
+    ],
+    "motivation": "for his researches on plant pigments, especially chlorophyll",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": [
+      "structure-determination",
+      "biomolecule"
+    ],
+    "tags": [
+      "chlorophyll",
+      "plant pigments",
+      "photosynthesis",
+      "anthocyanins",
+      "natural products",
+      "magnesium"
+    ],
+    "related": [
+      "chem-1930"
+    ],
+    "oneLiner": "Determined the structure of chlorophyll and other plant pigments.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1915",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1915/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Willstätter won for his researches on plant pigments, above all chlorophyll. He purified chlorophyll, showed it is a defined chemical compound containing magnesium at its core, distinguished chlorophyll a and b, and clarified its relationship to other natural pigments including the blood pigment heme and the flower pigments (anthocyanins) he also studied.",
+      "history": "Plant pigments were poorly understood mixtures. Using new chromatographic-style separation and careful organic analysis in the early 1900s-1910s, Willstätter brought rigorous structural chemistry to these labile natural colorants, foundational for understanding photosynthesis.",
+      "chemistryLogic": "Willstätter isolated chlorophyll in pure form and analyzed it, establishing that it is a single class of magnesium-containing compounds built on a porphyrin-like ring system (chlorin), with a long phytol tail. He identified two close forms, chlorophyll a and b.\n\nHe recognized the structural kinship between chlorophyll's magnesium-porphyrin core and the iron-porphyrin core of heme (blood pigment), revealing a deep unity in nature's use of metal-chelating tetrapyrrole rings for light capture (Mg) and oxygen transport (Fe).\n\nFor flower colors he studied the anthocyanins, showing how a common pigment skeleton gives different colors depending on substitution and pH (acidity), explaining the range of reds, purples, and blues.\n\nHis purification and degradation methods, plus careful elemental and functional-group analysis, set the standard for natural-product structure work and prepared the ground for Hans Fischer's later full synthesis of porphyrins (1930).",
+      "concepts": [
+        "Chlorophyll structure: a magnesium-centered porphyrin (chlorin) pigment that captures light.",
+        "Pigment kinship: chlorophyll (Mg) and heme (Fe) share a tetrapyrrole ring.",
+        "Anthocyanin color: flower pigment color depends on structure and pH."
+      ],
+      "jargon": [
+        {
+          "term": "chlorophyll",
+          "definition": "The green, magnesium-containing pigment that absorbs light for photosynthesis."
+        },
+        {
+          "term": "porphyrin",
+          "definition": "A ring of four linked pyrrole units that can chelate a metal ion."
+        },
+        {
+          "term": "anthocyanin",
+          "definition": "A class of plant pigments giving red, purple, and blue colors."
+        }
+      ],
+      "whyItMatters": "Willstätter's structural work on chlorophyll underlies our understanding of photosynthesis, the basis of nearly all life's energy. His insight that chlorophyll and heme share a porphyrin core unified plant and animal biochemistry.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1915",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1915/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What metal is at the core of chlorophyll?",
+          "back": "Magnesium."
+        },
+        {
+          "front": "What structural feature do chlorophyll and heme share?",
+          "back": "A tetrapyrrole (porphyrin) ring chelating a metal."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1916",
+    "year": 1916,
+    "awarded": false,
+    "laureates": [],
+    "motivation": "",
+    "field": "Chemistry",
+    "subfield": "Other",
+    "categories": [],
+    "tags": [],
+    "related": [],
+    "oneLiner": "No prize awarded this year.",
+    "sources": [],
+    "deepDive": {}
+  },
+  {
+    "id": "chem-1917",
+    "year": 1917,
+    "awarded": false,
+    "laureates": [],
+    "motivation": "",
+    "field": "Chemistry",
+    "subfield": "Other",
+    "categories": [],
+    "tags": [],
+    "related": [],
+    "oneLiner": "No prize awarded this year.",
+    "sources": [],
+    "deepDive": {}
+  },
+  {
+    "id": "chem-1918",
+    "year": 1918,
+    "awarded": true,
+    "laureates": [
+      "Fritz Haber"
+    ],
+    "motivation": "for the synthesis of ammonia from its elements",
+    "field": "Chemistry",
+    "subfield": "Physical Chemistry",
+    "categories": [
+      "synthesis",
+      "reaction-method",
+      "mechanism"
+    ],
+    "tags": [
+      "ammonia synthesis",
+      "haber process",
+      "nitrogen fixation",
+      "catalysis",
+      "chemical equilibrium",
+      "fertilizers"
+    ],
+    "related": [
+      "chem-1909",
+      "chem-1920",
+      "chem-1931"
+    ],
+    "oneLiner": "Synthesized ammonia from nitrogen and hydrogen, enabling industrial nitrogen fixation.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1918",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1918/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Haber won for the synthesis of ammonia (NH3) directly from atmospheric nitrogen and hydrogen. Around 1909 he demonstrated a catalytic, high-pressure process combining N2 and H2 over a catalyst, which (scaled up industrially by Carl Bosch at BASF as the Haber-Bosch process) made artificial nitrogen fixation possible at vast scale.",
+      "history": "Atmospheric nitrogen is abundant but inert; fixing it into usable compounds was a grand challenge tied to fertilizer and explosives supply. Haber's process solved a looming food crisis (nitrogen fertilizer) but also enabled wartime explosives. Haber's role in chemical warfare makes him a controversial figure; the Nobel was contentious.",
+      "chemistryLogic": "The reaction N2 + 3H2 -> 2NH3 is exothermic but extremely slow because the N triple bond in N2 is among the strongest in chemistry, and the equilibrium yield falls as temperature rises. Haber confronted this thermodynamic-kinetic dilemma directly.\n\nUsing Le Chatelier's principle, he applied high pressure (which favors the side with fewer gas molecules, the ammonia side) to push equilibrium toward NH3, and a moderately high temperature with an iron-based catalyst (with promoters) to achieve an acceptable rate without destroying yield.\n\nBecause single-pass conversion is low, the process recycles unreacted gases and continuously removes ammonia by condensation, shifting equilibrium forward, a marriage of equilibrium thermodynamics and chemical engineering.\n\nThe catalyst works by dissociatively adsorbing N2 on the iron surface (the rate-limiting step), allowing nitrogen atoms to combine stepwise with hydrogen, dramatically lowering the activation barrier for breaking the N triple bond.",
+      "concepts": [
+        "Nitrogen fixation: converting inert N2 into reactive compounds like ammonia.",
+        "Le Chatelier optimization: high pressure favors ammonia formation.",
+        "Heterogeneous catalysis: an iron surface dissociates N2 to speed the reaction."
+      ],
+      "jargon": [
+        {
+          "term": "nitrogen fixation",
+          "definition": "Turning unreactive atmospheric nitrogen into usable nitrogen compounds."
+        },
+        {
+          "term": "Le Chatelier's principle",
+          "definition": "A system at equilibrium shifts to counteract an imposed change (e.g., pressure)."
+        },
+        {
+          "term": "catalyst promoter",
+          "definition": "An additive that boosts a catalyst's activity or stability."
+        }
+      ],
+      "whyItMatters": "Haber-Bosch ammonia underlies synthetic fertilizers that feed roughly half the world's population, arguably the most consequential industrial chemical process ever. It also illustrates the dual-use dilemma, as fixed nitrogen serves both food and munitions.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1918",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1918/summary/",
+          "note": "Official summary."
+        },
+        {
+          "title": "Haber Nobel Lecture",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1918/haber/lecture/",
+          "note": "On the synthesis of ammonia."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What reaction did Haber achieve?",
+          "back": "Synthesis of ammonia from N2 and H2 (N2 + 3H2 -> 2NH3)."
+        },
+        {
+          "front": "Why are high pressure and a catalyst used?",
+          "back": "High pressure shifts equilibrium toward ammonia; the iron catalyst speeds the slow N2 dissociation."
+        },
+        {
+          "front": "Why is the Haber process world-changing?",
+          "back": "It enables industrial nitrogen fertilizer feeding much of humanity."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1919",
+    "year": 1919,
+    "awarded": false,
+    "laureates": [],
+    "motivation": "",
+    "field": "Chemistry",
+    "subfield": "Other",
+    "categories": [],
+    "tags": [],
+    "related": [],
+    "oneLiner": "No prize awarded this year.",
+    "sources": [],
+    "deepDive": {}
+  },
+  {
+    "id": "chem-1920",
+    "year": 1920,
+    "awarded": true,
+    "laureates": [
+      "Walther Hermann Nernst"
+    ],
+    "motivation": "in recognition of his work in thermochemistry",
+    "field": "Chemistry",
+    "subfield": "Physical Chemistry",
+    "categories": [
+      "theory",
+      "measurement"
+    ],
+    "tags": [
+      "thermochemistry",
+      "third law of thermodynamics",
+      "entropy",
+      "absolute zero",
+      "heat theorem",
+      "physical chemistry"
+    ],
+    "related": [
+      "chem-1901",
+      "chem-1918"
+    ],
+    "oneLiner": "His heat theorem became the third law of thermodynamics (entropy at absolute zero).",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1920",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1920/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Nernst won for his work in thermochemistry, centered on his 1906 heat theorem (the Nernst heat theorem), which developed into the third law of thermodynamics. It concerns how the entropy and free-energy changes of reactions behave as temperature approaches absolute zero, enabling chemical equilibria to be calculated from thermal data.",
+      "history": "Chemists wanted to predict whether and how far reactions proceed (chemical affinity) from measurable heat quantities. Earlier rules (Thomsen-Berthelot) were flawed. Nernst's theorem provided the missing principle, linking thermodynamics to absolute zero and spurring low-temperature physics.",
+      "chemistryLogic": "Nernst's heat theorem states that as temperature approaches absolute zero, the entropy change of a reaction between perfectly crystalline solids approaches zero. Equivalently (Planck's later refinement), the entropy of a perfect crystal is zero at 0 K, the third law.\n\nThis matters because the free-energy change DeltaG (which determines reaction direction and equilibrium) relates to the enthalpy change DeltaH and entropy change DeltaS via DeltaG = DeltaH - T DeltaS. Knowing how DeltaS behaves near 0 K lets chemists integrate heat-capacity data up to any temperature and compute equilibrium constants from purely thermal (calorimetric) measurements, no equilibrium experiment needed.\n\nIt also implies absolute zero is unattainable in a finite number of steps and that heat capacities vanish as T approaches 0, predictions that drove cryogenic research.\n\nNernst thus unified thermochemistry with thermodynamics, turning calorimetry into a predictive tool for chemical equilibrium.",
+      "concepts": [
+        "Third law of thermodynamics: entropy of a perfect crystal approaches zero at absolute zero.",
+        "Free energy and equilibrium: DeltaG = DeltaH - T DeltaS governs reaction spontaneity.",
+        "Calorimetric prediction: equilibria computable from heat data via the heat theorem."
+      ],
+      "jargon": [
+        {
+          "term": "entropy",
+          "definition": "A measure of disorder or the number of microscopic arrangements of a system."
+        },
+        {
+          "term": "thermochemistry",
+          "definition": "The study of heat changes in chemical reactions."
+        },
+        {
+          "term": "absolute zero",
+          "definition": "The lowest possible temperature, 0 K (-273.15 C)."
+        }
+      ],
+      "whyItMatters": "The third law lets chemists predict chemical equilibria from thermal measurements alone and grounds the concept of absolute entropy. It is a pillar of physical chemistry and underpins cryogenics and statistical thermodynamics.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1920",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1920/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Nernst's heat theorem become?",
+          "back": "The third law of thermodynamics."
+        },
+        {
+          "front": "What does the third law state?",
+          "back": "The entropy of a perfect crystal approaches zero as temperature approaches absolute zero."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1921",
+    "year": 1921,
+    "awarded": true,
+    "laureates": [
+      "Frederick Soddy"
+    ],
+    "motivation": "for his contributions to our knowledge of the chemistry of radioactive substances, and his investigations into the origin and nature of isotopes",
+    "field": "Chemistry",
+    "subfield": "Nuclear/Radiochemistry",
+    "categories": [
+      "theory",
+      "measurement"
+    ],
+    "tags": [
+      "isotopes",
+      "radioactive decay",
+      "displacement law",
+      "radiochemistry",
+      "atomic number",
+      "transmutation"
+    ],
+    "related": [
+      "chem-1908",
+      "chem-1914",
+      "chem-1922"
+    ],
+    "oneLiner": "Conceived isotopes and the radioactive displacement law of decay.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1921",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1921/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Soddy won for his contributions to radioactive chemistry and especially for the origin and nature of isotopes, a term he coined in 1913. He recognized that some chemically inseparable substances differ in atomic weight and radioactivity, hence are different atomic forms of the same element occupying the same place in the periodic table, and formulated the radioactive displacement laws.",
+      "history": "With Rutherford, Soddy had earlier developed the disintegration theory (1902-1903). The proliferation of dozens of radioactive 'elements' from decay chains overcrowded the periodic table; the concept of isotopes resolved this by showing many were variants of known elements.",
+      "chemistryLogic": "Soddy realized that several radioactive products were chemically identical to (and inseparable from) ordinary elements yet had different atomic masses and decay properties. He named these isotopes (Greek: 'same place'), since they share a periodic-table position despite differing in mass.\n\nHe formulated the radioactive displacement laws: emitting an alpha particle (helium nucleus) reduces the atomic number by 2 (moving the element two places left in the table) and the mass by 4; emitting a beta particle (electron) raises the atomic number by 1 (one place right) with negligible mass change. This systematized the decay chains.\n\nTogether these ideas implied that an element is defined by its nuclear charge (atomic number), not its atomic weight, and that an element can have multiple isotopes of different masses, exactly what Richards's lead measurements (1914) and Aston's mass spectrograph (1922) confirmed.\n\nSoddy thereby distinguished chemical identity (atomic number) from physical mass (isotope), a cornerstone of nuclear chemistry.",
+      "concepts": [
+        "Isotopes: atoms of one element with the same atomic number but different mass.",
+        "Radioactive displacement law: alpha emission shifts element 2 places left, beta 1 place right.",
+        "Atomic number defines the element: chemical identity depends on nuclear charge, not mass."
+      ],
+      "jargon": [
+        {
+          "term": "isotope",
+          "definition": "One of several forms of an element differing only in atomic mass (neutron number)."
+        },
+        {
+          "term": "atomic number",
+          "definition": "The number of protons in a nucleus, which defines the element."
+        },
+        {
+          "term": "displacement law",
+          "definition": "A rule for how alpha or beta decay changes an atom's position in the periodic table."
+        }
+      ],
+      "whyItMatters": "The concept of isotopes is fundamental to chemistry, physics, dating, medicine, and nuclear technology. Soddy's displacement laws made sense of radioactive decay series and clarified that elements are defined by atomic number.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1921",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1921/summary/",
+          "note": "Official summary."
+        },
+        {
+          "title": "Soddy Nobel Lecture",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1921/soddy/lecture/",
+          "note": "On the origins of the conception of isotopes."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What word did Soddy coin, and what does it mean?",
+          "back": "Isotope, atoms of the same element (same place in the table) with different masses."
+        },
+        {
+          "front": "State the alpha-decay displacement law.",
+          "back": "Alpha emission lowers atomic number by 2 and mass by 4 (shifts two places left)."
+        },
+        {
+          "front": "What defines a chemical element?",
+          "back": "Its atomic number (nuclear charge), not its atomic weight."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1922",
+    "year": 1922,
+    "awarded": true,
+    "laureates": [
+      "Francis William Aston"
+    ],
+    "motivation": "for his discovery, by means of his mass spectrograph, of isotopes, in a large number of non-radioactive elements, and for his enunciation of the whole-number rule",
+    "field": "Chemistry",
+    "subfield": "Spectroscopy/Instrumentation",
+    "categories": [
+      "equipment",
+      "measurement",
+      "technique"
+    ],
+    "tags": [
+      "mass spectrometry",
+      "isotopes",
+      "whole-number rule",
+      "mass spectrograph",
+      "atomic mass",
+      "instrumentation"
+    ],
+    "related": [
+      "chem-1914",
+      "chem-1921"
+    ],
+    "oneLiner": "Invented the mass spectrograph, found isotopes of stable elements, and the whole-number rule.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1922",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1922/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Aston won for discovering, with his mass spectrograph, that many ordinary (non-radioactive) elements consist of isotopes, and for the whole-number rule: isotopic masses are very nearly whole-number multiples of the hydrogen atom's mass. He measured isotopic masses with high precision and catalogued isotopes across the periodic table.",
+      "history": "Building on J.J. Thomson's positive-ray work, Aston designed (1919) an instrument that sorted ions by mass with unprecedented resolution, revealing that elements like neon are mixtures of isotopes, confirming Soddy's idea for stable elements.",
+      "chemistryLogic": "Aston's mass spectrograph ionized atoms and passed the ions through electric and magnetic fields arranged so that ions of the same mass-to-charge ratio focused to the same point regardless of small velocity differences (velocity focusing). The position where each ion landed gave its mass.\n\nThis revealed that neon, for instance, is a mixture of mass-20 and mass-22 atoms, explaining its non-integer average atomic weight (about 20.2) as a weighted average of integer-mass isotopes. He extended this to dozens of elements.\n\nHe enunciated the whole-number rule: each isotope's mass is close to an integer (in units of hydrogen/oxygen), so atomic weights are non-integer only because elements are mixtures of integer-mass isotopes, vindicating Prout's old hypothesis in modified form.\n\nAston also measured slight deviations from exact integers (the packing fraction / mass defect), foreshadowing nuclear binding energy and E=mc^2 considerations, the basis of understanding nuclear stability.",
+      "concepts": [
+        "Mass spectrograph: separates ions by mass-to-charge ratio to measure atomic masses.",
+        "Whole-number rule: isotopic masses are nearly integers; average atomic weights reflect isotope mixtures.",
+        "Mass defect / packing fraction: small deviations from integer mass relate to nuclear binding."
+      ],
+      "jargon": [
+        {
+          "term": "mass spectrograph",
+          "definition": "An instrument that sorts ionized atoms by mass to reveal isotopes."
+        },
+        {
+          "term": "mass-to-charge ratio",
+          "definition": "An ion's mass divided by its charge, the quantity a mass spectrometer measures."
+        },
+        {
+          "term": "packing fraction",
+          "definition": "Aston's measure of how much an isotope's mass deviates from a whole number."
+        }
+      ],
+      "whyItMatters": "Aston's instrument founded mass spectrometry, now indispensable across chemistry, biology, and physics. Cataloguing stable isotopes confirmed nuclear structure, and his mass-defect measurements opened the path to nuclear energy understanding.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1922",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1922/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What instrument did Aston invent?",
+          "back": "The mass spectrograph."
+        },
+        {
+          "front": "What is the whole-number rule?",
+          "back": "Isotopic masses are nearly whole numbers; non-integer atomic weights come from isotope mixtures."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1923",
+    "year": 1923,
+    "awarded": true,
+    "laureates": [
+      "Fritz Pregl"
+    ],
+    "motivation": "for his invention of the method of micro-analysis of organic substances",
+    "field": "Chemistry",
+    "subfield": "Analytical Chemistry",
+    "categories": [
+      "technique",
+      "measurement",
+      "equipment"
+    ],
+    "tags": [
+      "microanalysis",
+      "organic analysis",
+      "microbalance",
+      "elemental analysis",
+      "analytical chemistry",
+      "small samples"
+    ],
+    "related": [
+      "chem-1914"
+    ],
+    "oneLiner": "Invented quantitative organic microanalysis, enabling analysis from milligram samples.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1923",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1923/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Pregl won for inventing quantitative organic microanalysis: methods and apparatus to determine the elemental composition (carbon, hydrogen, nitrogen, etc.) of organic compounds using only a few milligrams of material, roughly a hundredfold less than classical methods required.",
+      "history": "Studying scarce natural products (like bile acids), Pregl was frustrated that classical combustion analysis needed large samples he could not obtain. From around 1910 he miniaturized the techniques and developed a sensitive microbalance, transforming what analyses were feasible.",
+      "chemistryLogic": "Classical elemental analysis burns an organic sample and weighs the CO2 and H2O produced to find carbon and hydrogen content, but it needed hundreds of milligrams. Pregl re-engineered every step for the milligram scale.\n\nCentral was a highly sensitive microbalance accurate to about a microgram, letting tiny mass changes be measured reliably. He redesigned combustion trains, absorption tubes, and gas-handling apparatus so that minute quantities of combustion products could be captured and weighed quantitatively.\n\nHe developed micro methods for carbon/hydrogen (combustion), nitrogen, halogens, sulfur, and functional-group determinations, all validated for precision at small scale.\n\nBy slashing the sample required, Pregl made it possible to characterize rare, precious, or hard-to-isolate substances, accelerating natural-product, biochemical, and pharmaceutical chemistry.",
+      "concepts": [
+        "Microanalysis: quantitative elemental analysis using milligram samples.",
+        "Microbalance: a balance precise enough to weigh microgram differences.",
+        "Combustion analysis: determining C and H by burning a sample and weighing CO2 and water."
+      ],
+      "jargon": [
+        {
+          "term": "microanalysis",
+          "definition": "Chemical analysis carried out on very small (milligram) amounts of material."
+        },
+        {
+          "term": "microbalance",
+          "definition": "An extremely sensitive balance for tiny masses."
+        },
+        {
+          "term": "elemental analysis",
+          "definition": "Measuring how much of each element a compound contains."
+        }
+      ],
+      "whyItMatters": "Microanalysis let chemists determine the formulas of scarce natural products and new compounds from tiny samples, indispensable to organic, natural-product, and biochemical research throughout the 20th century.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1923",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1923/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Pregl invent?",
+          "back": "Quantitative organic microanalysis (elemental analysis from a few milligrams)."
+        },
+        {
+          "front": "What key instrument enabled microanalysis?",
+          "back": "A highly sensitive microbalance."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1924",
+    "year": 1924,
+    "awarded": false,
+    "laureates": [],
+    "motivation": "",
+    "field": "Chemistry",
+    "subfield": "Other",
+    "categories": [],
+    "tags": [],
+    "related": [],
+    "oneLiner": "No prize awarded this year.",
+    "sources": [],
+    "deepDive": {}
+  },
+  {
+    "id": "chem-1925",
+    "year": 1925,
+    "awarded": true,
+    "laureates": [
+      "Richard Adolf Zsigmondy"
+    ],
+    "motivation": "for his demonstration of the heterogenous nature of colloid solutions and for the methods he used, which have since become fundamental in modern colloid chemistry",
+    "field": "Chemistry",
+    "subfield": "Physical Chemistry",
+    "categories": [
+      "equipment",
+      "technique",
+      "measurement"
+    ],
+    "tags": [
+      "colloids",
+      "ultramicroscope",
+      "gold sol",
+      "colloid chemistry",
+      "nanoparticles",
+      "physical chemistry"
+    ],
+    "related": [
+      "chem-1926"
+    ],
+    "oneLiner": "Proved colloids are heterogeneous and co-invented the ultramicroscope to see them.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1925",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1925/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Zsigmondy won for demonstrating the heterogeneous (particulate) nature of colloidal solutions and for the methods, especially the ultramicroscope he co-developed, that became foundational to colloid chemistry. Working with colloidal gold (gold sols), he showed colloids contain discrete suspended particles rather than being truly homogeneous solutions.",
+      "history": "Colloids (like gold sols, milk, and gels) were puzzling, were they solutions or suspensions? Around 1902 Zsigmondy and Henry Siedentopf built the ultramicroscope, which made individual sub-microscopic particles visible by their scattered light, settling the debate.",
+      "chemistryLogic": "Ordinary microscopes cannot resolve colloidal particles (nanometers to fractions of a micron). The ultramicroscope instead illuminates the sample from the side with intense light; each particle scatters light (the Tyndall effect) and appears as a bright point against a dark background, even though it is smaller than the resolution limit.\n\nBy counting these flashing points and knowing the concentration, Zsigmondy could estimate particle sizes and numbers, directly proving colloids are heterogeneous dispersions of many tiny particles, not homogeneous like true solutions.\n\nHe studied how gold sol particles aggregate and change color (ruby red to blue) with size and coagulation, and how protective colloids stabilize them, foundational concepts of particle stability.\n\nThis gave colloid science quantitative, observational tools and underpinned understanding of aerosols, emulsions, gels, and, in modern terms, nanoparticles.",
+      "concepts": [
+        "Colloid heterogeneity: colloidal solutions contain discrete suspended particles.",
+        "Ultramicroscope: reveals sub-resolution particles by their scattered light.",
+        "Tyndall scattering: colloidal particles scatter light, making beams visible."
+      ],
+      "jargon": [
+        {
+          "term": "colloid",
+          "definition": "A mixture with particles intermediate in size between dissolved molecules and visible grains, dispersed in a medium."
+        },
+        {
+          "term": "sol",
+          "definition": "A colloidal dispersion of solid particles in a liquid (e.g., gold sol)."
+        },
+        {
+          "term": "ultramicroscope",
+          "definition": "An instrument that detects tiny particles by the light they scatter."
+        }
+      ],
+      "whyItMatters": "Zsigmondy founded quantitative colloid chemistry and the methods to observe nanoscale particles, important to materials science, nanotechnology, biology, and industry (paints, inks, foods). His gold-sol work prefigures modern nanoparticle science.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1925",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1925/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Zsigmondy prove about colloids?",
+          "back": "They are heterogeneous, made of discrete suspended particles."
+        },
+        {
+          "front": "What instrument did he co-invent?",
+          "back": "The ultramicroscope, which sees particles by their scattered light."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1926",
+    "year": 1926,
+    "awarded": true,
+    "laureates": [
+      "The Svedberg"
+    ],
+    "motivation": "for his work on disperse systems",
+    "field": "Chemistry",
+    "subfield": "Physical Chemistry",
+    "categories": [
+      "equipment",
+      "technique",
+      "measurement"
+    ],
+    "tags": [
+      "ultracentrifuge",
+      "colloids",
+      "disperse systems",
+      "macromolecules",
+      "sedimentation",
+      "particle size"
+    ],
+    "related": [
+      "chem-1925"
+    ],
+    "oneLiner": "Invented the ultracentrifuge to measure particle and macromolecule sizes in disperse systems.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1926",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1926/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Theodor (The) Svedberg won for his work on disperse systems (colloids), centered on his invention of the analytical ultracentrifuge. This spun samples at enormous speeds to sediment colloidal particles and macromolecules, allowing precise determination of their size, mass, and uniformity.",
+      "history": "Building on colloid chemistry (cf. Zsigmondy), Svedberg sought to characterize particle sizes quantitatively. In the 1920s he developed centrifuges generating up to hundreds of thousands of times gravity, enabling sedimentation of even dissolved proteins.",
+      "chemistryLogic": "In a strong centrifugal field, particles sediment at a rate determined by their mass, size, shape, and the medium's density and viscosity. Svedberg measured sedimentation velocity optically as a moving boundary, deriving the sedimentation coefficient (now expressed in svedberg units, S).\n\nFrom sedimentation and diffusion data he calculated particle molecular weights via the Svedberg equation, and from the sharpness of the sedimenting boundary he judged whether a sample was uniform (monodisperse) or a mixture.\n\nA landmark finding was that proteins like hemoglobin sediment as discrete, uniform particles of definite molecular weight, evidence that proteins are true, well-defined macromolecules rather than ill-defined aggregates, a pivotal result for biochemistry.\n\nThe ultracentrifuge thus turned colloid and macromolecular chemistry into a precise, quantitative science.",
+      "concepts": [
+        "Ultracentrifugation: using extreme centrifugal force to sediment small particles and macromolecules.",
+        "Sedimentation coefficient: a measure (in svedbergs) of how fast a particle sediments.",
+        "Macromolecule definition: proteins are discrete molecules of definite mass."
+      ],
+      "jargon": [
+        {
+          "term": "ultracentrifuge",
+          "definition": "A very high-speed centrifuge used to sediment tiny particles and large molecules."
+        },
+        {
+          "term": "disperse system",
+          "definition": "A mixture of particles dispersed throughout a medium (a colloid)."
+        },
+        {
+          "term": "svedberg (S)",
+          "definition": "The unit of sedimentation rate, named after Svedberg."
+        }
+      ],
+      "whyItMatters": "The ultracentrifuge became essential for determining the size and purity of proteins, nucleic acids, and viruses, foundational to molecular biology (ribosome subunits are still named by their S values) and to colloid and polymer science.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1926",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1926/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Svedberg invent?",
+          "back": "The analytical ultracentrifuge."
+        },
+        {
+          "front": "What did ultracentrifugation reveal about proteins?",
+          "back": "They are discrete macromolecules of definite molecular weight."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1927",
+    "year": 1927,
+    "awarded": true,
+    "laureates": [
+      "Heinrich Otto Wieland"
+    ],
+    "motivation": "for his investigations of the constitution of the bile acids and related substances",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": [
+      "structure-determination",
+      "biomolecule"
+    ],
+    "tags": [
+      "bile acids",
+      "steroids",
+      "cholesterol",
+      "natural products",
+      "structure elucidation",
+      "biochemistry"
+    ],
+    "related": [
+      "chem-1928"
+    ],
+    "oneLiner": "Determined the structures of the bile acids, key to the steroid skeleton.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1927",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1927/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Wieland won for elucidating the constitution (chemical structure) of the bile acids, such as cholic acid, and related substances. His painstaking degradation studies established their molecular framework and revealed their relationship to cholesterol, helping define the steroid ring system.",
+      "history": "Bile acids, steroid compounds from bile, had complex, unknown structures. From the 1910s-1920s Wieland systematically degraded them chemically. His work, together with Windaus's on sterols (1928 Nobel), built the foundation of steroid chemistry (the precise ring structure was finalized soon after, with some early formulas later corrected).",
+      "chemistryLogic": "Wieland used controlled chemical degradation, oxidation and stepwise breakdown, to fragment bile acid molecules into identifiable smaller pieces, then reasoned backward to the parent structure. By relating bile acids to one another and to cholesterol through chemical transformations, he showed they share a common multi-ring carbon skeleton.\n\nHe established that bile acids are built on the steroid nucleus, a fused system of (as later precisely defined) three six-membered rings and one five-membered ring, with a carboxylic-acid-bearing side chain. This connected bile acids biochemically to cholesterol as their precursor.\n\nHe also contributed to understanding biological oxidation, proposing that oxidation in living systems often proceeds by removal of hydrogen (dehydrogenation) rather than direct oxygen addition, an important mechanistic insight.\n\nThe structural work was so intricate that the exact ring arrangement was refined shortly afterward (via X-ray data), but Wieland's framework was decisive.",
+      "concepts": [
+        "Bile acid structure: steroid-based acids derived from cholesterol.",
+        "Chemical degradation: breaking a molecule into known fragments to deduce its structure.",
+        "Biological oxidation as dehydrogenation: oxidation by removing hydrogen."
+      ],
+      "jargon": [
+        {
+          "term": "bile acid",
+          "definition": "A steroid acid made in the liver from cholesterol that aids fat digestion."
+        },
+        {
+          "term": "steroid nucleus",
+          "definition": "The characteristic four-fused-ring carbon skeleton of steroids."
+        },
+        {
+          "term": "degradation",
+          "definition": "Systematically breaking a molecule down to identify its parts."
+        }
+      ],
+      "whyItMatters": "Wieland's bile-acid work helped establish the steroid skeleton common to cholesterol, hormones, and vitamins, central to physiology, pharmacology, and medicine. His dehydrogenation view shaped understanding of metabolism.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1927",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1927/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What structures did Wieland elucidate?",
+          "back": "The bile acids (e.g., cholic acid) and their relation to cholesterol."
+        },
+        {
+          "front": "What is the steroid nucleus?",
+          "back": "A fused four-ring carbon skeleton shared by steroids."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1928",
+    "year": 1928,
+    "awarded": true,
+    "laureates": [
+      "Adolf Otto Reinhold Windaus"
+    ],
+    "motivation": "for the services rendered through his research into the constitution of the sterols and their connection with the vitamins",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": [
+      "structure-determination",
+      "biomolecule"
+    ],
+    "tags": [
+      "sterols",
+      "cholesterol",
+      "vitamin d",
+      "steroids",
+      "ergosterol",
+      "biochemistry"
+    ],
+    "related": [
+      "chem-1927"
+    ],
+    "oneLiner": "Elucidated sterol structures and linked them to vitamin D.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1928",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1928/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Windaus won for research on the constitution of the sterols (especially cholesterol and ergosterol) and their connection with the vitamins, notably the discovery that vitamin D forms from a sterol (ergosterol) by irradiation with ultraviolet light. His work tied steroid structural chemistry to nutrition and the cure of rickets.",
+      "history": "Cholesterol's structure was a major unsolved problem; Windaus, alongside Wieland, worked it out (with the precise ring connectivity finalized around 1932 after X-ray input). Crucially, he discovered the chemical origin of the antirachitic (anti-rickets) vitamin D.",
+      "chemistryLogic": "Windaus determined the structure of cholesterol and related sterols through extensive chemical degradation and synthesis, showing they share the steroid four-ring nucleus with a hydroxyl group and a side chain. His and Wieland's structures were close, and X-ray crystallography soon corrected a detail of the ring fusion.\n\nHis landmark biochemical insight: the sterol ergosterol, when irradiated with ultraviolet light, is converted into vitamin D (an antirachitic compound). The UV light breaks one of the sterol's rings (a photochemical ring-opening), transforming an inactive sterol into the active vitamin.\n\nThis explained why sunlight (UV) prevents and cures rickets: it photochemically generates vitamin D in skin from a sterol precursor, linking molecular structure, photochemistry, and physiology.\n\nThus Windaus connected the abstract steroid skeleton to a concrete vitamin and a public-health disease, a powerful demonstration of structural biochemistry's relevance.",
+      "concepts": [
+        "Sterol structure: cholesterol and ergosterol are steroid alcohols.",
+        "Photochemical vitamin D formation: UV light converts ergosterol to vitamin D.",
+        "Structure-function link: a sterol's transformation produces a physiologically active vitamin."
+      ],
+      "jargon": [
+        {
+          "term": "sterol",
+          "definition": "A steroid bearing a hydroxyl group, such as cholesterol."
+        },
+        {
+          "term": "ergosterol",
+          "definition": "A sterol that, on UV irradiation, becomes vitamin D."
+        },
+        {
+          "term": "antirachitic",
+          "definition": "Acting against rickets (the role of vitamin D)."
+        }
+      ],
+      "whyItMatters": "Windaus established sterol structures fundamental to biochemistry and revealed how vitamin D arises, underpinning prevention of rickets and modern understanding of vitamin D physiology and the steroid family.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1928",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1928/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What classes of molecules did Windaus study?",
+          "back": "Sterols (like cholesterol) and their link to vitamins."
+        },
+        {
+          "front": "How does UV light relate sterols to vitamin D?",
+          "back": "UV irradiation converts ergosterol into vitamin D."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1929",
+    "year": 1929,
+    "awarded": true,
+    "laureates": [
+      "Arthur Harden",
+      "Hans Karl August Simon von Euler-Chelpin"
+    ],
+    "motivation": "for their investigations on the fermentation of sugar and fermentative enzymes",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": [
+      "pathway",
+      "mechanism",
+      "biomolecule"
+    ],
+    "tags": [
+      "fermentation",
+      "enzymes",
+      "coenzymes",
+      "glycolysis",
+      "phosphorylation",
+      "biochemistry"
+    ],
+    "related": [
+      "chem-1907"
+    ],
+    "oneLiner": "Revealed the enzymes and coenzymes (and phosphate steps) of sugar fermentation.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1929",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1929/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Harden and von Euler-Chelpin shared the prize for investigations on the fermentation of sugar and fermentative enzymes. They showed that alcoholic fermentation requires not only protein enzymes but also small, heat-stable cofactors (coenzymes), and that inorganic phosphate is consumed, becoming incorporated into sugar phosphate intermediates, early glimpses of the glycolytic pathway.",
+      "history": "After Buchner proved cell-free fermentation (1907), the detailed machinery remained unknown. Harden discovered (around 1905-1906) that dialyzing yeast juice stopped fermentation unless a small dialyzable factor was added back, revealing the coenzyme. Euler-Chelpin later characterized this cofactor (cozymase, now known as NAD).",
+      "chemistryLogic": "Harden found that yeast extract loses fermenting power when dialyzed (which removes small molecules), but activity is restored by adding back the boiled, dialyzed filtrate. This proved fermentation needs two components: a heat-labile enzyme (protein) and a heat-stable, low-molecular-weight coenzyme.\n\nHe also discovered that fermentation consumes inorganic phosphate, which becomes esterified to sugar, isolating a sugar diphosphate (the Harden-Young ester, fructose-1,6-bisphosphate). This was the first evidence that phosphorylated sugars are obligatory intermediates in carbohydrate breakdown, a cornerstone of metabolic biochemistry.\n\nEuler-Chelpin elucidated the chemical nature and role of the coenzyme (cozymase / NAD), showing how it participates as a hydrogen/electron carrier in the fermentation reactions.\n\nTogether they transformed fermentation from a single mysterious process into a defined sequence of enzyme-catalyzed steps involving coenzymes and phosphorylated intermediates, the conceptual seed of glycolysis.",
+      "concepts": [
+        "Coenzyme requirement: enzymes often need small heat-stable cofactors (e.g., NAD).",
+        "Sugar phosphorylation: phosphate is incorporated into sugar intermediates during fermentation.",
+        "Pathway thinking: fermentation is a multi-step enzymatic sequence."
+      ],
+      "jargon": [
+        {
+          "term": "coenzyme",
+          "definition": "A small non-protein molecule an enzyme needs to function."
+        },
+        {
+          "term": "cozymase",
+          "definition": "The old name for the fermentation coenzyme now known as NAD."
+        },
+        {
+          "term": "phosphorylation",
+          "definition": "Attaching a phosphate group to a molecule."
+        }
+      ],
+      "whyItMatters": "Discovering coenzymes and phosphorylated sugar intermediates launched the study of metabolic pathways and bioenergetics. NAD and sugar phosphates are central to glycolysis and cellular energy metabolism in all life.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1929",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1929/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What two components did Harden show fermentation needs?",
+          "back": "A heat-labile enzyme and a heat-stable coenzyme (cozymase/NAD)."
+        },
+        {
+          "front": "What did the consumption of phosphate reveal?",
+          "back": "Sugar phosphate intermediates (e.g., fructose-1,6-bisphosphate) in fermentation."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1930",
+    "year": 1930,
+    "awarded": true,
+    "laureates": [
+      "Hans Fischer"
+    ],
+    "motivation": "for his researches into the constitution of haemin and chlorophyll and especially for his synthesis of haemin",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": [
+      "synthesis",
+      "structure-determination",
+      "biomolecule"
+    ],
+    "tags": [
+      "heme",
+      "haemin",
+      "chlorophyll",
+      "porphyrins",
+      "blood pigment",
+      "natural product synthesis"
+    ],
+    "related": [
+      "chem-1915"
+    ],
+    "oneLiner": "Determined and synthesized haemin, the iron-porphyrin of blood, and studied chlorophyll.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1930",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1930/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Hans Fischer won for elucidating the structures of haemin (the iron-containing red pigment of blood, related to hemoglobin's heme) and chlorophyll, and especially for accomplishing the total synthesis of haemin. He established the detailed porphyrin architecture of these vital pigments.",
+      "history": "Building on Willstätter's pigment work (1915), Fischer attacked the precise constitution of the porphyrin pigments through the 1920s. His 1929 synthesis of haemin was a tour de force confirming the structure of the blood pigment, and he continued toward chlorophyll and bile pigments.",
+      "chemistryLogic": "Heme/haemin is built on a porphyrin: four pyrrole rings joined into a large macrocycle that chelates a central metal ion, iron in heme (giving blood its color and oxygen-binding ability), magnesium in chlorophyll.\n\nFischer determined exactly how the four pyrroles are linked and which side chains (methyl, vinyl, propionic acid groups) occupy which positions around the ring, distinguishing among many possible isomers. He systematized porphyrins by numbering and naming the substitution patterns.\n\nHis crowning achievement was synthesizing haemin from simpler pyrrole-derived building blocks, assembling the macrocycle and inserting iron, thereby proving the proposed structure by construction, the gold standard of structural chemistry.\n\nHe extended this understanding to chlorophyll and to the bile pigments (breakdown products of heme), revealing a unified family of biologically crucial tetrapyrrole molecules underlying respiration, photosynthesis, and pigment metabolism.",
+      "concepts": [
+        "Porphyrin macrocycle: four pyrroles forming a metal-chelating ring.",
+        "Heme vs chlorophyll: iron-porphyrin for oxygen transport vs magnesium-porphyrin for light capture.",
+        "Synthesis as proof: total synthesis confirms a proposed structure."
+      ],
+      "jargon": [
+        {
+          "term": "haemin",
+          "definition": "A crystalline iron-porphyrin derivative of the blood pigment heme."
+        },
+        {
+          "term": "porphyrin",
+          "definition": "A macrocycle of four pyrrole rings that binds a central metal."
+        },
+        {
+          "term": "pyrrole",
+          "definition": "A five-membered nitrogen-containing ring, the building block of porphyrins."
+        }
+      ],
+      "whyItMatters": "Fischer's synthesis and structural work defined the porphyrin pigments essential to oxygen transport (heme) and photosynthesis (chlorophyll), foundational to biochemistry, hematology, and the chemistry of life's pigments.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1930",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1930/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Hans Fischer synthesize?",
+          "back": "Haemin, the iron-porphyrin of the blood pigment."
+        },
+        {
+          "front": "What ring system underlies heme and chlorophyll?",
+          "back": "The porphyrin (tetrapyrrole) macrocycle."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1931",
+    "year": 1931,
+    "awarded": true,
+    "laureates": [
+      "Carl Bosch",
+      "Friedrich Bergius"
+    ],
+    "motivation": "in recognition of their contributions to the invention and development of chemical high pressure methods",
+    "field": "Chemistry",
+    "subfield": "Physical Chemistry",
+    "categories": [
+      "technique",
+      "reaction-method",
+      "synthesis"
+    ],
+    "tags": [
+      "high pressure chemistry",
+      "haber-bosch",
+      "coal liquefaction",
+      "catalysis",
+      "chemical engineering",
+      "hydrogenation"
+    ],
+    "related": [
+      "chem-1918",
+      "chem-1912"
+    ],
+    "oneLiner": "Developed industrial high-pressure chemistry: ammonia (Bosch) and coal liquefaction (Bergius).",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1931",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1931/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Bosch and Bergius shared the prize for inventing and developing chemical high-pressure methods. Bosch engineered the industrial-scale Haber-Bosch ammonia synthesis (turning Haber's lab process into a working factory technology), and Bergius developed high-pressure hydrogenation of coal into liquid fuels (the Bergius process).",
+      "history": "Running reactions at high pressure and temperature on a large scale demanded new chemical engineering, pressure-resistant reactors, durable catalysts, and continuous gas handling. Bosch solved these for ammonia in the 1910s; Bergius applied high-pressure hydrogenation to coal in the same era. This was the first chemistry Nobel emphasizing chemical engineering.",
+      "chemistryLogic": "High pressure shifts equilibria toward products that occupy less volume (Le Chatelier) and increases reactant concentrations, boosting rates, making it powerful for gas-phase syntheses like ammonia and hydrogenation.\n\nBosch's challenge was practical: at the high pressures and hydrogen temperatures needed for ammonia, ordinary steel was attacked by hydrogen (embrittlement and decarburization). He devised lined reactors, robust catalysts and purification trains, and continuous-flow plant design, enabling tonnage ammonia production.\n\nBergius hydrogenated coal: by reacting powdered coal with hydrogen at high pressure and temperature (with catalysts), he broke the large carbon-rich coal molecules and added hydrogen to yield liquid hydrocarbons, synthetic oil and gasoline, a route to liquid fuel from coal.\n\nBoth processes show how thermodynamic favorability under pressure, combined with catalysis and engineering, converts simple feedstocks (air, coal, hydrogen) into essential products at industrial scale.",
+      "concepts": [
+        "High-pressure synthesis: pressure shifts equilibria and speeds gas reactions.",
+        "Chemical engineering of catalysis: reactor design and materials make lab reactions industrial.",
+        "Coal hydrogenation: adding hydrogen under pressure converts coal to liquid fuels."
+      ],
+      "jargon": [
+        {
+          "term": "Haber-Bosch process",
+          "definition": "The industrial high-pressure catalytic synthesis of ammonia."
+        },
+        {
+          "term": "hydrogenation",
+          "definition": "Adding hydrogen to a substance, here to convert coal into liquids."
+        },
+        {
+          "term": "hydrogen embrittlement",
+          "definition": "Weakening of steel by hydrogen at high pressure/temperature, a key engineering hurdle."
+        }
+      ],
+      "whyItMatters": "High-pressure methods enabled mass production of fertilizer (ammonia) and synthetic fuels, transforming agriculture, energy, and the chemical industry, and establishing chemical engineering as central to applied chemistry.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1931",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1931/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Bosch contribute?",
+          "back": "Industrial-scale engineering of high-pressure ammonia synthesis (Haber-Bosch)."
+        },
+        {
+          "front": "What did Bergius develop?",
+          "back": "High-pressure hydrogenation of coal into liquid fuels."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1932",
+    "year": 1932,
+    "awarded": true,
+    "laureates": [
+      "Irving Langmuir"
+    ],
+    "motivation": "for his discoveries and investigations in surface chemistry",
+    "field": "Chemistry",
+    "subfield": "Physical Chemistry",
+    "categories": [
+      "theory",
+      "mechanism",
+      "technique"
+    ],
+    "tags": [
+      "surface chemistry",
+      "adsorption",
+      "monolayers",
+      "langmuir isotherm",
+      "catalysis",
+      "thin films"
+    ],
+    "related": [
+      "chem-1909"
+    ],
+    "oneLiner": "Founded modern surface chemistry: monolayer adsorption and the Langmuir isotherm.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1932",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1932/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Langmuir won for his discoveries and investigations in surface chemistry. He established that adsorption on surfaces often forms a single molecular layer (monolayer), formulated the Langmuir adsorption isotherm, and clarified the structure and behavior of surface films and adsorbed layers, founding surface science.",
+      "history": "Working at General Electric (initially on light bulbs and gas-filled lamps), Langmuir studied how gases interact with hot filaments and surfaces. From around 1916 he developed a rigorous, atomistic picture of surfaces, complemented by his and Katharine Blodgett's work on molecular films on liquids.",
+      "chemistryLogic": "Langmuir argued that a solid (or liquid) surface presents a fixed array of sites, and that adsorbed molecules bind to these sites, typically forming at most one molecule-thick layer (a monolayer), because surface forces are short-range.\n\nFrom this he derived the Langmuir adsorption isotherm, relating surface coverage to gas pressure: coverage rises with pressure and saturates as all sites fill. The model assumes equivalent, independent sites and a balance between adsorption and desorption rates, a kinetic-equilibrium treatment.\n\nThis monolayer concept explained heterogeneous catalysis, reactant molecules adsorb onto catalyst surface sites where they react, and the behavior of films on liquids (he and Blodgett built ordered molecular monolayers, Langmuir-Blodgett films).\n\nLangmuir also contributed to bonding ideas (extending the Lewis octet, electron sharing) and plasma physics, but the Nobel centered on his quantitative, mechanistic surface chemistry.",
+      "concepts": [
+        "Monolayer adsorption: molecules typically adsorb as a single layer on a surface.",
+        "Langmuir isotherm: surface coverage versus pressure saturates as sites fill.",
+        "Surface catalysis: reactions occur on adsorbed surface sites."
+      ],
+      "jargon": [
+        {
+          "term": "adsorption",
+          "definition": "The sticking of molecules onto a surface (distinct from absorption into a bulk)."
+        },
+        {
+          "term": "monolayer",
+          "definition": "A single-molecule-thick layer on a surface."
+        },
+        {
+          "term": "isotherm",
+          "definition": "A relationship measured at constant temperature, here coverage versus pressure."
+        }
+      ],
+      "whyItMatters": "Langmuir's surface chemistry underpins heterogeneous catalysis (most industrial chemistry), adsorption technologies, thin-film science, and surface analysis. The Langmuir isotherm remains a standard model, and Langmuir-Blodgett films seeded nanoscience.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1932",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1932/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What field did Langmuir found?",
+          "back": "Modern surface chemistry."
+        },
+        {
+          "front": "What does the Langmuir isotherm describe?",
+          "back": "How surface coverage by adsorbed molecules depends on pressure, saturating at a monolayer."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1933",
+    "year": 1933,
+    "awarded": false,
+    "laureates": [],
+    "motivation": "",
+    "field": "Chemistry",
+    "subfield": "Other",
+    "categories": [],
+    "tags": [],
+    "related": [],
+    "oneLiner": "No prize awarded this year.",
+    "sources": [],
+    "deepDive": {}
+  },
+  {
+    "id": "chem-1934",
+    "year": 1934,
+    "awarded": true,
+    "laureates": [
+      "Harold Clayton Urey"
+    ],
+    "motivation": "for his discovery of heavy hydrogen",
+    "field": "Chemistry",
+    "subfield": "Nuclear/Radiochemistry",
+    "categories": [
+      "technique",
+      "measurement",
+      "structure-determination"
+    ],
+    "tags": [
+      "deuterium",
+      "heavy hydrogen",
+      "isotopes",
+      "heavy water",
+      "spectroscopy",
+      "isotope separation"
+    ],
+    "related": [
+      "chem-1921",
+      "chem-1922"
+    ],
+    "oneLiner": "Discovered deuterium (heavy hydrogen), the mass-2 isotope of hydrogen.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1934",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1934/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Urey won for discovering heavy hydrogen, the hydrogen isotope of mass 2 (deuterium), which he detected spectroscopically in 1931 and then concentrated. He also pioneered methods to separate isotopes and showed how isotopic substitution affects molecular properties.",
+      "history": "By 1931 isotopes of many elements were known, but hydrogen, the lightest element, was thought to be essentially a single species. Predicting a rare heavy isotope, Urey designed an experiment to find it, opening the chemistry of isotopes and isotope effects.",
+      "chemistryLogic": "Urey reasoned that if a mass-2 hydrogen isotope existed, it would have very slightly different atomic spectral lines than ordinary mass-1 hydrogen because the heavier nucleus shifts energy levels (the reduced-mass effect). The isotope's natural abundance is tiny (about 1 in 6500), so the lines would be faint.\n\nTo enhance them, he evaporated a large quantity of liquid hydrogen down to a small residue, concentrating the less-volatile heavy isotope, then examined the atomic emission spectrum. He observed faint new lines at exactly the wavelengths predicted for mass-2 hydrogen, confirming deuterium.\n\nHe and others then separated deuterium in bulk, notably as heavy water (D2O), exploiting small differences in physical and electrochemical behavior between H and D (a large isotope effect because deuterium is twice the mass of protium).\n\nBecause deuterium differs so much in relative mass, it produces pronounced kinetic and equilibrium isotope effects, making it an invaluable tracer and mechanistic probe, and heavy water became important in nuclear reactors as a neutron moderator.",
+      "concepts": [
+        "Deuterium: the hydrogen isotope with a proton and a neutron (mass 2).",
+        "Spectroscopic isotope detection: isotopes shift spectral lines via nuclear mass.",
+        "Isotope separation by distillation/electrolysis: concentrating a rare heavy isotope."
+      ],
+      "jargon": [
+        {
+          "term": "deuterium",
+          "definition": "Heavy hydrogen, an isotope with one proton and one neutron."
+        },
+        {
+          "term": "heavy water",
+          "definition": "Water made with deuterium (D2O) instead of ordinary hydrogen."
+        },
+        {
+          "term": "isotope effect",
+          "definition": "A change in reaction rate or properties when an atom is replaced by a heavier isotope."
+        }
+      ],
+      "whyItMatters": "Deuterium and heavy water are essential tools: deuterium labeling probes reaction mechanisms and is used in NMR and tracer studies, while heavy water moderates neutrons in nuclear reactors. The discovery extended isotope chemistry to hydrogen and revealed large isotope effects.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1934",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1934/summary/",
+          "note": "Official summary."
+        },
+        {
+          "title": "Urey Nobel Lecture",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1934/urey/lecture/",
+          "note": "On heavy hydrogen."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Urey discover?",
+          "back": "Deuterium, the mass-2 (heavy) isotope of hydrogen."
+        },
+        {
+          "front": "How did he first detect it?",
+          "back": "By faint predicted spectral lines after concentrating heavy hydrogen from evaporated liquid hydrogen."
+        },
+        {
+          "front": "What is heavy water?",
+          "back": "Water made with deuterium, D2O, used as a neutron moderator."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1935",
+    "year": 1935,
+    "awarded": true,
+    "laureates": [
+      "Frédéric Joliot",
+      "Irène Joliot-Curie"
+    ],
+    "motivation": "in recognition of their synthesis of new radioactive elements",
+    "field": "Chemistry",
+    "subfield": "Nuclear/Radiochemistry",
+    "categories": [
+      "synthesis",
+      "technique",
+      "reaction-method"
+    ],
+    "tags": [
+      "artificial radioactivity",
+      "induced radioactivity",
+      "alpha bombardment",
+      "radioisotopes",
+      "nuclear transmutation",
+      "radiochemistry"
+    ],
+    "related": [
+      "chem-1908",
+      "chem-1911",
+      "chem-1921"
+    ],
+    "oneLiner": "Created artificial radioactivity, synthesizing new radioactive isotopes by bombardment.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1935",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1935/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Frederic Joliot and Irene Joliot-Curie shared the prize for the synthesis of new radioactive elements, the discovery of artificial (induced) radioactivity in 1934. By bombarding light elements with alpha particles, they produced new, previously nonexistent radioactive isotopes, showing that radioactivity could be created at will, not just found in nature.",
+      "history": "Irene was the daughter of Marie and Pierre Curie, continuing the family's radioactivity research. In 1934, irradiating aluminium and other light elements with alpha particles from polonium, the couple noticed the targets remained radioactive after the source was removed, proof of newly created radioactive nuclei.",
+      "chemistryLogic": "They bombarded light targets (such as aluminium, boron, magnesium) with alpha particles. An alpha particle (helium nucleus) can fuse with a target nucleus, ejecting a neutron and forming a new, heavier nucleus, for example, aluminium-27 + alpha yields phosphorus-30 + a neutron.\n\nThe product phosphorus-30 is an artificial radioactive isotope not found in nature: it decays (by positron emission) with its own characteristic half-life. Crucially, the irradiated sample kept emitting radiation after the alpha source was withdrawn, decaying exponentially, unmistakable evidence of a genuine new radioactive species.\n\nThey confirmed the products chemically: by dissolving and separating the irradiated material, they showed the radioactivity belonged to a different element than the target (e.g., phosphorus, then nitrogen/silicon daughters), proving transmutation had created a new radioelement.\n\nThis demonstrated that nuclear reactions can synthesize radioactive isotopes of ordinary elements, generalizing Rutherford's transmutation and Soddy's isotopes to deliberate creation, and immediately enabled radioactive tracers for science and medicine.",
+      "concepts": [
+        "Artificial radioactivity: bombardment can create radioactive isotopes not found in nature.",
+        "Alpha-induced transmutation: an alpha particle fuses with a nucleus, ejecting a neutron and forming a new element.",
+        "Chemical identification of radioelements: separating the new active species proves the element changed."
+      ],
+      "jargon": [
+        {
+          "term": "induced radioactivity",
+          "definition": "Radioactivity created by bombarding stable nuclei with particles."
+        },
+        {
+          "term": "alpha bombardment",
+          "definition": "Striking target nuclei with alpha particles to induce nuclear reactions."
+        },
+        {
+          "term": "radioisotope",
+          "definition": "A radioactive isotope of an element."
+        }
+      ],
+      "whyItMatters": "Artificial radioactivity made radioisotopes available on demand, revolutionizing medicine (diagnosis and therapy), biology (tracers), and research, and was a key step toward nuclear fission and the broader exploitation of nuclear reactions.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1935",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1935/summary/",
+          "note": "Official summary."
+        },
+        {
+          "title": "Joliot-Curie Nobel Lectures",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1935/joliot-fred/lecture/",
+          "note": "On artificial radioactive elements."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did the Joliot-Curies discover in 1934?",
+          "back": "Artificial (induced) radioactivity, creating new radioactive isotopes by bombardment."
+        },
+        {
+          "front": "Give an example of their nuclear reaction.",
+          "back": "Aluminium-27 + alpha -> phosphorus-30 (radioactive) + a neutron."
+        },
+        {
+          "front": "Why was the effect convincing?",
+          "back": "Targets kept emitting radiation, decaying with a characteristic half-life, after the source was removed."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1936",
+    "year": 1936,
+    "awarded": true,
+    "laureates": [
+      "Petrus (Peter) Josephus Wilhelmus Debye"
+    ],
+    "motivation": "for his contributions to our knowledge of molecular structure through his investigations on dipole moments and on the diffraction of X-rays and electrons in gases",
+    "field": "Chemistry",
+    "subfield": "Theoretical/Computational",
+    "categories": [
+      "theory",
+      "technique",
+      "structure-determination"
+    ],
+    "tags": [
+      "dipole moments",
+      "molecular structure",
+      "x-ray diffraction",
+      "electron diffraction",
+      "debye unit",
+      "physical chemistry"
+    ],
+    "related": [
+      "chem-1913"
+    ],
+    "oneLiner": "Probed molecular structure via dipole moments and X-ray/electron diffraction.",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1936",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1936/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Debye won for contributions to knowledge of molecular structure through his work on dipole moments and on the diffraction of X-rays and electrons by gases. He showed how measuring a molecule's dipole moment and its diffraction pattern reveals charge distribution, shape, and bond geometry.",
+      "history": "In the 1910s-1930s, determining molecular shapes and polarity was a frontier. Debye, a physicist-chemist, developed quantitative theories connecting macroscopic measurements (dielectric behavior, scattering) to molecular structure, and the dipole-moment unit (the debye) bears his name.",
+      "chemistryLogic": "A polar molecule has a permanent dipole moment because its positive and negative charge centers do not coincide (e.g., water). Debye showed that a substance's dielectric constant and its temperature dependence reveal the molecular dipole moment, via the Debye equation relating polarization to permanent dipoles plus induced polarizability. From the dipole moment one infers bond polarity and molecular geometry (a symmetric molecule like CO2 has zero net dipole; a bent one like water does not).\n\nFor diffraction, Debye (with Scherrer) developed powder X-ray diffraction and, importantly, the theory of X-ray and electron scattering by gas-phase molecules. The scattered intensity pattern encodes interatomic distances; analyzing it yields bond lengths and angles of free molecules, not just crystals.\n\nElectron diffraction in gases became a primary method for determining the structures of small molecules, complementing X-ray crystallography for solids.\n\nThus Debye provided both a polarity probe (dipole moments) and geometry probes (diffraction), turning physical measurements into structural information, foundational physical chemistry.",
+      "concepts": [
+        "Dipole moment: a measure of a molecule's charge separation/polarity.",
+        "Dielectric method: dielectric constant vs temperature yields the dipole moment.",
+        "Gas-phase diffraction: scattering of X-rays/electrons reveals bond lengths and angles."
+      ],
+      "jargon": [
+        {
+          "term": "dipole moment",
+          "definition": "A vector measuring how separated a molecule's positive and negative charge are."
+        },
+        {
+          "term": "debye (D)",
+          "definition": "The unit of molecular dipole moment, named after Debye."
+        },
+        {
+          "term": "electron diffraction",
+          "definition": "Scattering of electrons used to determine molecular geometry."
+        }
+      ],
+      "whyItMatters": "Debye's methods are core physical-chemistry tools: dipole moments characterize polarity and bonding, and X-ray/electron diffraction determine molecular and crystal structures, underpinning chemistry, materials science, and structural biology.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1936",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1936/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What two kinds of measurement did Debye use to probe structure?",
+          "back": "Dipole moments and X-ray/electron diffraction."
+        },
+        {
+          "front": "What does a molecule's dipole moment indicate?",
+          "back": "Its charge separation/polarity, hence bond polarity and shape."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1937",
+    "year": 1937,
+    "awarded": true,
+    "laureates": [
+      "Walter Norman Haworth",
+      "Paul Karrer"
+    ],
+    "motivation": "Walter Norman Haworth \"for his investigations on carbohydrates and vitamin C\"; Paul Karrer \"for his investigations on carotenoids, flavins and vitamins A and B2\"",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": [
+      "structure-determination",
+      "synthesis",
+      "biomolecule"
+    ],
+    "tags": [
+      "carbohydrates",
+      "vitamin c",
+      "carotenoids",
+      "vitamin a",
+      "vitamins",
+      "natural products"
+    ],
+    "related": [
+      "chem-1902",
+      "chem-1938"
+    ],
+    "oneLiner": "Structures of carbohydrates and vitamin C (Haworth) and of carotenoids/vitamins A, B2 (Karrer).",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1937",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1937/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "The 1937 prize was shared. Haworth won for work on carbohydrates and vitamin C, he determined the ring structures of sugars (the Haworth projection) and the structure of vitamin C (ascorbic acid), achieving its synthesis, the first vitamin to be synthesized. Karrer won for elucidating the structures of carotenoids, flavins, and vitamins A and B2 (riboflavin).",
+      "history": "The 1920s-30s were the golden age of vitamin chemistry. Building on Fischer's sugar work, Haworth clarified sugar ring forms; his vitamin C synthesis (with Reichstein independently) was a milestone. Karrer's structural work on carotene and vitamin A linked plant pigments to nutrition.",
+      "chemistryLogic": "Haworth showed that sugars in solution exist mainly as rings (pyranose six-membered or furanose five-membered), not open chains, and devised the Haworth projection to depict these rings in three dimensions, clarifying anomeric configuration and glycosidic linkages, the basis of carbohydrate structure.\n\nHe determined that vitamin C is ascorbic acid, a relatively simple sugar-derived lactone, and synthesized it, proving the structure and enabling industrial production of the antiscorbutic vitamin.\n\nKarrer elucidated the carotenoids (e.g., beta-carotene), long-chain polyene pigments, and showed that beta-carotene is a provitamin: the body cleaves it to form vitamin A (retinol). He established vitamin A's structure and that of riboflavin (vitamin B2) and the flavins, relating molecular structure to nutritional function.\n\nTogether their work connected the structures of sugars, vitamins, and pigments to biology, and demonstrated that vitamins are definite chemical compounds that can be synthesized.",
+      "concepts": [
+        "Sugar ring forms: sugars predominantly cyclize into pyranose/furanose rings (Haworth projection).",
+        "Vitamin C as ascorbic acid: a synthesizable, defined molecule.",
+        "Provitamin conversion: beta-carotene is cleaved to vitamin A."
+      ],
+      "jargon": [
+        {
+          "term": "Haworth projection",
+          "definition": "A standard way of drawing the ring form of a sugar."
+        },
+        {
+          "term": "carotenoid",
+          "definition": "A class of yellow-orange polyene plant pigments (e.g., beta-carotene)."
+        },
+        {
+          "term": "provitamin",
+          "definition": "A precursor the body converts into a vitamin."
+        }
+      ],
+      "whyItMatters": "Haworth's carbohydrate ring chemistry and the synthesis of vitamin C transformed nutrition and industry, while Karrer's structures of carotenoids and vitamins A and B2 underpinned vitamin science and the understanding of dietary pigments.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1937",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1937/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What is the Haworth projection used for?",
+          "back": "Depicting the ring (cyclic) structures of sugars."
+        },
+        {
+          "front": "What did Karrer show about beta-carotene?",
+          "back": "It is a provitamin cleaved by the body to form vitamin A."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1938",
+    "year": 1938,
+    "awarded": true,
+    "laureates": [
+      "Richard Kuhn"
+    ],
+    "motivation": "for his work on carotenoids and vitamins",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": [
+      "structure-determination",
+      "biomolecule"
+    ],
+    "tags": [
+      "carotenoids",
+      "vitamins",
+      "vitamin b2",
+      "vitamin b6",
+      "natural products",
+      "biochemistry"
+    ],
+    "related": [
+      "chem-1937"
+    ],
+    "oneLiner": "Elucidated carotenoid pigments and vitamins (riboflavin and vitamin B6).",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1938",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1938/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "Kuhn won for his work on carotenoids and vitamins. He isolated and determined the structures of numerous carotenoid pigments and contributed key structural work on vitamins, including riboflavin (vitamin B2) and the isolation/characterization of vitamin B6, advancing the chemistry of these biologically essential molecules.",
+      "history": "Working in the same vitamin/pigment era as Karrer (with whom he sometimes competed), Kuhn applied advanced separation and microanalytical methods to isolate pure carotenoids and vitamins from natural sources in the 1930s. He was awarded the prize in 1938 but, under Nazi-era pressure, was compelled to decline it at the time and received the diploma/medal after the war.",
+      "chemistryLogic": "Carotenoids are long conjugated polyene chains; their extended alternating double bonds (conjugation) absorb visible light, giving their colors, and make them sensitive to handling. Kuhn used careful chromatographic separation to isolate individual carotenoids from complex mixtures and determined how many double bonds and what end groups each contained, refining the relationship between conjugation length and color.\n\nFor vitamins, he established the structure of riboflavin (vitamin B2), part of the flavin coenzymes, and isolated vitamin B6 (pyridoxine), characterizing its structure. These required isolating tiny amounts of pure substance and deducing structure by degradation and synthesis.\n\nHis work tied the precise molecular architecture of pigments and vitamins to their biological roles (as coenzymes and nutrients), reinforcing that vitamins are definite, synthesizable compounds.\n\nKuhn also advanced understanding of conjugated systems and stereochemistry of polyenes, relevant to color and reactivity.",
+      "concepts": [
+        "Conjugated polyenes: alternating double bonds give carotenoids their color.",
+        "Vitamin structure determination: isolating and characterizing B2 and B6.",
+        "Coenzyme role: flavins (from riboflavin) act as biological cofactors."
+      ],
+      "jargon": [
+        {
+          "term": "carotenoid",
+          "definition": "A conjugated polyene plant/animal pigment, often yellow-orange."
+        },
+        {
+          "term": "riboflavin",
+          "definition": "Vitamin B2, a precursor of flavin coenzymes."
+        },
+        {
+          "term": "conjugation",
+          "definition": "Alternating single and double bonds that delocalize electrons and absorb light."
+        }
+      ],
+      "whyItMatters": "Kuhn's structural chemistry of carotenoids and vitamins advanced nutrition, coenzyme biochemistry, and the chemistry of conjugated pigments. His isolation of vitamin B6 and work on B2 were important for understanding essential nutrients.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1938",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1938/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Kuhn win the Nobel for?",
+          "back": "His work on carotenoids and vitamins."
+        },
+        {
+          "front": "Which vitamins are associated with Kuhn's work?",
+          "back": "Riboflavin (B2) and vitamin B6."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1939",
+    "year": 1939,
+    "awarded": true,
+    "laureates": [
+      "Adolf Friedrich Johann Butenandt",
+      "Leopold Ruzicka"
+    ],
+    "motivation": "Adolf Butenandt \"for his work on sex hormones\"; Leopold Ruzicka \"for his work on polymethylenes and higher terpenes\"",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": [
+      "structure-determination",
+      "synthesis",
+      "biomolecule"
+    ],
+    "tags": [
+      "sex hormones",
+      "steroids",
+      "terpenes",
+      "macrocycles",
+      "testosterone",
+      "natural products"
+    ],
+    "related": [
+      "chem-1910",
+      "chem-1927",
+      "chem-1928"
+    ],
+    "oneLiner": "Sex hormone structures (Butenandt) and large-ring terpene chemistry (Ruzicka).",
+    "sources": [
+      {
+        "title": "Nobel Prize in Chemistry 1939",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1939/summary/"
+      }
+    ],
+    "deepDive": {
+      "scope": "The 1939 prize was shared. Butenandt won for work on the sex hormones, he isolated and determined the structures of estrone, androsterone, and progesterone, key steroid hormones. Ruzicka won for work on polymethylenes (large carbon rings) and higher terpenes, including establishing the structures of musk macrocyclic compounds and developing the isoprene rule of terpene biosynthesis. Butenandt, like Kuhn, was forced by the Nazi regime to decline initially and received the award after the war.",
+      "history": "In the early 1930s sex hormones were isolated in tiny quantities from enormous amounts of biological material; Butenandt's structural work built on the steroid chemistry of Wieland and Windaus. Ruzicka overturned the belief that only small carbon rings were stable by synthesizing large-ring musk compounds, and systematized terpene chemistry begun by Wallach.",
+      "chemistryLogic": "Butenandt isolated estrone (from urine) and androsterone, then determined that the sex hormones are steroids, built on the same four-ring nucleus as cholesterol and bile acids, differing in oxidation pattern and side groups. Establishing these structures (and later partial syntheses) revealed how subtle changes to the steroid skeleton produce distinct hormonal activities (estrogenic vs androgenic vs progestational).\n\nRuzicka demonstrated that stable carbon rings can be very large (up to many-membered macrocycles), explaining the structures of natural musks like muscone and civetone as large-ring ketones, contradicting the prevailing view that only 5- and 6-membered rings were favorable.\n\nFor terpenes, he advanced the isoprene rule: terpenes and related natural products are assembled from isoprene (C5) units in regular head-to-tail patterns, and he extended this to higher terpenes and to the biosynthetic relationship between terpenes and steroids.\n\nTogether their work deepened steroid and terpenoid chemistry, classes that include hormones, fragrances, vitamins, and many drugs, linking molecular architecture to biological and sensory function.",
+      "concepts": [
+        "Steroid hormones: sex hormones are steroids on the four-ring nucleus.",
+        "Large carbon rings: macrocyclic compounds (musks) are stable and natural.",
+        "Isoprene rule: terpenes are built from C5 isoprene units."
+      ],
+      "jargon": [
+        {
+          "term": "sex hormone",
+          "definition": "A steroid (e.g., estrone, testosterone, progesterone) regulating reproductive function."
+        },
+        {
+          "term": "macrocycle",
+          "definition": "A large ring molecule with many atoms in the ring."
+        },
+        {
+          "term": "isoprene rule",
+          "definition": "The principle that terpenes are assembled from five-carbon isoprene units."
+        }
+      ],
+      "whyItMatters": "Butenandt's hormone structures founded steroid endocrinology and pharmacology (including later contraceptives and corticosteroids). Ruzicka's macrocycle and isoprene-rule work shaped fragrance chemistry and the understanding of terpenoid and steroid biosynthesis.",
+      "learnMore": [
+        {
+          "title": "Nobel Prize in Chemistry 1939",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1939/summary/",
+          "note": "Official summary."
+        }
+      ],
+      "flashcards": [
+        {
+          "front": "What did Butenandt determine?",
+          "back": "The structures of sex hormones (estrone, androsterone, progesterone) as steroids."
+        },
+        {
+          "front": "What is the isoprene rule (Ruzicka)?",
+          "back": "Terpenes are built from five-carbon isoprene units."
+        }
+      ]
+    }
+  },
+  {
+    "id": "chem-1940",
+    "year": 1940,
+    "awarded": false,
+    "laureates": [],
+    "motivation": "",
+    "field": "Chemistry",
+    "subfield": "Other",
+    "categories": [],
+    "tags": [],
+    "related": [],
+    "oneLiner": "No prize awarded this year.",
+    "sources": [],
+    "deepDive": {}
+  }
+]
