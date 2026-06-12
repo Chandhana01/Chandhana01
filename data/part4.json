@@ -1,0 +1,830 @@
+[
+  {
+    "id": "chem-2006",
+    "year": 2006,
+    "awarded": true,
+    "laureates": ["Roger D. Kornberg"],
+    "motivation": "for his studies of the molecular basis of eukaryotic transcription",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": ["mechanism", "structure-determination", "biomolecule"],
+    "tags": ["transcription", "RNA polymerase II", "X-ray crystallography", "gene expression"],
+    "related": ["chem-2009", "chem-1959"],
+    "oneLiner": "X-ray structures revealing how RNA polymerase II copies DNA into RNA in eukaryotes.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2006 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2006/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2006", "url": "https://www.nobelprize.org/prizes/chemistry/2006/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "Roger Kornberg won for visualizing, at atomic resolution, how genetic information stored in DNA is copied into messenger RNA in eukaryotic cells (organisms with cell nuclei). His key achievement was determining detailed X-ray crystallographic structures of the yeast RNA polymerase II transcription machinery caught in the act of transcription, including an actively elongating complex with template DNA and the growing RNA strand.",
+      "history": "Transcription is the first step of gene expression. Kornberg built on decades of molecular biology, including the work of his father Arthur Kornberg (Nobel laureate in Physiology or Medicine 1959 for DNA replication enzymes). Roger Kornberg spent roughly a decade reconstituting a faithful in vitro yeast transcription system before achieving crystal structures around 2000-2001 that captured the polymerase mid-transcription.",
+      "chemistryLogic": "RNA polymerase II is a large multi-subunit enzyme that reads a DNA template strand and synthesizes a complementary RNA copy, adding ribonucleotides one at a time. Kornberg's structures revealed the enzyme's architecture: a clamp that grips the DNA, a bridge helix near the active site, and a channel through which the nascent RNA exits. The structures showed Mg2+ ions positioned at the catalytic center where the phosphodiester bond forms between the incoming nucleotide triphosphate and the 3' end of the growing RNA chain.\n\nBy crystallizing complexes at different stages, Kornberg illustrated the choreography of nucleotide addition and translocation: the DNA-RNA hybrid sits in the active site cleft, the template base pairs with the incoming nucleotide, the bond forms, and the enzyme ratchets forward by one base. These snapshots turned an abstract biochemical process into a concrete molecular mechanism and explained how fidelity and processivity are achieved.",
+      "concepts": [
+        "Transcription: the copying of a DNA sequence into a complementary RNA molecule by RNA polymerase.",
+        "Eukaryotic vs prokaryotic transcription: eukaryotes have nucleus-bound, multi-subunit polymerases requiring many accessory factors.",
+        "Structural biology snapshots: crystallizing enzyme-substrate complexes at successive stages reveals a reaction mechanism."
+      ],
+      "jargon": [
+        {"term": "RNA polymerase II", "definition": "The enzyme in eukaryotes that transcribes protein-coding genes into messenger RNA."},
+        {"term": "Eukaryote", "definition": "An organism whose cells contain a nucleus (animals, plants, fungi, yeast)."},
+        {"term": "Transcription elongation complex", "definition": "The assembly of polymerase, DNA template, and growing RNA captured mid-reaction."}
+      ],
+      "whyItMatters": "Transcription underlies all gene expression; its disruption causes disease and it is the target of many drugs and toxins. Understanding the precise molecular mechanism provides a foundation for understanding cancer, stem cells, and gene regulation, and for designing therapeutics that modulate gene activity.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2006", "url": "https://www.nobelprize.org/prizes/chemistry/2006/popular-information/", "note": "Accessible overview of transcription and Kornberg's structures."},
+        {"title": "Roger D. Kornberg - Britannica", "url": "https://www.britannica.com/biography/Roger-D-Kornberg", "note": "Biographical and scientific context."}
+      ],
+      "flashcards": [
+        {"front": "What did Roger Kornberg win the 2006 Chemistry Nobel for?", "back": "Studies of the molecular basis of eukaryotic transcription, including atomic-resolution structures of RNA polymerase II in action."},
+        {"front": "Which enzyme transcribes protein-coding genes in eukaryotes?", "back": "RNA polymerase II."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2007",
+    "year": 2007,
+    "awarded": true,
+    "laureates": ["Gerhard Ertl"],
+    "motivation": "for his studies of chemical processes on solid surfaces",
+    "field": "Chemistry",
+    "subfield": "Physical Chemistry",
+    "categories": ["mechanism", "technique", "measurement"],
+    "tags": ["surface chemistry", "heterogeneous catalysis", "Haber-Bosch", "ultra-high vacuum"],
+    "related": ["chem-1918", "chem-1932"],
+    "oneLiner": "Founding modern surface science: how molecules react on solid catalyst surfaces, step by step.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2007 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2007/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2007", "url": "https://www.nobelprize.org/prizes/chemistry/2007/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "Gerhard Ertl was honored for establishing the methodology and conceptual framework of modern surface chemistry: the detailed, mechanistic study of how molecules adsorb onto, react upon, and desorb from solid surfaces. His signature achievements include unravelling the step-by-step mechanism of the Haber-Bosch ammonia synthesis on iron catalysts and the oxidation of carbon monoxide on platinum (relevant to catalytic converters).",
+      "history": "Surface reactions underpin heterogeneous catalysis, central to industry (fertilizer, fuels, pollution control) and to phenomena like corrosion and semiconductor fabrication. Ertl pioneered the rigorous use of ultra-high vacuum (UHV) techniques in the 1960s-70s, which keep surfaces atomically clean long enough to observe individual reaction steps cleanly.",
+      "chemistryLogic": "Heterogeneous catalysis occurs because a solid surface offers sites where gas molecules can bind, weaken their internal bonds, and react more easily than in the gas phase. Ertl combined methods such as low-energy electron diffraction (LEED), photoelectron spectroscopy, and scanning tunneling microscopy to identify which atoms sit where and how surface coverage and structure evolve during reaction.\n\nFor ammonia synthesis (N2 + 3H2 to 2NH3 over iron), Ertl showed that the rate-limiting step is the dissociative adsorption of nitrogen: the very strong N triple-bond N must be split into individual nitrogen atoms bound to the iron surface, which then combine stepwise with adsorbed hydrogen atoms to build NH, NH2, and finally NH3 before it desorbs. He measured the energetics of each elementary step.\n\nFor CO oxidation on platinum (2CO + O2 to 2CO2), Ertl revealed rich nonlinear behavior, including oscillating reaction rates and self-organized spatial patterns on the surface, demonstrating that surfaces are dynamic, not static stages. This turned surface catalysis from a black box into a quantitative, atom-level science.",
+      "concepts": [
+        "Heterogeneous catalysis: reactions where the catalyst (solid) is in a different phase from the reactants (gas/liquid).",
+        "Dissociative adsorption: a molecule splits into atoms upon binding to a surface, often the rate-limiting step.",
+        "Ultra-high vacuum methodology: keeping surfaces atomically clean to study individual reaction steps."
+      ],
+      "jargon": [
+        {"term": "Adsorption", "definition": "The sticking of molecules onto a surface (distinct from absorption into a bulk)."},
+        {"term": "Haber-Bosch process", "definition": "The industrial synthesis of ammonia from nitrogen and hydrogen over an iron catalyst."},
+        {"term": "LEED", "definition": "Low-energy electron diffraction, a technique to determine the atomic arrangement of a surface."}
+      ],
+      "whyItMatters": "Catalytic surface reactions feed the world (ammonia for fertilizer) and clean our air (catalytic converters). Ertl's atom-level understanding lets chemists rationally design better, cheaper, more selective catalysts and underpins fields from energy to environmental chemistry.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2007", "url": "https://www.nobelprize.org/prizes/chemistry/2007/popular-information/", "note": "Overview of surface chemistry and Ertl's work."},
+        {"title": "2007 Nobel Prize advanced information (PDF)", "url": "https://www.nobelprize.org/uploads/2018/06/popular-chemistryprize2007.pdf", "note": "Detailed scientific background."}
+      ],
+      "flashcards": [
+        {"front": "What did Gerhard Ertl win the 2007 Chemistry Nobel for?", "back": "His studies of chemical processes on solid surfaces, founding modern surface science."},
+        {"front": "What is the rate-limiting step in ammonia synthesis on iron, per Ertl?", "back": "The dissociative adsorption (splitting) of N2 into nitrogen atoms on the iron surface."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2008",
+    "year": 2008,
+    "awarded": true,
+    "laureates": ["Osamu Shimomura", "Martin Chalfie", "Roger Y. Tsien"],
+    "motivation": "for the discovery and development of the green fluorescent protein, GFP",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": ["discovery-element", "biomolecule", "technique"],
+    "tags": ["green fluorescent protein", "GFP", "fluorescence", "bioimaging", "Aequorea victoria"],
+    "related": ["chem-2014", "chem-1962"],
+    "oneLiner": "A jellyfish protein that glows green became biology's universal glowing tag for tracking molecules in living cells.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2008 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2008/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2008", "url": "https://www.nobelprize.org/prizes/chemistry/2008/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "The prize recognized the discovery of green fluorescent protein (GFP) from the jellyfish Aequorea victoria and its transformation into one of biology's most important tools. Osamu Shimomura isolated GFP in the 1960s and found it glows green under UV light. Martin Chalfie showed (1994) that the GFP gene could be expressed in other organisms (E. coli and the worm C. elegans) as a glowing genetic tag. Roger Tsien elucidated how the chromophore forms, engineered brighter and more stable variants, and expanded the color palette (blue, cyan, yellow) for multicolor imaging.",
+      "history": "Shimomura, studying bioluminescence in the crystal jellyfish, purified the calcium-activated photoprotein aequorin and the accompanying GFP, noticing the protein fluoresced green. For decades GFP was a curiosity until cloning of its gene (by Douglas Prasher) enabled Chalfie and Tsien's breakthroughs. GFP-based imaging is now standard in every molecular biology lab worldwide.",
+      "chemistryLogic": "GFP's remarkable feature is that its fluorescent chromophore forms autocatalytically from its own amino acid backbone, requiring no external cofactor or enzyme, only molecular oxygen. A tripeptide within the chain (Ser65-Tyr66-Gly67 in wild type) undergoes cyclization, dehydration, and oxidation to create a conjugated p-hydroxybenzylidene-imidazolinone chromophore buried inside a rigid 11-stranded beta-barrel.\n\nThe beta-barrel ('beta-can') is essential: it shields the chromophore from water and holds it rigid, so absorbed blue/UV light is re-emitted as green fluorescence rather than lost to vibrational quenching. Because the protein needs nothing but oxygen to mature, you can fuse the GFP gene to any gene of interest; the cell then makes a glowing fusion protein, letting researchers watch where and when that protein is made, where it travels, and how much is present, all in living cells.\n\nTsien's mechanistic dissection of chromophore formation allowed rational mutagenesis. By mutating residues near the chromophore he tuned the absorption/emission wavelengths, brightness, folding efficiency, and photostability, creating the family of fluorescent proteins (BFP, CFP, YFP, and later, via other organisms, red variants) that enable multicolor labeling and FRET-based biosensors.",
+      "concepts": [
+        "Fluorescence: absorption of light at one wavelength and re-emission at a longer wavelength.",
+        "Genetically encoded tag: a protein label that the cell makes itself by expressing a fused gene.",
+        "Autocatalytic chromophore: GFP forms its own light-emitting center from its backbone using only O2."
+      ],
+      "jargon": [
+        {"term": "Chromophore", "definition": "The part of a molecule responsible for absorbing and emitting light."},
+        {"term": "Beta-barrel", "definition": "A protein fold of beta-strands wrapped into a can shape; in GFP it encloses the chromophore."},
+        {"term": "Fusion protein", "definition": "A protein made by joining the gene of interest to the GFP gene so both are expressed together."}
+      ],
+      "whyItMatters": "GFP let scientists make the invisible visible: tracking individual proteins, watching nerve cells develop, monitoring cancer spread, and reporting gene activity in real time in living organisms. It is a cornerstone tool of modern cell and molecular biology and a foundation for super-resolution microscopy.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2008", "url": "https://www.nobelprize.org/prizes/chemistry/2008/popular-information/", "note": "Story of GFP from jellyfish to lab tool."},
+        {"title": "Nobel Advanced Information 2008", "url": "https://www.nobelprize.org/prizes/chemistry/2008/advanced-information/", "note": "Detailed chemistry of chromophore formation."}
+      ],
+      "flashcards": [
+        {"front": "What organism is GFP originally from?", "back": "The jellyfish Aequorea victoria."},
+        {"front": "Why is GFP so useful as a tag?", "back": "Its chromophore forms autonomously using only oxygen, so fusing its gene to any gene makes a self-glowing protein in living cells."},
+        {"front": "What did Roger Tsien contribute to GFP?", "back": "He worked out how the chromophore forms and engineered brighter, more stable variants in many colors."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2009",
+    "year": 2009,
+    "awarded": true,
+    "laureates": ["Venkatraman Ramakrishnan", "Thomas A. Steitz", "Ada E. Yonath"],
+    "motivation": "for studies of the structure and function of the ribosome",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": ["structure-determination", "biomolecule", "mechanism"],
+    "tags": ["ribosome", "X-ray crystallography", "translation", "antibiotics", "rRNA"],
+    "related": ["chem-2006", "chem-1962"],
+    "oneLiner": "Atomic-resolution X-ray structures of the ribosome revealing how cells translate the genetic code into proteins.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2009 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2009/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2009", "url": "https://www.nobelprize.org/prizes/chemistry/2009/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "The three laureates determined the three-dimensional atomic structures of the ribosome, the giant RNA-protein machine that synthesizes proteins. Around 2000, Steitz solved the large (50S) subunit, while Ramakrishnan and Yonath solved the small (30S) subunit. These structures, comprising hundreds of thousands of atoms, were among the largest asymmetric structures ever solved by X-ray crystallography and revealed how the ribosome reads messenger RNA and catalyzes peptide bond formation.",
+      "history": "Yonath pioneered the seemingly impossible task of crystallizing ribosomes in the 1980s, using ribosomes from extremophile bacteria for stability, an effort many thought hopeless. Two decades of methodological persistence, including heavy-atom derivatives and synchrotron radiation, culminated in atomic-resolution structures in 2000. The ribosome is ancient, conserved across all life, and central to the translation step of the central dogma (DNA to RNA to protein).",
+      "chemistryLogic": "The ribosome translates the sequence of codons (triplets of nucleotides) in messenger RNA into a sequence of amino acids. The small subunit holds the mRNA and ensures correct codon-anticodon pairing with incoming transfer RNAs (tRNAs); the large subunit contains the peptidyl transferase center (PTC) that catalyzes the formation of peptide bonds linking amino acids.\n\nA landmark finding from Steitz's structure was that the PTC is composed entirely of RNA, with no protein at the catalytic site, proving the ribosome is a ribozyme (an RNA enzyme). This strongly supported the 'RNA world' hypothesis that RNA both stored information and catalyzed reactions early in life's evolution. The structures showed how the ribosome positions the tRNA substrates so their reactive groups are aligned, lowering the entropic barrier to peptide bond formation rather than relying on chemical catalysis by amino acid side chains.\n\nRamakrishnan's small-subunit structures revealed the decoding center, where bases of the 16S rRNA flip out to monitor the geometry of the codon-anticodon helix, conferring fidelity by rejecting incorrect tRNAs. The structures also mapped exactly where many antibiotics bind, explaining how drugs like tetracyclines and aminoglycosides block bacterial protein synthesis, and providing a template for designing new antibiotics.",
+      "concepts": [
+        "Translation: synthesis of proteins by reading mRNA codons into amino acids at the ribosome.",
+        "Ribozyme: an RNA molecule that acts as an enzyme; the ribosome's catalytic core is RNA.",
+        "Decoding fidelity: the small subunit checks codon-anticodon geometry to ensure the right amino acid is added."
+      ],
+      "jargon": [
+        {"term": "Ribosome", "definition": "The cellular machine of RNA and protein that synthesizes proteins from mRNA."},
+        {"term": "Peptidyl transferase center", "definition": "The RNA active site in the large subunit that forms peptide bonds."},
+        {"term": "tRNA", "definition": "Transfer RNA; an adaptor that brings a specific amino acid matched to each codon."}
+      ],
+      "whyItMatters": "Knowing the ribosome's atomic structure explains the molecular basis of life's protein factory and reveals exactly how many antibiotics work, enabling rational design of new antibacterial drugs, crucial in an era of rising antibiotic resistance.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2009", "url": "https://www.nobelprize.org/prizes/chemistry/2009/popular-information/", "note": "Accessible explanation of ribosome structure and function."},
+        {"title": "Nobel Prize Speed Read 2009", "url": "https://www.nobelprize.org/prizes/chemistry/2009/speedread/", "note": "Concise summary."}
+      ],
+      "flashcards": [
+        {"front": "What is surprising about the ribosome's catalytic center?", "back": "It is made of RNA, not protein, making the ribosome a ribozyme."},
+        {"front": "Which subunit did Steitz solve versus Ramakrishnan and Yonath?", "back": "Steitz solved the large (50S) subunit; Ramakrishnan and Yonath solved the small (30S) subunit."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2010",
+    "year": 2010,
+    "awarded": true,
+    "laureates": ["Richard F. Heck", "Ei-ichi Negishi", "Akira Suzuki"],
+    "motivation": "for palladium-catalyzed cross couplings in organic synthesis",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": ["reaction-method", "synthesis", "mechanism"],
+    "tags": ["palladium", "cross-coupling", "Heck reaction", "Suzuki coupling", "Negishi coupling", "C-C bond"],
+    "related": ["chem-2005", "chem-2001"],
+    "oneLiner": "Palladium catalysis that stitches carbon atoms together precisely, revolutionizing synthesis of drugs and materials.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2010 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2010/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2010", "url": "https://www.nobelprize.org/prizes/chemistry/2010/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "The prize honored the development of palladium-catalyzed cross-coupling reactions, a set of tools for forming carbon-carbon bonds between two organic fragments with great precision. Heck developed coupling of organohalides with alkenes (the Heck reaction, 1968-72); Negishi developed coupling using organozinc reagents (Negishi coupling, 1977); Suzuki developed coupling using organoboron reagents (Suzuki coupling, 1979), which is exceptionally mild, tolerant, and non-toxic.",
+      "history": "Joining two carbon atoms selectively is one of the central challenges of organic synthesis. Earlier methods were limited or harsh. The palladium cross-couplings transformed how complex molecules are built and became among the most-used reactions in pharmaceutical manufacturing (roughly a quarter of industrial reactions in pharma) and materials science. The Suzuki coupling in particular is prized for its functional-group tolerance and benign byproducts.",
+      "chemistryLogic": "All three reactions share a catalytic cycle centered on palladium switching between oxidation states. The cycle begins with oxidative addition: a Pd(0) species inserts into the carbon-halogen bond of an organohalide (R-X), giving an R-Pd(II)-X complex. Next, transmetalation transfers a second carbon group from an organometallic partner onto palladium, so two carbon fragments now sit on the same metal center. Finally, reductive elimination joins the two carbon groups to form the new C-C bond and regenerates Pd(0) to restart the cycle.\n\nThe reactions differ in the second coupling partner. In the Heck reaction the alkene inserts into the Pd-C bond (migratory insertion) followed by beta-hydride elimination, giving a substituted alkene. In the Negishi coupling the carbon nucleophile is delivered by an organozinc compound; in the Suzuki coupling it comes from an organoboron compound activated by base. Boron and zinc reagents are far less reactive and toxic than older organometallics, which makes the reactions selective, tolerant of many functional groups, and practical at scale.\n\nThe power of these methods is selectivity and modularity: chemists can join exactly the two pieces they want, including building biaryl linkages (two aromatic rings joined directly) that are ubiquitous in pharmaceuticals, agrochemicals, conducting polymers, and natural-product total synthesis.",
+      "concepts": [
+        "Cross-coupling: joining two different organic fragments to form a new carbon-carbon bond.",
+        "Catalytic cycle: Pd cycles between Pd(0) and Pd(II) via oxidative addition, transmetalation, and reductive elimination.",
+        "Functional-group tolerance: Suzuki/Negishi couplings work even with sensitive groups present, enabling complex synthesis."
+      ],
+      "jargon": [
+        {"term": "Oxidative addition", "definition": "Pd(0) inserting into a C-X bond, becoming Pd(II) bonded to both fragments."},
+        {"term": "Transmetalation", "definition": "Transfer of an organic group from a metal (B, Zn) onto palladium."},
+        {"term": "Reductive elimination", "definition": "The two carbon groups on Pd join to form the C-C bond, regenerating Pd(0)."}
+      ],
+      "whyItMatters": "Cross-couplings are workhorses of modern synthesis, used to manufacture medicines, agrochemicals, and advanced materials (OLEDs, conducting polymers). They let chemists build complex molecules efficiently from simple modular pieces, accelerating drug discovery and industrial production.",
+      "learnMore": [
+        {"title": "Nobel Illustrated Information 2010", "url": "https://www.nobelprize.org/prizes/chemistry/2010/illustrated-information/", "note": "Visual explanation of the coupling reactions."},
+        {"title": "Palladium-Catalysed Cross-Coupling review (Johnson Matthey)", "url": "https://technology.matthey.com/content/journals/10.1595/147106711X558301", "note": "Technical review of the chemistry."}
+      ],
+      "flashcards": [
+        {"front": "What metal catalyzes Heck, Negishi, and Suzuki couplings?", "back": "Palladium, cycling between Pd(0) and Pd(II)."},
+        {"front": "What organometallic partner does the Suzuki coupling use?", "back": "Organoboron reagents (boronic acids/esters), activated by base."},
+        {"front": "Name the three steps of the Pd cross-coupling cycle.", "back": "Oxidative addition, transmetalation, reductive elimination."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2011",
+    "year": 2011,
+    "awarded": true,
+    "laureates": ["Dan Shechtman"],
+    "motivation": "for the discovery of quasicrystals",
+    "field": "Chemistry",
+    "subfield": "Materials/Polymers",
+    "categories": ["discovery-element", "structure-determination", "materials"],
+    "tags": ["quasicrystals", "aperiodic order", "electron diffraction", "five-fold symmetry"],
+    "related": ["chem-2010", "chem-1985"],
+    "oneLiner": "Solids with ordered, never-repeating atomic patterns and forbidden five-fold symmetry, upending crystallography.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2011 - Press release", "url": "https://www.nobelprize.org/prizes/chemistry/2011/press-release/"},
+      {"title": "Nobel Prize in Chemistry 2011 - Shechtman facts", "url": "https://www.nobelprize.org/prizes/chemistry/2011/shechtman/facts/"}
+    ],
+    "deepDive": {
+      "scope": "Dan Shechtman won for discovering quasicrystals, solid materials whose atoms are arranged in patterns that are ordered (giving sharp diffraction spots) yet never repeat periodically, and which display rotational symmetries, such as five-fold, forbidden to ordinary crystals. On 8 April 1982, studying a rapidly cooled aluminum-manganese alloy by electron diffraction, he observed a tenfold diffraction pattern that classical crystallography said could not exist.",
+      "history": "Crystallography had long held that crystals must be periodic, and that periodicity restricts rotational symmetry to 1, 2, 3, 4, and 6-fold; five-fold and ten-fold symmetry were considered impossible. Shechtman faced fierce resistance, including from Linus Pauling, and was even asked to leave his research group. His finding, published in 1984, was eventually vindicated and forced the International Union of Crystallography to redefine the word 'crystal' in 1992 to include aperiodic ordered solids.",
+      "chemistryLogic": "An ordinary crystal is built from a unit cell repeated by translation, and a diffraction experiment (X-ray or electron) yields sharp spots whose symmetry reflects the lattice. The mathematics of periodic tiling forbids five-fold symmetry because regular pentagons cannot tile a plane without gaps. Quasicrystals resolve this paradox by being aperiodic but quasiperiodic: their structure is ordered according to mathematical rules (related to the golden ratio and to Penrose tilings) that produce long-range order without exact repetition.\n\nBecause the atomic positions follow a deterministic, non-random rule, the diffraction pattern is still composed of sharp, discrete spots, the hallmark of order, but those spots exhibit the forbidden five-, ten-, or twelve-fold symmetry. A quasicrystal can be understood as a projection of a higher-dimensional periodic lattice onto three-dimensional space, which gives a rigorous way to index and model the diffraction pattern.\n\nNaturally occurring quasicrystals were later found (in a meteorite), and synthetic quasicrystalline alloys have unusual properties: low friction, low thermal/electrical conductivity, hardness, and non-stick surfaces, attractive for coatings and other applications.",
+      "concepts": [
+        "Periodicity vs aperiodicity: crystals repeat; quasicrystals are ordered but never repeat exactly.",
+        "Forbidden symmetry: five- and ten-fold rotational symmetry are impossible for periodic lattices but occur in quasicrystals.",
+        "Diffraction reveals order: sharp diffraction spots indicate long-range order even without periodicity."
+      ],
+      "jargon": [
+        {"term": "Quasicrystal", "definition": "A solid with ordered but non-repeating atomic arrangement and non-classical symmetry."},
+        {"term": "Penrose tiling", "definition": "A 2D aperiodic pattern with five-fold symmetry, a model for quasicrystal order."},
+        {"term": "Electron diffraction", "definition": "Using a beam of electrons to probe the atomic arrangement of a material."}
+      ],
+      "whyItMatters": "Quasicrystals forced a fundamental redefinition of what a crystal is, expanding our understanding of how matter can be ordered. Their unusual mechanical and surface properties have practical uses in durable coatings, non-stick surfaces, and specialty alloys.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2011", "url": "https://www.nobelprize.org/prizes/chemistry/2011/popular-information/", "note": "Story of the discovery and the controversy."},
+        {"title": "PRL: 2011 Nobel Prize for Chemistry: Quasicrystals", "url": "https://journals.aps.org/prl/edannounce/2011-nobel-chemistry", "note": "Physics perspective and original papers."}
+      ],
+      "flashcards": [
+        {"front": "What is forbidden in normal crystals but seen in quasicrystals?", "back": "Five-fold (and ten-fold) rotational symmetry."},
+        {"front": "What did Shechtman's discovery force the IUCr to do?", "back": "Redefine the term 'crystal' (1992) to include ordered aperiodic solids."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2012",
+    "year": 2012,
+    "awarded": true,
+    "laureates": ["Robert J. Lefkowitz", "Brian K. Kobilka"],
+    "motivation": "for studies of G-protein-coupled receptors",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": ["mechanism", "structure-determination", "biomolecule"],
+    "tags": ["GPCR", "signal transduction", "adrenergic receptor", "X-ray crystallography", "drug targets"],
+    "related": ["chem-2003", "chem-2009"],
+    "oneLiner": "Structure and signaling of G-protein-coupled receptors, the cell sensors targeted by ~a third of all drugs.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2012 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2012/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2012", "url": "https://www.nobelprize.org/prizes/chemistry/2012/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "Lefkowitz and Kobilka were honored for revealing how G-protein-coupled receptors (GPCRs) work, the large family of cell-surface receptors that let cells sense hormones, neurotransmitters, light, odors, and more. Lefkowitz used radioactively tagged ligands to identify and isolate receptors like the beta-adrenergic receptor and cloned its gene; Kobilka captured a landmark X-ray crystal structure of the beta2-adrenergic receptor in the act of signaling, bound to its G protein at the moment of activation.",
+      "history": "For decades it was unclear how a signal outside a cell was transmitted inside without the messenger entering. Lefkowitz's work from the 1970s onward established that receptors are discrete membrane proteins; cloning the beta-adrenergic receptor revealed a seven-transmembrane-helix architecture shared with rhodopsin, suggesting a whole family. Kobilka, who had worked in Lefkowitz's lab, achieved the technical tour de force of crystallizing these notoriously unstable membrane proteins, including the active-state complex in 2011.",
+      "chemistryLogic": "A GPCR threads back and forth across the cell membrane seven times (seven transmembrane alpha-helices). A signaling molecule (ligand) binds in a pocket on the outside or within the helical bundle. Ligand binding causes a conformational change, the helices shift relative to each other, that propagates to the receptor's cytoplasmic face inside the cell.\n\nThis change opens a cavity that binds a heterotrimeric G protein (made of alpha, beta, gamma subunits). The activated receptor acts as a guanine-nucleotide exchange factor: it triggers the G-alpha subunit to release GDP and bind GTP, causing the G protein to split into G-alpha-GTP and G-beta-gamma, which then activate downstream effectors (such as adenylate cyclase, producing the second messenger cyclic AMP). Thus the external signal is relayed and amplified inside the cell without the ligand ever crossing the membrane.\n\nKobilka's active-state crystal structure of the beta2-adrenergic receptor bound to its G protein froze this molecular handshake, showing exactly how agonist binding outside the cell reshapes the receptor to engage and activate the G protein inside. About 800 GPCRs exist in humans, and they are the targets of roughly a third to a half of all marketed drugs, so the structural insight is enormously valuable for drug design.",
+      "concepts": [
+        "Signal transduction: converting an extracellular signal into an intracellular response.",
+        "Seven-transmembrane architecture: GPCRs cross the membrane seven times, the shared GPCR fold.",
+        "G-protein activation: the receptor catalyzes GDP-to-GTP exchange on G-alpha, splitting and activating the G protein."
+      ],
+      "jargon": [
+        {"term": "GPCR", "definition": "G-protein-coupled receptor; a seven-transmembrane cell-surface receptor."},
+        {"term": "Ligand", "definition": "A molecule (hormone, drug, neurotransmitter) that binds a receptor to trigger a response."},
+        {"term": "Heterotrimeric G protein", "definition": "An intracellular signaling protein of alpha, beta, and gamma subunits activated by GPCRs."}
+      ],
+      "whyItMatters": "GPCRs govern sight, smell, taste, mood, heart rate, blood pressure, and immune responses. Because they are the targets of an enormous fraction of medicines, atomic-level understanding of how they activate enables the rational design of safer, more selective drugs.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2012", "url": "https://www.nobelprize.org/prizes/chemistry/2012/popular-information/", "note": "Accessible account of GPCR signaling."},
+        {"title": "RSC news on the 2012 prize", "url": "https://www.rsc.org/news-events/articles/2012/10-october/nobel-prize-for-chemistry-awarded-for-g-protein-coupled-receptors/", "note": "Context and significance."}
+      ],
+      "flashcards": [
+        {"front": "How many times does a GPCR cross the cell membrane?", "back": "Seven (seven transmembrane alpha-helices)."},
+        {"front": "What fraction of drugs target GPCRs?", "back": "Roughly a third to a half of all marketed drugs."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2013",
+    "year": 2013,
+    "awarded": true,
+    "laureates": ["Martin Karplus", "Michael Levitt", "Arieh Warshel"],
+    "motivation": "for the development of multiscale models for complex chemical systems",
+    "field": "Chemistry",
+    "subfield": "Theoretical/Computational",
+    "categories": ["theory", "technique", "mechanism"],
+    "tags": ["QM/MM", "molecular dynamics", "computational chemistry", "enzyme catalysis", "simulation"],
+    "related": ["chem-2024", "chem-1998"],
+    "oneLiner": "Combining quantum and classical physics in one model, letting computers simulate large molecules and reactions.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2013 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2013/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2013", "url": "https://www.nobelprize.org/prizes/chemistry/2013/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "Karplus, Levitt, and Warshel were honored for developing multiscale models that let computers simulate complex chemical systems, especially large biomolecules, by combining quantum mechanics (QM) and classical molecular mechanics (MM) in a single calculation. In the 1970s they pioneered the QM/MM approach, treating the small region where chemistry happens with quantum mechanics and the large surrounding environment with cheaper classical physics.",
+      "history": "Quantum mechanics describes electrons and chemical bond making/breaking accurately but is computationally too expensive for large systems; classical mechanics (force fields) handles thousands of atoms but cannot describe reactions. The laureates bridged these scales. Warshel and Levitt's 1976 work modeled enzyme catalysis (the lysozyme reaction) using a hybrid approach, a foundational moment for modern computational chemistry and molecular dynamics.",
+      "chemistryLogic": "The central insight is partitioning a large system by importance. In an enzyme, only a handful of atoms at the active site actually break and form bonds; the rest of the protein and the surrounding water mainly provide an electrostatic and steric environment. QM/MM treats the reactive core quantum-mechanically (solving for electrons, allowing bonds to change) and the bulk environment with classical force fields (atoms as balls connected by springs with electrostatic charges), coupling the two regions so the environment polarizes and steers the quantum reaction.\n\nThis multiscale strategy makes otherwise impossible simulations tractable: one gets near-quantum accuracy where it matters at a fraction of the computational cost. It allows researchers to compute reaction pathways, transition states, and energy barriers for enzymes and other large systems, and to visualize how a protein's structure lowers the activation energy of a reaction.\n\nThe broader achievement is the modern paradigm of molecular dynamics and simulation: representing a molecule in a computer and letting Newton's equations (with quantum corrections where needed) evolve it through time. Today these methods are everywhere, in drug design, materials, catalysis, and protein studies, and they laid groundwork that connects to later computational advances in structural biology.",
+      "concepts": [
+        "Multiscale modeling: using different levels of physical theory for different parts of a system.",
+        "QM/MM: quantum mechanics for the reactive core, classical mechanics for the bulk environment.",
+        "Force field: a set of classical equations approximating atomic interactions as springs and charges."
+      ],
+      "jargon": [
+        {"term": "Quantum mechanics (QM)", "definition": "Physics of electrons; needed to describe bond breaking and forming accurately."},
+        {"term": "Molecular mechanics (MM)", "definition": "Classical approximation treating atoms as charged balls on springs; fast but cannot do reactions."},
+        {"term": "Transition state", "definition": "The highest-energy arrangement along a reaction path that determines the reaction rate."}
+      ],
+      "whyItMatters": "Computer simulation has become a third pillar of chemistry alongside experiment and theory. Multiscale models let scientists predict how enzymes catalyze reactions, how drugs bind targets, and how new materials behave, often before doing any experiment, accelerating discovery across chemistry and biology.",
+      "learnMore": [
+        {"title": "Nobel summary 2013", "url": "https://www.nobelprize.org/prizes/chemistry/2013/summary/", "note": "Official overview."},
+        {"title": "RSC: computer modelling of complex chemical systems", "url": "https://www.rsc.org/news/2013/october/nobel-prize-in-chemistry-awarded-for-computer-modelling-of-complex-chemical-systems", "note": "Background on the method."}
+      ],
+      "flashcards": [
+        {"front": "What does QM/MM stand for and do?", "back": "Quantum mechanics / molecular mechanics: a hybrid treating the reactive core with QM and the environment with classical MM."},
+        {"front": "Why combine quantum and classical methods?", "back": "QM is accurate but expensive; MM is cheap but can't model reactions, so combining them simulates large reactive systems affordably."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2014",
+    "year": 2014,
+    "awarded": true,
+    "laureates": ["Eric Betzig", "Stefan W. Hell", "William E. Moerner"],
+    "motivation": "for the development of super-resolved fluorescence microscopy",
+    "field": "Chemistry",
+    "subfield": "Spectroscopy/Instrumentation",
+    "categories": ["equipment", "technique", "measurement"],
+    "tags": ["super-resolution microscopy", "STED", "PALM", "single-molecule", "Abbe limit", "nanoscopy"],
+    "related": ["chem-2008", "chem-2017"],
+    "oneLiner": "Breaking the optical diffraction limit to image living cells at nanometer scale with fluorescent light.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2014 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2014/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2014", "url": "https://www.nobelprize.org/prizes/chemistry/2014/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "The prize recognized methods that bypass the fundamental resolution limit of light microscopy, enabling imaging of structures far smaller than half the wavelength of light. Stefan Hell developed stimulated emission depletion (STED) microscopy (concept 1994, realized 2000). Eric Betzig and William Moerner independently laid the foundations of single-molecule microscopy, leading to techniques like PALM/STORM that locate individual fluorescent molecules with nanometer precision.",
+      "history": "In 1873 Ernst Abbe established that an optical microscope can never resolve details finer than about 0.2 micrometers (half the wavelength of light) due to diffraction. This limit stood for over a century. Moerner achieved the first detection of a single fluorescent molecule in condensed phase (1989), and the laureates' work in the 1990s-2000s showed that by cleverly controlling which molecules emit light at any instant, one could break Abbe's barrier without violating physics.",
+      "chemistryLogic": "Both approaches sidestep the diffraction limit by ensuring that fluorescent molecules closer together than the limit do not emit at the same time, so each can be located separately. STED does this deterministically: one laser beam excites fluorophores in a spot, while a second, doughnut-shaped 'depletion' beam de-excites (via stimulated emission) every molecule except those in a tiny central zone smaller than the diffraction limit. Scanning this sub-diffraction emitting spot across the sample builds a super-resolution image.\n\nSingle-molecule localization microscopy (PALM, by Betzig; STORM, related) does it stochastically. Fluorophores are switched on and off (photoactivation/photoswitching) so that in each camera frame only a sparse, random subset glows, with each glowing molecule well separated from its neighbors. Although each molecule's image is a blurry diffraction-limited spot, its center can be fitted mathematically to within nanometers because you know it is a single point source. Repeating this over thousands of frames and accumulating all the precisely located molecules reconstructs a complete image at nanometer resolution.\n\nThe enabling chemistry is fluorescent labeling and photoswitchable fluorophores (including fluorescent proteins from the 2008 prize). These methods let biologists watch individual proteins, synapses, and viruses inside living cells, turning the optical microscope into a nanoscope.",
+      "concepts": [
+        "Abbe diffraction limit: classical light microscopy cannot resolve below ~200 nm.",
+        "STED: a doughnut depletion beam shrinks the emitting spot below the diffraction limit.",
+        "Single-molecule localization: sparsely activated molecules are pinpointed to nanometers and combined into a super-resolution image."
+      ],
+      "jargon": [
+        {"term": "Diffraction limit", "definition": "The fundamental resolution ceiling of light microscopy set by the wavelength of light."},
+        {"term": "STED", "definition": "Stimulated emission depletion microscopy; uses a depletion beam to narrow the fluorescence spot."},
+        {"term": "PALM/STORM", "definition": "Localization microscopy that fits centers of individually blinking fluorophores to build nanoscale images."}
+      ],
+      "whyItMatters": "Super-resolution microscopy lets scientists watch molecular machinery inside living cells in real time at nanometer scale, observing how proteins cluster at synapses, how viruses assemble, and how diseases develop, all with visible light and no need to kill or freeze the sample.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2014", "url": "https://www.nobelprize.org/prizes/chemistry/2014/popular-information/", "note": "How the methods beat the diffraction limit."},
+        {"title": "C&EN: 2014 super-resolution Nobel", "url": "https://cen.acs.org/articles/92/web/2014/10/Eric-Betzig-Stefan-Hell-W.html", "note": "Coverage and context."}
+      ],
+      "flashcards": [
+        {"front": "What classical limit did super-resolution microscopy break?", "back": "The Abbe diffraction limit (~0.2 micrometers)."},
+        {"front": "How does STED achieve super-resolution?", "back": "A doughnut-shaped depletion beam de-excites all fluorophores except those in a tiny central spot."},
+        {"front": "How does PALM/STORM achieve super-resolution?", "back": "By activating sparse subsets of molecules and fitting each blurry spot's center to nanometer precision over many frames."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2015",
+    "year": 2015,
+    "awarded": true,
+    "laureates": ["Tomas Lindahl", "Paul Modrich", "Aziz Sancar"],
+    "motivation": "for mechanistic studies of DNA repair",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": ["mechanism", "pathway", "biomolecule"],
+    "tags": ["DNA repair", "base excision repair", "nucleotide excision repair", "mismatch repair", "genome stability"],
+    "related": ["chem-2006", "chem-2009"],
+    "oneLiner": "How cells constantly find and fix DNA damage, mapping the molecular toolkits that protect our genome.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2015 - Press release", "url": "https://www.nobelprize.org/prizes/chemistry/2015/press-release/"},
+      {"title": "The Nobel Prize in Chemistry 2015 - Popular information", "url": "https://www.nobelprize.org/prizes/chemistry/2015/popular-information/"}
+    ],
+    "deepDive": {
+      "scope": "The three laureates mapped, at the molecular level, the main systems cells use to repair DNA damage and copying errors. Tomas Lindahl discovered base excision repair and showed DNA is inherently unstable, decaying continuously. Aziz Sancar elucidated nucleotide excision repair, which removes bulky lesions like UV-induced damage. Paul Modrich worked out mismatch repair, which corrects errors made during DNA replication.",
+      "history": "DNA was once thought to be a stable molecule, but Lindahl realized in the 1970s that its chemical decay (deamination, oxidation, loss of bases) would be too fast to sustain life unless cells constantly repaired it. Over the following decades, the three laureates dissected distinct repair pathways. Their work explained how genomic integrity is maintained across generations and why defects in repair lead to cancer and other diseases.",
+      "chemistryLogic": "DNA is chemically reactive: bases can spontaneously lose amino groups (cytosine to uracil), bases can fall off the sugar-phosphate backbone, and oxidizing agents and UV light create lesions. Each repair pathway is a molecular toolkit tuned to a class of damage.\n\nBase excision repair (Lindahl) handles small, non-helix-distorting damage. A DNA glycosylase recognizes and flips out the damaged base, cleaving it from the sugar; an endonuclease nicks the backbone; the gap is filled by a polymerase using the intact complementary strand as a template, and a ligase seals it. Nucleotide excision repair (Sancar) handles bulky lesions that distort the helix, such as pyrimidine dimers from UV light: a set of proteins recognizes the distortion, makes incisions on both sides of the lesion, removes a short oligonucleotide containing the damage, and resynthesizes the strand.\n\nMismatch repair (Modrich) corrects mistakes that DNA polymerase makes during replication, like inserting the wrong base. The system must know which strand is newly made (and therefore wrong); Modrich showed it uses strand-discrimination signals to excise the error from the new strand and resynthesize it correctly. Together these pathways reduce the error rate of the genome enormously and explain disease: inherited defects in nucleotide excision repair cause xeroderma pigmentosum (extreme UV sensitivity and skin cancer), and defects in mismatch repair cause hereditary colon cancer (Lynch syndrome).",
+      "concepts": [
+        "DNA is unstable: it spontaneously decays and must be continuously repaired.",
+        "Excision repair: damaged bases or stretches are cut out and resynthesized from the intact strand.",
+        "Mismatch repair: replication errors are corrected by identifying and replacing the wrong base in the new strand."
+      ],
+      "jargon": [
+        {"term": "Base excision repair", "definition": "Removal of a single damaged base by a glycosylase, then gap filling."},
+        {"term": "Nucleotide excision repair", "definition": "Removal of a short DNA segment containing a bulky lesion (e.g., UV dimer)."},
+        {"term": "Mismatch repair", "definition": "Correction of base-pairing errors introduced during replication."}
+      ],
+      "whyItMatters": "DNA repair protects against mutations, cancer, and aging. Understanding these pathways explains hereditary cancer syndromes and underpins new cancer therapies, including drugs (like PARP inhibitors) that exploit repair deficiencies to selectively kill tumor cells.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2015 (PDF)", "url": "https://www.nobelprize.org/uploads/2018/06/popular-chemistryprize2015.pdf", "note": "Clear overview of the three repair pathways."},
+        {"title": "Nature Reviews: The year of DNA repair", "url": "https://www.nature.com/articles/nrm4078", "note": "Scientific commentary."}
+      ],
+      "flashcards": [
+        {"front": "Which repair pathway did each 2015 laureate elucidate?", "back": "Lindahl: base excision repair; Sancar: nucleotide excision repair; Modrich: mismatch repair."},
+        {"front": "What disease results from defective nucleotide excision repair?", "back": "Xeroderma pigmentosum (extreme UV sensitivity and skin cancer)."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2016",
+    "year": 2016,
+    "awarded": true,
+    "laureates": ["Jean-Pierre Sauvage", "Sir J. Fraser Stoddart", "Bernard L. Feringa"],
+    "motivation": "for the design and synthesis of molecular machines",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": ["synthesis", "materials", "mechanism"],
+    "tags": ["molecular machines", "catenane", "rotaxane", "molecular motor", "supramolecular chemistry"],
+    "related": ["chem-1987", "chem-2021"],
+    "oneLiner": "Building the world's tiniest machines: interlocked molecules and motors that move on command.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2016 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2016/summary/"},
+      {"title": "Press release: The 2016 Nobel Prize in Chemistry", "url": "https://www.nobelprize.org/prizes/chemistry/2016/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "The prize honored the design and synthesis of molecular machines, molecules with controllable, movable parts that perform mechanical tasks. Sauvage created a catenane (two interlocked rings) in 1983 using a metal template. Stoddart built rotaxanes (a ring threaded on an axle) in 1991 and showed the ring could be shuttled along the axle. Feringa built the first true molecular motor in 1999, a molecule whose rotor blade spins continuously in one direction when fed energy.",
+      "history": "Chemists had long dreamed of molecular machines that, like macroscopic machines, convert energy into directed motion. The breakthrough required mechanically interlocked molecules, components physically linked but not chemically bonded, so parts could move relative to each other. The laureates' work created the field of artificial molecular machinery, raising the question of whether molecules can do controlled work at the nanoscale.",
+      "chemistryLogic": "The foundational challenge was forming mechanical bonds. Sauvage used a copper ion as a template: it gathered two crescent-shaped molecules in a crossed arrangement, which were then closed into rings, leaving them interlocked once the metal was removed, a catenane. This made interlocked molecules accessible in good yield. Stoddart's rotaxane exploited attractive interactions (an electron-rich ring drawn to electron-poor stations on the axle) so a ring threads onto a dumbbell-shaped axle; by changing conditions (oxidation state, pH), the ring could be made to jump between stations, a controllable molecular shuttle.\n\nFeringa's molecular motor solved the hard problem of unidirectional rotation. Random thermal motion alone gives no net direction; to get a motor you must ratchet motion so it proceeds one way. His overcrowded alkene design uses light to drive a cis-trans isomerization about a central double bond, twisting the molecule, followed by a thermal relaxation step that resets the geometry. The molecule's built-in chirality (helical shape) ensures each light-plus-heat cycle advances the rotation in the same direction, so repeated cycles produce continuous 360-degree rotation.\n\nThese principles let chemists build molecular muscles, elevators, pumps, and motors that drive larger objects (Feringa famously rotated a glass rod 10,000 times its size and built a 'nanocar'). The field demonstrates controlled mechanical work at the molecular scale.",
+      "concepts": [
+        "Mechanical bond: components interlocked physically (not chemically bonded) so they can move relative to each other.",
+        "Template synthesis: using a metal ion to pre-organize molecules into an interlocked geometry.",
+        "Unidirectional motor: combining light-driven isomerization with thermal ratcheting to spin one way."
+      ],
+      "jargon": [
+        {"term": "Catenane", "definition": "Two or more interlocked molecular rings, like links of a chain."},
+        {"term": "Rotaxane", "definition": "A ring threaded onto a molecular axle, trapped by bulky stoppers."},
+        {"term": "Molecular motor", "definition": "A molecule that converts energy into continuous directional rotation."}
+      ],
+      "whyItMatters": "Molecular machines point toward materials and devices that work at the nanoscale: smart materials that change shape or stiffness, molecular-scale sensors and pumps, targeted drug delivery, and nano-robots. They are at an early stage comparable to the electric motor in the 1830s, with vast future potential.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2016", "url": "https://www.nobelprize.org/prizes/chemistry/2016/popular-information/", "note": "How the machines were built and how they move."},
+        {"title": "Lindau: World's Smallest Machines", "url": "https://www.lindau-nobel.org/nobel-prize-in-chemistry-2016-the-worlds-smallest-machines/", "note": "Overview of molecular machines."}
+      ],
+      "flashcards": [
+        {"front": "What did Sauvage build in 1983?", "back": "A catenane, two interlocked molecular rings, using a copper template."},
+        {"front": "How did Feringa achieve unidirectional rotation in a molecular motor?", "back": "Light-driven isomerization of an overcrowded alkene plus a thermal ratcheting step, with built-in chirality enforcing one direction."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2017",
+    "year": 2017,
+    "awarded": true,
+    "laureates": ["Jacques Dubochet", "Joachim Frank", "Richard Henderson"],
+    "motivation": "for developing cryo-electron microscopy for the high-resolution structure determination of biomolecules in solution",
+    "field": "Chemistry",
+    "subfield": "Spectroscopy/Instrumentation",
+    "categories": ["equipment", "technique", "structure-determination"],
+    "tags": ["cryo-EM", "electron microscopy", "vitrification", "single-particle reconstruction", "structural biology"],
+    "related": ["chem-2009", "chem-2024"],
+    "oneLiner": "Freezing biomolecules in glassy ice and imaging them with electrons to reveal atomic structures without crystals.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2017 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2017/summary/"},
+      {"title": "Press release: The 2017 Nobel Prize in Chemistry", "url": "https://www.nobelprize.org/prizes/chemistry/2017/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "The prize recognized the development of cryo-electron microscopy (cryo-EM), which determines the three-dimensional atomic structures of biomolecules by imaging them with electrons after flash-freezing them in their native, hydrated state, no crystals required. Richard Henderson proved an electron microscope could yield atomic-resolution protein structures; Joachim Frank developed image-processing methods to merge many noisy 2D images into a sharp 3D structure; Jacques Dubochet developed vitrification, rapidly freezing water so it solidifies as glass around the sample.",
+      "history": "X-ray crystallography requires growing well-ordered crystals, which many important molecules (especially membrane proteins and large complexes) refuse to do. Electron microscopy promised an alternative but seemed blocked: the vacuum dried out and destroyed biological samples, and electron beams damaged them. The laureates solved these problems over the 1970s-1990s. A 'resolution revolution' around 2013, driven by better detectors and software building on their foundations, made cryo-EM routinely capable of atomic resolution.",
+      "chemistryLogic": "Three problems had to be solved. First, biological samples must survive the microscope's vacuum and remain hydrated. Dubochet's vitrification solved this: by plunging a thin film of sample into liquid ethane fast enough, water freezes without forming crystalline ice, becoming an amorphous glass (vitreous ice) that preserves the molecule's natural shape and protects it from the vacuum.\n\nSecond, electrons damage delicate biomolecules, so only very low electron doses can be used, giving extremely noisy images in which the molecule is barely visible. Frank's solution was single-particle reconstruction: collect images of many thousands of copies of the same molecule frozen in random orientations, computationally sort them by orientation, average the noise away, and combine the different views to reconstruct a single high-resolution 3D map. Each 2D image is a projection from a different angle; combining many angles rebuilds the 3D object, much like CT scanning.\n\nThird, Henderson demonstrated, on bacteriorhodopsin, that electron microscopy could in principle reach atomic resolution, pushing the field to keep improving rather than settling for blurry pictures. Modern cryo-EM, with direct electron detectors and motion-correction software, now resolves structures to better than 2 angstroms, rivaling crystallography, and uniquely captures large, flexible, and membrane-bound complexes in multiple functional states.",
+      "concepts": [
+        "Vitrification: ultra-fast freezing that traps water as glass, preserving native molecular structure.",
+        "Single-particle reconstruction: averaging many noisy 2D images of identical molecules into one 3D structure.",
+        "No crystals needed: cryo-EM images molecules in solution, unlocking targets that resist crystallization."
+      ],
+      "jargon": [
+        {"term": "Cryo-EM", "definition": "Cryo-electron microscopy; imaging flash-frozen biomolecules with electrons to get 3D structures."},
+        {"term": "Vitreous ice", "definition": "Glassy, non-crystalline frozen water that preserves embedded biomolecules."},
+        {"term": "Single-particle analysis", "definition": "Combining thousands of individual molecule images into a high-resolution 3D reconstruction."}
+      ],
+      "whyItMatters": "Cryo-EM revolutionized structural biology, letting scientists see proteins, viruses, and molecular machines (including drug targets and pathogens) at atomic detail in near-native states. It accelerated understanding of diseases and drug design, including rapid structural work on viruses like SARS-CoV-2.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2017", "url": "https://www.nobelprize.org/prizes/chemistry/2017/popular-information/", "note": "How cryo-EM captures life in atomic detail."},
+        {"title": "Nature: Cryo-EM wins chemistry Nobel", "url": "https://www.nature.com/articles/nature.2017.22738", "note": "News coverage and significance."}
+      ],
+      "flashcards": [
+        {"front": "What did Dubochet contribute to cryo-EM?", "back": "Vitrification: flash-freezing water into glassy (vitreous) ice that preserves biomolecules' native shape."},
+        {"front": "How does single-particle reconstruction overcome noisy images?", "back": "By averaging and combining thousands of low-dose images of identical molecules in different orientations into one 3D structure."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2018",
+    "year": 2018,
+    "awarded": true,
+    "laureates": ["Frances H. Arnold", "George P. Smith", "Sir Gregory P. Winter"],
+    "motivation": "one half to Frances H. Arnold \"for the directed evolution of enzymes\", the other half jointly to George P. Smith and Sir Gregory P. Winter \"for the phage display of peptides and antibodies\"",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": ["technique", "biomolecule", "synthesis"],
+    "tags": ["directed evolution", "enzymes", "phage display", "antibodies", "protein engineering"],
+    "related": ["chem-2020", "chem-2024"],
+    "oneLiner": "Harnessing evolution in the lab to engineer new enzymes and antibodies for medicine and industry.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2018 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2018/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2018", "url": "https://www.nobelprize.org/prizes/chemistry/2018/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "The prize was split. Frances Arnold won half for the directed evolution of enzymes, a method to engineer proteins by iterated rounds of mutation and selection rather than rational design. George Smith and Gregory Winter shared the other half for phage display, in which bacteriophages (viruses that infect bacteria) are used to evolve new peptides and antibodies; Winter pioneered its use to make human therapeutic antibodies.",
+      "history": "Proteins are too complex to design from first principles for most desired functions. Arnold's insight (from the early 1990s) was to mimic natural evolution in the test tube. Smith introduced phage display in 1985; Winter adapted it in the 1990s to evolve antibodies, leading to the first fully human antibody drugs. These methods turned evolution into a practical engineering tool.",
+      "chemistryLogic": "Directed evolution applies Darwinian selection to molecules. Starting from a gene encoding an enzyme, you introduce random mutations (by error-prone PCR or other means), express the many variant proteins, and screen or select for the rare variants with improved or new desired properties (e.g., activity in a solvent, on a new substrate, or at high temperature). The best variants' genes become the parents for the next round of mutation and selection. Repeating this cycle accumulates beneficial mutations, climbing a fitness landscape toward proteins with properties that no chemist could have designed rationally, because the sequence-to-function relationship is too complex to predict.\n\nPhage display links each protein variant physically to the gene that encodes it, solving the central problem of how to recover the winning gene after selection. The gene for a peptide or antibody fragment is fused to a phage coat-protein gene, so each phage displays its protein on its surface while carrying the corresponding DNA inside. A library of billions of phages, each showing a different variant, is washed over a target (e.g., a disease molecule); phages that bind are retained, the rest washed away. Bound phages are amplified by infecting bacteria, and successive rounds (panning) enrich for the tightest binders, whose sequences are then read from the phage DNA.\n\nWinter used phage display on antibody fragments to evolve fully human antibodies in vitro, avoiding the immunogenicity of animal-derived antibodies. This produced drugs such as adalimumab (Humira). Together, the two methods exploit variation plus selection, the engine of evolution, to make tailored biomolecules.",
+      "concepts": [
+        "Directed evolution: iterative mutation and selection to engineer proteins with new functions.",
+        "Phage display: linking a displayed protein to its encoding gene inside a phage for selection.",
+        "Genotype-phenotype linkage: the key trick that lets you recover the gene for any selected protein."
+      ],
+      "jargon": [
+        {"term": "Directed evolution", "definition": "Lab-controlled rounds of mutation and selection to evolve improved proteins."},
+        {"term": "Bacteriophage", "definition": "A virus that infects bacteria, used as a display platform."},
+        {"term": "Panning", "definition": "Repeated rounds of binding selection to enrich phages displaying the best binders."}
+      ],
+      "whyItMatters": "These methods produce greener industrial enzymes (for biofuels, detergents, pharmaceuticals) and a major class of antibody drugs treating cancer, autoimmune disease, and more. They let us harness evolution's creativity to solve practical problems faster than rational design.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2018", "url": "https://www.nobelprize.org/prizes/chemistry/2018/popular-information/", "note": "How evolution was harnessed in the lab."},
+        {"title": "Quanta: Three Biochemists Win for Directing Evolution", "url": "https://www.quantamagazine.org/frances-arnold-george-smith-and-gregory-winter-win-chemistry-nobel-for-directing-evolution-20181003/", "note": "Accessible feature."}
+      ],
+      "flashcards": [
+        {"front": "What is directed evolution?", "back": "Engineering proteins by repeated cycles of random mutation and selection for desired function."},
+        {"front": "What problem does phage display solve?", "back": "It physically links each displayed protein to its gene, so the winning sequence can be recovered after selection."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2019",
+    "year": 2019,
+    "awarded": true,
+    "laureates": ["John B. Goodenough", "M. Stanley Whittingham", "Akira Yoshino"],
+    "motivation": "for the development of lithium-ion batteries",
+    "field": "Chemistry",
+    "subfield": "Materials/Polymers",
+    "categories": ["materials", "discovery-element", "technique"],
+    "tags": ["lithium-ion battery", "energy storage", "intercalation", "cathode", "electrochemistry"],
+    "related": ["chem-2011", "chem-2007"],
+    "oneLiner": "The rechargeable lithium-ion battery that powers phones, laptops, and electric cars and enables renewable energy.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2019 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2019/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2019", "url": "https://www.nobelprize.org/prizes/chemistry/2019/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "The prize honored the creation of the lithium-ion battery. Stanley Whittingham developed the first lithium battery in the early 1970s using titanium disulfide as a cathode into which lithium ions could insert. John Goodenough showed in 1980 that a cobalt-oxide cathode could roughly double the voltage and energy. Akira Yoshino in 1985 built the first commercially viable, safe lithium-ion battery by pairing Goodenough's cathode with a carbon-based anode, eliminating hazardous metallic lithium.",
+      "history": "The 1970s oil crisis spurred research into energy storage independent of fossil fuels. Whittingham, working at Exxon, exploited intercalation chemistry to make a high-energy battery, but metallic lithium electrodes were dangerously reactive. Goodenough's higher-voltage oxide cathode and Yoshino's carbon anode made the technology powerful and safe enough to commercialize; Sony launched the first lithium-ion batteries in 1991, igniting the portable-electronics revolution.",
+      "chemistryLogic": "A lithium-ion battery stores and releases energy by shuttling lithium ions back and forth between two electrodes through an electrolyte, while electrons flow through the external circuit doing useful work. The key concept is intercalation: lithium ions slip in and out of layered host materials without destroying their structure, allowing reversible charge and discharge over many cycles.\n\nDuring discharge, lithium ions leave the anode (in Yoshino's design, lithium atoms stored between graphite layers), travel through the electrolyte to the cathode (a layered lithium-cobalt oxide), and insert there, while the released electrons flow through the device. Charging reverses the process, driving lithium back into the anode. Goodenough's lithium-cobalt oxide cathode raised the cell voltage to about 4 volts (versus about 2 for Whittingham's sulfide), because the cobalt-oxide redox couple sits at a more favorable potential, greatly increasing energy density.\n\nYoshino's critical innovation was using a carbon (petroleum coke, later graphite) anode that hosts lithium ions instead of metallic lithium. This avoided the dangerous, dendrite-forming, highly reactive lithium metal while still delivering high voltage and capacity. The result is a lightweight, rechargeable, high-energy-density battery that loses little capacity over hundreds of cycles, because no electrode is consumed; ions simply move back and forth.",
+      "concepts": [
+        "Intercalation: ions reversibly insert into a layered host material without breaking it.",
+        "Energy density: lithium's light weight and high voltage give large energy per mass.",
+        "Rechargeability: shuttling ions between electrodes allows many charge/discharge cycles."
+      ],
+      "jargon": [
+        {"term": "Cathode", "definition": "The positive electrode; here a layered lithium-metal-oxide that accepts lithium ions on discharge."},
+        {"term": "Anode", "definition": "The negative electrode; in Li-ion batteries usually graphite hosting lithium ions."},
+        {"term": "Electrolyte", "definition": "The medium through which lithium ions travel between electrodes."}
+      ],
+      "whyItMatters": "Lithium-ion batteries power the mobile world, phones, laptops, and electric vehicles, and store energy from solar and wind, making a fossil-fuel-free society possible. They are foundational to decarbonization and modern electronics.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2019", "url": "https://www.nobelprize.org/prizes/chemistry/2019/popular-information/", "note": "How the battery was developed."},
+        {"title": "Quanta: Chemistry Nobel for lithium battery innovators", "url": "https://www.quantamagazine.org/chemistry-nobel-goes-to-lithium-battery-innovators-20191009/", "note": "Accessible feature."}
+      ],
+      "flashcards": [
+        {"front": "What is intercalation in a lithium-ion battery?", "back": "Reversible insertion of lithium ions into layered electrode materials without destroying their structure."},
+        {"front": "What was Yoshino's key safety innovation?", "back": "Using a carbon (graphite) anode that hosts lithium ions instead of dangerous metallic lithium."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2020",
+    "year": 2020,
+    "awarded": true,
+    "laureates": ["Emmanuelle Charpentier", "Jennifer A. Doudna"],
+    "motivation": "for the development of a method for genome editing",
+    "field": "Chemistry",
+    "subfield": "Biochemistry",
+    "categories": ["technique", "biomolecule", "mechanism"],
+    "tags": ["CRISPR-Cas9", "genome editing", "gene editing", "guide RNA", "molecular scissors"],
+    "related": ["chem-2018", "chem-2015"],
+    "oneLiner": "CRISPR-Cas9 genetic scissors that cut DNA at a chosen site, letting scientists rewrite the code of life.",
+    "sources": [
+      {"title": "Press release: The Nobel Prize in Chemistry 2020", "url": "https://www.nobelprize.org/prizes/chemistry/2020/press-release/"},
+      {"title": "The Nobel Prize in Chemistry 2020 - Popular information", "url": "https://www.nobelprize.org/prizes/chemistry/2020/popular-information/"}
+    ],
+    "deepDive": {
+      "scope": "Charpentier and Doudna were honored for developing CRISPR-Cas9 into a programmable tool for genome editing. Building on Charpentier's discovery of a small RNA (tracrRNA) in the bacterial CRISPR immune system, the two showed in their 2012 Science paper that the Cas9 enzyme could be directed by a single, engineerable guide RNA to cut any chosen DNA sequence, turning a bacterial defense system into precise molecular scissors for editing genomes.",
+      "history": "CRISPR sequences are part of bacteria's adaptive immune system against viruses. Charpentier, studying the pathogen Streptococcus pyogenes, discovered tracrRNA, a component needed to activate the system. Collaborating with RNA biochemist Doudna in 2011-2012, they reconstituted the cutting machinery in vitro and simplified it into a two-component (Cas9 plus a single guide RNA) tool, demonstrating programmable DNA cleavage. The method spread explosively across biology within a few years.",
+      "chemistryLogic": "In bacteria, the CRISPR-Cas system stores snippets of viral DNA in the genome; these are transcribed into short CRISPR RNAs (crRNAs) that, together with a helper tracrRNA, guide the Cas9 nuclease to matching viral DNA and cut it, disabling the virus. Doudna and Charpentier's key insight was that the crRNA and tracrRNA could be fused into a single guide RNA (sgRNA), and that by changing the ~20-nucleotide targeting sequence of that guide, Cas9 could be programmed to cut any DNA sequence the experimenter chooses.\n\nMechanistically, Cas9 carries the guide RNA and scans the genome for a short adjacent motif called the PAM (protospacer-adjacent motif). When it finds a PAM, it unwinds the local DNA and tests whether the guide RNA base-pairs with the adjacent sequence. A match triggers Cas9's two nuclease domains to cut both strands, producing a double-strand break at a precise location.\n\nThe cell then repairs the break, and this repair is what edits the genome. Error-prone non-homologous end joining often introduces small insertions or deletions that knock out a gene, while homology-directed repair, given a template, can install a desired sequence, correcting a mutation or inserting new DNA. Because retargeting only requires synthesizing a new guide RNA, CRISPR-Cas9 made genome editing cheap, fast, and accessible to any lab.",
+      "concepts": [
+        "Programmable targeting: a short guide RNA directs Cas9 to any chosen DNA sequence.",
+        "Double-strand break: Cas9 cuts both DNA strands at the target, triggering cellular repair.",
+        "Repair-driven editing: the cell's repair of the cut is what knocks out or rewrites genes."
+      ],
+      "jargon": [
+        {"term": "CRISPR", "definition": "Clustered Regularly Interspaced Short Palindromic Repeats; a bacterial adaptive immune system repurposed for editing."},
+        {"term": "Cas9", "definition": "The RNA-guided nuclease (DNA-cutting enzyme) at the heart of the tool."},
+        {"term": "Guide RNA / PAM", "definition": "The guide RNA specifies the target sequence; the PAM is a short DNA motif Cas9 requires next to the target."}
+      ],
+      "whyItMatters": "CRISPR-Cas9 transformed life science, making it routine to edit genes in plants, animals, and human cells. It is driving new disease research, crops, and approved therapies (e.g., for sickle-cell disease), while raising profound ethical questions about editing the human germline.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2020", "url": "https://www.nobelprize.org/prizes/chemistry/2020/popular-information/", "note": "Story and mechanism of CRISPR-Cas9."},
+        {"title": "Berkeley News: Doudna wins 2020 Nobel", "url": "https://news.berkeley.edu/2020/10/07/jennifer-doudna-wins-2020-nobel-prize-in-chemistry/", "note": "Background and context."}
+      ],
+      "flashcards": [
+        {"front": "What directs Cas9 to its target DNA?", "back": "A short (~20-nucleotide) guide RNA that base-pairs with the target sequence (next to a PAM)."},
+        {"front": "How does cutting DNA lead to a genome edit?", "back": "The cell repairs the double-strand break, either disabling the gene or, with a template, inserting a desired sequence."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2021",
+    "year": 2021,
+    "awarded": true,
+    "laureates": ["Benjamin List", "David W. C. MacMillan"],
+    "motivation": "for the development of asymmetric organocatalysis",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": ["reaction-method", "synthesis", "mechanism"],
+    "tags": ["organocatalysis", "asymmetric catalysis", "chirality", "enamine catalysis", "green chemistry"],
+    "related": ["chem-2001", "chem-2010"],
+    "oneLiner": "A third kind of catalysis using small organic molecules to build chiral compounds cleanly and cheaply.",
+    "sources": [
+      {"title": "Press release: The Nobel Prize in Chemistry 2021", "url": "https://www.nobelprize.org/prizes/chemistry/2021/press-release/"},
+      {"title": "The Nobel Prize in Chemistry 2021 - Popular information", "url": "https://www.nobelprize.org/prizes/chemistry/2021/popular-information/"}
+    ],
+    "deepDive": {
+      "scope": "List and MacMillan, working independently around 2000, founded asymmetric organocatalysis, a third major category of catalysis using small organic molecules (as opposed to metals or enzymes) to accelerate reactions and control which mirror-image form (enantiomer) of a product is made. List showed the amino acid proline catalyzes asymmetric aldol reactions; MacMillan designed organic 'imidazolidinone' catalysts and coined the term organocatalysis.",
+      "history": "Before 2000, asymmetric catalysis (vital for making single-handed drug molecules) relied mainly on expensive, sometimes toxic transition-metal complexes or on enzymes (the 2001 Nobel honored metal-based asymmetric catalysis). List and MacMillan independently realized that simple organic molecules could do the job, often more cheaply, robustly, and sustainably, launching an entire field that exploded over the following two decades.",
+      "chemistryLogic": "Many molecules are chiral, existing as two non-superimposable mirror images (enantiomers) that can have drastically different biological effects; a drug's two forms may be therapeutic and toxic respectively. Making predominantly one enantiomer requires a chiral catalyst that biases the reaction's geometry.\n\nList's breakthrough used proline, a natural amino acid, as a catalyst for the aldol reaction. Proline's secondary amine reacts with a carbonyl substrate to form an enamine intermediate, activating it toward bond formation; proline's own chirality (and a hydrogen-bonding carboxylic acid group) organizes the transition state so the new bond forms on one preferred face, yielding one enantiomer in excess. This 'enamine catalysis' showed a tiny, cheap, metal-free organic molecule could achieve high enantioselectivity.\n\nMacMillan's approach used designed imidazolidinone catalysts that form reactive iminium ions with unsaturated carbonyl compounds. The iminium lowers the energy of the substrate's lowest unoccupied orbital (activating it) while the catalyst's bulky chiral framework shields one face, steering an incoming nucleophile to the other and setting the product's handedness. He generalized these ideas and named the field organocatalysis. Organocatalysts are typically inexpensive, non-toxic, insensitive to air and water, and can drive cascade reactions, making asymmetric synthesis greener and more efficient, including in pharmaceutical manufacturing.",
+      "concepts": [
+        "Chirality and enantioselectivity: producing predominantly one mirror-image form of a molecule.",
+        "Enamine and iminium catalysis: organic catalysts activate carbonyl substrates via these intermediates.",
+        "Green, metal-free catalysis: small organic catalysts are cheap, non-toxic, and robust."
+      ],
+      "jargon": [
+        {"term": "Organocatalysis", "definition": "Catalysis using small organic molecules rather than metals or enzymes."},
+        {"term": "Enantiomer", "definition": "One of two non-superimposable mirror-image forms of a chiral molecule."},
+        {"term": "Enamine/iminium intermediate", "definition": "Reactive species formed between an amine catalyst and a carbonyl substrate that enable selective bond formation."}
+      ],
+      "whyItMatters": "Organocatalysis lets chemists build complex chiral molecules, including pharmaceuticals, more cheaply, safely, and sustainably than with metal catalysts, reducing toxic waste. It has become a standard tool in drug synthesis and a pillar of green chemistry.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2021", "url": "https://www.nobelprize.org/prizes/chemistry/2021/popular-information/", "note": "Clear explanation of the new catalysis."},
+        {"title": "Chemistry World: asymmetric organocatalysis", "url": "https://www.chemistryworld.com/news/asymmetric-organocatalysis-scoops-2021-chemistry-nobel-prize/4014511.article", "note": "Background and significance."}
+      ],
+      "flashcards": [
+        {"front": "What three broad categories of catalysis now exist?", "back": "Metal catalysis, enzyme (bio)catalysis, and organocatalysis (small organic molecules)."},
+        {"front": "What natural molecule did List use as an organocatalyst?", "back": "The amino acid proline, via enamine catalysis of the aldol reaction."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2022",
+    "year": 2022,
+    "awarded": true,
+    "laureates": ["Carolyn R. Bertozzi", "Morten Meldal", "K. Barry Sharpless"],
+    "motivation": "for the development of click chemistry and bioorthogonal chemistry",
+    "field": "Chemistry",
+    "subfield": "Organic Chemistry",
+    "categories": ["reaction-method", "synthesis", "biomolecule"],
+    "tags": ["click chemistry", "bioorthogonal chemistry", "CuAAC", "azide-alkyne", "glycans"],
+    "related": ["chem-2001", "chem-2008"],
+    "oneLiner": "Snap-together molecular reactions, including versions that work inside living cells to build and track molecules.",
+    "sources": [
+      {"title": "The Nobel Prize in Chemistry 2022 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2022/summary/"},
+      {"title": "Press release: The Nobel Prize in Chemistry 2022", "url": "https://www.nobelprize.org/prizes/chemistry/2022/press-release/"}
+    ],
+    "deepDive": {
+      "scope": "The prize recognized click chemistry and bioorthogonal chemistry. Barry Sharpless conceived click chemistry (around 2001), the idea of building molecules from small reliable reactions that snap together quickly and selectively. Morten Meldal and Sharpless independently discovered its flagship reaction, the copper-catalyzed azide-alkyne cycloaddition (CuAAC). Carolyn Bertozzi developed bioorthogonal chemistry, click-type reactions that proceed inside living organisms without interfering with native biochemistry, enabling labeling of biomolecules like glycans in living cells.",
+      "history": "Sharpless (already a 2001 Nobel laureate for asymmetric oxidation) argued chemists should favor a small toolkit of robust, high-yielding, modular reactions rather than laborious bespoke syntheses. The CuAAC reaction, reported by Meldal and Sharpless in 2002, became the archetype. Bertozzi extended the philosophy into the cell, inventing copper-free variants that are safe in living systems, founding a new way to study biology chemically.",
+      "chemistryLogic": "Click reactions are defined by being fast, high-yielding, selective, wide in scope, and producing only benign byproducts, joining two molecular building blocks together as easily as snapping a buckle. The crown jewel is the copper-catalyzed azide-alkyne cycloaddition: an azide group and a terminal alkyne react to form a stable triazole ring. Copper(I) catalysis makes this otherwise sluggish reaction fast, regioselective, and reliable at room temperature in water, so two molecules each bearing one of these tags will click together cleanly even in a complex mixture, because azides and alkynes are inert toward most other functional groups.\n\nBioorthogonal chemistry brings this idea into living systems, where copper is toxic. Bertozzi developed copper-free click reactions, notably strain-promoted azide-alkyne cycloaddition (SPAAC): she replaced the copper catalyst with a strained cyclooctyne whose ring strain provides the driving force for the reaction with an azide, so it proceeds spontaneously and harmlessly inside cells and animals. 'Bioorthogonal' means the reactive groups ignore, and are ignored by, the cell's own chemistry.\n\nIn practice, a researcher feeds cells a sugar (or other metabolite) carrying an azide tag; the cell incorporates it into glycans on its surface; then a fluorescent or other probe bearing a cyclooctyne is added and clicks onto the azides, lighting up exactly those biomolecules. This lets scientists visualize and track specific molecules, like the glycans coating cell surfaces, in living organisms, and has been used to better target cancer drugs, with bioorthogonal approaches now in clinical trials.",
+      "concepts": [
+        "Click chemistry: a philosophy of using fast, reliable, modular, high-yield reactions to join building blocks.",
+        "CuAAC: copper-catalyzed azide-alkyne cycloaddition forming a stable triazole, the flagship click reaction.",
+        "Bioorthogonal reactions: click-type reactions that proceed in living systems without disturbing native biochemistry."
+      ],
+      "jargon": [
+        {"term": "Click chemistry", "definition": "Building molecules from quick, selective, high-yielding modular reactions."},
+        {"term": "Azide-alkyne cycloaddition", "definition": "Reaction of an azide and alkyne to form a triazole ring, copper-catalyzed (CuAAC) or strain-promoted."},
+        {"term": "Bioorthogonal", "definition": "Chemically inert toward biology, so the reaction can run inside living cells."}
+      ],
+      "whyItMatters": "Click and bioorthogonal chemistry give chemists and biologists fast, dependable ways to assemble molecules and to label, track, and target specific biomolecules in living organisms. Applications span drug development, diagnostics, materials, and cancer-targeting therapies now in clinical trials.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2022", "url": "https://www.nobelprize.org/prizes/chemistry/2022/popular-information/", "note": "How click and bioorthogonal chemistry work."},
+        {"title": "Chemistry World explainer 2022", "url": "https://www.chemistryworld.com/news/explainer-why-have-bioorthogonal-and-click-chemistry-won-the-2022-nobel-prize/4016337.article", "note": "Accessible explainer."}
+      ],
+      "flashcards": [
+        {"front": "What is the flagship click reaction?", "back": "The copper-catalyzed azide-alkyne cycloaddition (CuAAC), forming a stable triazole."},
+        {"front": "How did Bertozzi make click chemistry work in living cells?", "back": "Copper-free, strain-promoted click reactions (e.g., strained cyclooctynes reacting with azides) that are bioorthogonal."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2023",
+    "year": 2023,
+    "awarded": true,
+    "laureates": ["Moungi G. Bawendi", "Louis E. Brus", "Aleksey Yekimov"],
+    "motivation": "for the discovery and synthesis of quantum dots",
+    "field": "Chemistry",
+    "subfield": "Materials/Polymers",
+    "categories": ["discovery-element", "materials", "synthesis"],
+    "tags": ["quantum dots", "nanocrystals", "quantum confinement", "semiconductors", "nanotechnology"],
+    "related": ["chem-2011", "chem-2014"],
+    "oneLiner": "Nanocrystals so tiny their size tunes their color, powering vivid displays and biomedical imaging.",
+    "sources": [
+      {"title": "Press release: The Nobel Prize in Chemistry 2023", "url": "https://www.nobelprize.org/prizes/chemistry/2023/press-release/"},
+      {"title": "The Nobel Prize in Chemistry 2023 - Popular information", "url": "https://www.nobelprize.org/prizes/chemistry/2023/popular-information/"}
+    ],
+    "deepDive": {
+      "scope": "The prize honored the discovery and synthesis of quantum dots, semiconductor nanoparticles only a few nanometers across whose optical and electronic properties depend on their size due to quantum effects. Alexei Ekimov first observed size-dependent color in semiconductor nanocrystals grown in colored glass (early 1980s). Louis Brus discovered the same size-dependent quantum effects in nanoparticles freely suspended in solution. Moungi Bawendi (1993) developed a method to synthesize nearly perfect, uniform quantum dots with precise size control.",
+      "history": "Physicists had predicted that confining electrons in very small spaces would create size-dependent quantum effects, but it seemed impossible to make such tiny, controlled particles. Ekimov, working in Soviet glass research, and Brus, at Bell Labs, independently demonstrated the effect in the early-to-mid 1980s. The field remained hampered by poor-quality, polydisperse particles until Bawendi's elegant hot-injection synthesis produced uniform, high-quality crystals, unlocking applications.",
+      "chemistryLogic": "Quantum dots exploit quantum confinement. In a bulk semiconductor, electrons occupy continuous energy bands separated by a fixed band gap, the band gap sets the wavelength of light the material absorbs and emits. When you shrink the crystal to a few nanometers, comparable to or smaller than the natural size of an electron-hole pair (exciton), the electrons can no longer spread out; they are squeezed, and quantum mechanics dictates that their allowed energies become more widely spaced. The effective band gap grows as the dot gets smaller.\n\nThe practical consequence is striking: the same material gives different colors purely by changing particle size. A larger dot of cadmium selenide emits red light; a smaller dot of the identical material emits green or blue, because the smaller dot's wider band gap corresponds to higher-energy (shorter-wavelength) photons. Color is thus tuned by size rather than chemistry, a uniquely nanoscale phenomenon.\n\nBawendi's synthetic breakthrough was a hot-injection method: rapidly injecting precursor chemicals into a hot solvent triggers a burst of nucleation, then controlled growth, so all crystals form at nearly the same time and grow to nearly the same size. Stopping growth at a chosen moment gives monodisperse dots of a desired size, and hence color, with sharp, bright emission. This reproducible chemistry turned quantum dots from a curiosity into a manufacturable material now used in QLED displays (vivid, efficient color), LED lighting, solar cells, and as fluorescent labels that help surgeons image tumors.",
+      "concepts": [
+        "Quantum confinement: shrinking a semiconductor crystal widens its band gap and shifts its color.",
+        "Size-tunable optics: identical material emits different colors depending only on particle size.",
+        "Hot-injection synthesis: rapid nucleation then controlled growth yields uniform nanocrystals."
+      ],
+      "jargon": [
+        {"term": "Quantum dot", "definition": "A semiconductor nanocrystal small enough that its electronic properties depend on its size."},
+        {"term": "Band gap", "definition": "The energy gap an electron must cross; it sets the color of light absorbed/emitted."},
+        {"term": "Quantum confinement", "definition": "Restricting electrons to nanoscale dimensions, quantizing and shifting their energy levels."}
+      ],
+      "whyItMatters": "Quantum dots brought nanotechnology into everyday life: they produce the vivid colors in QLED TVs and monitors, improve LED lighting and solar cells, and serve as bright, tunable fluorescent markers that guide surgeons and illuminate biology. They are a versatile platform for future electronics and medicine.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2023", "url": "https://www.nobelprize.org/prizes/chemistry/2023/popular-information/", "note": "How size controls quantum dot color."},
+        {"title": "Science News: quantum dots win 2023 Nobel", "url": "https://www.sciencenews.org/article/quantum-dots-nanoparticles-bawendi-brus-ekimov", "note": "Accessible feature."}
+      ],
+      "flashcards": [
+        {"front": "Why does a quantum dot's color depend on its size?", "back": "Quantum confinement: smaller dots have a wider effective band gap, emitting higher-energy (bluer) light."},
+        {"front": "What did Bawendi contribute to quantum dots?", "back": "A hot-injection synthesis producing uniform, high-quality nanocrystals with precise size and color control."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2024",
+    "year": 2024,
+    "awarded": true,
+    "laureates": ["David Baker", "Demis Hassabis", "John M. Jumper"],
+    "motivation": "one half to David Baker \"for computational protein design\", the other half jointly to Demis Hassabis and John M. Jumper \"for protein structure prediction\"",
+    "field": "Chemistry",
+    "subfield": "Theoretical/Computational",
+    "categories": ["theory", "technique", "structure-determination"],
+    "tags": ["protein folding", "deep learning", "alphafold", "protein design", "Rosetta"],
+    "related": ["chem-2013", "chem-2017"],
+    "oneLiner": "AI cracks protein structure prediction and protein design, solving a 50-year grand challenge of biochemistry.",
+    "sources": [
+      {"title": "Press release: The Nobel Prize in Chemistry 2024", "url": "https://www.nobelprize.org/prizes/chemistry/2024/press-release/"},
+      {"title": "The Nobel Prize in Chemistry 2024 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2024/summary/"}
+    ],
+    "deepDive": {
+      "scope": "The prize was split. David Baker won half for computational protein design, the ability to design entirely new proteins, with sequences not found in nature, that fold into desired shapes and perform new functions, using his Rosetta software and successors like RFdiffusion. Demis Hassabis and John Jumper (DeepMind) shared the other half for protein structure prediction: their 2020-2021 AI model AlphaFold2 solved the long-standing problem of predicting a protein's 3D structure from its amino acid sequence with near-experimental accuracy, and they predicted structures for nearly all ~200 million known proteins.",
+      "history": "Christian Anfinsen's 1972 Nobel established that a protein's amino acid sequence determines its 3D fold, posing the 'protein folding problem': can we compute the structure from the sequence? For 50 years this resisted solution; the biennial CASP competition tracked slow progress. In 2018 AlphaFold1 led CASP13; in 2020 AlphaFold2 achieved a stunning leap at CASP14, reaching accuracy comparable to experiment, widely judged to have solved the problem. The 2021 Science/Nature papers (AlphaFold2 by Jumper et al.; RoseTTAFold by Baker's group) and the open AlphaFold Protein Structure Database followed.",
+      "chemistryLogic": "A protein is a chain of amino acids that folds spontaneously into a specific 3D shape, and that shape dictates its function. The folding problem is to predict that 3D structure from the 1D sequence alone, hard because the number of possible conformations is astronomical (Levinthal's paradox) and the physics of folding is subtle.\n\nAlphaFold2 reframed the problem with deep learning. Its first key input is the multiple sequence alignment (MSA): it gathers many evolutionarily related sequences of the same protein from across organisms. Positions that mutate in a correlated way (coevolution) are often physically in contact in the folded structure, because a mutation at one site is compensated by a mutation at its 3D neighbor to preserve the fold. The MSA thus encodes hidden structural information.\n\nThe network processes this with the Evoformer, a stack of attention-based blocks that pass information back and forth between two representations: the MSA (which residues coevolve) and a pairwise residue-residue representation (a 2D map of relationships between every pair of residues). Attention lets the model weigh which residues inform which, iteratively refining its internal picture of contacts and geometry. The refined pair and single representations feed the structure module, which uses 'invariant point attention' and treats each residue as a movable frame in 3D space, directly outputting atomic coordinates (backbone frames and side-chain angles) in a way that is invariant to how the whole protein is rotated or translated. The system is trained end-to-end on known structures from the Protein Data Bank, learning to map sequence-plus-MSA to coordinates, and it also outputs a per-residue confidence score (pLDDT) so users know which regions to trust.\n\nBaker's protein design is the inverse problem: choose a target 3D shape, then find an amino acid sequence that will fold into it. Rosetta uses physics-based energy functions and sampling to design sequences; newer deep-learning tools (RFdiffusion, ProteinMPNN) generate novel backbones and sequences for binders, enzymes, and nanomaterials never seen in nature, many of which fold and function as designed when actually synthesized.\n\nCould a motivated learner build a small version? Yes, to a degree. Open-source reimplementations exist: OpenFold is a trainable PyTorch reimplementation of AlphaFold2; ColabFold lets anyone run structure prediction in a browser using precomputed MSAs (via MMseqs2) for speed; and Baker lab tools like RoseTTAFold, RFdiffusion, and ProteinMPNN are open. Educational mini-reimplementations and tutorials walk through the Evoformer and structure module on toy data. Training a full model from scratch needs large compute and the PDB, but understanding and running the methods, and even fine-tuning or building simplified versions, is achievable for a determined student.",
+      "concepts": [
+        "The folding problem: predicting a protein's 3D structure from its amino acid sequence alone.",
+        "Coevolution/MSA: correlated mutations across related sequences reveal which residues are in 3D contact.",
+        "Evoformer attention + structure module: AlphaFold2's architecture that turns sequence/MSA into atomic coordinates.",
+        "Inverse design: choosing a target shape and computing a sequence that folds into it."
+      ],
+      "jargon": [
+        {"term": "AlphaFold2", "definition": "DeepMind's deep-learning model that predicts protein 3D structures at near-experimental accuracy."},
+        {"term": "MSA (multiple sequence alignment)", "definition": "A stack of evolutionarily related sequences whose covariation encodes structural contacts."},
+        {"term": "Evoformer", "definition": "AlphaFold2's attention-based module that exchanges information between MSA and pairwise residue representations."},
+        {"term": "Invariant point attention", "definition": "The structure-module mechanism that predicts atomic coordinates in a rotation/translation-invariant way."},
+        {"term": "Rosetta / RFdiffusion", "definition": "Baker-lab software for computational design of new protein sequences and backbones."}
+      ],
+      "whyItMatters": "Knowing a protein's structure is key to understanding life and disease and to designing drugs, vaccines, and enzymes. AlphaFold made structures for nearly all known proteins freely available, accelerating biology worldwide, while computational design opens the door to custom proteins for medicine, vaccines, biosensors, and green industry, capabilities that previously took years of experiments or were impossible.",
+      "learnMore": [
+        {"title": "Nobel scientific background 2024", "url": "https://www.nobelprize.org/prizes/chemistry/2024/advanced-information/", "note": "Detailed technical account of the science."},
+        {"title": "AlphaFold Protein Structure Database", "url": "https://alphafold.ebi.ac.uk/", "note": "Freely browse ~200 million predicted structures."},
+        {"title": "OpenFold and ColabFold", "url": "https://github.com/aqlaboratory/openfold", "note": "Open-source reimplementations to learn and run structure prediction."}
+      ],
+      "flashcards": [
+        {"front": "What was the 50-year-old problem AlphaFold2 solved?", "back": "Predicting a protein's 3D structure from its amino acid sequence (the protein folding problem)."},
+        {"front": "How does AlphaFold2 use evolution?", "back": "It builds a multiple sequence alignment; coevolving (correlated) residue positions indicate 3D contacts."},
+        {"front": "What did David Baker win his half for?", "back": "Computational protein design, creating entirely new proteins (via Rosetta and tools like RFdiffusion) that fold and function as designed."}
+      ]
+    }
+  },
+  {
+    "id": "chem-2025",
+    "year": 2025,
+    "awarded": true,
+    "laureates": ["Susumu Kitagawa", "Richard Robson", "Omar M. Yaghi"],
+    "motivation": "for the development of metal–organic frameworks",
+    "field": "Chemistry",
+    "subfield": "Materials/Polymers",
+    "categories": ["materials", "synthesis", "structure-determination"],
+    "tags": ["metal-organic frameworks", "MOFs", "porous materials", "reticular chemistry", "gas storage", "carbon capture"],
+    "related": ["chem-2016", "chem-2023"],
+    "oneLiner": "Porous crystalline materials with vast internal cavities for capturing gases, harvesting water, and catalysis.",
+    "sources": [
+      {"title": "Press release: Nobel Prize in Chemistry 2025", "url": "https://www.nobelprize.org/prizes/chemistry/2025/press-release/"},
+      {"title": "The Nobel Prize in Chemistry 2025 - Summary", "url": "https://www.nobelprize.org/prizes/chemistry/2025/summary/"}
+    ],
+    "deepDive": {
+      "scope": "The 2025 prize, awarded equally to Susumu Kitagawa, Richard Robson, and Omar Yaghi, honored the development of metal-organic frameworks (MOFs), crystalline materials in which metal ions act as nodes joined by organic 'linker' molecules to form ordered, porous three-dimensional networks riddled with large, regular cavities. Robson pioneered the concept (late 1980s) of building such frameworks by linking metal centers with organic struts; Kitagawa showed MOFs could be made robust, flexible, and able to take up and release gases reversibly; Yaghi developed exceptionally stable MOFs and articulated 'reticular chemistry,' the rational design of frameworks by choosing nodes and linkers like building blocks.",
+      "history": "Chemists long wanted to build materials with designed internal voids, like sponges with atomically precise pores. Robson's early frameworks were fragile and often collapsed. Through the 1990s and 2000s, Kitagawa and Yaghi independently made MOFs stable, porous, and tunable; Yaghi's MOF-5 and the design principle of reticular chemistry showed frameworks could be engineered for enormous internal surface areas (a gram of some MOFs can have a surface area larger than a football field). MOFs are now one of the most active areas in materials chemistry.",
+      "chemistryLogic": "A MOF is assembled by coordination chemistry: positively charged metal ions or small metal-oxide clusters (the nodes, or secondary building units) bond to multidentate organic molecules (the linkers, often rigid molecules with carboxylate or nitrogen groups at each end). Because the geometry of both the metal node (how many linkers it binds and in what directions) and the linker (its length and shape) is well defined, the components self-assemble into a predictable, periodic crystalline lattice, leaving large open channels and cavities between them.\n\nThe defining feature is permanent porosity: unlike a molecular crystal that collapses when guest solvent leaves, a well-designed MOF keeps its open framework even when emptied, so the pores can be reversibly filled with and emptied of gas or other molecules. The pore size, shape, and chemistry are tunable: lengthen the linker to enlarge the pores, or decorate the linker with functional groups to make the pores selectively attract certain molecules (this is reticular chemistry, the heart of Yaghi's contribution). Some of Kitagawa's frameworks are flexible ('breathing'), expanding or contracting in response to guests, giving gating and selective uptake behavior.\n\nThe resulting materials have extraordinary internal surface areas, which makes them excellent at storing and separating gases (hydrogen, methane, capturing CO2 from emissions or air), holding toxic gases safely, separating molecules of similar size, catalyzing reactions in their pores, delivering drugs, and even harvesting drinkable water from dry desert air, where a MOF adsorbs water vapor at night and releases it when gently warmed. Newer work targets capturing PFAS 'forever chemicals' and breaking down pharmaceutical pollutants.",
+      "concepts": [
+        "Reticular chemistry: building crystalline frameworks by deliberately linking molecular building blocks.",
+        "Permanent porosity: the framework retains its open cavities even when guest molecules are removed.",
+        "Tunable pores: pore size and chemistry are designed by choosing the metal node and organic linker."
+      ],
+      "jargon": [
+        {"term": "Metal-organic framework (MOF)", "definition": "A porous crystal of metal-ion nodes joined by organic linker molecules."},
+        {"term": "Linker", "definition": "The organic molecule that bridges metal nodes and sets the framework's geometry and pore size."},
+        {"term": "Reticular chemistry", "definition": "The rational design of frameworks by choosing building blocks that link into predictable networks."}
+      ],
+      "whyItMatters": "MOFs offer designer materials to tackle major challenges: capturing carbon dioxide to fight climate change, storing clean fuels like hydrogen and methane, harvesting water from desert air, removing pollutants and 'forever chemicals' from water, and enabling new catalysis and drug delivery. Their tunability makes them a versatile platform across energy, environment, and health.",
+      "learnMore": [
+        {"title": "Nobel Popular Information 2025", "url": "https://www.nobelprize.org/prizes/chemistry/2025/popular-information/", "note": "How MOFs are built and what they do."},
+        {"title": "Chemistry World: 2025 MOF Nobel", "url": "https://www.chemistryworld.com/news/2025-chemistry-nobel-prize-goes-to-the-scientists-behind-metal-organic-frameworks/4022287.article", "note": "Accessible coverage of the prize."}
+      ],
+      "flashcards": [
+        {"front": "What are the two building blocks of a metal-organic framework?", "back": "Metal-ion (or metal-cluster) nodes joined by organic linker molecules."},
+        {"front": "What property makes MOFs so useful?", "back": "Permanent, tunable porosity, huge internal surface area with designable pores for storing/separating gases, water harvesting, and catalysis."}
+      ]
+    }
+  }
+]
