@@ -10220,6 +10220,13 @@ window.NOBEL_DATA = [
       this._bindEvents();
       this._resize();
       window.addEventListener("resize", () => this._resize());
+      // Recompute canvas size whenever the graph container changes (e.g. the
+      // detail drawer opening shrinks this area). Without this the canvas keeps
+      // its old width and overflows on top of the drawer, eating clicks.
+      if (window.ResizeObserver) {
+        this._ro = new ResizeObserver(() => this._resize());
+        this._ro.observe(canvas.parentElement);
+      }
       this._loop = this._loop.bind(this);
       requestAnimationFrame(this._loop);
     }
