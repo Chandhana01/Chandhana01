@@ -22,6 +22,7 @@
       <div class="progress-pill" id="progressPill" title="Prizes you've added notes or flashcards to">
         <span id="progressFilled">0</span>/<span id="progressTotal">0</span> studied
       </div>
+      <button class="btn" id="trailsBtn" title="Guided learning paths in prerequisite order">🧭 Trails</button>
       <button class="btn" id="reviewBtn" title="Review flashcards due across all prizes">
         🎴 Review <span class="badge" id="dueBadge">0</span>
       </button>
@@ -87,12 +88,18 @@
   </div>
 </div>
 
+<!-- Trail focus banner (shown on graph when a trail is active) -->
+<div id="trailBanner" class="trail-banner" hidden></div>
+
+<!-- Trails overlay -->
+<div id="trailsOverlay" class="overlay" hidden></div>
 <!-- Review overlay -->
 <div id="reviewOverlay" class="overlay" hidden></div>
 <!-- Help overlay -->
 <div id="helpOverlay" class="overlay" hidden></div>
 
 <script src="data/prizes.js"></script>
+<script src="data/trails.js"></script>
 <script src="src/store.js"></script>
 <script src="src/graph.js"></script>
 <script src="src/app.js"></script>

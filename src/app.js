@@ -31,8 +31,18 @@
     subfields: new Set(),     // empty = all
     categories: new Set(),    // empty = all
     tags: new Set(),
-    search: ""
+    search: "",
+    trail: null               // Set of ids when a trail is focused
   };
+
+  // ---------- Trails ----------
+  const TRAILS = window.NOBEL_TRAILS || [];
+  const trailById = {}; TRAILS.forEach(t => trailById[t.id] = t);
+  const membership = {};      // prizeId -> [{trail, index}]
+  TRAILS.forEach(t => t.steps.forEach((s, i) => {
+    (membership[s.id] = membership[s.id] || []).push({ trail: t, index: i });
+  }));
+  let activeTrail = null, activeStep = 0;
 
   // ---------- Build derived indexes ----------
   const subfieldCounts = {}, categoryCounts = {}, tagCounts = {};
@@ -78,6 +88,7 @@
 
   // ---------- Filtering ----------
   function matches(d) {
+    if (filter.trail && !filter.trail.has(d.id)) return false;
     if (filter.subfields.size && !filter.subfields.has(d.subfield)) return false;
     if (filter.categories.size && !(d.categories || []).some(c => filter.categories.has(c))) return false;
     if (filter.tags.size && !(d.tags || []).some(t => filter.tags.has(t))) return false;
@@ -170,6 +181,10 @@
 
   function openDetail(id) {
     currentId = id; currentTab = "overview";
+    if (activeTrail) {
+      const i = activeTrail.steps.findIndex(s => s.id === id);
+      if (i >= 0 && i !== activeStep) { activeStep = i; renderBanner(); }
+    }
     renderDetail();
     detail.classList.remove("collapsed");
     graph.centerOn(id);
@@ -187,6 +202,7 @@
         <h2 class="detail-title">${(d.laureates || []).join(" · ")}</h2>
         <div class="detail-laur">${esc(d.oneLiner || "")}</div>
         ${d.motivation ? `<div class="detail-motivation">“${esc(d.motivation)}”</div>` : ""}
+        ${trailContext(d.id)}
         <div class="detail-chips">
           <span class="chip subfield" style="color:${colorFor(d)};border-color:${colorFor(d)}">${d.subfield}</span>
           ${(d.categories || []).map(c => `<span class="chip cat">${CATEGORY_LABEL[c] || c}</span>`).join("")}
@@ -333,7 +349,9 @@
   // delegate related-link clicks
   detail.addEventListener("click", e => {
     const a = e.target.closest("[data-goto]");
-    if (a) { e.preventDefault(); openDetail(a.dataset.goto); }
+    if (a) { e.preventDefault(); openDetail(a.dataset.goto); return; }
+    const tc = e.target.closest(".tctx-name");
+    if (tc) { e.preventDefault(); focusTrail(tc.dataset.trail, parseInt(tc.dataset.step)); }
   });
 
   // ---------- Review overlay (cross-prize SRS) ----------
@@ -409,6 +427,7 @@
   }
 
   function wireHeader() {
+    document.getElementById("trailsBtn").onclick = () => openTrails();
     document.getElementById("reviewBtn").onclick = startReview;
     document.getElementById("exportBtn").onclick = () => {
       const blob = new Blob([Store.exportData()], { type: "application/json" });
@@ -460,6 +479,8 @@
           <li><b>My notes</b> — your lab notebook, saved locally in this browser.</li>
           <li><b>Flashcards</b> — write your own or import starter decks; review them across all prizes with the 🎴 button (spaced repetition).</li>
         </ul>
+        <h3>Learning Trails (🧭 top bar)</h3>
+        <p>Not sure what order to learn in? Trails are curated, ordered prerequisite paths through each thread (Foundations, Bonding, Structure, Synthesis, Life, Nucleus, Materials). Each step says <i>why it comes next</i>. "Focus this trail" draws the numbered path on the graph and dims everything else; use <b>prev/next</b> to walk it. Inside any prize, a banner shows which trail(s) it sits on and what comes before/after.</p>
         <h3>Filters</h3>
         <p>Use the left rail to filter by engagement (studied / not started / cards due), subfield, category, and tags, or search anything.</p>
         <h3>Your data</h3>
@@ -467,6 +488,115 @@
       </div></div>`;
     ov.hidden = false;
     ov.querySelector(".modal-close").onclick = () => ov.hidden = true;
+  }
+
+  // ---------- Trails UI ----------
+  function trailProgress(t) {
+    const done = t.steps.filter(s => Store.isStudied(s.id)).length;
+    return { done, total: t.steps.length };
+  }
+  function openTrails(selectId) {
+    const ov = document.getElementById("trailsOverlay");
+    let sel = selectId || (activeTrail ? activeTrail.id : (TRAILS[0] && TRAILS[0].id));
+    function render() {
+      const t = trailById[sel];
+      ov.innerHTML = `<div class="modal" style="max-width:860px">
+        <div class="modal-head"><h2>🧭 Learning Trails</h2><button class="modal-close">×</button></div>
+        <div class="modal-body">
+          <p style="font-size:13px;color:var(--text-dim);line-height:1.55;margin:0 0 16px">${esc(window.NOBEL_TRAIL_INTRO || "")}</p>
+          <div class="trails-layout">
+            <div class="trails-list">${TRAILS.map(tr => {
+              const p = trailProgress(tr);
+              return `<div class="trail-pick ${tr.id === sel ? "active" : ""}" data-t="${tr.id}">
+                <div class="tp-name"><span class="tp-dot" style="background:${tr.color}"></span>${esc(tr.name)}</div>
+                <div class="tp-meta">${p.done}/${p.total} studied</div>
+                <div class="tp-bar"><i style="width:${Math.round(p.done / p.total * 100)}%;background:${tr.color}"></i></div>
+              </div>`;
+            }).join("")}</div>
+            <div class="trail-detail">
+              <h3>${esc(t.name)}</h3>
+              <p class="trail-blurb">${esc(t.blurb)}</p>
+              <div class="trail-actions">
+                <button class="btn primary" id="focusTrail">Focus this trail on the graph →</button>
+              </div>
+              ${t.steps.map((s, i) => {
+                const d = byId[s.id]; if (!d) return "";
+                const done = Store.isStudied(s.id);
+                return `<div class="trail-step" data-goto="${s.id}">
+                  <div class="ts-num" style="background:${done ? 'var(--good)' : t.color}">${i + 1}</div>
+                  <div class="ts-body">
+                    <div class="ts-title">${d.year} · ${(d.laureates || [])[0] || ""}${done ? '<span class="ts-done">✦ studied</span>' : ''}</div>
+                    <div class="ts-why">${esc(s.why)}</div>
+                  </div></div>`;
+              }).join("")}
+            </div>
+          </div>
+        </div></div>`;
+      ov.querySelector(".modal-close").onclick = () => ov.hidden = true;
+      ov.querySelectorAll(".trail-pick").forEach(el => el.onclick = () => { sel = el.dataset.t; render(); });
+      ov.querySelector("#focusTrail").onclick = () => { ov.hidden = true; focusTrail(sel); };
+      ov.querySelectorAll(".trail-step").forEach(el => el.onclick = () => { ov.hidden = true; focusTrail(sel, t.steps.findIndex(s => s.id === el.dataset.goto)); });
+    }
+    render();
+    ov.hidden = false;
+  }
+
+  function focusTrail(trailId, stepIndex) {
+    activeTrail = trailById[trailId];
+    if (!activeTrail) return;
+    activeStep = stepIndex != null ? stepIndex : 0;
+    filter.trail = new Set(activeTrail.steps.map(s => s.id));
+    graph.setTrail(activeTrail.steps.map(s => s.id), activeTrail.color);
+    applyFilter();
+    setTimeout(() => graph.fit(), 350);
+    renderBanner();
+    if (stepIndex != null) gotoStep(activeStep);
+  }
+  function clearTrail() {
+    activeTrail = null; filter.trail = null;
+    graph.setTrail(null); applyFilter();
+    document.getElementById("trailBanner").hidden = true;
+    setTimeout(() => graph.fit(), 350);
+  }
+  function gotoStep(i) {
+    if (!activeTrail) return;
+    activeStep = Math.max(0, Math.min(activeTrail.steps.length - 1, i));
+    openDetail(activeTrail.steps[activeStep].id);
+    renderBanner();
+  }
+  function renderBanner() {
+    const b = document.getElementById("trailBanner");
+    if (!activeTrail) { b.hidden = true; return; }
+    const n = activeTrail.steps.length;
+    b.innerHTML = `<span class="tp-dot" style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${activeTrail.color}"></span>
+      <span class="tb-name">${esc(activeTrail.name)}</span>
+      <span class="tb-step">step ${activeStep + 1}/${n}</span>
+      <span class="tb-nav">
+        <button class="btn ghost sm" id="tbPrev" ${activeStep === 0 ? "disabled" : ""}>‹ prev</button>
+        <button class="btn ghost sm" id="tbNext" ${activeStep === n - 1 ? "disabled" : ""}>next ›</button>
+        <button class="btn ghost sm" id="tbExit">✕ exit</button>
+      </span>`;
+    b.hidden = false;
+    document.getElementById("tbPrev").onclick = () => gotoStep(activeStep - 1);
+    document.getElementById("tbNext").onclick = () => gotoStep(activeStep + 1);
+    document.getElementById("tbExit").onclick = clearTrail;
+  }
+
+  // banner shown inside a prize's detail: where it sits across trails
+  function trailContext(prizeId) {
+    const mem = membership[prizeId];
+    if (!mem || !mem.length) return "";
+    return mem.map(m => {
+      const prev = m.index > 0 ? m.trail.steps[m.index - 1].id : null;
+      const next = m.index < m.trail.steps.length - 1 ? m.trail.steps[m.index + 1].id : null;
+      const prevD = prev && byId[prev], nextD = next && byId[next];
+      return `<div class="detail-trailctx">
+        <span class="tp-dot" style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${m.trail.color};margin-right:6px"></span>
+        <a href="#" class="tctx-name" data-trail="${m.trail.id}" data-step="${m.index}" title="Focus this trail on the graph"><b>${esc(m.trail.name)}</b></a> · step ${m.index + 1}/${m.trail.steps.length}
+        <div class="tctx-nav">${prevD ? `← after <a href="#" data-goto="${prev}">${prevD.year} ${(prevD.laureates||[])[0]||""}</a>` : "trail start"} ·
+        ${nextD ? `before <a href="#" data-goto="${next}">${nextD.year} ${(nextD.laureates||[])[0]||""}</a> →` : "trail end"}</div>
+      </div>`;
+    }).join("");
   }
 
   // ---------- keyboard ----------

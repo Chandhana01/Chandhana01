@@ -68,6 +68,12 @@
 
     reheat() { this.alpha = Math.max(this.alpha, 0.6); }
 
+    setTrail(orderedIds, color) {
+      this.trail = orderedIds && orderedIds.length ? orderedIds.slice() : null;
+      this.trailSet = this.trail ? new Set(this.trail) : null;
+      this.trailColor = color || "#f4c95d";
+    }
+
     _resize() {
       const r = this.canvas.parentElement.getBoundingClientRect();
       this.W = r.width; this.H = r.height;
@@ -146,27 +152,49 @@
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       }
 
+      // ordered trail path (drawn over normal links, under nodes)
+      if (this.trail) {
+        ctx.lineWidth = 3; ctx.strokeStyle = this.trailColor;
+        ctx.shadowColor = this.trailColor; ctx.shadowBlur = 8;
+        for (let i = 0; i < this.trail.length - 1; i++) {
+          const a = this.byId[this.trail[i]], b = this.byId[this.trail[i + 1]];
+          if (!a || !b) continue;
+          const pa = this._toScreen(a), pb = this._toScreen(b);
+          this._arrow(pa, pb);
+        }
+        ctx.shadowBlur = 0;
+      }
+
       // nodes
       for (const n of this.nodes) {
         if (n.visible === false) continue;
+        const offTrail = this.trailSet && !this.trailSet.has(n.id);
         const p = this._toScreen(n);
         const fill = this.opts.fillFn ? this.opts.fillFn(n) : 0;       // 0..1 engagement
-        const r = this.nodeRadius(n) * this.scale * (0.85 + fill * 0.4);
+        let r = this.nodeRadius(n) * this.scale * (0.85 + fill * 0.4);
         const base = "#3a4150";                                        // pale/dull
-        const col = mix(base, n.color, 0.25 + fill * 0.75);
+        let col = mix(base, n.color, 0.25 + fill * 0.75);
         const isHover = n === this.hovered;
-        if (fill > 0.05 || isHover) {
+        if (offTrail) { col = "#2a313d"; r *= 0.7; }                   // dim non-trail
+        if (!offTrail && (fill > 0.05 || isHover)) {
           ctx.shadowColor = n.color; ctx.shadowBlur = (6 + fill * 16) * (isHover ? 1.6 : 1);
         } else ctx.shadowBlur = 0;
         ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
         ctx.fillStyle = col; ctx.fill();
         ctx.shadowBlur = 0;
         // ring for studied
-        if (fill > 0.05) { ctx.lineWidth = 1.5; ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.stroke(); }
+        if (!offTrail && fill > 0.05) { ctx.lineWidth = 1.5; ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.stroke(); }
         if (isHover) { ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke(); }
 
+        // trail step number badge
+        if (this.trailSet && !offTrail) {
+          const step = this.trail.indexOf(n.id) + 1;
+          ctx.fillStyle = this.trailColor; ctx.font = "700 11px -apple-system, sans-serif"; ctx.textAlign = "center";
+          ctx.fillText(String(step), p.x, p.y - r - 6);
+        }
+
         // labels when zoomed in or hovered
-        if (this.scale > 1.15 || isHover) {
+        if ((this.scale > 1.15 || isHover) && !offTrail) {
           ctx.fillStyle = isHover ? "#fff" : "rgba(231,236,243,.75)";
           ctx.font = `${isHover ? "700 " : ""}${11}px -apple-system, sans-serif`;
           ctx.textAlign = "center";
@@ -174,6 +202,24 @@
           ctx.fillText(label, p.x, p.y + r + 13);
         }
       }
+    }
+
+    _arrow(a, b) {
+      const ctx = this.ctx;
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const ux = dx / len, uy = dy / len;
+      const pad = 12 * this.scale;                     // stop short of node centers
+      const ax = a.x + ux * pad, ay = a.y + uy * pad;
+      const bx = b.x - ux * pad, by = b.y - uy * pad;
+      ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+      // arrowhead
+      const h = 8;
+      ctx.beginPath();
+      ctx.moveTo(bx, by);
+      ctx.lineTo(bx - ux * h - uy * h * 0.6, by - uy * h + ux * h * 0.6);
+      ctx.lineTo(bx - ux * h + uy * h * 0.6, by - uy * h - ux * h * 0.6);
+      ctx.closePath(); ctx.fillStyle = this.trailColor; ctx.fill();
     }
 
     _loop() { this._tick(); this._draw(); requestAnimationFrame(this._loop); }

@@ -157,6 +157,12 @@ a { color: var(--accent-2); }
   border-left: 3px solid var(--accent); padding: 6px 0 6px 12px; background: rgba(244,201,93,.04);
   line-height: 1.5;
 }
+.detail-trailctx { margin-top: 10px; font-size: 12.5px; color: var(--text-dim); background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 11px; }
+.detail-trailctx + .detail-trailctx { margin-top: 6px; }
+.detail-trailctx .tctx-name { color: var(--text); text-decoration: none; }
+.detail-trailctx .tctx-name:hover b { text-decoration: underline; }
+.detail-trailctx .tctx-nav { margin-top: 4px; font-size: 12px; color: var(--text-faint); }
+.detail-trailctx .tctx-nav a { color: var(--accent-2); text-decoration: none; }
 .detail-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
 .chip { font-size: 11px; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--line); color: var(--text-dim); }
 .chip.subfield { font-weight: 700; }
@@ -261,6 +267,41 @@ a { color: var(--accent-2); }
 .grade-good { background: rgba(95,211,138,.15); color: var(--good); border-color: rgba(95,211,138,.35); }
 .grade-easy { background: rgba(108,197,255,.15); color: var(--accent-2); border-color: rgba(108,197,255,.35); }
 
+/* Trails */
+.trails-layout { display: flex; gap: 0; max-height: 70vh; }
+.trails-list { width: 230px; flex-shrink: 0; border-right: 1px solid var(--line); overflow-y: auto; padding-right: 4px; }
+.trail-pick { padding: 11px 12px; border-radius: 9px; cursor: pointer; margin-bottom: 4px; border: 1px solid transparent; }
+.trail-pick:hover { background: var(--bg-3); }
+.trail-pick.active { background: var(--bg-3); border-color: var(--line); }
+.trail-pick .tp-name { font-weight: 700; font-size: 13.5px; display: flex; align-items: center; gap: 7px; }
+.trail-pick .tp-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.trail-pick .tp-meta { font-size: 11px; color: var(--text-faint); margin-top: 4px; }
+.tp-bar { height: 4px; border-radius: 3px; background: var(--bg); margin-top: 6px; overflow: hidden; }
+.tp-bar i { display: block; height: 100%; }
+.trail-detail { flex: 1; overflow-y: auto; padding: 0 4px 0 18px; }
+.trail-detail h3 { margin: 0 0 6px; font-size: 16px; }
+.trail-blurb { font-size: 13.5px; color: var(--text-dim); line-height: 1.55; margin-bottom: 14px; }
+.trail-step { display: flex; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); cursor: pointer; }
+.trail-step:hover .ts-title { color: #fff; }
+.ts-num { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; font-weight: 800; font-size: 12px; color: #04121c; }
+.ts-body { flex: 1; }
+.ts-title { font-weight: 600; font-size: 14px; }
+.ts-title .ts-done { color: var(--good); margin-left: 6px; font-size: 12px; }
+.ts-why { font-size: 12.5px; color: var(--text-dim); margin-top: 3px; line-height: 1.45; }
+.ts-conn { width: 2px; background: var(--line); margin: 0 12px; }
+.trail-actions { display: flex; gap: 8px; margin-bottom: 14px; }
+
+.trail-banner {
+  position: fixed; top: 74px; left: 50%; transform: translateX(-50%); z-index: 35;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 24px;
+  padding: 7px 9px 7px 16px; display: flex; align-items: center; gap: 12px;
+  box-shadow: var(--shadow); max-width: 80vw;
+}
+.trail-banner .tb-name { font-size: 13px; font-weight: 700; }
+.trail-banner .tb-step { font-size: 12px; color: var(--text-dim); }
+.trail-banner .tb-nav { display: flex; gap: 5px; }
+.trail-banner button { border-radius: 18px; }
+
 .empty-state { text-align: center; color: var(--text-dim); padding: 30px; }
 .empty-state .big { font-size: 40px; margin-bottom: 10px; }
 
@@ -298,6 +339,7 @@ a { color: var(--accent-2); }
       <div class="progress-pill" id="progressPill" title="Prizes you've added notes or flashcards to">
         <span id="progressFilled">0</span>/<span id="progressTotal">0</span> studied
       </div>
+      <button class="btn" id="trailsBtn" title="Guided learning paths in prerequisite order">🧭 Trails</button>
       <button class="btn" id="reviewBtn" title="Review flashcards due across all prizes">
         🎴 Review <span class="badge" id="dueBadge">0</span>
       </button>
@@ -363,10 +405,16 @@ a { color: var(--accent-2); }
   </div>
 </div>
 
+<!-- Trail focus banner (shown on graph when a trail is active) -->
+<div id="trailBanner" class="trail-banner" hidden></div>
+
+<!-- Trails overlay -->
+<div id="trailsOverlay" class="overlay" hidden></div>
 <!-- Review overlay -->
 <div id="reviewOverlay" class="overlay" hidden></div>
 <!-- Help overlay -->
 <div id="helpOverlay" class="overlay" hidden></div>
+
 
 
 
@@ -10038,6 +10086,155 @@ window.NOBEL_DATA = [
  }
 ];
 
+/* trails.js — curated learning paths through the Chemistry Nobels.
+   There is no single linear order through all 117 prizes; they branch into
+   threads. Each trail is an ordered prerequisite chain within one thread,
+   with a "why this comes next" note per step. A prize may appear on more
+   than one trail (e.g. Pauling sits on both Bonding and Structure). */
+window.NOBEL_TRAILS = [
+  {
+    id: "foundations",
+    name: "Foundations: chemistry becomes quantitative",
+    color: "#6cc5ff",
+    blurb: "Start here. How chemistry turned from descriptive recipes into a predictive, mathematical science of rates, equilibria, and energy. Almost everything else assumes this.",
+    steps: [
+      { id: "chem-1901", why: "The starting point of physical chemistry: rates, chemical equilibrium, and osmotic pressure put on a quantitative footing." },
+      { id: "chem-1903", why: "Explains WHY solutions behave as van 't Hoff described — ions, dissociation, and the link between concentration and reactivity." },
+      { id: "chem-1909", why: "Catalysis, reaction velocities, and equilibria — the machinery that controls how fast and how far a reaction goes." },
+      { id: "chem-1920", why: "Adds the energy bookkeeping: the heat theorem (third law) lets you predict whether a reaction is even possible." },
+      { id: "chem-1932", why: "Brings reactions to surfaces and interfaces (adsorption) — where most real-world and industrial chemistry actually happens." },
+      { id: "chem-1956", why: "Reaction mechanisms and chain reactions: the step-by-step elementary events behind an overall rate law." },
+      { id: "chem-1968", why: "Extends thermodynamics to systems not at equilibrium (reciprocal relations) — the bridge to living and flowing systems." },
+      { id: "chem-1977", why: "Caps the thread: dissipative structures and order arising far from equilibrium." }
+    ]
+  },
+  {
+    id: "bonding",
+    name: "Bonding & quantum chemistry: why atoms stick",
+    color: "#7af0e0",
+    blurb: "The theory of the chemical bond and electronic structure — from valence and coordination to molecular orbitals, frontier-orbital reasoning, and modern computation.",
+    steps: [
+      { id: "chem-1913", why: "Coordination theory: the first real model of how metal ions bind groups in 3D, breaking the simple valence picture." },
+      { id: "chem-1936", why: "Dipole moments and diffraction reveal real molecular shapes and charge distribution — evidence the bond theories must explain." },
+      { id: "chem-1954", why: "The keystone: the nature of the chemical bond, resonance, hybridization, electronegativity. Read this slowly." },
+      { id: "chem-1966", why: "Molecular orbital theory — electrons delocalized over the whole molecule, the alternative/complement to Pauling's valence bonds." },
+      { id: "chem-1981", why: "Frontier orbitals (HOMO/LUMO) and the Woodward–Hoffmann rules: predicting whether a reaction is allowed from orbital symmetry." },
+      { id: "chem-1992", why: "Marcus theory: a quantitative model of electron-transfer rates built on the energy ideas above." },
+      { id: "chem-1998", why: "Density functional theory + computational methods: turning quantum mechanics into a practical predictive tool." },
+      { id: "chem-2013", why: "Multiscale modeling — combining quantum and classical descriptions to simulate large, real molecules." }
+    ]
+  },
+  {
+    id: "structure",
+    name: "Seeing molecules: structure determination",
+    color: "#b0b8ff",
+    blurb: "How we learned to 'see' atoms and molecules — the instruments and methods that reveal 3D structure, ending at predicting it from sequence.",
+    steps: [
+      { id: "chem-1922", why: "The mass spectrograph: separating atoms/molecules by mass, the root of isotope and structure analysis." },
+      { id: "chem-1936", why: "Electron/X-ray diffraction of molecules gives the first direct geometries — bond lengths and angles you can measure." },
+      { id: "chem-1962", why: "X-ray crystallography cracks the first protein structures (haemoglobin, myoglobin) — 3D biology begins." },
+      { id: "chem-1964", why: "Pushes crystallography to complex biomolecules (penicillin, vitamin B12) — proves the method's reach." },
+      { id: "chem-1985", why: "Direct methods: the math that lets you solve a structure from diffraction data without prior knowledge." },
+      { id: "chem-1991", why: "NMR spectroscopy: structure and dynamics in solution, not just crystals." },
+      { id: "chem-2002", why: "Mass spec + NMR extended to large biomolecules — sequencing and structures of proteins in the gas phase and solution." },
+      { id: "chem-2014", why: "Super-resolution fluorescence microscopy breaks the diffraction limit — watching molecules in living cells." },
+      { id: "chem-2017", why: "Cryo-EM images macromolecules at atomic detail without crystals — today's structural workhorse." },
+      { id: "chem-2024", why: "The endpoint: predicting 3D structure directly from sequence (AlphaFold) and designing new proteins." }
+    ]
+  },
+  {
+    id: "synthesis",
+    name: "Building molecules: synthesis & catalysis",
+    color: "#ff9f6c",
+    blurb: "The art of making molecules on purpose — from classic total synthesis to the catalytic and 'click' methods that make it efficient and selective.",
+    steps: [
+      { id: "chem-1902", why: "Fischer's sugar and purine work: the first systematic, logical synthesis of complex natural molecules." },
+      { id: "chem-1912", why: "Grignard reagents and catalytic hydrogenation — general C–C bond-forming and reduction tools used ever since." },
+      { id: "chem-1947", why: "Alkaloid synthesis and the electronic theory of organic reactions: starting to reason about WHY reactions go." },
+      { id: "chem-1950", why: "The Diels–Alder reaction: a single, predictable step that builds six-membered rings — a synthetic Swiss-army knife." },
+      { id: "chem-1965", why: "Woodward's total syntheses (quinine, cholesterol, B12): the high-water mark of planning a route to any molecule." },
+      { id: "chem-1979", why: "Boron and phosphorus-ylide reagents (hydroboration, Wittig) add precise new bond-forming reactions." },
+      { id: "chem-1984", why: "Solid-phase synthesis: automating peptide assembly — chemistry becomes a repeatable machine process." },
+      { id: "chem-1990", why: "Retrosynthetic analysis: Corey's formal logic for planning a synthesis backwards from the target." },
+      { id: "chem-2001", why: "Asymmetric catalysis: making a single mirror-image (chirality) on demand — essential for drugs." },
+      { id: "chem-2005", why: "Olefin metathesis: swapping pieces of double bonds, a powerful and green way to build skeletons." },
+      { id: "chem-2010", why: "Palladium cross-couplings (Heck/Negishi/Suzuki): joining carbon fragments precisely — modern synthesis's backbone." },
+      { id: "chem-2021", why: "Organocatalysis: small organic catalysts do asymmetric chemistry without metals." },
+      { id: "chem-2022", why: "Click & bioorthogonal chemistry: reactions so reliable they snap together, even inside living cells." }
+    ]
+  },
+  {
+    id: "life",
+    name: "The molecules of life: biochemistry & molecular biology",
+    color: "#5fd38a",
+    blurb: "From 'what is fermentation?' to reading, editing, and designing the molecules of life. The largest thread — many prizes build directly on the previous one.",
+    steps: [
+      { id: "chem-1907", why: "Fermentation works without living cells — life's chemistry is just enzyme chemistry. The conceptual starting gun." },
+      { id: "chem-1929", why: "The chemistry of fermentation and the role of coenzymes — metabolism becomes traceable reactions." },
+      { id: "chem-1946", why: "Enzymes are proteins, and can be crystallized — connecting catalysis to defined molecules." },
+      { id: "chem-1958", why: "Sanger sequences insulin: proteins have an exact, readable amino-acid order. Foundational method." },
+      { id: "chem-1961", why: "Calvin maps the path of carbon in photosynthesis — a full metabolic pathway worked out with tracers." },
+      { id: "chem-1962", why: "The first 3D protein structures explain how sequence becomes function." },
+      { id: "chem-1972", why: "Anfinsen: a protein's sequence encodes its fold (the folding problem) — plus how enzymes work chemically." },
+      { id: "chem-1978", why: "Chemiosmosis: how cells actually make energy (ATP) using ion gradients — a deep mechanistic idea." },
+      { id: "chem-1980", why: "Recombinant DNA and DNA sequencing: now we can read and splice the genetic code itself." },
+      { id: "chem-1989", why: "RNA can be an enzyme (ribozymes) — rewrites the origin-of-life and central-dogma story." },
+      { id: "chem-1993", why: "PCR amplifies DNA at will and site-directed mutagenesis lets you edit it — the tools that power modern biology." },
+      { id: "chem-1997", why: "ATP synthase: the rotary molecular machine behind Mitchell's chemiosmosis, caught in the act." },
+      { id: "chem-2004", why: "Ubiquitin-tagged protein degradation — the cell's regulated disposal system." },
+      { id: "chem-2006", why: "The structural basis of transcription: how DNA is copied into RNA, atom by atom." },
+      { id: "chem-2009", why: "The ribosome structure: how the genetic code is translated into protein." },
+      { id: "chem-2015", why: "DNA repair mechanisms — how cells protect and correct the code." },
+      { id: "chem-2018", why: "Directed evolution and phage display: harnessing evolution to engineer new proteins." },
+      { id: "chem-2020", why: "CRISPR-Cas9: programmable genome editing — rewriting DNA precisely." },
+      { id: "chem-2024", why: "Predicting and designing protein structure with AI — the culmination of the whole thread." }
+    ]
+  },
+  {
+    id: "nucleus",
+    name: "Atoms, isotopes & the nucleus",
+    color: "#ffd24a",
+    blurb: "Radiochemistry: discovering radioactivity, isotopes, and artificial elements — and turning them into tools like tracers and radiocarbon dating.",
+    steps: [
+      { id: "chem-1908", why: "Rutherford shows radioactivity is atoms transmuting — the nucleus enters chemistry." },
+      { id: "chem-1911", why: "Marie Curie isolates radium and polonium: new radioactive elements, and the methods to handle them." },
+      { id: "chem-1921", why: "Soddy's isotopes: same element, different mass — the key concept the rest depends on." },
+      { id: "chem-1922", why: "Aston's mass spectrograph measures those isotopes directly and finds the whole-number rule." },
+      { id: "chem-1934", why: "Urey discovers deuterium (heavy hydrogen) — isotopes you can do chemistry with." },
+      { id: "chem-1935", why: "The Joliot-Curies make radioactivity artificial — create radioisotopes on demand." },
+      { id: "chem-1943", why: "Hevesy turns radioisotopes into tracers — following atoms through chemical and biological processes." },
+      { id: "chem-1944", why: "Hahn's nuclear fission: splitting the nucleus, the discovery that reshaped the 20th century." },
+      { id: "chem-1951", why: "McMillan and Seaborg create the transuranium elements, extending the periodic table." },
+      { id: "chem-1960", why: "Libby's radiocarbon dating: isotopes become a clock for archaeology and geology." }
+    ]
+  },
+  {
+    id: "materials",
+    name: "Materials & the very small: polymers to nanotech",
+    color: "#ff7aa8",
+    blurb: "From understanding giant molecules to designing materials atom-by-atom: polymers, fullerenes, quasicrystals, molecular machines, batteries, quantum dots, and frameworks.",
+    steps: [
+      { id: "chem-1953", why: "Staudinger proves polymers are real giant covalent molecules — the foundation of all materials chemistry." },
+      { id: "chem-1963", why: "Ziegler–Natta catalysts control how polymers are built — making modern plastics possible." },
+      { id: "chem-1974", why: "Flory's physical chemistry of macromolecules: predicting how polymer chains behave." },
+      { id: "chem-1996", why: "Fullerenes (C60): carbon forms hollow cages — a whole new branch of nanomaterials." },
+      { id: "chem-2000", why: "Conductive polymers: plastics that carry current, blending organic chemistry and electronics." },
+      { id: "chem-2011", why: "Quasicrystals: ordered but non-repeating atomic arrangements — breaking a 'rule' of crystallography." },
+      { id: "chem-2016", why: "Molecular machines: building motors and switches from individual molecules." },
+      { id: "chem-2019", why: "Lithium-ion batteries: the materials chemistry powering portable electronics." },
+      { id: "chem-2023", why: "Quantum dots: nanocrystals whose color is set by size — quantum effects you can engineer." },
+      { id: "chem-2025", why: "Metal–organic frameworks: porous designer solids with vast internal surface area." }
+    ]
+  }
+];
+
+/* Suggested overall on-ramp shown in the Trails intro. */
+window.NOBEL_TRAIL_INTRO =
+  "There isn't one straight line through all 117 prizes — they branch. The strongest path: " +
+  "start with Foundations to get the quantitative mindset, then pick the thread you care about most. " +
+  "If your goal is a modern Chemistry Nobel, the Life and Synthesis trails are where the most recent prizes cluster, " +
+  "but Bonding and Structure give you the tools the others assume. A prize can sit on several trails — that overlap is the point.";
+
 /* store.js — local persistence for notes, flashcards, jargon "known" state.
    Everything lives in localStorage so the page works fully offline with no server. */
 (function () {
@@ -10258,6 +10455,12 @@ window.NOBEL_DATA = [
 
     reheat() { this.alpha = Math.max(this.alpha, 0.6); }
 
+    setTrail(orderedIds, color) {
+      this.trail = orderedIds && orderedIds.length ? orderedIds.slice() : null;
+      this.trailSet = this.trail ? new Set(this.trail) : null;
+      this.trailColor = color || "#f4c95d";
+    }
+
     _resize() {
       const r = this.canvas.parentElement.getBoundingClientRect();
       this.W = r.width; this.H = r.height;
@@ -10336,27 +10539,49 @@ window.NOBEL_DATA = [
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       }
 
+      // ordered trail path (drawn over normal links, under nodes)
+      if (this.trail) {
+        ctx.lineWidth = 3; ctx.strokeStyle = this.trailColor;
+        ctx.shadowColor = this.trailColor; ctx.shadowBlur = 8;
+        for (let i = 0; i < this.trail.length - 1; i++) {
+          const a = this.byId[this.trail[i]], b = this.byId[this.trail[i + 1]];
+          if (!a || !b) continue;
+          const pa = this._toScreen(a), pb = this._toScreen(b);
+          this._arrow(pa, pb);
+        }
+        ctx.shadowBlur = 0;
+      }
+
       // nodes
       for (const n of this.nodes) {
         if (n.visible === false) continue;
+        const offTrail = this.trailSet && !this.trailSet.has(n.id);
         const p = this._toScreen(n);
         const fill = this.opts.fillFn ? this.opts.fillFn(n) : 0;       // 0..1 engagement
-        const r = this.nodeRadius(n) * this.scale * (0.85 + fill * 0.4);
+        let r = this.nodeRadius(n) * this.scale * (0.85 + fill * 0.4);
         const base = "#3a4150";                                        // pale/dull
-        const col = mix(base, n.color, 0.25 + fill * 0.75);
+        let col = mix(base, n.color, 0.25 + fill * 0.75);
         const isHover = n === this.hovered;
-        if (fill > 0.05 || isHover) {
+        if (offTrail) { col = "#2a313d"; r *= 0.7; }                   // dim non-trail
+        if (!offTrail && (fill > 0.05 || isHover)) {
           ctx.shadowColor = n.color; ctx.shadowBlur = (6 + fill * 16) * (isHover ? 1.6 : 1);
         } else ctx.shadowBlur = 0;
         ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
         ctx.fillStyle = col; ctx.fill();
         ctx.shadowBlur = 0;
         // ring for studied
-        if (fill > 0.05) { ctx.lineWidth = 1.5; ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.stroke(); }
+        if (!offTrail && fill > 0.05) { ctx.lineWidth = 1.5; ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.stroke(); }
         if (isHover) { ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke(); }
 
+        // trail step number badge
+        if (this.trailSet && !offTrail) {
+          const step = this.trail.indexOf(n.id) + 1;
+          ctx.fillStyle = this.trailColor; ctx.font = "700 11px -apple-system, sans-serif"; ctx.textAlign = "center";
+          ctx.fillText(String(step), p.x, p.y - r - 6);
+        }
+
         // labels when zoomed in or hovered
-        if (this.scale > 1.15 || isHover) {
+        if ((this.scale > 1.15 || isHover) && !offTrail) {
           ctx.fillStyle = isHover ? "#fff" : "rgba(231,236,243,.75)";
           ctx.font = `${isHover ? "700 " : ""}${11}px -apple-system, sans-serif`;
           ctx.textAlign = "center";
@@ -10364,6 +10589,24 @@ window.NOBEL_DATA = [
           ctx.fillText(label, p.x, p.y + r + 13);
         }
       }
+    }
+
+    _arrow(a, b) {
+      const ctx = this.ctx;
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const ux = dx / len, uy = dy / len;
+      const pad = 12 * this.scale;                     // stop short of node centers
+      const ax = a.x + ux * pad, ay = a.y + uy * pad;
+      const bx = b.x - ux * pad, by = b.y - uy * pad;
+      ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+      // arrowhead
+      const h = 8;
+      ctx.beginPath();
+      ctx.moveTo(bx, by);
+      ctx.lineTo(bx - ux * h - uy * h * 0.6, by - uy * h + ux * h * 0.6);
+      ctx.lineTo(bx - ux * h + uy * h * 0.6, by - uy * h - ux * h * 0.6);
+      ctx.closePath(); ctx.fillStyle = this.trailColor; ctx.fill();
     }
 
     _loop() { this._tick(); this._draw(); requestAnimationFrame(this._loop); }
@@ -10507,8 +10750,18 @@ window.NOBEL_DATA = [
     subfields: new Set(),     // empty = all
     categories: new Set(),    // empty = all
     tags: new Set(),
-    search: ""
+    search: "",
+    trail: null               // Set of ids when a trail is focused
   };
+
+  // ---------- Trails ----------
+  const TRAILS = window.NOBEL_TRAILS || [];
+  const trailById = {}; TRAILS.forEach(t => trailById[t.id] = t);
+  const membership = {};      // prizeId -> [{trail, index}]
+  TRAILS.forEach(t => t.steps.forEach((s, i) => {
+    (membership[s.id] = membership[s.id] || []).push({ trail: t, index: i });
+  }));
+  let activeTrail = null, activeStep = 0;
 
   // ---------- Build derived indexes ----------
   const subfieldCounts = {}, categoryCounts = {}, tagCounts = {};
@@ -10554,6 +10807,7 @@ window.NOBEL_DATA = [
 
   // ---------- Filtering ----------
   function matches(d) {
+    if (filter.trail && !filter.trail.has(d.id)) return false;
     if (filter.subfields.size && !filter.subfields.has(d.subfield)) return false;
     if (filter.categories.size && !(d.categories || []).some(c => filter.categories.has(c))) return false;
     if (filter.tags.size && !(d.tags || []).some(t => filter.tags.has(t))) return false;
@@ -10646,6 +10900,10 @@ window.NOBEL_DATA = [
 
   function openDetail(id) {
     currentId = id; currentTab = "overview";
+    if (activeTrail) {
+      const i = activeTrail.steps.findIndex(s => s.id === id);
+      if (i >= 0 && i !== activeStep) { activeStep = i; renderBanner(); }
+    }
     renderDetail();
     detail.classList.remove("collapsed");
     graph.centerOn(id);
@@ -10663,6 +10921,7 @@ window.NOBEL_DATA = [
         <h2 class="detail-title">${(d.laureates || []).join(" · ")}</h2>
         <div class="detail-laur">${esc(d.oneLiner || "")}</div>
         ${d.motivation ? `<div class="detail-motivation">“${esc(d.motivation)}”</div>` : ""}
+        ${trailContext(d.id)}
         <div class="detail-chips">
           <span class="chip subfield" style="color:${colorFor(d)};border-color:${colorFor(d)}">${d.subfield}</span>
           ${(d.categories || []).map(c => `<span class="chip cat">${CATEGORY_LABEL[c] || c}</span>`).join("")}
@@ -10809,7 +11068,9 @@ window.NOBEL_DATA = [
   // delegate related-link clicks
   detail.addEventListener("click", e => {
     const a = e.target.closest("[data-goto]");
-    if (a) { e.preventDefault(); openDetail(a.dataset.goto); }
+    if (a) { e.preventDefault(); openDetail(a.dataset.goto); return; }
+    const tc = e.target.closest(".tctx-name");
+    if (tc) { e.preventDefault(); focusTrail(tc.dataset.trail, parseInt(tc.dataset.step)); }
   });
 
   // ---------- Review overlay (cross-prize SRS) ----------
@@ -10885,6 +11146,7 @@ window.NOBEL_DATA = [
   }
 
   function wireHeader() {
+    document.getElementById("trailsBtn").onclick = () => openTrails();
     document.getElementById("reviewBtn").onclick = startReview;
     document.getElementById("exportBtn").onclick = () => {
       const blob = new Blob([Store.exportData()], { type: "application/json" });
@@ -10936,6 +11198,8 @@ window.NOBEL_DATA = [
           <li><b>My notes</b> — your lab notebook, saved locally in this browser.</li>
           <li><b>Flashcards</b> — write your own or import starter decks; review them across all prizes with the 🎴 button (spaced repetition).</li>
         </ul>
+        <h3>Learning Trails (🧭 top bar)</h3>
+        <p>Not sure what order to learn in? Trails are curated, ordered prerequisite paths through each thread (Foundations, Bonding, Structure, Synthesis, Life, Nucleus, Materials). Each step says <i>why it comes next</i>. "Focus this trail" draws the numbered path on the graph and dims everything else; use <b>prev/next</b> to walk it. Inside any prize, a banner shows which trail(s) it sits on and what comes before/after.</p>
         <h3>Filters</h3>
         <p>Use the left rail to filter by engagement (studied / not started / cards due), subfield, category, and tags, or search anything.</p>
         <h3>Your data</h3>
@@ -10943,6 +11207,115 @@ window.NOBEL_DATA = [
       </div></div>`;
     ov.hidden = false;
     ov.querySelector(".modal-close").onclick = () => ov.hidden = true;
+  }
+
+  // ---------- Trails UI ----------
+  function trailProgress(t) {
+    const done = t.steps.filter(s => Store.isStudied(s.id)).length;
+    return { done, total: t.steps.length };
+  }
+  function openTrails(selectId) {
+    const ov = document.getElementById("trailsOverlay");
+    let sel = selectId || (activeTrail ? activeTrail.id : (TRAILS[0] && TRAILS[0].id));
+    function render() {
+      const t = trailById[sel];
+      ov.innerHTML = `<div class="modal" style="max-width:860px">
+        <div class="modal-head"><h2>🧭 Learning Trails</h2><button class="modal-close">×</button></div>
+        <div class="modal-body">
+          <p style="font-size:13px;color:var(--text-dim);line-height:1.55;margin:0 0 16px">${esc(window.NOBEL_TRAIL_INTRO || "")}</p>
+          <div class="trails-layout">
+            <div class="trails-list">${TRAILS.map(tr => {
+              const p = trailProgress(tr);
+              return `<div class="trail-pick ${tr.id === sel ? "active" : ""}" data-t="${tr.id}">
+                <div class="tp-name"><span class="tp-dot" style="background:${tr.color}"></span>${esc(tr.name)}</div>
+                <div class="tp-meta">${p.done}/${p.total} studied</div>
+                <div class="tp-bar"><i style="width:${Math.round(p.done / p.total * 100)}%;background:${tr.color}"></i></div>
+              </div>`;
+            }).join("")}</div>
+            <div class="trail-detail">
+              <h3>${esc(t.name)}</h3>
+              <p class="trail-blurb">${esc(t.blurb)}</p>
+              <div class="trail-actions">
+                <button class="btn primary" id="focusTrail">Focus this trail on the graph →</button>
+              </div>
+              ${t.steps.map((s, i) => {
+                const d = byId[s.id]; if (!d) return "";
+                const done = Store.isStudied(s.id);
+                return `<div class="trail-step" data-goto="${s.id}">
+                  <div class="ts-num" style="background:${done ? 'var(--good)' : t.color}">${i + 1}</div>
+                  <div class="ts-body">
+                    <div class="ts-title">${d.year} · ${(d.laureates || [])[0] || ""}${done ? '<span class="ts-done">✦ studied</span>' : ''}</div>
+                    <div class="ts-why">${esc(s.why)}</div>
+                  </div></div>`;
+              }).join("")}
+            </div>
+          </div>
+        </div></div>`;
+      ov.querySelector(".modal-close").onclick = () => ov.hidden = true;
+      ov.querySelectorAll(".trail-pick").forEach(el => el.onclick = () => { sel = el.dataset.t; render(); });
+      ov.querySelector("#focusTrail").onclick = () => { ov.hidden = true; focusTrail(sel); };
+      ov.querySelectorAll(".trail-step").forEach(el => el.onclick = () => { ov.hidden = true; focusTrail(sel, t.steps.findIndex(s => s.id === el.dataset.goto)); });
+    }
+    render();
+    ov.hidden = false;
+  }
+
+  function focusTrail(trailId, stepIndex) {
+    activeTrail = trailById[trailId];
+    if (!activeTrail) return;
+    activeStep = stepIndex != null ? stepIndex : 0;
+    filter.trail = new Set(activeTrail.steps.map(s => s.id));
+    graph.setTrail(activeTrail.steps.map(s => s.id), activeTrail.color);
+    applyFilter();
+    setTimeout(() => graph.fit(), 350);
+    renderBanner();
+    if (stepIndex != null) gotoStep(activeStep);
+  }
+  function clearTrail() {
+    activeTrail = null; filter.trail = null;
+    graph.setTrail(null); applyFilter();
+    document.getElementById("trailBanner").hidden = true;
+    setTimeout(() => graph.fit(), 350);
+  }
+  function gotoStep(i) {
+    if (!activeTrail) return;
+    activeStep = Math.max(0, Math.min(activeTrail.steps.length - 1, i));
+    openDetail(activeTrail.steps[activeStep].id);
+    renderBanner();
+  }
+  function renderBanner() {
+    const b = document.getElementById("trailBanner");
+    if (!activeTrail) { b.hidden = true; return; }
+    const n = activeTrail.steps.length;
+    b.innerHTML = `<span class="tp-dot" style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${activeTrail.color}"></span>
+      <span class="tb-name">${esc(activeTrail.name)}</span>
+      <span class="tb-step">step ${activeStep + 1}/${n}</span>
+      <span class="tb-nav">
+        <button class="btn ghost sm" id="tbPrev" ${activeStep === 0 ? "disabled" : ""}>‹ prev</button>
+        <button class="btn ghost sm" id="tbNext" ${activeStep === n - 1 ? "disabled" : ""}>next ›</button>
+        <button class="btn ghost sm" id="tbExit">✕ exit</button>
+      </span>`;
+    b.hidden = false;
+    document.getElementById("tbPrev").onclick = () => gotoStep(activeStep - 1);
+    document.getElementById("tbNext").onclick = () => gotoStep(activeStep + 1);
+    document.getElementById("tbExit").onclick = clearTrail;
+  }
+
+  // banner shown inside a prize's detail: where it sits across trails
+  function trailContext(prizeId) {
+    const mem = membership[prizeId];
+    if (!mem || !mem.length) return "";
+    return mem.map(m => {
+      const prev = m.index > 0 ? m.trail.steps[m.index - 1].id : null;
+      const next = m.index < m.trail.steps.length - 1 ? m.trail.steps[m.index + 1].id : null;
+      const prevD = prev && byId[prev], nextD = next && byId[next];
+      return `<div class="detail-trailctx">
+        <span class="tp-dot" style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${m.trail.color};margin-right:6px"></span>
+        <a href="#" class="tctx-name" data-trail="${m.trail.id}" data-step="${m.index}" title="Focus this trail on the graph"><b>${esc(m.trail.name)}</b></a> · step ${m.index + 1}/${m.trail.steps.length}
+        <div class="tctx-nav">${prevD ? `← after <a href="#" data-goto="${prev}">${prevD.year} ${(prevD.laureates||[])[0]||""}</a>` : "trail start"} ·
+        ${nextD ? `before <a href="#" data-goto="${next}">${nextD.year} ${(nextD.laureates||[])[0]||""}</a> →` : "trail end"}</div>
+      </div>`;
+    }).join("");
   }
 
   // ---------- keyboard ----------
