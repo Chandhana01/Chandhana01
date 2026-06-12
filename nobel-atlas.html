@@ -95,6 +95,38 @@ a { color: var(--accent-2); }
 }
 #searchBox:focus { outline: none; border-color: var(--accent-2); }
 
+/* Study by vibe */
+.vibe-toggle {
+  width: 100%; margin-top: 8px; background: linear-gradient(135deg, rgba(108,197,255,.12), rgba(244,201,93,.10));
+  border: 1px solid var(--line); color: var(--text); padding: 8px 11px; border-radius: 9px;
+  font-size: 13px; font-weight: 600; text-align: left; display: flex; align-items: center; justify-content: space-between;
+}
+.vibe-toggle::after { content: "▾"; color: var(--text-faint); }
+.vibe-toggle[aria-expanded="true"]::after { content: "▴"; }
+.vibe-toggle:hover { border-color: #3a4757; }
+.vibe-panel { margin-top: 10px; }
+.vibe-panel textarea {
+  width: 100%; min-height: 64px; background: var(--bg); border: 1px solid var(--line); border-radius: 9px;
+  color: var(--text); padding: 9px 11px; font-size: 13px; font-family: var(--sans); line-height: 1.45; resize: vertical;
+}
+.vibe-panel textarea:focus { outline: none; border-color: var(--accent-2); }
+.vibe-examples { display: flex; flex-wrap: wrap; gap: 4px; margin: 7px 0; }
+.vibe-ex { font-size: 10.5px; padding: 2px 7px; border-radius: 12px; background: var(--bg-3); border: 1px solid var(--line); color: var(--text-dim); cursor: pointer; }
+.vibe-ex:hover { color: var(--text); border-color: #3a4757; }
+.vibe-go { width: 100%; margin-top: 4px; justify-content: center; }
+.vibe-results { margin-top: 12px; }
+.vibe-results .vr-head { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-faint); margin: 10px 0 7px; display:flex; justify-content:space-between; align-items:center; }
+.vibe-hit { background: var(--bg-3); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; cursor: pointer; }
+.vibe-hit:hover { border-color: #3a4757; }
+.vibe-hit .vh-top { display: flex; align-items: baseline; gap: 6px; }
+.vibe-hit .vh-yr { font-weight: 800; font-size: 12px; }
+.vibe-hit .vh-laur { font-size: 12.5px; color: var(--text); font-weight: 600; }
+.vibe-hit .vh-one { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; line-height: 1.35; }
+.vibe-hit .vh-why { font-size: 10.5px; color: var(--accent-2); margin-top: 4px; }
+.vibe-hit .vh-new { font-size: 9.5px; color: var(--accent); border: 1px solid var(--line); border-radius: 10px; padding: 0 5px; margin-left: auto; }
+.vibe-path-btn { width: 100%; margin-top: 6px; justify-content: center; }
+.vibe-empty-tip { font-size: 12px; color: var(--text-faint); line-height: 1.5; margin: 6px 0; }
+
 .radio, .chk {
   display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-dim);
   padding: 5px 4px; border-radius: 6px; cursor: pointer;
@@ -355,6 +387,8 @@ a { color: var(--accent-2); }
     <aside id="rail">
       <div class="rail-section">
         <input type="search" id="searchBox" placeholder="Search laureate, topic, tag…" autocomplete="off" />
+        <button class="vibe-toggle" id="vibeToggle" aria-expanded="false">✨ Study by vibe</button>
+        <div id="vibePanel" class="vibe-panel" hidden></div>
       </div>
 
       <div class="rail-section">
@@ -11200,6 +11234,8 @@ window.NOBEL_TRAIL_INTRO =
         </ul>
         <h3>Learning Trails (🧭 top bar)</h3>
         <p>Not sure what order to learn in? Trails are curated, ordered prerequisite paths through each thread (Foundations, Bonding, Structure, Synthesis, Life, Nucleus, Materials). Each step says <i>why it comes next</i>. "Focus this trail" draws the numbered path on the graph and dims everything else; use <b>prev/next</b> to walk it. Inside any prize, a banner shows which trail(s) it sits on and what comes before/after.</p>
+        <h3>Study by vibe (✨ under search)</h3>
+        <p>Optional and collapsed by default. Open it and describe in plain language what you want to learn — “how drugs are made as single mirror-image molecules”, “the chemistry behind AI predicting proteins” — and it backtracks across every prize's tags, concepts, mechanisms and scope to rank the best matches, with a note on <i>why</i> each matched. Hit “Make these a path on the graph” to walk them in order. With the box empty it shows <b>recommended next</b> steps based on what you've already studied.</p>
         <h3>Filters</h3>
         <p>Use the left rail to filter by engagement (studied / not started / cards due), subfield, category, and tags, or search anything.</p>
         <h3>Your data</h3>
@@ -11261,8 +11297,12 @@ window.NOBEL_TRAIL_INTRO =
   }
 
   function focusTrail(trailId, stepIndex) {
-    activeTrail = trailById[trailId];
-    if (!activeTrail) return;
+    const t = trailById[trailId];
+    if (t) focusTrailObj(t, stepIndex);
+  }
+  function focusTrailObj(trail, stepIndex) {
+    activeTrail = trail;
+    if (!activeTrail || !activeTrail.steps.length) return;
     activeStep = stepIndex != null ? stepIndex : 0;
     filter.trail = new Set(activeTrail.steps.map(s => s.id));
     graph.setTrail(activeTrail.steps.map(s => s.id), activeTrail.color);
@@ -11318,6 +11358,209 @@ window.NOBEL_TRAIL_INTRO =
     }).join("");
   }
 
+  // ---------- Study by vibe (intent finder) ----------
+  const STOP = new Set("the a an of to in on for and or with how what why is are be i want learn learning study understand about into from that this it works work all more most very really get can could would like want need know made make making made used using use as by we do my no so up at an or is it be has have had will when which who whom they them their there here out off than then also such each via per its".split(" "));
+  const ACRONYMS = new Set(["ai", "ml", "dna", "rna", "atp", "nmr", "pcr", "dft", "gfp", "mri", "led", "mof", "uv", "ir"]);
+  // multi-word intent phrases resolved before tokenizing (avoids e.g. "mirror-image" → imaging)
+  const PHRASES = [
+    [/\bmirror[\s-]?image[ds]?\b/g, ["chirality", "asymmetric", "enantiomer"]],
+    [/\bsingle[\s-]?handed\b/g, ["chirality", "asymmetric"]],
+    [/\bsingle[\s-]?molecule[s]?\b/g, ["microscopy", "single"]],
+    [/\bprotein[\s-]?structure[s]?\b/g, ["protein", "structure", "crystallography"]],
+    [/\bgreen chemistry\b/g, ["catalysis", "click", "metathesis"]],
+    [/\bgenome editing\b/g, ["crispr", "genome"]],
+    [/\bcross[\s-]?coupling\b/g, ["coupling", "palladium"]],
+    [/\bclimate|global warming|ozone\b/g, ["ozone", "atmospheric"]]
+  ];
+  // intent → concept expansions (values are matched against the prize index)
+  const SYNONYMS = {
+    drug: ["synthesis", "asymmetric", "chirality", "medicinal", "total synthesis"], drugs: ["synthesis", "chirality", "asymmetric"],
+    medicine: ["synthesis", "chirality"], pharma: ["synthesis", "asymmetric"], medicinal: ["synthesis", "chirality"],
+    ai: ["alphafold", "deep learning", "computational", "machine"], ml: ["deep learning", "computational"],
+    "machine": ["deep learning", "computational"], neural: ["deep learning", "alphafold"], computer: ["computational", "theory"],
+    protein: ["protein", "folding", "structure", "enzyme", "amino"], proteins: ["protein", "folding", "structure"],
+    fold: ["folding", "protein", "structure"], folding: ["folding", "protein"],
+    dna: ["dna", "genome", "sequencing", "nucleic"], gene: ["genome", "dna", "crispr"], genetic: ["genome", "dna"],
+    crispr: ["crispr", "genome", "editing"], editing: ["crispr", "mutagenesis", "genome"], genome: ["genome", "dna"],
+    battery: ["lithium", "batteries", "electrochem", "materials"], batteries: ["lithium", "batteries", "electrochem"],
+    energy: ["thermodynamics", "electrochem", "lithium", "photosynthesis", "atp"], electric: ["electrochem", "conductive", "lithium"],
+    see: ["microscopy", "crystallography", "spectroscopy", "imaging", "diffraction"], seeing: ["microscopy", "crystallography", "spectroscopy"],
+    image: ["microscopy", "imaging", "cryo"], imaging: ["microscopy", "cryo", "spectroscopy"], microscope: ["microscopy", "cryo"],
+    visualize: ["microscopy", "crystallography"], structure: ["structure", "crystallography", "diffraction"],
+    green: ["catalysis", "click", "metathesis", "ozone", "sustainable"], sustainable: ["catalysis", "click"], environment: ["ozone", "atmospheric", "catalysis"],
+    quantum: ["quantum", "orbital", "bond", "dft", "theory"], bond: ["bond", "orbital", "valence"], bonding: ["bond", "orbital", "valence"],
+    reaction: ["mechanism", "kinetics", "reaction", "catalysis"], mechanism: ["mechanism", "kinetics"], catalyst: ["catalysis", "catalyst"], catalysis: ["catalysis"],
+    nuclear: ["radioactivity", "isotope", "fission", "nucleus"], radioactive: ["radioactivity", "isotope"], isotope: ["isotope", "radioactivity"], atom: ["atomic", "nucleus", "isotope"],
+    material: ["materials", "polymer", "nano"], materials: ["materials", "polymer", "nano"], polymer: ["polymer", "materials"], nano: ["nano", "quantum dots", "fullerene"],
+    enzyme: ["enzyme", "catalysis", "protein"], metabolism: ["pathway", "metabolic", "biochem"], photosynthesis: ["photosynthesis", "carbon", "calvin"],
+    chemistry: [], chemical: []
+  };
+
+  let prizeIndex = null;
+  function buildIndex() {
+    prizeIndex = DATA.map(d => {
+      const dd = d.deepDive || {};
+      const fields = [
+        { t: (d.laureates || []).join(" "), w: 2, label: "laureate" },
+        { t: d.subfield || "", w: 2.5, label: "subfield" },
+        { t: (d.categories || []).map(c => CATEGORY_LABEL[c] || c).join(" ") + " " + (d.categories || []).join(" "), w: 3, label: "category" },
+        { t: (d.tags || []).join(" "), w: 4, label: "tag" },
+        { t: d.oneLiner || "", w: 3, label: "summary" },
+        { t: d.motivation || "", w: 1.5, label: "citation" },
+        { t: (dd.concepts || []).join(" "), w: 3, label: "concept" },
+        { t: (dd.jargon || []).map(j => j.term).join(" "), w: 2.5, label: "term" },
+        { t: dd.scope || "", w: 1, label: "scope" },
+        { t: [dd.chemistryLogic, dd.history, dd.whyItMatters].filter(Boolean).join(" "), w: 0.4, label: "detail" }
+      ].map(f => ({ t: f.t.toLowerCase(), w: f.w, label: f.label }));
+      return { prize: d, fields };
+    });
+  }
+  function termMatch(text, term) {
+    if (term.length <= 3) return new RegExp("\\b" + term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b").test(text);
+    return text.indexOf(term) !== -1;
+  }
+  function rankByVibe(query) {
+    if (!prizeIndex) buildIndex();
+    let q = query.toLowerCase();
+    const terms = [];
+    // 1) resolve known phrases first, then strip them from the string
+    PHRASES.forEach(([re, mapped]) => {
+      if (re.test(q)) { mapped.forEach(t => terms.push({ term: t, f: 0.9 })); q = q.replace(re, " "); }
+    });
+    // 2) tokenize the rest
+    const raw = q.split(/[^a-z0-9]+/).filter(w => w && ((w.length >= 3 && !STOP.has(w)) || ACRONYMS.has(w)));
+    if (!raw.length && !terms.length) return [];
+    raw.forEach(w => {
+      terms.push({ term: w, f: 1 });                                  // originals weigh full
+      (SYNONYMS[w] || []).forEach(e => terms.push({ term: e.toLowerCase(), f: 0.5, src: w }));  // expansions weigh less
+    });
+    const results = [];
+    for (const entry of prizeIndex) {
+      let score = 0; const hits = {};
+      for (const { term, f } of terms) {
+        let best = 0, bestLabel = null;
+        for (const fld of entry.fields) {
+          if (fld.t && termMatch(fld.t, term)) { const c = fld.w * f; if (c > best) { best = c; bestLabel = fld.label; } }
+        }
+        if (best > 0) { score += best; (hits[bestLabel] = hits[bestLabel] || new Set()).add(term); }
+      }
+      if (score > 1) {
+        if (!Store.isStudied(entry.prize.id)) score *= 1.06;   // gently surface new ground
+        results.push({ prize: entry.prize, score, hits });
+      }
+    }
+    results.sort((a, b) => b.score - a.score);
+    return results.slice(0, 10);
+  }
+  function whyText(hits) {
+    const order = ["tag", "concept", "summary", "category", "term", "subfield", "laureate", "citation", "scope", "detail"];
+    const parts = [];
+    order.forEach(l => { if (hits[l] && parts.length < 2) parts.push(l + ": " + [...hits[l]].slice(0, 2).join(", ")); });
+    return parts.join(" · ");
+  }
+
+  // recommend next steps from studied state across trails
+  function recommendNext() {
+    const recs = [];
+    const ranked = TRAILS.map(t => {
+      const done = t.steps.filter(s => Store.isStudied(s.id)).length;
+      const frontier = t.steps.findIndex(s => !Store.isStudied(s.id));
+      return { trail: t, done, frontier };
+    }).filter(x => x.frontier !== -1);
+    const anyProgress = ranked.some(x => x.done > 0);
+    if (anyProgress) {
+      ranked.sort((a, b) => b.done - a.done);
+      ranked.slice(0, 4).forEach(x => {
+        if (x.done === 0) return;
+        recs.push({ id: x.trail.steps[x.frontier].id, trail: x.trail, idx: x.frontier,
+          reason: `Next in ${x.trail.name.split(":")[0]} — you've done ${x.done}/${x.trail.steps.length}` });
+      });
+    }
+    if (recs.length < 3) {
+      ["foundations", "life", "synthesis"].forEach(tid => {
+        const t = trailById[tid]; if (!t) return;
+        const fr = t.steps.findIndex(s => !Store.isStudied(s.id));
+        if (fr !== -1 && !recs.some(r => r.id === t.steps[fr].id))
+          recs.push({ id: t.steps[fr].id, trail: t, idx: fr, reason: `Start the ${t.name.split(":")[0]} trail` });
+      });
+    }
+    return recs.slice(0, 4);
+  }
+
+  function wireFinder() {
+    const toggle = document.getElementById("vibeToggle");
+    const panel = document.getElementById("vibePanel");
+    toggle.onclick = () => {
+      const open = panel.hidden;
+      panel.hidden = !open;
+      toggle.setAttribute("aria-expanded", String(open));
+      if (open && !panel.dataset.built) buildPanel();
+      if (open) setTimeout(() => panel.querySelector("textarea").focus(), 50);
+    };
+
+    function buildPanel() {
+      panel.dataset.built = "1";
+      panel.innerHTML = `
+        <textarea id="vibeInput" placeholder="Describe what you want to learn… e.g. 'I want to understand how drugs are made selectively' or 'the chemistry behind AI predicting proteins'"></textarea>
+        <div class="vibe-examples">
+          ${["drug synthesis", "how we see molecules", "AI & proteins", "batteries & energy", "DNA editing", "quantum bonding"].map(x => `<span class="vibe-ex">${x}</span>`).join("")}
+        </div>
+        <button class="btn primary vibe-go" id="vibeGo">Find my path →</button>
+        <div class="vibe-results" id="vibeResults"></div>`;
+      const input = panel.querySelector("#vibeInput");
+      panel.querySelectorAll(".vibe-ex").forEach(c => c.onclick = () => { input.value = c.textContent; runVibe(); });
+      panel.querySelector("#vibeGo").onclick = runVibe;
+      input.addEventListener("keydown", e => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) runVibe(); });
+      renderRecs();
+    }
+
+    function renderRecs() {
+      const box = panel.querySelector("#vibeResults");
+      const recs = recommendNext();
+      box.innerHTML = `<div class="vr-head">Recommended next</div>
+        <p class="vibe-empty-tip">Based on what you've studied — or type a vibe above to search all 117 prizes.</p>` +
+        recs.map(r => {
+          const d = byId[r.id];
+          return `<div class="vibe-hit" data-goto="${r.id}">
+            <div class="vh-top"><span class="vh-yr" style="color:${colorFor(d)}">${d.year}</span>
+            <span class="vh-laur">${(d.laureates || [])[0] || ""}</span></div>
+            <div class="vh-one">${esc(d.oneLiner || "")}</div>
+            <div class="vh-why">${esc(r.reason)}</div></div>`;
+        }).join("");
+      box.querySelectorAll(".vibe-hit").forEach(el => el.onclick = () => openDetail(el.dataset.goto));
+    }
+
+    function runVibe() {
+      const q = panel.querySelector("#vibeInput").value.trim();
+      const box = panel.querySelector("#vibeResults");
+      if (!q) { renderRecs(); return; }
+      const hits = rankByVibe(q);
+      if (!hits.length) {
+        box.innerHTML = `<div class="vr-head">No strong matches</div><p class="vibe-empty-tip">Try different words — topics, techniques, or what you'd build (e.g. “making mirror-image molecules”, “reading DNA”, “seeing atoms”).</p>`;
+        return;
+      }
+      box.innerHTML = `<div class="vr-head"><span>${hits.length} matches, best first</span></div>` +
+        hits.map(h => {
+          const d = h.prize, isNew = !Store.isStudied(d.id);
+          return `<div class="vibe-hit" data-goto="${d.id}">
+            <div class="vh-top"><span class="vh-yr" style="color:${colorFor(d)}">${d.year}</span>
+            <span class="vh-laur">${(d.laureates || [])[0] || ""}</span>${isNew ? '<span class="vh-new">new</span>' : ''}</div>
+            <div class="vh-one">${esc(d.oneLiner || "")}</div>
+            <div class="vh-why">↳ ${esc(whyText(h.hits))}</div></div>`;
+        }).join("") +
+        `<button class="btn vibe-path-btn" id="vibePath">🧭 Make these a path on the graph</button>`;
+      box.querySelectorAll(".vibe-hit").forEach(el => el.onclick = () => openDetail(el.dataset.goto));
+      box.querySelector("#vibePath").onclick = () => {
+        const ordered = hits.map(h => h.prize).sort((a, b) => a.year - b.year);
+        focusTrailObj({
+          id: "vibe", color: "#f4c95d",
+          name: "Your path: " + (q.length > 38 ? q.slice(0, 36) + "…" : q),
+          steps: ordered.map(p => ({ id: p.id, why: "Matched your search." }))
+        });
+      };
+    }
+  }
+
   // ---------- keyboard ----------
   document.addEventListener("keydown", e => {
     if (!reviewOverlay.hidden) {
@@ -11352,6 +11595,7 @@ window.NOBEL_TRAIL_INTRO =
     }
     renderRail();
     wireHeader();
+    wireFinder();
     buildGraph();
     updateProgress();
     updateDue();
