@@ -21,35 +21,37 @@
     --world: #f472b6;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
   body {
     background: var(--bg);
     color: var(--text);
     font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
   header {
     text-align: center;
-    padding: 48px 20px 24px;
+    padding: 18px 20px 10px;
     background: radial-gradient(ellipse at top, #1f2937 0%, var(--bg) 70%);
+    flex: 0 0 auto;
   }
   header h1 {
-    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-size: clamp(1.2rem, 3vw, 1.9rem);
     background: linear-gradient(90deg, #f0b429, #ef4444, #60a5fa);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
-  header p { color: var(--muted); max-width: 640px; margin: 0 auto; }
+  header p { color: var(--muted); max-width: 760px; margin: 0 auto; font-size: 0.82rem; }
 
   .controls {
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    flex: 0 0 auto;
     background: rgba(13, 17, 23, 0.92);
-    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
-    padding: 14px 20px;
+    padding: 10px 16px;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -60,10 +62,10 @@
     border: 1px solid var(--line);
     background: var(--panel);
     color: var(--text);
-    padding: 6px 14px;
+    padding: 5px 13px;
     border-radius: 999px;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     transition: all 0.18s ease;
     user-select: none;
   }
@@ -85,120 +87,163 @@
     border: 1px solid var(--line);
     border-radius: 8px;
     color: var(--text);
-    padding: 7px 12px;
-    width: 200px;
-    font-size: 0.85rem;
+    padding: 6px 12px;
+    width: 190px;
+    font-size: 0.82rem;
   }
   #search:focus { outline: none; border-color: var(--science); }
 
-  .stats { text-align: center; color: var(--muted); font-size: 0.8rem; padding: 10px; }
-
-  /* era jump bar */
-  .jumpbar {
+  .meta {
+    flex: 0 0 auto;
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 6px;
-    padding: 8px 16px 0;
+    justify-content: center;
+    align-items: center;
+    gap: 6px 14px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    padding: 6px 16px;
   }
-  .jumpbar a {
+  .meta a {
     color: var(--muted);
     text-decoration: none;
-    font-size: 0.75rem;
     border-bottom: 1px dotted var(--line);
+    cursor: pointer;
   }
-  .jumpbar a:hover { color: var(--text); }
+  .meta a:hover { color: var(--text); }
 
-  .timeline {
-    max-width: 880px;
-    margin: 30px auto 80px;
+  /* ===== horizontal timeline ===== */
+  .tl-wrap {
+    flex: 1 1 auto;
+    overflow-x: auto;
+    overflow-y: hidden;
     position: relative;
-    padding: 0 16px;
+    cursor: grab;
+    scrollbar-color: var(--line) var(--bg);
   }
+  .tl-wrap.dragging { cursor: grabbing; user-select: none; }
+  .timeline {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    position: relative;
+    padding: 0 60px;
+    width: max-content;
+  }
+  /* the horizontal spine */
   .timeline::before {
     content: "";
     position: absolute;
-    left: 50%;
-    top: 0; bottom: 0;
-    width: 2px;
-    background: linear-gradient(var(--line), var(--line));
-    transform: translateX(-50%);
+    left: 0; right: 0;
+    top: 50%;
+    height: 2px;
+    background: var(--line);
+    transform: translateY(-1px);
   }
   .era-label {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
     position: relative;
-    text-align: center;
-    margin: 48px 0 24px;
     z-index: 2;
   }
   .era-label span {
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 999px;
-    padding: 6px 18px;
-    font-size: 0.8rem;
+    padding: 6px 16px;
+    font-size: 0.74rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
+    white-space: nowrap;
   }
   .event {
+    flex: 0 0 auto;
+    width: 300px;
     position: relative;
-    width: 50%;
-    padding: 0 36px 28px;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 12px;
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateX(30px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
   }
-  .event.visible { opacity: 1; transform: translateY(0); }
-  .event.left { left: 0; text-align: right; }
-  .event.right { left: 50%; text-align: left; }
+  .event.visible { opacity: 1; transform: translateX(0); }
+  /* top events sit above the line, bottom events below */
+  .event.top { justify-content: flex-end; height: 50%; }
+  .event.bottom { justify-content: flex-start; height: 50%; align-self: flex-end; }
   .event .node {
     position: absolute;
-    top: 8px;
+    left: 50%;
     width: 14px; height: 14px;
     border-radius: 50%;
     background: var(--c);
     box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--c);
+    transform: translateX(-50%);
+    z-index: 2;
   }
-  .event.left .node { right: -7px; }
-  .event.right .node { left: -7px; }
+  .event.top .node { bottom: -8px; }
+  .event.bottom .node { top: -8px; }
+  /* connector stem from card to node */
+  .event::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    background: var(--line);
+    transform: translateX(-50%);
+  }
+  .event.top::after { bottom: 0; height: 14px; }
+  .event.bottom::after { top: 0; height: 14px; }
   .event .year {
     font-weight: 700;
     color: var(--c);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     letter-spacing: 0.04em;
+    text-align: center;
   }
+  .event.top .year { order: 2; margin-top: 6px; }
+  .event.bottom .year { margin-bottom: 6px; }
   .card {
-    display: inline-block;
-    text-align: left;
     background: var(--panel);
     border: 1px solid var(--line);
-    border-left: 3px solid var(--c);
     border-radius: 10px;
-    padding: 12px 16px;
-    margin-top: 6px;
+    padding: 12px 14px;
     cursor: pointer;
-    max-width: 100%;
     transition: transform 0.18s ease, border-color 0.18s ease;
+    overflow: hidden;
   }
+  .event.top .card { border-bottom: 3px solid var(--c); order: 1; }
+  .event.bottom .card { border-top: 3px solid var(--c); }
   .card:hover { transform: scale(1.02); border-color: var(--c); }
-  .card h3 { font-size: 1rem; margin-bottom: 2px; }
-  .card .tag { font-size: 0.7rem; color: var(--c); text-transform: uppercase; letter-spacing: 0.08em; }
+  .card h3 { font-size: 0.95rem; margin-bottom: 2px; }
+  .card .tag { font-size: 0.68rem; color: var(--c); text-transform: uppercase; letter-spacing: 0.08em; }
   .card .detail {
     color: var(--muted);
-    font-size: 0.86rem;
+    font-size: 0.82rem;
     max-height: 0;
-    overflow: hidden;
+    overflow-y: auto;
     transition: max-height 0.35s ease, margin-top 0.35s ease;
   }
-  .card.open .detail { max-height: 300px; margin-top: 8px; }
+  .card.open .detail { max-height: 26vh; margin-top: 8px; }
   .hidden { display: none !important; }
 
-  footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 24px; border-top: 1px solid var(--line); }
+  .hint {
+    flex: 0 0 auto;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.72rem;
+    padding: 6px;
+    border-top: 1px solid var(--line);
+  }
 
-  @media (max-width: 680px) {
-    .timeline::before { left: 14px; }
-    .event, .event.left, .event.right { width: 100%; left: 0; text-align: left; padding: 0 8px 24px 44px; }
-    .event.left .node, .event.right .node { left: 8px; right: auto; }
+  /* narrow screens: keep horizontal but smaller cards */
+  @media (max-width: 560px) {
+    .event { width: 240px; }
+    header p { display: none; }
   }
 </style>
 </head>
@@ -206,7 +251,7 @@
 
 <header>
   <h1>From Alexander to AI</h1>
-  <p>An interactive journey through 4,500 years — from the Great Pyramid through the conquerors of the ancient Mediterranean, the life of Jesus, the Mughal arrival in India, the gears of the Antikythera mechanism, and the revolutions of science and industry. World milestones are woven in for a sense of scale. Click any card to expand. Filter by era or search below.</p>
+  <p>An interactive journey through 4,500 years — from the Great Pyramid through the conquerors of the ancient Mediterranean, the life of Jesus, the Mughal arrival in India, the gears of the Antikythera mechanism, and the revolutions of science and industry. Scroll right to move forward in time. Click any card to expand.</p>
 </header>
 
 <div class="controls">
@@ -222,11 +267,16 @@
   <input id="search" type="text" placeholder="Search events…">
 </div>
 
-<div class="stats"><span id="count"></span> events shown</div>
-<div class="jumpbar" id="jumpbar"></div>
-<div class="timeline" id="timeline"></div>
+<div class="meta">
+  <span><span id="count"></span> events</span>
+  <span id="jumpbar"></span>
+</div>
 
-<footer>Built as a single self-contained HTML file — no libraries, no network needed. Dates for ancient events follow standard scholarly consensus.</footer>
+<div class="tl-wrap" id="wrap">
+  <div class="timeline" id="timeline"></div>
+</div>
+
+<div class="hint">Scroll, swipe, or click-and-drag to travel through time · mouse wheel works too · click a card for the full story</div>
 
 <script>
 const EVENTS = [
@@ -319,6 +369,7 @@ const ERAS = [
   { before: 1543, label: "The Scientific Revolution & Beyond" },
 ];
 
+const wrap = document.getElementById("wrap");
 const tl = document.getElementById("timeline");
 const sorted = [...EVENTS].sort((a, b) => a.y - b.y);
 const colors = {
@@ -335,7 +386,7 @@ const catNames = {
 
 let side = 0;
 let eraIdx = 0;
-sorted.forEach((e, i) => {
+sorted.forEach((e) => {
   while (eraIdx < ERAS.length && e.y >= ERAS[eraIdx].before) {
     const lbl = document.createElement("div");
     lbl.className = "era-label";
@@ -345,7 +396,7 @@ sorted.forEach((e, i) => {
     eraIdx++;
   }
   const div = document.createElement("div");
-  div.className = "event " + (side++ % 2 === 0 ? "left" : "right");
+  div.className = "event " + (side++ % 2 === 0 ? "top" : "bottom");
   div.dataset.cat = e.cat;
   div.dataset.text = (e.title + " " + e.detail + " " + e.year).toLowerCase();
   div.style.setProperty("--c", colors[e.cat]);
@@ -360,21 +411,58 @@ sorted.forEach((e, i) => {
   tl.appendChild(div);
 });
 
-// era jump links
+// era jump links — horizontal scroll to the label
 document.getElementById("jumpbar").innerHTML =
-  ERAS.map((e, i) => `<a href="#era-${i}">${e.label}</a>`).join(" · ");
+  ERAS.map((e, i) => `<a data-era="era-${i}">${e.label}</a>`).join(" · ");
+document.getElementById("jumpbar").addEventListener("click", (ev) => {
+  const a = ev.target.closest("a[data-era]");
+  if (a) document.getElementById(a.dataset.era)
+    .scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+});
 
 // expand/collapse
 tl.addEventListener("click", (ev) => {
   const card = ev.target.closest(".card");
-  if (card) card.classList.toggle("open");
+  if (card && !wrap.classList.contains("dragged")) card.classList.toggle("open");
 });
 
-// scroll-in animation
+// slide-in animation as events scroll into view horizontally
 const obs = new IntersectionObserver((entries) => {
   entries.forEach((en) => { if (en.isIntersecting) en.target.classList.add("visible"); });
-}, { threshold: 0.12 });
+}, { root: wrap, threshold: 0.1 });
 document.querySelectorAll(".event").forEach((el) => obs.observe(el));
+
+// vertical mouse wheel scrolls the timeline horizontally
+wrap.addEventListener("wheel", (ev) => {
+  if (Math.abs(ev.deltaY) > Math.abs(ev.deltaX)) {
+    ev.preventDefault();
+    wrap.scrollLeft += ev.deltaY;
+  }
+}, { passive: false });
+
+// click-and-drag to pan
+let dragStartX = 0, dragStartScroll = 0, dragging = false, moved = false;
+wrap.addEventListener("pointerdown", (ev) => {
+  dragging = true; moved = false;
+  dragStartX = ev.clientX;
+  dragStartScroll = wrap.scrollLeft;
+  wrap.classList.add("dragging");
+});
+window.addEventListener("pointermove", (ev) => {
+  if (!dragging) return;
+  const dx = ev.clientX - dragStartX;
+  if (Math.abs(dx) > 5) moved = true;
+  wrap.scrollLeft = dragStartScroll - dx;
+});
+window.addEventListener("pointerup", () => {
+  dragging = false;
+  wrap.classList.remove("dragging");
+  // suppress the click that follows a drag so cards don't toggle
+  if (moved) {
+    wrap.classList.add("dragged");
+    setTimeout(() => wrap.classList.remove("dragged"), 50);
+  }
+});
 
 // filtering
 const chips = [...document.querySelectorAll(".chip")];
@@ -384,13 +472,21 @@ const searchBox = document.getElementById("search");
 function applyFilter() {
   const q = searchBox.value.trim().toLowerCase();
   let shown = 0;
+  let s = 0;
   document.querySelectorAll(".event").forEach((el) => {
     const ok = active.has(el.dataset.cat) && (!q || el.dataset.text.includes(q));
     el.classList.toggle("hidden", !ok);
-    if (ok) { shown++; el.classList.add("visible"); }
+    if (ok) {
+      shown++;
+      el.classList.add("visible");
+      // re-alternate top/bottom among visible events so spacing stays even
+      el.classList.toggle("top", s % 2 === 0);
+      el.classList.toggle("bottom", s % 2 !== 0);
+      s++;
+    }
   });
   document.getElementById("count").textContent = shown;
-  // hide era labels with no visible events before next label
+  // hide era labels with no visible events before the next label
   const nodes = [...tl.children];
   nodes.forEach((n, i) => {
     if (!n.classList.contains("era-label")) return;
