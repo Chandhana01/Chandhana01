@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nobel Atlas — Ultralearn Chemistry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+<div id="app">
+  <!-- Top bar -->
+  <header id="topbar">
+    <div class="brand">
+      <span class="logo">⚗</span>
+      <div class="brand-text">
+        <h1>Nobel Atlas</h1>
+        <p class="tagline">Ultralearn chemistry through every Nobel Prize, 1901&rarr;now</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <div class="progress-pill" id="progressPill" title="Prizes you've added notes or flashcards to">
+        <span id="progressFilled">0</span>/<span id="progressTotal">0</span> studied
+      </div>
+      <button class="btn" id="reviewBtn" title="Review flashcards due across all prizes">
+        🎴 Review <span class="badge" id="dueBadge">0</span>
+      </button>
+      <button class="btn ghost" id="exportBtn" title="Export your notes &amp; flashcards">Export</button>
+      <button class="btn ghost" id="importBtn" title="Import your notes &amp; flashcards">Import</button>
+      <input type="file" id="importFile" accept="application/json" hidden />
+      <button class="btn ghost" id="helpBtn" title="How to use this">?</button>
+    </div>
+  </header>
+
+  <div id="main">
+    <!-- Left rail: filters / legend -->
+    <aside id="rail">
+      <div class="rail-section">
+        <input type="search" id="searchBox" placeholder="Search laureate, topic, tag…" autocomplete="off" />
+      </div>
+
+      <div class="rail-section">
+        <h3>Engagement</h3>
+        <label class="radio"><input type="radio" name="engage" value="all" checked /> All prizes</label>
+        <label class="radio"><input type="radio" name="engage" value="studied" /> ✦ Has my notes</label>
+        <label class="radio"><input type="radio" name="engage" value="empty" /> ○ Not started</label>
+        <label class="radio"><input type="radio" name="engage" value="due" /> 🎴 Cards due</label>
+      </div>
+
+      <div class="rail-section">
+        <h3>Subfields <button class="mini-link" id="subAll">all</button></h3>
+        <div id="subfieldFilters" class="chk-list"></div>
+      </div>
+
+      <div class="rail-section">
+        <h3>Categories <button class="mini-link" id="catAll">all</button></h3>
+        <div id="categoryFilters" class="chk-list"></div>
+      </div>
+
+      <div class="rail-section">
+        <h3>Tags</h3>
+        <div id="tagCloud" class="tag-cloud"></div>
+      </div>
+
+      <div class="rail-section legend">
+        <h3>How to read the graph</h3>
+        <p><span class="legend-dot pale"></span> Pale = not studied yet</p>
+        <p><span class="legend-dot bright"></span> Bright = your notes are filling in</p>
+        <p>Color = subfield. Lines = related work. Drag to rearrange, scroll to zoom.</p>
+      </div>
+    </aside>
+
+    <!-- Graph canvas -->
+    <section id="graphWrap">
+      <canvas id="graph"></canvas>
+      <div id="graphHint" class="graph-hint">Click any node to enter its world →</div>
+      <div class="graph-controls">
+        <button class="btn ghost sm" id="zoomIn">+</button>
+        <button class="btn ghost sm" id="zoomOut">−</button>
+        <button class="btn ghost sm" id="zoomFit">fit</button>
+      </div>
+      <div id="hoverCard" class="hover-card" hidden></div>
+    </section>
+
+    <!-- Detail drawer -->
+    <section id="detail" class="detail collapsed" aria-live="polite"></section>
+  </div>
+</div>
+
+<!-- Review overlay -->
+<div id="reviewOverlay" class="overlay" hidden></div>
+<!-- Help overlay -->
+<div id="helpOverlay" class="overlay" hidden></div>
+
+<script src="data/prizes.js"></script>
+<script src="src/store.js"></script>
+<script src="src/graph.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>
