@@ -10,11 +10,18 @@
     return `rgb(${r},${g},${bl})`;
   }
 
+  const THEMES = {
+    light: { pale: "#c2cad6", link: "rgba(70,90,120,.16)", linkHot: "rgba(201,138,27,.6)", ring: "rgba(40,55,75,.5)", label: "rgba(40,50,65,.82)", labelHover: "#101722", offTrail: "#d6dbe3" },
+    dark: { pale: "#3a4150", link: "rgba(120,140,165,.10)", linkHot: "rgba(244,201,93,.5)", ring: "rgba(255,255,255,.55)", label: "rgba(231,236,243,.75)", labelHover: "#ffffff", offTrail: "#2a313d" }
+  };
+
   class Graph {
     constructor(canvas, opts) {
       this.canvas = canvas;
       this.ctx = canvas.getContext("2d");
       this.opts = opts || {};
+      this.col = THEMES.light;
+      this.mode = "cluster";
       this.nodes = [];
       this.links = [];
       this.byId = {};
@@ -52,6 +59,7 @@
           vx: 0, vy: 0
         }, n);
       });
+      this.nodes.forEach(n => { if (n.year == null && n.prize) n.year = n.prize.year; });
       this.byId = {};
       this.nodes.forEach(n => this.byId[n.id] = n);
       this.links = links.filter(l => this.byId[l.source] && this.byId[l.target])
@@ -67,6 +75,50 @@
     }
 
     reheat() { this.alpha = Math.max(this.alpha, 0.6); }
+
+    setTheme(name) { this.col = THEMES[name] || THEMES.light; }
+
+    setMode(mode) {
+      this.mode = mode;
+      if (mode === "timeline") this._computeTimeline();
+      this.alpha = 1;
+      setTimeout(() => this.fit(), 250);
+    }
+
+    _computeTimeline() {
+      const vis = this.nodes;
+      const years = vis.map(n => n.year).filter(Boolean);
+      const minY = Math.min.apply(null, years), maxY = Math.max.apply(null, years);
+      const mid = (minY + maxY) / 2;
+      const lanes = this.clusterKeys || [];
+      const nLanes = Math.max(1, lanes.length);
+      this._tl = { mid, minY, maxY, lanes, nLanes, sx: 18, sy: 88 };
+      vis.forEach(n => {
+        const lane = lanes.indexOf(n.cluster);
+        n.tx = ((n.year || mid) - mid) * 18;
+        n.ty = (lane - (nLanes - 1) / 2) * 88;
+      });
+    }
+    _drawTimelineAxis() {
+      const ctx = this.ctx, t = this._tl; if (!t) return;
+      // decade gridlines + year ticks
+      ctx.strokeStyle = this.col.link; ctx.lineWidth = 1;
+      ctx.fillStyle = this.col.label; ctx.font = "11px -apple-system, sans-serif"; ctx.textAlign = "center";
+      const start = Math.ceil(t.minY / 10) * 10;
+      for (let y = start; y <= t.maxY; y += 10) {
+        const x = ((y - t.mid) * t.sx) * this.scale + this.offset.x;
+        ctx.beginPath(); ctx.moveTo(x, 44); ctx.lineTo(x, this.H - 26); ctx.stroke();
+        ctx.fillText(String(y), x, this.H - 10);
+      }
+      // lane labels (left, screen-fixed)
+      ctx.textAlign = "left"; ctx.font = "700 11px -apple-system, sans-serif";
+      t.lanes.forEach((name, i) => {
+        const wy = (i - (t.nLanes - 1) / 2) * t.sy;
+        const y = wy * this.scale + this.offset.y;
+        ctx.fillStyle = this.opts.laneColor ? this.opts.laneColor(name) : this.col.label;
+        ctx.fillText(name, 8, y + 4);
+      });
+    }
 
     setTrail(orderedIds, color) {
       this.trail = orderedIds && orderedIds.length ? orderedIds.slice() : null;
@@ -89,36 +141,55 @@
       const nodes = this.nodes;
       const visible = nodes.filter(n => n.visible !== false);
       const k = this.alpha;
-      // repulsion (O(n^2), fine for ~125 nodes)
-      for (let i = 0; i < visible.length; i++) {
-        const a = visible[i];
-        for (let j = i + 1; j < visible.length; j++) {
-          const b = visible[j];
-          let dx = a.x - b.x, dy = a.y - b.y;
-          let d2 = dx * dx + dy * dy || 0.01;
-          if (d2 > 90000) continue;
-          const d = Math.sqrt(d2);
-          const force = (3400 / d2);
-          const fx = (dx / d) * force, fy = (dy / d) * force;
+
+      if (this.mode === "timeline") {
+        // light vertical-only repulsion so same-year nodes don't stack, then pull to (year, lane)
+        for (let i = 0; i < visible.length; i++) {
+          const a = visible[i];
+          for (let j = i + 1; j < visible.length; j++) {
+            const b = visible[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const d2 = dx * dx + dy * dy || 0.01;
+            if (d2 > 4000) continue;
+            const d = Math.sqrt(d2), force = 600 / d2;
+            const fy = (dy / d) * force, fx = (dx / d) * force * 0.15;
+            a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
+          }
+        }
+        for (const n of visible) {
+          if (n.tx == null) this._computeTimeline();
+          n.vx += (n.tx - n.x) * 0.08; n.vy += (n.ty - n.y) * 0.06;
+        }
+      } else {
+        // repulsion (O(n^2), fine for ~125 nodes)
+        for (let i = 0; i < visible.length; i++) {
+          const a = visible[i];
+          for (let j = i + 1; j < visible.length; j++) {
+            const b = visible[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const d2 = dx * dx + dy * dy || 0.01;
+            if (d2 > 90000) continue;
+            const d = Math.sqrt(d2), force = 3400 / d2;
+            const fx = (dx / d) * force, fy = (dy / d) * force;
+            a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
+          }
+        }
+        // springs
+        for (const l of this.links) {
+          const a = l.s, b = l.t;
+          if (a.visible === false || b.visible === false) continue;
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const d = Math.sqrt(dx * dx + dy * dy) || 0.01;
+          const f = (d - 95) * 0.012;
+          const fx = (dx / d) * f, fy = (dy / d) * f;
           a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
         }
-      }
-      // springs
-      for (const l of this.links) {
-        const a = l.s, b = l.t;
-        if (a.visible === false || b.visible === false) continue;
-        let dx = b.x - a.x, dy = b.y - a.y;
-        let d = Math.sqrt(dx * dx + dy * dy) || 0.01;
-        const target = 95;
-        const f = (d - target) * 0.012;
-        const fx = (dx / d) * f, fy = (dy / d) * f;
-        a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
-      }
-      // cluster gravity + global centering
-      for (const n of visible) {
-        const c = this.clusterCenters[n.cluster];
-        if (c) { n.vx += (c.x - n.x) * 0.009; n.vy += (c.y - n.y) * 0.009; }
-        n.vx += (0 - n.x) * 0.0012; n.vy += (0 - n.y) * 0.0012;
+        // cluster gravity + global centering
+        for (const n of visible) {
+          const c = this.clusterCenters[n.cluster];
+          if (c) { n.vx += (c.x - n.x) * 0.009; n.vy += (c.y - n.y) * 0.009; }
+          n.vx += (0 - n.x) * 0.0012; n.vy += (0 - n.y) * 0.0012;
+        }
       }
       // integrate
       for (const n of visible) {
@@ -142,13 +213,16 @@
       ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
       ctx.clearRect(0, 0, this.W, this.H);
 
+      if (this.mode === "timeline") this._drawTimelineAxis();
+
       // links
       ctx.lineWidth = 1;
       for (const l of this.links) {
         if (l.s.visible === false || l.t.visible === false) continue;
         const a = this._toScreen(l.s), b = this._toScreen(l.t);
         const hot = this.hovered && (l.s === this.hovered || l.t === this.hovered);
-        ctx.strokeStyle = hot ? "rgba(244,201,93,.5)" : "rgba(120,140,165,.10)";
+        if (this.mode === "timeline" && !hot) continue;     // hide the web in timeline view
+        ctx.strokeStyle = hot ? this.col.linkHot : this.col.link;
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       }
 
@@ -172,10 +246,10 @@
         const p = this._toScreen(n);
         const fill = this.opts.fillFn ? this.opts.fillFn(n) : 0;       // 0..1 engagement
         let r = this.nodeRadius(n) * this.scale * (0.85 + fill * 0.4);
-        const base = "#3a4150";                                        // pale/dull
+        const base = this.col.pale;                                    // pale/dull
         let col = mix(base, n.color, 0.25 + fill * 0.75);
         const isHover = n === this.hovered;
-        if (offTrail) { col = "#2a313d"; r *= 0.7; }                   // dim non-trail
+        if (offTrail) { col = this.col.offTrail; r *= 0.7; }           // dim non-trail
         if (!offTrail && (fill > 0.05 || isHover)) {
           ctx.shadowColor = n.color; ctx.shadowBlur = (6 + fill * 16) * (isHover ? 1.6 : 1);
         } else ctx.shadowBlur = 0;
@@ -183,8 +257,8 @@
         ctx.fillStyle = col; ctx.fill();
         ctx.shadowBlur = 0;
         // ring for studied
-        if (!offTrail && fill > 0.05) { ctx.lineWidth = 1.5; ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.stroke(); }
-        if (isHover) { ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke(); }
+        if (!offTrail && fill > 0.05) { ctx.lineWidth = 1.5; ctx.strokeStyle = this.col.ring; ctx.stroke(); }
+        if (isHover) { ctx.lineWidth = 2; ctx.strokeStyle = this.col.labelHover; ctx.stroke(); }
 
         // trail step number badge
         if (this.trailSet && !offTrail) {
@@ -193,9 +267,9 @@
           ctx.fillText(String(step), p.x, p.y - r - 6);
         }
 
-        // labels when zoomed in or hovered
-        if ((this.scale > 1.15 || isHover) && !offTrail) {
-          ctx.fillStyle = isHover ? "#fff" : "rgba(231,236,243,.75)";
+        // labels when zoomed in or hovered (always show year axis labels in timeline)
+        if ((this.scale > 1.15 || isHover || this.mode === "timeline") && !offTrail) {
+          ctx.fillStyle = isHover ? this.col.labelHover : this.col.label;
           ctx.font = `${isHover ? "700 " : ""}${11}px -apple-system, sans-serif`;
           ctx.textAlign = "center";
           const label = n.label.length > 22 && !isHover ? n.label.slice(0, 20) + "…" : n.label;

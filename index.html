@@ -22,13 +22,16 @@
       <div class="progress-pill" id="progressPill" title="Prizes you've added notes or flashcards to">
         <span id="progressFilled">0</span>/<span id="progressTotal">0</span> studied
       </div>
+      <button class="btn" id="timelineBtn" title="Toggle timeline vs cluster layout">📅 Timeline</button>
       <button class="btn" id="trailsBtn" title="Guided learning paths in prerequisite order">🧭 Trails</button>
+      <button class="btn" id="cardsBtn" title="All your flashcards in one place">🗂 Cards</button>
       <button class="btn" id="reviewBtn" title="Review flashcards due across all prizes">
         🎴 Review <span class="badge" id="dueBadge">0</span>
       </button>
       <button class="btn ghost" id="exportBtn" title="Export your notes &amp; flashcards">Export</button>
       <button class="btn ghost" id="importBtn" title="Import your notes &amp; flashcards">Import</button>
       <input type="file" id="importFile" accept="application/json" hidden />
+      <button class="btn ghost" id="themeBtn" title="Toggle light / dark">🌙</button>
       <button class="btn ghost" id="helpBtn" title="How to use this">?</button>
     </div>
   </header>
@@ -95,6 +98,10 @@
 
 <!-- Trails overlay -->
 <div id="trailsOverlay" class="overlay" hidden></div>
+<!-- Cards (global deck) overlay -->
+<div id="cardsOverlay" class="overlay" hidden></div>
+<!-- Learn mode (distraction-free) -->
+<div id="learnMode" hidden></div>
 <!-- Review overlay -->
 <div id="reviewOverlay" class="overlay" hidden></div>
 <!-- Help overlay -->

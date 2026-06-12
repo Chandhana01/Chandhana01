@@ -7,7 +7,11 @@ An interactive study lab for learning chemistry through **every Nobel Prize in C
 
 - **Obsidian-style knowledge graph** of all 117 awarded prizes, colored by subfield, linked by related work, and clustered by field.
 - Nodes start **pale**; they **brighten and grow** as you add notes, flashcards, or mark jargon as understood — your knowledge web lighting up.
-- Click any prize to enter its **world**: exact scope of what won, history, the chemistry *logic* (mechanisms, not just facts), key concepts, a **jargon decoder** with "I understand this" toggles, primary sources, "could you rebuild it yourself?" resources, a personal **lab notebook**, and **flashcards** with cross-prize spaced-repetition review.
+- Click any prize to enter its **world**: exact scope of what won, history, the chemistry *logic* (mechanisms, not just facts), key concepts, a **jargon decoder** with "I understand this" toggles, primary sources, "could you rebuild it yourself?" resources, a personal **lab notebook**, and **flashcards**.
+- **Learn mode** — distraction-free, one idea at a time (scope → history → chemistry → concepts → jargon → self-test → mastery checkpoint).
+- **Mastery levels** (Skimmed → Understand → Can explain → Can rebuild) drive how brightly each node glows.
+- **One flashcard deck** for everything — create/tag/link cards and study them together with spaced-repetition Review.
+- **Timeline toggle** for the chronology, and **light/dark** themes.
 - **Learning Trails** (🧭) — curated, ordered prerequisite paths through each thread (Foundations, Bonding, Structure, Synthesis, Life, Nucleus, Materials), with a "why this comes next" note on every step. Focus a trail to draw its numbered path on the graph; inside any prize a banner shows where it sits and what comes before/after.
 - Filter by engagement (studied / not started / cards due), subfield, category, and tags, or search anything.
 

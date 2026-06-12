@@ -6,31 +6,59 @@
 <title>Nobel Atlas — Ultralearn Chemistry</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <style>
-:root {
+:root, :root[data-theme="light"] {
+  --bg: #f4f6fa;
+  --bg-2: #eaeef4;
+  --bg-3: #e1e7ef;
+  --panel: #ffffff;
+  --line: #d7dde7;
+  --line-strong: #c2cad6;
+  --pale: #c2cad6;            /* unstudied node base */
+  --text: #1a2230;
+  --text-dim: #56616f;
+  --text-faint: #868f9d;
+  --accent: #c98a1b;
+  --accent-soft: #f4c95d;
+  --accent-2: #1f7fc9;
+  --good: #1f9d57;
+  --warn: #c07d16;
+  --bad: #cf423c;
+  --radius: 12px;
+  --shadow: 0 10px 34px rgba(25,40,65,.14);
+  --hint-bg: rgba(255,255,255,.82);
+  --on-accent: #2a1d02;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --page-glow: radial-gradient(1200px 600px at 70% -10%, #ffffff 0%, var(--bg) 55%);
+}
+:root[data-theme="dark"] {
   --bg: #0e1116;
   --bg-2: #151a22;
   --bg-3: #1b212b;
   --panel: #161c25;
   --line: #283140;
+  --line-strong: #3a4757;
+  --pale: #3a4150;
   --text: #e7ecf3;
   --text-dim: #9aa7b8;
   --text-faint: #6b7888;
   --accent: #f4c95d;
+  --accent-soft: #f4c95d;
   --accent-2: #6cc5ff;
   --good: #5fd38a;
   --warn: #ffb454;
   --bad: #ff7a7a;
-  --radius: 12px;
   --shadow: 0 8px 30px rgba(0,0,0,.45);
-  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --hint-bg: rgba(15,19,26,.7);
+  --on-accent: #1a1406;
+  --page-glow: radial-gradient(1200px 600px at 70% -10%, #1a2230 0%, var(--bg) 55%);
 }
 
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
 body {
   font-family: var(--sans);
-  background: radial-gradient(1200px 600px at 70% -10%, #1a2230 0%, var(--bg) 55%);
+  background: var(--page-glow);
   color: var(--text);
   overflow: hidden;
 }
@@ -43,13 +71,13 @@ a { color: var(--accent-2); }
 #topbar {
   display: flex; align-items: center; justify-content: space-between;
   padding: 10px 18px; border-bottom: 1px solid var(--line);
-  background: rgba(15,19,26,.85); backdrop-filter: blur(8px); z-index: 30;
+  background: var(--panel); z-index: 30;
 }
 .brand { display: flex; align-items: center; gap: 12px; }
 .logo {
   font-size: 26px; width: 42px; height: 42px; display: grid; place-items: center;
-  background: linear-gradient(135deg, #2a3344, #1a212c); border-radius: 12px;
-  border: 1px solid var(--line); box-shadow: inset 0 0 12px rgba(244,201,93,.12);
+  background: var(--bg-3); border-radius: 12px;
+  border: 1px solid var(--line);
 }
 .brand-text h1 { margin: 0; font-size: 18px; letter-spacing: .3px; }
 .tagline { margin: 0; font-size: 12px; color: var(--text-dim); }
@@ -60,13 +88,14 @@ a { color: var(--accent-2); }
   padding: 8px 12px; border-radius: 9px; font-size: 13px; font-weight: 600;
   display: inline-flex; align-items: center; gap: 7px; transition: .15s;
 }
-.btn:hover { background: #232c39; border-color: #38465a; }
+.btn:hover { background: var(--bg-2); border-color: var(--line-strong); }
 .btn.ghost { background: transparent; }
 .btn.sm { padding: 5px 9px; font-size: 13px; }
-.btn.primary { background: var(--accent); color: #1a1406; border-color: var(--accent); }
+.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
 .btn.primary:hover { filter: brightness(1.07); }
+.btn.active-mode { background: var(--accent); color: #fff; border-color: var(--accent); }
 .badge {
-  background: var(--accent); color: #1a1406; border-radius: 20px; padding: 1px 7px;
+  background: var(--accent); color: #fff; border-radius: 20px; padding: 1px 7px;
   font-size: 11px; font-weight: 800; min-width: 18px; text-align: center;
 }
 .progress-pill {
@@ -90,34 +119,34 @@ a { color: var(--accent-2); }
 }
 .mini-link { background: none; border: none; color: var(--accent-2); font-size: 11px; padding: 0; }
 #searchBox {
-  width: 100%; padding: 9px 11px; background: var(--bg); border: 1px solid var(--line);
+  width: 100%; padding: 9px 11px; background: var(--panel); border: 1px solid var(--line);
   border-radius: 9px; color: var(--text); font-size: 13px;
 }
 #searchBox:focus { outline: none; border-color: var(--accent-2); }
 
 /* Study by vibe */
 .vibe-toggle {
-  width: 100%; margin-top: 8px; background: linear-gradient(135deg, rgba(108,197,255,.12), rgba(244,201,93,.10));
+  width: 100%; margin-top: 8px; background: var(--bg-3);
   border: 1px solid var(--line); color: var(--text); padding: 8px 11px; border-radius: 9px;
   font-size: 13px; font-weight: 600; text-align: left; display: flex; align-items: center; justify-content: space-between;
 }
 .vibe-toggle::after { content: "▾"; color: var(--text-faint); }
 .vibe-toggle[aria-expanded="true"]::after { content: "▴"; }
-.vibe-toggle:hover { border-color: #3a4757; }
+.vibe-toggle:hover { border-color: var(--line-strong); }
 .vibe-panel { margin-top: 10px; }
 .vibe-panel textarea {
-  width: 100%; min-height: 64px; background: var(--bg); border: 1px solid var(--line); border-radius: 9px;
+  width: 100%; min-height: 64px; background: var(--panel); border: 1px solid var(--line); border-radius: 9px;
   color: var(--text); padding: 9px 11px; font-size: 13px; font-family: var(--sans); line-height: 1.45; resize: vertical;
 }
 .vibe-panel textarea:focus { outline: none; border-color: var(--accent-2); }
 .vibe-examples { display: flex; flex-wrap: wrap; gap: 4px; margin: 7px 0; }
 .vibe-ex { font-size: 10.5px; padding: 2px 7px; border-radius: 12px; background: var(--bg-3); border: 1px solid var(--line); color: var(--text-dim); cursor: pointer; }
-.vibe-ex:hover { color: var(--text); border-color: #3a4757; }
+.vibe-ex:hover { color: var(--text); border-color: var(--line-strong); }
 .vibe-go { width: 100%; margin-top: 4px; justify-content: center; }
 .vibe-results { margin-top: 12px; }
 .vibe-results .vr-head { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-faint); margin: 10px 0 7px; display:flex; justify-content:space-between; align-items:center; }
-.vibe-hit { background: var(--bg-3); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; cursor: pointer; }
-.vibe-hit:hover { border-color: #3a4757; }
+.vibe-hit { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; cursor: pointer; }
+.vibe-hit:hover { border-color: var(--line-strong); }
 .vibe-hit .vh-top { display: flex; align-items: baseline; gap: 6px; }
 .vibe-hit .vh-yr { font-weight: 800; font-size: 12px; }
 .vibe-hit .vh-laur { font-size: 12.5px; color: var(--text); font-weight: 600; }
@@ -141,12 +170,12 @@ a { color: var(--accent-2); }
   font-size: 11px; padding: 3px 8px; border-radius: 20px; background: var(--bg-3);
   border: 1px solid var(--line); color: var(--text-dim); cursor: pointer;
 }
-.tag:hover { color: var(--text); border-color: #3a4757; }
-.tag.active { background: var(--accent-2); color: #04121c; border-color: var(--accent-2); font-weight: 700; }
+.tag:hover { color: var(--text); border-color: var(--line-strong); }
+.tag.active { background: var(--accent-2); color: #fff; border-color: var(--accent-2); font-weight: 700; }
 
 .legend p { font-size: 12px; color: var(--text-dim); margin: 6px 0; line-height: 1.4; }
 .legend-dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
-.legend-dot.pale { background: #3a4150; }
+.legend-dot.pale { background: var(--pale); }
 .legend-dot.bright { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 
 /* ---------- Graph ---------- */
@@ -155,7 +184,7 @@ a { color: var(--accent-2); }
 #graph:active { cursor: grabbing; }
 .graph-hint {
   position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
-  font-size: 12px; color: var(--text-faint); background: rgba(15,19,26,.7);
+  font-size: 12px; color: var(--text-dim); background: var(--hint-bg);
   padding: 6px 12px; border-radius: 20px; border: 1px solid var(--line); pointer-events: none;
 }
 .graph-controls { position: absolute; bottom: 16px; left: 16px; display: flex; flex-direction: column; gap: 6px; }
@@ -175,7 +204,7 @@ a { color: var(--accent-2); }
 .detail {
   width: 560px; flex-shrink: 0; background: var(--panel); border-left: 1px solid var(--line);
   display: flex; flex-direction: column; transition: margin-right .28s ease, width .28s;
-  box-shadow: -12px 0 40px rgba(0,0,0,.35);
+  box-shadow: -12px 0 40px rgba(30,45,70,.12);
 }
 .detail.collapsed { margin-right: -561px; }
 .detail-head { padding: 18px 20px 12px; border-bottom: 1px solid var(--line); position: relative; }
@@ -186,9 +215,21 @@ a { color: var(--accent-2); }
 .detail-laur { color: var(--text-dim); font-size: 14px; }
 .detail-motivation {
   margin-top: 10px; font-size: 13px; font-style: italic; color: var(--text);
-  border-left: 3px solid var(--accent); padding: 6px 0 6px 12px; background: rgba(244,201,93,.04);
+  border-left: 3px solid var(--accent); padding: 6px 0 6px 12px; background: var(--bg-2);
   line-height: 1.5;
 }
+
+/* mastery control */
+.mastery { margin-top: 12px; }
+.mastery-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-faint); margin-bottom: 6px; }
+.mastery-steps { display: flex; gap: 4px; }
+.mastery-steps button {
+  flex: 1; font-size: 11px; font-weight: 600; padding: 6px 4px; border-radius: 7px;
+  border: 1px solid var(--line); background: var(--bg-3); color: var(--text-dim);
+}
+.mastery-steps button:hover { border-color: var(--line-strong); color: var(--text); }
+.mastery-steps button.on { background: var(--good); color: #fff; border-color: var(--good); }
+
 .detail-trailctx { margin-top: 10px; font-size: 12.5px; color: var(--text-dim); background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 11px; }
 .detail-trailctx + .detail-trailctx { margin-top: 6px; }
 .detail-trailctx .tctx-name { color: var(--text); text-decoration: none; }
@@ -212,16 +253,14 @@ a { color: var(--accent-2); }
 .detail-body { flex: 1; overflow-y: auto; padding: 18px 20px 60px; }
 .detail-body h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-faint); margin: 22px 0 8px; }
 .detail-body h4:first-child { margin-top: 4px; }
-.detail-body p { line-height: 1.62; font-size: 14.5px; color: #dce3ec; margin: 0 0 12px; }
+.detail-body p { line-height: 1.62; font-size: 14.5px; color: var(--text); margin: 0 0 12px; }
 .detail-body .lead { font-size: 15px; }
 
 .concept-item { background: var(--bg-2); border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px; margin-bottom: 8px; }
 .concept-item b { color: var(--accent); }
 
 .jargon-list { display: flex; flex-direction: column; gap: 8px; }
-.jargon-item {
-  background: var(--bg-2); border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px;
-}
+.jargon-item { background: var(--bg-2); border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px; }
 .jargon-term { font-weight: 700; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .jargon-term .term-name { color: var(--accent-2); }
 .jargon-def { font-size: 13.5px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
@@ -231,10 +270,10 @@ a { color: var(--accent-2); }
   font-size: 11px; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--line);
   background: var(--bg-3); color: var(--text-dim); white-space: nowrap;
 }
-.jargon-item.known .know-toggle { background: var(--good); color: #04210f; border-color: var(--good); }
+.jargon-item.known .know-toggle { background: var(--good); color: #fff; border-color: var(--good); }
 
 .resource { display: block; background: var(--bg-2); border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px; margin-bottom: 8px; text-decoration: none; }
-.resource:hover { border-color: #3a4757; }
+.resource:hover { border-color: var(--line-strong); }
 .resource .r-title { color: var(--accent-2); font-weight: 600; font-size: 14px; }
 .resource .r-note { color: var(--text-dim); font-size: 12.5px; margin-top: 3px; }
 
@@ -244,7 +283,7 @@ a { color: var(--accent-2); }
 
 /* Notes */
 .notes-area {
-  width: 100%; min-height: 240px; background: var(--bg); border: 1px solid var(--line);
+  width: 100%; min-height: 240px; background: var(--panel); border: 1px solid var(--line);
   border-radius: 10px; color: var(--text); padding: 12px; font-size: 14px; line-height: 1.6;
   font-family: var(--sans); resize: vertical;
 }
@@ -254,25 +293,26 @@ a { color: var(--accent-2); }
 /* Flashcards in detail */
 .fc-add { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
 .fc-add input, .fc-add textarea {
-  background: var(--bg); border: 1px solid var(--line); border-radius: 8px; color: var(--text);
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px; color: var(--text);
   padding: 9px 11px; font-size: 13.5px; font-family: var(--sans);
 }
 .fc-add input:focus, .fc-add textarea:focus { outline: none; border-color: var(--accent-2); }
-.fc-card {
-  background: var(--bg-2); border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; margin-bottom: 8px;
-}
+.fc-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; margin-bottom: 8px; }
 .fc-card .fc-front { font-weight: 600; font-size: 14px; }
 .fc-card .fc-back { color: var(--text-dim); font-size: 13.5px; margin-top: 5px; line-height: 1.5; }
 .fc-card .fc-meta { display:flex; justify-content: space-between; align-items:center; margin-top: 8px; font-size: 11px; color: var(--text-faint); }
+.fc-card .fc-tags { display:flex; gap:4px; flex-wrap:wrap; margin-top:6px; }
+.fc-card .fc-tag { font-size:10px; padding:1px 6px; border-radius:10px; background:var(--bg-3); color:var(--text-dim); }
 .fc-del { background: none; border: none; color: var(--text-faint); font-size: 12px; }
 .fc-del:hover { color: var(--bad); }
 .fc-seed-note { font-size: 12px; color: var(--text-faint); margin-bottom: 8px; }
 
-/* ---------- Overlays (review / help) ---------- */
+/* ---------- Overlays ---------- */
 .overlay {
-  position: fixed; inset: 0; z-index: 100; background: rgba(6,9,13,.82);
+  position: fixed; inset: 0; z-index: 100; background: rgba(20,30,45,.55);
   display: flex; align-items: center; justify-content: center; padding: 24px;
 }
+:root[data-theme="dark"] .overlay { background: rgba(6,9,13,.82); }
 .overlay[hidden] { display: none; }
 .modal {
   background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
@@ -294,12 +334,21 @@ a { color: var(--accent-2); }
 .review-actions { display: flex; gap: 8px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
 .review-progress { text-align: center; color: var(--text-faint); font-size: 12px; margin-top: 14px; }
 .grade-btn { flex: 1; min-width: 90px; padding: 11px; border-radius: 10px; border: 1px solid var(--line); font-weight: 700; font-size: 13px; }
-.grade-again { background: rgba(255,122,122,.15); color: var(--bad); border-color: rgba(255,122,122,.35); }
-.grade-hard { background: rgba(255,180,84,.15); color: var(--warn); border-color: rgba(255,180,84,.35); }
-.grade-good { background: rgba(95,211,138,.15); color: var(--good); border-color: rgba(95,211,138,.35); }
-.grade-easy { background: rgba(108,197,255,.15); color: var(--accent-2); border-color: rgba(108,197,255,.35); }
+.grade-again { background: rgba(207,66,60,.12); color: var(--bad); border-color: rgba(207,66,60,.35); }
+.grade-hard { background: rgba(192,125,22,.14); color: var(--warn); border-color: rgba(192,125,22,.35); }
+.grade-good { background: rgba(31,157,87,.13); color: var(--good); border-color: rgba(31,157,87,.35); }
+.grade-easy { background: rgba(31,127,201,.12); color: var(--accent-2); border-color: rgba(31,127,201,.35); }
 
-/* Trails */
+.empty-state { text-align: center; color: var(--text-dim); padding: 30px; }
+.empty-state .big { font-size: 40px; margin-bottom: 10px; }
+
+.help-content h3 { color: var(--accent); margin: 16px 0 6px; font-size: 14px; }
+.help-content p, .help-content li { font-size: 14px; line-height: 1.6; color: var(--text-dim); }
+.help-content ul { padding-left: 20px; }
+
+.kbd { font-family: var(--mono); font-size: 11px; background: var(--bg-3); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; }
+
+/* ---------- Trails ---------- */
 .trails-layout { display: flex; gap: 0; max-height: 70vh; }
 .trails-list { width: 230px; flex-shrink: 0; border-right: 1px solid var(--line); overflow-y: auto; padding-right: 4px; }
 .trail-pick { padding: 11px 12px; border-radius: 9px; cursor: pointer; margin-bottom: 4px; border: 1px solid transparent; }
@@ -308,19 +357,18 @@ a { color: var(--accent-2); }
 .trail-pick .tp-name { font-weight: 700; font-size: 13.5px; display: flex; align-items: center; gap: 7px; }
 .trail-pick .tp-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
 .trail-pick .tp-meta { font-size: 11px; color: var(--text-faint); margin-top: 4px; }
-.tp-bar { height: 4px; border-radius: 3px; background: var(--bg); margin-top: 6px; overflow: hidden; }
+.tp-bar { height: 4px; border-radius: 3px; background: var(--bg-3); margin-top: 6px; overflow: hidden; }
 .tp-bar i { display: block; height: 100%; }
 .trail-detail { flex: 1; overflow-y: auto; padding: 0 4px 0 18px; }
 .trail-detail h3 { margin: 0 0 6px; font-size: 16px; }
 .trail-blurb { font-size: 13.5px; color: var(--text-dim); line-height: 1.55; margin-bottom: 14px; }
 .trail-step { display: flex; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); cursor: pointer; }
-.trail-step:hover .ts-title { color: #fff; }
-.ts-num { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; font-weight: 800; font-size: 12px; color: #04121c; }
+.trail-step:hover .ts-title { color: var(--accent); }
+.ts-num { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; font-weight: 800; font-size: 12px; color: #fff; }
 .ts-body { flex: 1; }
 .ts-title { font-weight: 600; font-size: 14px; }
 .ts-title .ts-done { color: var(--good); margin-left: 6px; font-size: 12px; }
 .ts-why { font-size: 12.5px; color: var(--text-dim); margin-top: 3px; line-height: 1.45; }
-.ts-conn { width: 2px; background: var(--line); margin: 0 12px; }
 .trail-actions { display: flex; gap: 8px; margin-bottom: 14px; }
 
 .trail-banner {
@@ -334,18 +382,52 @@ a { color: var(--accent-2); }
 .trail-banner .tb-nav { display: flex; gap: 5px; }
 .trail-banner button { border-radius: 18px; }
 
-.empty-state { text-align: center; color: var(--text-dim); padding: 30px; }
-.empty-state .big { font-size: 40px; margin-bottom: 10px; }
+/* ---------- Global cards (Study deck) ---------- */
+.cards-toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+.cards-toolbar input, .cards-toolbar select { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; color: var(--text); padding: 7px 10px; font-size: 13px; }
+.card-compose { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.card-compose .row { display: flex; gap: 8px; margin-bottom: 8px; }
+.card-compose input, .card-compose textarea, .card-compose select {
+  width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; color: var(--text);
+  padding: 9px 11px; font-size: 13.5px; font-family: var(--sans);
+}
+.card-compose textarea { min-height: 56px; resize: vertical; }
+.card-compose input:focus, .card-compose textarea:focus, .card-compose select:focus { outline: none; border-color: var(--accent-2); }
+.deck-stats { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+.deck-list { display: flex; flex-direction: column; gap: 8px; }
 
-.help-content h3 { color: var(--accent); margin: 16px 0 6px; font-size: 14px; }
-.help-content p, .help-content li { font-size: 14px; line-height: 1.6; color: var(--text-dim); }
-.help-content ul { padding-left: 20px; }
-
-.kbd { font-family: var(--mono); font-size: 11px; background: var(--bg-3); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; }
+/* ---------- Learn mode ---------- */
+#learnMode { position: fixed; inset: 0; z-index: 90; background: var(--bg); display: flex; flex-direction: column; }
+#learnMode[hidden] { display: none; }
+.learn-top { display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; border-bottom: 1px solid var(--line); }
+.learn-top .lt-meta { font-size: 13px; color: var(--text-dim); }
+.learn-top .lt-meta b { color: var(--text); }
+.learn-progress { height: 4px; background: var(--bg-3); }
+.learn-progress i { display: block; height: 100%; background: var(--accent); transition: width .25s; }
+.learn-stage { flex: 1; overflow-y: auto; display: flex; justify-content: center; }
+.learn-inner { max-width: 720px; width: 100%; padding: 40px 28px 80px; }
+.learn-kicker { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); font-weight: 700; }
+.learn-h { font-size: 26px; margin: 8px 0 18px; line-height: 1.2; }
+.learn-inner p { font-size: 17px; line-height: 1.7; color: var(--text); margin: 0 0 16px; }
+.learn-inner .muted { color: var(--text-dim); font-size: 15px; }
+.learn-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; box-shadow: var(--shadow); }
+.learn-card b { color: var(--accent); }
+.learn-jargon { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+.learn-jargon .lj-term { font-weight: 700; color: var(--accent-2); font-size: 16px; }
+.learn-jargon .lj-def { font-size: 15px; color: var(--text-dim); margin-top: 6px; line-height: 1.55; }
+.learn-bottom { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; border-top: 1px solid var(--line); background: var(--panel); }
+.learn-bottom .lb-mid { display: flex; gap: 6px; }
+.learn-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-strong); }
+.learn-dot.on { background: var(--accent); }
+.learn-flip { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 22px; text-align: center; cursor: pointer; margin-bottom: 12px; }
+.learn-flip .lf-q { font-size: 18px; font-weight: 600; }
+.learn-flip .lf-a { font-size: 16px; color: var(--text-dim); margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.learn-mastery-prompt { text-align:center; }
+.learn-mastery-prompt .lmp-row { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
 
 /* scrollbars */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-thumb { background: #2a3340; border-radius: 8px; border: 2px solid var(--bg-2); }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 8px; border: 2px solid var(--bg-2); }
 ::-webkit-scrollbar-track { background: transparent; }
 
 @media (max-width: 1100px) {
@@ -371,13 +453,16 @@ a { color: var(--accent-2); }
       <div class="progress-pill" id="progressPill" title="Prizes you've added notes or flashcards to">
         <span id="progressFilled">0</span>/<span id="progressTotal">0</span> studied
       </div>
+      <button class="btn" id="timelineBtn" title="Toggle timeline vs cluster layout">📅 Timeline</button>
       <button class="btn" id="trailsBtn" title="Guided learning paths in prerequisite order">🧭 Trails</button>
+      <button class="btn" id="cardsBtn" title="All your flashcards in one place">🗂 Cards</button>
       <button class="btn" id="reviewBtn" title="Review flashcards due across all prizes">
         🎴 Review <span class="badge" id="dueBadge">0</span>
       </button>
       <button class="btn ghost" id="exportBtn" title="Export your notes &amp; flashcards">Export</button>
       <button class="btn ghost" id="importBtn" title="Import your notes &amp; flashcards">Import</button>
       <input type="file" id="importFile" accept="application/json" hidden />
+      <button class="btn ghost" id="themeBtn" title="Toggle light / dark">🌙</button>
       <button class="btn ghost" id="helpBtn" title="How to use this">?</button>
     </div>
   </header>
@@ -444,6 +529,10 @@ a { color: var(--accent-2); }
 
 <!-- Trails overlay -->
 <div id="trailsOverlay" class="overlay" hidden></div>
+<!-- Cards (global deck) overlay -->
+<div id="cardsOverlay" class="overlay" hidden></div>
+<!-- Learn mode (distraction-free) -->
+<div id="learnMode" hidden></div>
 <!-- Review overlay -->
 <div id="reviewOverlay" class="overlay" hidden></div>
 <!-- Help overlay -->
@@ -10269,37 +10358,58 @@ window.NOBEL_TRAIL_INTRO =
   "If your goal is a modern Chemistry Nobel, the Life and Synthesis trails are where the most recent prizes cluster, " +
   "but Bonding and Structure give you the tools the others assume. A prize can sit on several trails — that overlap is the point.";
 
-/* store.js — local persistence for notes, flashcards, jargon "known" state.
-   Everything lives in localStorage so the page works fully offline with no server. */
+/* store.js — local persistence for notes, flashcards, jargon "known" state,
+   and per-prize mastery. Everything lives in localStorage so the page works
+   fully offline with no server.
+
+   Cards are stored as ONE flat deck (not nested per prize) so they can be
+   created, browsed, and studied all together. Each card optionally links to a
+   prize (prizeId) and carries free-text tags, so you can still filter "cards
+   from this prize" while studying the whole pile in one place. */
 (function () {
-  const KEY = "nobelAtlas.v1";
+  const KEY = "nobelAtlas.v2";
+  const OLD_KEY = "nobelAtlas.v1";
   const DAY = 86400000;
+
+  // mastery ladder
+  const MASTERY = ["Not started", "Skimmed", "Understand", "Can explain", "Can rebuild"];
+
+  function blank() { return { notes: {}, cards: [], known: {}, mastery: {}, theme: "light", meta: { created: Date.now() } }; }
+
+  function migrate(old) {
+    // v1 cards were { prizeId: [card,...] } — flatten to a single array
+    const s = blank();
+    s.notes = old.notes || {};
+    s.known = old.known || {};
+    s.meta = old.meta || { created: Date.now() };
+    if (Array.isArray(old.cards)) s.cards = old.cards;
+    else if (old.cards && typeof old.cards === "object") {
+      for (const pid in old.cards) (old.cards[pid] || []).forEach(c => s.cards.push(Object.assign({ prizeId: pid, tags: [] }, c)));
+    }
+    s.mastery = old.mastery || {};
+    return s;
+  }
 
   function load() {
     try {
       const raw = localStorage.getItem(KEY);
-      if (raw) return JSON.parse(raw);
+      if (raw) { const s = JSON.parse(raw); if (!s.cards) s.cards = []; if (!Array.isArray(s.cards)) s = migrate(s); return Object.assign(blank(), s); }
+      const oldRaw = localStorage.getItem(OLD_KEY);
+      if (oldRaw) return migrate(JSON.parse(oldRaw));
     } catch (e) { /* corrupted — start fresh */ }
-    return { notes: {}, cards: {}, known: {}, meta: { created: Date.now() } };
+    return blank();
   }
 
   let state = load();
-
-  function save() {
-    try { localStorage.setItem(KEY, JSON.stringify(state)); }
-    catch (e) { console.warn("Could not save (storage full?)", e); }
-  }
-
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { console.warn("save failed", e); } }
   function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
   const Store = {
+    MASTERY,
+
     /* ---- Notes ---- */
     getNote(prizeId) { return state.notes[prizeId] || ""; },
-    setNote(prizeId, text) {
-      if (text && text.trim()) state.notes[prizeId] = text;
-      else delete state.notes[prizeId];
-      save();
-    },
+    setNote(prizeId, text) { if (text && text.trim()) state.notes[prizeId] = text; else delete state.notes[prizeId]; save(); },
 
     /* ---- Jargon known ---- */
     isKnown(prizeId, term) { return !!(state.known[prizeId] && state.known[prizeId][term]); },
@@ -10311,45 +10421,48 @@ window.NOBEL_TRAIL_INTRO =
       save();
     },
 
-    /* ---- Flashcards ---- */
-    getCards(prizeId) { return (state.cards[prizeId] || []).slice(); },
-    addCard(prizeId, front, back, opts) {
+    /* ---- Mastery (0..4) ---- */
+    getMastery(prizeId) { return state.mastery[prizeId] || 0; },
+    setMastery(prizeId, level) {
+      level = Math.max(0, Math.min(4, level | 0));
+      if (level === 0) delete state.mastery[prizeId]; else state.mastery[prizeId] = level;
+      save();
+    },
+
+    /* ---- Flashcards (flat deck) ---- */
+    allCards() { return state.cards.slice(); },
+    getCards(prizeId) { return state.cards.filter(c => c.prizeId === prizeId); },
+    addCard(front, back, opts) {
       opts = opts || {};
-      state.cards[prizeId] = state.cards[prizeId] || [];
       const card = {
         id: uid(), front, back,
-        seed: !!opts.seed,                 // came from the dataset vs user-authored
-        ease: 2.5, interval: 0, reps: 0,
-        due: Date.now(),                   // due immediately
-        created: Date.now()
+        prizeId: opts.prizeId || null,
+        tags: (opts.tags || []).map(t => t.trim()).filter(Boolean),
+        seed: !!opts.seed,
+        ease: 2.5, interval: 0, reps: 0, due: Date.now(), created: Date.now()
       };
-      state.cards[prizeId].push(card);
-      save();
-      return card;
+      state.cards.push(card); save(); return card;
     },
-    deleteCard(prizeId, cardId) {
-      if (!state.cards[prizeId]) return;
-      state.cards[prizeId] = state.cards[prizeId].filter(c => c.id !== cardId);
-      if (state.cards[prizeId].length === 0) delete state.cards[prizeId];
-      save();
-    },
-    // Has the seed deck for this prize been imported yet?
-    hasSeeded(prizeId) {
-      return (state.cards[prizeId] || []).some(c => c.seed);
-    },
+    updateCard(id, fields) { const c = state.cards.find(x => x.id === id); if (c) { Object.assign(c, fields); if (fields.tags) c.tags = fields.tags.map(t => t.trim()).filter(Boolean); save(); } },
+    deleteCard(id) { state.cards = state.cards.filter(c => c.id !== id); save(); },
+
+    hasSeeded(prizeId) { return state.cards.some(c => c.prizeId === prizeId && c.seed); },
     seedCards(prizeId, pairs) {
       if (this.hasSeeded(prizeId)) return;
-      pairs.forEach(p => this.addCard(prizeId, p.front, p.back, { seed: true }));
+      pairs.forEach(p => this.addCard(p.front, p.back, { prizeId, seed: true, tags: [] }));
+    },
+
+    allTags() {
+      const m = {};
+      state.cards.forEach(c => (c.tags || []).forEach(t => m[t] = (m[t] || 0) + 1));
+      return m;
     },
 
     /* SM-2-ish scheduling. grade: 0 again, 1 hard, 2 good, 3 easy */
-    gradeCard(prizeId, cardId, grade) {
-      const list = state.cards[prizeId]; if (!list) return;
-      const c = list.find(x => x.id === cardId); if (!c) return;
-      if (grade === 0) {
-        c.reps = 0; c.interval = 0; c.ease = Math.max(1.3, c.ease - 0.2);
-        c.due = Date.now() + 60 * 1000; // ~1 min, effectively this session
-      } else {
+    gradeCard(id, grade) {
+      const c = state.cards.find(x => x.id === id); if (!c) return;
+      if (grade === 0) { c.reps = 0; c.interval = 0; c.ease = Math.max(1.3, c.ease - 0.2); c.due = Date.now() + 60000; }
+      else {
         c.reps += 1;
         if (grade === 1) { c.ease = Math.max(1.3, c.ease - 0.15); c.interval = Math.max(1, c.interval * 1.2 || 1); }
         else if (grade === 2) { c.interval = c.reps === 1 ? 1 : (c.reps === 2 ? 3 : Math.round(c.interval * c.ease)); }
@@ -10359,59 +10472,51 @@ window.NOBEL_TRAIL_INTRO =
       save();
     },
 
-    /* All cards due now, flattened with prize context */
-    dueCards() {
-      const now = Date.now(); const out = [];
-      for (const pid in state.cards) {
-        for (const c of state.cards[pid]) {
-          if (c.due <= now) out.push(Object.assign({ prizeId: pid }, c));
-        }
-      }
-      return out.sort((a, b) => a.due - b.due);
+    dueCards(filterFn) {
+      const now = Date.now();
+      return state.cards.filter(c => c.due <= now && (!filterFn || filterFn(c))).sort((a, b) => a.due - b.due);
     },
     dueCount() { return this.dueCards().length; },
 
-    /* ---- Engagement: is a prize "studied"? ---- */
+    /* ---- Engagement ---- */
     isStudied(prizeId) {
-      const hasNote = !!(state.notes[prizeId] && state.notes[prizeId].trim());
-      const userCards = (state.cards[prizeId] || []).some(c => !c.seed);
-      const known = !!state.known[prizeId];
-      return hasNote || userCards || known;
+      if (this.getMastery(prizeId) > 0) return true;
+      if ((state.notes[prizeId] || "").trim()) return true;
+      if (state.cards.some(c => c.prizeId === prizeId && !c.seed)) return true;
+      if (state.known[prizeId]) return true;
+      return false;
     },
-    // 0..1 fill score used to brighten nodes
+    // 0..1 fill score for node brightness — driven mostly by mastery level
     fillScore(prizeId, prize) {
-      let s = 0;
-      const note = (state.notes[prizeId] || "").trim();
-      if (note) s += Math.min(0.5, 0.18 + note.length / 1400);
-      const cards = state.cards[prizeId] || [];
-      const userCards = cards.filter(c => !c.seed).length;
-      s += Math.min(0.3, userCards * 0.1);
+      const m = this.getMastery(prizeId);
+      let s = m > 0 ? 0.2 + (m / 4) * 0.65 : 0;          // mastery is the main driver
+      if ((state.notes[prizeId] || "").trim()) s += 0.08;
+      const userCards = state.cards.filter(c => c.prizeId === prizeId && !c.seed).length;
+      s += Math.min(0.12, userCards * 0.05);
       const known = state.known[prizeId] ? Object.keys(state.known[prizeId]).length : 0;
       const totalJargon = prize && prize.deepDive && prize.deepDive.jargon ? prize.deepDive.jargon.length : 6;
-      if (known) s += Math.min(0.25, (known / Math.max(1, totalJargon)) * 0.25);
-      const reviewed = cards.filter(c => c.reps > 0).length;
-      s += Math.min(0.2, reviewed * 0.05);
+      if (known) s += Math.min(0.1, (known / Math.max(1, totalJargon)) * 0.1);
       return Math.min(1, s);
     },
     studiedCount() {
       const ids = new Set();
-      Object.keys(state.notes).forEach(id => { if ((state.notes[id]||"").trim()) ids.add(id); });
+      Object.keys(state.mastery).forEach(id => ids.add(id));
+      Object.keys(state.notes).forEach(id => { if ((state.notes[id] || "").trim()) ids.add(id); });
       Object.keys(state.known).forEach(id => ids.add(id));
-      for (const id in state.cards) if (state.cards[id].some(c => !c.seed)) ids.add(id);
+      state.cards.forEach(c => { if (c.prizeId && !c.seed) ids.add(c.prizeId); });
       return ids.size;
     },
+
+    /* ---- Theme ---- */
+    getTheme() { return state.theme || "light"; },
+    setTheme(t) { state.theme = t; save(); },
 
     /* ---- Import / export ---- */
     exportData() { return JSON.stringify(state, null, 2); },
     importData(json) {
       const incoming = JSON.parse(json);
       if (!incoming || typeof incoming !== "object") throw new Error("bad file");
-      state = {
-        notes: incoming.notes || {},
-        cards: incoming.cards || {},
-        known: incoming.known || {},
-        meta: incoming.meta || { created: Date.now() }
-      };
+      state = Array.isArray(incoming.cards) ? Object.assign(blank(), incoming) : migrate(incoming);
       save();
     }
   };
@@ -10431,11 +10536,18 @@ window.NOBEL_TRAIL_INTRO =
     return `rgb(${r},${g},${bl})`;
   }
 
+  const THEMES = {
+    light: { pale: "#c2cad6", link: "rgba(70,90,120,.16)", linkHot: "rgba(201,138,27,.6)", ring: "rgba(40,55,75,.5)", label: "rgba(40,50,65,.82)", labelHover: "#101722", offTrail: "#d6dbe3" },
+    dark: { pale: "#3a4150", link: "rgba(120,140,165,.10)", linkHot: "rgba(244,201,93,.5)", ring: "rgba(255,255,255,.55)", label: "rgba(231,236,243,.75)", labelHover: "#ffffff", offTrail: "#2a313d" }
+  };
+
   class Graph {
     constructor(canvas, opts) {
       this.canvas = canvas;
       this.ctx = canvas.getContext("2d");
       this.opts = opts || {};
+      this.col = THEMES.light;
+      this.mode = "cluster";
       this.nodes = [];
       this.links = [];
       this.byId = {};
@@ -10473,6 +10585,7 @@ window.NOBEL_TRAIL_INTRO =
           vx: 0, vy: 0
         }, n);
       });
+      this.nodes.forEach(n => { if (n.year == null && n.prize) n.year = n.prize.year; });
       this.byId = {};
       this.nodes.forEach(n => this.byId[n.id] = n);
       this.links = links.filter(l => this.byId[l.source] && this.byId[l.target])
@@ -10488,6 +10601,50 @@ window.NOBEL_TRAIL_INTRO =
     }
 
     reheat() { this.alpha = Math.max(this.alpha, 0.6); }
+
+    setTheme(name) { this.col = THEMES[name] || THEMES.light; }
+
+    setMode(mode) {
+      this.mode = mode;
+      if (mode === "timeline") this._computeTimeline();
+      this.alpha = 1;
+      setTimeout(() => this.fit(), 250);
+    }
+
+    _computeTimeline() {
+      const vis = this.nodes;
+      const years = vis.map(n => n.year).filter(Boolean);
+      const minY = Math.min.apply(null, years), maxY = Math.max.apply(null, years);
+      const mid = (minY + maxY) / 2;
+      const lanes = this.clusterKeys || [];
+      const nLanes = Math.max(1, lanes.length);
+      this._tl = { mid, minY, maxY, lanes, nLanes, sx: 18, sy: 88 };
+      vis.forEach(n => {
+        const lane = lanes.indexOf(n.cluster);
+        n.tx = ((n.year || mid) - mid) * 18;
+        n.ty = (lane - (nLanes - 1) / 2) * 88;
+      });
+    }
+    _drawTimelineAxis() {
+      const ctx = this.ctx, t = this._tl; if (!t) return;
+      // decade gridlines + year ticks
+      ctx.strokeStyle = this.col.link; ctx.lineWidth = 1;
+      ctx.fillStyle = this.col.label; ctx.font = "11px -apple-system, sans-serif"; ctx.textAlign = "center";
+      const start = Math.ceil(t.minY / 10) * 10;
+      for (let y = start; y <= t.maxY; y += 10) {
+        const x = ((y - t.mid) * t.sx) * this.scale + this.offset.x;
+        ctx.beginPath(); ctx.moveTo(x, 44); ctx.lineTo(x, this.H - 26); ctx.stroke();
+        ctx.fillText(String(y), x, this.H - 10);
+      }
+      // lane labels (left, screen-fixed)
+      ctx.textAlign = "left"; ctx.font = "700 11px -apple-system, sans-serif";
+      t.lanes.forEach((name, i) => {
+        const wy = (i - (t.nLanes - 1) / 2) * t.sy;
+        const y = wy * this.scale + this.offset.y;
+        ctx.fillStyle = this.opts.laneColor ? this.opts.laneColor(name) : this.col.label;
+        ctx.fillText(name, 8, y + 4);
+      });
+    }
 
     setTrail(orderedIds, color) {
       this.trail = orderedIds && orderedIds.length ? orderedIds.slice() : null;
@@ -10510,36 +10667,55 @@ window.NOBEL_TRAIL_INTRO =
       const nodes = this.nodes;
       const visible = nodes.filter(n => n.visible !== false);
       const k = this.alpha;
-      // repulsion (O(n^2), fine for ~125 nodes)
-      for (let i = 0; i < visible.length; i++) {
-        const a = visible[i];
-        for (let j = i + 1; j < visible.length; j++) {
-          const b = visible[j];
-          let dx = a.x - b.x, dy = a.y - b.y;
-          let d2 = dx * dx + dy * dy || 0.01;
-          if (d2 > 90000) continue;
-          const d = Math.sqrt(d2);
-          const force = (3400 / d2);
-          const fx = (dx / d) * force, fy = (dy / d) * force;
+
+      if (this.mode === "timeline") {
+        // light vertical-only repulsion so same-year nodes don't stack, then pull to (year, lane)
+        for (let i = 0; i < visible.length; i++) {
+          const a = visible[i];
+          for (let j = i + 1; j < visible.length; j++) {
+            const b = visible[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const d2 = dx * dx + dy * dy || 0.01;
+            if (d2 > 4000) continue;
+            const d = Math.sqrt(d2), force = 600 / d2;
+            const fy = (dy / d) * force, fx = (dx / d) * force * 0.15;
+            a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
+          }
+        }
+        for (const n of visible) {
+          if (n.tx == null) this._computeTimeline();
+          n.vx += (n.tx - n.x) * 0.08; n.vy += (n.ty - n.y) * 0.06;
+        }
+      } else {
+        // repulsion (O(n^2), fine for ~125 nodes)
+        for (let i = 0; i < visible.length; i++) {
+          const a = visible[i];
+          for (let j = i + 1; j < visible.length; j++) {
+            const b = visible[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const d2 = dx * dx + dy * dy || 0.01;
+            if (d2 > 90000) continue;
+            const d = Math.sqrt(d2), force = 3400 / d2;
+            const fx = (dx / d) * force, fy = (dy / d) * force;
+            a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
+          }
+        }
+        // springs
+        for (const l of this.links) {
+          const a = l.s, b = l.t;
+          if (a.visible === false || b.visible === false) continue;
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const d = Math.sqrt(dx * dx + dy * dy) || 0.01;
+          const f = (d - 95) * 0.012;
+          const fx = (dx / d) * f, fy = (dy / d) * f;
           a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
         }
-      }
-      // springs
-      for (const l of this.links) {
-        const a = l.s, b = l.t;
-        if (a.visible === false || b.visible === false) continue;
-        let dx = b.x - a.x, dy = b.y - a.y;
-        let d = Math.sqrt(dx * dx + dy * dy) || 0.01;
-        const target = 95;
-        const f = (d - target) * 0.012;
-        const fx = (dx / d) * f, fy = (dy / d) * f;
-        a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
-      }
-      // cluster gravity + global centering
-      for (const n of visible) {
-        const c = this.clusterCenters[n.cluster];
-        if (c) { n.vx += (c.x - n.x) * 0.009; n.vy += (c.y - n.y) * 0.009; }
-        n.vx += (0 - n.x) * 0.0012; n.vy += (0 - n.y) * 0.0012;
+        // cluster gravity + global centering
+        for (const n of visible) {
+          const c = this.clusterCenters[n.cluster];
+          if (c) { n.vx += (c.x - n.x) * 0.009; n.vy += (c.y - n.y) * 0.009; }
+          n.vx += (0 - n.x) * 0.0012; n.vy += (0 - n.y) * 0.0012;
+        }
       }
       // integrate
       for (const n of visible) {
@@ -10563,13 +10739,16 @@ window.NOBEL_TRAIL_INTRO =
       ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
       ctx.clearRect(0, 0, this.W, this.H);
 
+      if (this.mode === "timeline") this._drawTimelineAxis();
+
       // links
       ctx.lineWidth = 1;
       for (const l of this.links) {
         if (l.s.visible === false || l.t.visible === false) continue;
         const a = this._toScreen(l.s), b = this._toScreen(l.t);
         const hot = this.hovered && (l.s === this.hovered || l.t === this.hovered);
-        ctx.strokeStyle = hot ? "rgba(244,201,93,.5)" : "rgba(120,140,165,.10)";
+        if (this.mode === "timeline" && !hot) continue;     // hide the web in timeline view
+        ctx.strokeStyle = hot ? this.col.linkHot : this.col.link;
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       }
 
@@ -10593,10 +10772,10 @@ window.NOBEL_TRAIL_INTRO =
         const p = this._toScreen(n);
         const fill = this.opts.fillFn ? this.opts.fillFn(n) : 0;       // 0..1 engagement
         let r = this.nodeRadius(n) * this.scale * (0.85 + fill * 0.4);
-        const base = "#3a4150";                                        // pale/dull
+        const base = this.col.pale;                                    // pale/dull
         let col = mix(base, n.color, 0.25 + fill * 0.75);
         const isHover = n === this.hovered;
-        if (offTrail) { col = "#2a313d"; r *= 0.7; }                   // dim non-trail
+        if (offTrail) { col = this.col.offTrail; r *= 0.7; }           // dim non-trail
         if (!offTrail && (fill > 0.05 || isHover)) {
           ctx.shadowColor = n.color; ctx.shadowBlur = (6 + fill * 16) * (isHover ? 1.6 : 1);
         } else ctx.shadowBlur = 0;
@@ -10604,8 +10783,8 @@ window.NOBEL_TRAIL_INTRO =
         ctx.fillStyle = col; ctx.fill();
         ctx.shadowBlur = 0;
         // ring for studied
-        if (!offTrail && fill > 0.05) { ctx.lineWidth = 1.5; ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.stroke(); }
-        if (isHover) { ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke(); }
+        if (!offTrail && fill > 0.05) { ctx.lineWidth = 1.5; ctx.strokeStyle = this.col.ring; ctx.stroke(); }
+        if (isHover) { ctx.lineWidth = 2; ctx.strokeStyle = this.col.labelHover; ctx.stroke(); }
 
         // trail step number badge
         if (this.trailSet && !offTrail) {
@@ -10614,9 +10793,9 @@ window.NOBEL_TRAIL_INTRO =
           ctx.fillText(String(step), p.x, p.y - r - 6);
         }
 
-        // labels when zoomed in or hovered
-        if ((this.scale > 1.15 || isHover) && !offTrail) {
-          ctx.fillStyle = isHover ? "#fff" : "rgba(231,236,243,.75)";
+        // labels when zoomed in or hovered (always show year axis labels in timeline)
+        if ((this.scale > 1.15 || isHover || this.mode === "timeline") && !offTrail) {
+          ctx.fillStyle = isHover ? this.col.labelHover : this.col.label;
           ctx.font = `${isHover ? "700 " : ""}${11}px -apple-system, sans-serif`;
           ctx.textAlign = "center";
           const label = n.label.length > 22 && !isHover ? n.label.slice(0, 20) + "…" : n.label;
@@ -10813,6 +10992,7 @@ window.NOBEL_TRAIL_INTRO =
 
   const graph = new Graph(document.getElementById("graph"), {
     fillFn: n => (fillCache[n.id] != null ? fillCache[n.id] : (fillCache[n.id] = Store.fillScore(n.id, byId[n.id]))),
+    laneColor: name => SUBFIELD_COLOR[name] || SUBFIELD_COLOR.Other,
     onClick: n => openDetail(n.id),
     onHover: (n, pos) => showHover(n, pos)
   });
@@ -10960,6 +11140,13 @@ window.NOBEL_TRAIL_INTRO =
           <span class="chip subfield" style="color:${colorFor(d)};border-color:${colorFor(d)}">${d.subfield}</span>
           ${(d.categories || []).map(c => `<span class="chip cat">${CATEGORY_LABEL[c] || c}</span>`).join("")}
         </div>
+        <div class="mastery">
+          <div class="mastery-label">My mastery — sets how bright this node glows</div>
+          <div class="mastery-steps" id="masterySteps">
+            ${[1, 2, 3, 4].map(l => `<button data-l="${l}" class="${Store.getMastery(d.id) >= l ? "on" : ""}">${Store.MASTERY[l]}</button>`).join("")}
+          </div>
+        </div>
+        <button class="btn primary" id="learnBtn" style="margin-top:12px;width:100%;justify-content:center">▶ Learn this (focused mode)</button>
       </div>
       <div class="detail-tabs">
         ${tabBtn("overview", "Overview")}
@@ -10973,6 +11160,14 @@ window.NOBEL_TRAIL_INTRO =
       <div class="detail-body" id="detailBody"></div>`;
     detail.querySelector(".detail-close").onclick = closeDetail;
     detail.querySelectorAll(".tab").forEach(t => t.onclick = () => { currentTab = t.dataset.tab; renderDetail(); });
+    const ms = detail.querySelector("#masterySteps");
+    if (ms) ms.querySelectorAll("button").forEach(b => b.onclick = () => {
+      const lvl = parseInt(b.dataset.l);
+      Store.setMastery(d.id, Store.getMastery(d.id) === lvl ? lvl - 1 : lvl);  // click current level to step down
+      refreshFill(d.id); updateProgress(); renderDetail();
+    });
+    const lb = detail.querySelector("#learnBtn");
+    if (lb) lb.onclick = () => startLearn(d.id);
     renderTab(d, dd);
   }
 
@@ -11088,14 +11283,14 @@ window.NOBEL_TRAIL_INTRO =
       const f = document.getElementById("fcFront").value.trim();
       const b = document.getElementById("fcBack").value.trim();
       if (!f || !b) return;
-      Store.addCard(d.id, f, b);
+      Store.addCard(f, b, { prizeId: d.id, tags: [d.subfield, String(d.year)] });
       refreshFill(d.id); updateProgress(); updateDue(); renderTab(d, dd);
     };
     if (canSeed) document.getElementById("fcSeed").onclick = () => {
       Store.seedCards(d.id, seeds); updateDue(); renderTab(d, dd);
     };
     body.querySelectorAll(".fc-card").forEach(el => {
-      el.querySelector(".fc-del").onclick = () => { Store.deleteCard(d.id, el.dataset.id); refreshFill(d.id); updateProgress(); updateDue(); renderTab(d, dd); };
+      el.querySelector(".fc-del").onclick = () => { Store.deleteCard(el.dataset.id); refreshFill(d.id); updateProgress(); updateDue(); renderTab(d, dd); };
     });
   }
 
@@ -11110,8 +11305,9 @@ window.NOBEL_TRAIL_INTRO =
   // ---------- Review overlay (cross-prize SRS) ----------
   const reviewOverlay = document.getElementById("reviewOverlay");
   let reviewQueue = [], reviewIdx = 0, reviewShown = false;
-  function startReview() {
-    reviewQueue = Store.dueCards();
+  function startReview() { runReviewQueue(Store.dueCards()); }
+  function runReviewQueue(cards) {
+    reviewQueue = cards.slice();
     reviewIdx = 0;
     if (!reviewQueue.length) {
       reviewOverlay.innerHTML = `<div class="modal"><div class="modal-head"><h2>🎴 Review</h2><button class="modal-close">×</button></div>
@@ -11163,8 +11359,8 @@ window.NOBEL_TRAIL_INTRO =
   }
   function grade(g) {
     const c = reviewQueue[reviewIdx];
-    Store.gradeCard(c.prizeId, c.id, g);
-    refreshFill(c.prizeId);
+    Store.gradeCard(c.id, g);
+    if (c.prizeId) refreshFill(c.prizeId);
     reviewIdx++; renderReview();
   }
 
@@ -11181,7 +11377,21 @@ window.NOBEL_TRAIL_INTRO =
 
   function wireHeader() {
     document.getElementById("trailsBtn").onclick = () => openTrails();
+    document.getElementById("cardsBtn").onclick = openCards;
     document.getElementById("reviewBtn").onclick = startReview;
+    document.getElementById("themeBtn").onclick = () => {
+      const next = Store.getTheme() === "dark" ? "light" : "dark";
+      Store.setTheme(next); applyTheme(next);
+    };
+    let timelineOn = false;
+    document.getElementById("timelineBtn").onclick = (e) => {
+      timelineOn = !timelineOn;
+      graph.setMode(timelineOn ? "timeline" : "cluster");
+      e.currentTarget.classList.toggle("active-mode", timelineOn);
+      document.getElementById("graphHint").textContent = timelineOn
+        ? "Timeline: left→right by year, lanes by subfield · click a node"
+        : "Click any node to enter its world →";
+    };
     document.getElementById("exportBtn").onclick = () => {
       const blob = new Blob([Store.exportData()], { type: "application/json" });
       const a = document.createElement("a");
@@ -11232,6 +11442,14 @@ window.NOBEL_TRAIL_INTRO =
           <li><b>My notes</b> — your lab notebook, saved locally in this browser.</li>
           <li><b>Flashcards</b> — write your own or import starter decks; review them across all prizes with the 🎴 button (spaced repetition).</li>
         </ul>
+        <h3>Learn mode (▶ inside a prize)</h3>
+        <p>Distraction-free studying: just you and one idea at a time. It walks you through scope → history → the chemistry → key concepts → each jargon word → a quick self-test → a mastery checkpoint, with Back/Next (or ← →). This is the "actually learn it" path, as opposed to the explore-the-map view.</p>
+        <h3>Mastery levels</h3>
+        <p>Inside each prize, rate yourself: <b>Skimmed → Understand → Can explain → Can rebuild</b>. This is what brightens the node (pale = untouched, glowing = mastered) and feeds "recommended next". Click your current level again to step back down.</p>
+        <h3>Flashcards in one place (🗂 Cards)</h3>
+        <p>All your cards live in a single deck. Create a card anywhere, optionally tag it or link it to a prize, then browse/search/filter and "Study these" as one pile — real studying, not buried inside one prize. The 🎴 Review button runs spaced repetition over everything due.</p>
+        <h3>Timeline (📅) &amp; theme (🌙/☀️)</h3>
+        <p>Toggle <b>Timeline</b> to lay prizes left→right by year in subfield lanes — the chronology at a glance. Toggle the theme for light or dark.</p>
         <h3>Learning Trails (🧭 top bar)</h3>
         <p>Not sure what order to learn in? Trails are curated, ordered prerequisite paths through each thread (Foundations, Bonding, Structure, Synthesis, Life, Nucleus, Materials). Each step says <i>why it comes next</i>. "Focus this trail" draws the numbered path on the graph and dims everything else; use <b>prev/next</b> to walk it. Inside any prize, a banner shows which trail(s) it sits on and what comes before/after.</p>
         <h3>Study by vibe (✨ under search)</h3>
@@ -11561,8 +11779,190 @@ window.NOBEL_TRAIL_INTRO =
     }
   }
 
+  // ---------- Global Cards deck ----------
+  const cardsOverlay = document.getElementById("cardsOverlay");
+  function openCards() {
+    let q = "", tagF = "", dueOnly = false;
+    const prizeOpts = ['<option value="">— general (no prize) —</option>']
+      .concat(DATA.slice().sort((a, b) => a.year - b.year).map(d => `<option value="${d.id}">${d.year} · ${(d.laureates || [])[0] || ""}</option>`)).join("");
+    function render() {
+      const all = Store.allCards();
+      const tags = Store.allTags();
+      let list = all;
+      if (dueOnly) list = list.filter(c => c.due <= Date.now());
+      if (tagF) list = list.filter(c => (c.tags || []).includes(tagF));
+      if (q) { const s = q.toLowerCase(); list = list.filter(c => (c.front + " " + c.back + " " + (c.tags || []).join(" ")).toLowerCase().includes(s)); }
+      list = list.slice().sort((a, b) => a.due - b.due);
+      cardsOverlay.innerHTML = `<div class="modal" style="max-width:720px">
+        <div class="modal-head"><h2>🗂 Flashcards <span style="color:var(--text-faint);font-weight:400">${all.length} total · ${Store.dueCount()} due</span></h2><button class="modal-close">×</button></div>
+        <div class="modal-body">
+          <div class="card-compose">
+            <div class="row"><input id="ccFront" placeholder="Front (question / prompt)…"></div>
+            <div class="row"><textarea id="ccBack" placeholder="Back (answer)…"></textarea></div>
+            <div class="row">
+              <input id="ccTags" placeholder="tags (comma separated) — e.g. mechanisms, organic">
+              <select id="ccPrize" title="Optionally link to a prize">${prizeOpts}</select>
+            </div>
+            <button class="btn primary" id="ccAdd" style="width:100%;justify-content:center">+ Add to deck</button>
+          </div>
+          <div class="cards-toolbar">
+            <input id="ckSearch" placeholder="Search deck…" value="${esc(q)}" style="flex:1;min-width:140px">
+            <select id="ckTag"><option value="">all tags</option>${Object.keys(tags).sort().map(t => `<option value="${esc(t)}" ${t === tagF ? "selected" : ""}>${esc(t)} (${tags[t]})</option>`).join("")}</select>
+            <label class="radio" style="white-space:nowrap"><input type="checkbox" id="ckDue" ${dueOnly ? "checked" : ""}> due only</label>
+            <button class="btn primary" id="ckStudy">Study these (${list.length})</button>
+          </div>
+          <div class="deck-list">${list.length ? list.map(c => {
+            const d = c.prizeId && byId[c.prizeId];
+            return `<div class="fc-card" data-id="${c.id}">
+              <div class="fc-front">${esc(c.front)}</div>
+              <div class="fc-back">${esc(c.back)}</div>
+              <div class="fc-tags">${(c.tags || []).map(t => `<span class="fc-tag">${esc(t)}</span>`).join("")}${d ? `<span class="fc-tag" data-goto="${d.id}" style="cursor:pointer;color:var(--accent-2)">↗ ${d.year} ${(d.laureates || [])[0] || ""}</span>` : ""}</div>
+              <div class="fc-meta"><span>${c.seed ? "starter" : "yours"} · ${c.reps ? "seen " + c.reps + "×" : "new"} · due ${dueLabel(c.due)}</span><button class="fc-del">delete</button></div>
+            </div>`;
+          }).join("") : '<div class="empty-state"><p>No cards yet. Add one above — they all live here so you can study them together.</p></div>'}</div>
+        </div></div>`;
+      cardsOverlay.querySelector(".modal-close").onclick = () => cardsOverlay.hidden = true;
+      cardsOverlay.querySelector("#ccAdd").onclick = () => {
+        const f = cardsOverlay.querySelector("#ccFront").value.trim();
+        const b = cardsOverlay.querySelector("#ccBack").value.trim();
+        if (!f || !b) return;
+        const tg = cardsOverlay.querySelector("#ccTags").value.split(",").map(s => s.trim()).filter(Boolean);
+        const pid = cardsOverlay.querySelector("#ccPrize").value || null;
+        Store.addCard(f, b, { prizeId: pid, tags: tg });
+        if (pid) refreshFill(pid);
+        updateProgress(); updateDue(); render();
+      };
+      cardsOverlay.querySelector("#ckSearch").oninput = e => { q = e.target.value; render(); };
+      cardsOverlay.querySelector("#ckTag").onchange = e => { tagF = e.target.value; render(); };
+      cardsOverlay.querySelector("#ckDue").onchange = e => { dueOnly = e.target.checked; render(); };
+      cardsOverlay.querySelector("#ckStudy").onclick = () => { if (list.length) { cardsOverlay.hidden = true; runReviewQueue(list); } };
+      cardsOverlay.querySelectorAll(".fc-del").forEach(el => el.onclick = e => {
+        const id = e.target.closest(".fc-card").dataset.id;
+        const card = Store.allCards().find(c => c.id === id);
+        Store.deleteCard(id); if (card && card.prizeId) refreshFill(card.prizeId);
+        updateProgress(); updateDue(); render();
+      });
+      cardsOverlay.querySelectorAll("[data-goto]").forEach(el => el.onclick = () => { cardsOverlay.hidden = true; openDetail(el.dataset.goto); });
+    }
+    render();
+    cardsOverlay.hidden = false;
+  }
+
+  // ---------- Learn mode (distraction-free, one thing at a time) ----------
+  const learnEl = document.getElementById("learnMode");
+  let learn = null;
+  function startLearn(prizeId) {
+    const d = byId[prizeId]; if (!d) return;
+    const dd = d.deepDive || {};
+    const stages = [{ kind: "intro" }];
+    if (dd.scope) stages.push({ kind: "text", kicker: "Scope", title: "What actually won the prize", body: dd.scope });
+    if (dd.history) stages.push({ kind: "text", kicker: "History", title: "How we got here", body: dd.history });
+    if (dd.chemistryLogic) stages.push({ kind: "text", kicker: "The chemistry", title: "The logic, mechanistically", body: dd.chemistryLogic });
+    if (dd.concepts && dd.concepts.length) stages.push({ kind: "concepts", title: "The ideas to hold onto", items: dd.concepts });
+    (dd.jargon || []).forEach(j => stages.push({ kind: "jargon", term: j.term, def: j.definition }));
+    if (dd.whyItMatters) stages.push({ kind: "text", kicker: "Why it matters", title: "Why this is a big deal", body: dd.whyItMatters });
+    stages.push({ kind: "cards" });
+    stages.push({ kind: "mastery" });
+    learn = { id: prizeId, stages, i: 0, flip: false, cardIdx: 0 };
+    // ensure there are cards to flip
+    if (dd.flashcards && dd.flashcards.length && !Store.hasSeeded(prizeId)) Store.seedCards(prizeId, dd.flashcards);
+    learnEl.hidden = false;
+    document.body.style.overflow = "hidden";
+    renderLearn();
+  }
+  function exitLearn() {
+    learnEl.hidden = true; learn = null;
+    refreshFill(currentId); updateProgress(); updateDue();
+    if (currentId) renderDetail();
+  }
+  function renderLearn() {
+    if (!learn) return;
+    const d = byId[learn.id], dd = d.deepDive || {};
+    const st = learn.stages[learn.i];
+    const pct = Math.round((learn.i) / (learn.stages.length - 1) * 100);
+    let inner = "";
+    if (st.kind === "intro") {
+      inner = `<div class="learn-kicker">${d.year} · ${d.subfield}</div>
+        <h1 class="learn-h">${(d.laureates || []).join(" · ")}</h1>
+        <p>${esc(d.oneLiner || "")}</p>
+        ${d.motivation ? `<p class="muted">“${esc(d.motivation)}”</p>` : ""}
+        <p class="muted">You'll move through this one piece at a time — scope, history, the chemistry, the key ideas, the jargon, then a few cards. At the end you'll set how well you know it.</p>`;
+    } else if (st.kind === "text") {
+      inner = `<div class="learn-kicker">${st.kicker}</div><h1 class="learn-h">${esc(st.title)}</h1>${para(st.body)}`;
+    } else if (st.kind === "concepts") {
+      inner = `<div class="learn-kicker">Concepts</div><h1 class="learn-h">${esc(st.title)}</h1>` +
+        st.items.map(c => { const [h, ...r] = String(c).split(":"); return `<div class="learn-card"><b>${esc(h)}</b>${r.length ? ": " + esc(r.join(":").trim()) : ""}</div>`; }).join("");
+    } else if (st.kind === "jargon") {
+      inner = `<div class="learn-kicker">Jargon</div><h1 class="learn-h">Make sure this word is yours</h1>
+        <div class="learn-jargon"><div class="lj-term">${esc(st.term)}</div>
+        <div class="lj-def" id="ljDef" style="${learn.flip ? "" : "display:none"}">${esc(st.def)}</div></div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          ${learn.flip ? `<button class="btn ${Store.isKnown(learn.id, st.term) ? "primary" : ""}" id="ljKnow">${Store.isKnown(learn.id, st.term) ? "✓ I understand this" : "Mark: I understand this"}</button>` : `<button class="btn primary" id="ljReveal">Reveal meaning</button>`}
+        </div>`;
+    } else if (st.kind === "cards") {
+      const cards = Store.getCards(learn.id);
+      if (!cards.length) {
+        inner = `<div class="learn-kicker">Cards</div><h1 class="learn-h">Quick self-test</h1><p class="muted">No flashcards for this prize yet. You can add some from the prize's Flashcards tab, or just continue.</p>`;
+      } else {
+        const c = cards[Math.min(learn.cardIdx, cards.length - 1)];
+        inner = `<div class="learn-kicker">Self-test · card ${learn.cardIdx + 1}/${cards.length}</div><h1 class="learn-h">Recall before you reveal</h1>
+          <div class="learn-flip" id="learnFlip"><div class="lf-q">${esc(c.front)}</div>${learn.flip ? `<div class="lf-a">${esc(c.back)}</div>` : `<div class="muted" style="margin-top:12px;font-size:13px">click to reveal</div>`}</div>
+          ${learn.flip ? `<div style="display:flex;gap:8px;justify-content:center"><button class="btn" id="cardAgain">Shaky</button><button class="btn primary" id="cardGood">Got it →</button></div>` : ""}`;
+      }
+    } else if (st.kind === "mastery") {
+      const cur = Store.getMastery(learn.id);
+      inner = `<div class="learn-mastery-prompt"><div class="learn-kicker">Checkpoint</div>
+        <h1 class="learn-h">How well do you know this now?</h1>
+        <p class="muted">Be honest — this sets how bright the node glows and feeds your "recommended next".</p>
+        <div class="lmp-row">${[1, 2, 3, 4].map(l => `<button class="btn ${cur >= l ? "primary" : ""}" data-l="${l}">${Store.MASTERY[l]}</button>`).join("")}</div>
+        <p class="muted" style="margin-top:20px">Then close to return to the map and watch it light up.</p></div>`;
+    }
+    learnEl.innerHTML = `
+      <div class="learn-top">
+        <div class="lt-meta"><b>${d.year}</b> · ${(d.laureates || [])[0] || ""}</div>
+        <button class="btn ghost" id="learnClose">✕ Exit focus</button>
+      </div>
+      <div class="learn-progress"><i style="width:${pct}%"></i></div>
+      <div class="learn-stage"><div class="learn-inner">${inner}</div></div>
+      <div class="learn-bottom">
+        <button class="btn" id="learnPrev" ${learn.i === 0 ? "disabled" : ""}>‹ Back</button>
+        <div class="lb-mid">${learn.stages.map((_, k) => `<span class="learn-dot ${k === learn.i ? "on" : ""}"></span>`).join("")}</div>
+        <button class="btn primary" id="learnNext">${learn.i === learn.stages.length - 1 ? "Finish ✓" : "Next ›"}</button>
+      </div>`;
+    learnEl.querySelector("#learnClose").onclick = exitLearn;
+    learnEl.querySelector("#learnPrev").onclick = () => { if (learn.i > 0) { learn.i--; learn.flip = false; learn.cardIdx = 0; renderLearn(); } };
+    learnEl.querySelector("#learnNext").onclick = () => {
+      if (learn.i === learn.stages.length - 1) { exitLearn(); return; }
+      learn.i++; learn.flip = false; learn.cardIdx = 0; renderLearn();
+    };
+    const rv = learnEl.querySelector("#ljReveal"); if (rv) rv.onclick = () => { learn.flip = true; renderLearn(); };
+    const kn = learnEl.querySelector("#ljKnow"); if (kn) kn.onclick = () => { Store.toggleKnown(learn.id, st.term); renderLearn(); };
+    const fl = learnEl.querySelector("#learnFlip"); if (fl) fl.onclick = () => { if (!learn.flip) { learn.flip = true; renderLearn(); } };
+    const cg = learnEl.querySelector("#cardGood"); if (cg) cg.onclick = () => advanceCard(st, 2);
+    const ca = learnEl.querySelector("#cardAgain"); if (ca) ca.onclick = () => advanceCard(st, 0);
+    learnEl.querySelectorAll(".lmp-row button").forEach(b => b.onclick = () => {
+      const lvl = parseInt(b.dataset.l);
+      Store.setMastery(learn.id, Store.getMastery(learn.id) === lvl ? lvl - 1 : lvl);
+      renderLearn();
+    });
+  }
+  function advanceCard(st, grade) {
+    const cards = Store.getCards(learn.id);
+    const c = cards[Math.min(learn.cardIdx, cards.length - 1)];
+    if (c) Store.gradeCard(c.id, grade);
+    if (learn.cardIdx < cards.length - 1) { learn.cardIdx++; learn.flip = false; renderLearn(); }
+    else { learn.i++; learn.flip = false; learn.cardIdx = 0; renderLearn(); }
+  }
+
   // ---------- keyboard ----------
   document.addEventListener("keydown", e => {
+    if (!learnEl.hidden) {
+      if (e.key === "Escape") exitLearn();
+      else if (e.key === "ArrowRight") { const n = learnEl.querySelector("#learnNext"); if (n) n.click(); }
+      else if (e.key === "ArrowLeft") { const p = learnEl.querySelector("#learnPrev"); if (p && !p.disabled) p.click(); }
+      return;
+    }
+    if (!cardsOverlay.hidden && e.key === "Escape") { cardsOverlay.hidden = true; return; }
     if (!reviewOverlay.hidden) {
       if (e.code === "Space") { e.preventDefault(); if (!reviewShown) revealAnswer(); }
       else if (reviewShown && ["1", "2", "3", "4"].includes(e.key)) grade(parseInt(e.key) - 1);
@@ -11593,12 +11993,21 @@ window.NOBEL_TRAIL_INTRO =
       document.getElementById("graphHint").textContent = "Dataset not loaded yet — data/prizes.js is empty.";
       return;
     }
+    applyTheme(Store.getTheme());
     renderRail();
     wireHeader();
     wireFinder();
     buildGraph();
     updateProgress();
     updateDue();
+  }
+
+  function applyTheme(t) {
+    document.documentElement.setAttribute("data-theme", t);
+    graph.setTheme(t);
+    graph.reheat();
+    const b = document.getElementById("themeBtn");
+    if (b) b.textContent = t === "dark" ? "☀️" : "🌙";
   }
   boot();
   window.__nobel = { graph, Store, DATA, openDetail };

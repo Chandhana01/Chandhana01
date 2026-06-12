@@ -60,6 +60,7 @@
 
   const graph = new Graph(document.getElementById("graph"), {
     fillFn: n => (fillCache[n.id] != null ? fillCache[n.id] : (fillCache[n.id] = Store.fillScore(n.id, byId[n.id]))),
+    laneColor: name => SUBFIELD_COLOR[name] || SUBFIELD_COLOR.Other,
     onClick: n => openDetail(n.id),
     onHover: (n, pos) => showHover(n, pos)
   });
@@ -207,6 +208,13 @@
           <span class="chip subfield" style="color:${colorFor(d)};border-color:${colorFor(d)}">${d.subfield}</span>
           ${(d.categories || []).map(c => `<span class="chip cat">${CATEGORY_LABEL[c] || c}</span>`).join("")}
         </div>
+        <div class="mastery">
+          <div class="mastery-label">My mastery — sets how bright this node glows</div>
+          <div class="mastery-steps" id="masterySteps">
+            ${[1, 2, 3, 4].map(l => `<button data-l="${l}" class="${Store.getMastery(d.id) >= l ? "on" : ""}">${Store.MASTERY[l]}</button>`).join("")}
+          </div>
+        </div>
+        <button class="btn primary" id="learnBtn" style="margin-top:12px;width:100%;justify-content:center">▶ Learn this (focused mode)</button>
       </div>
       <div class="detail-tabs">
         ${tabBtn("overview", "Overview")}
@@ -220,6 +228,14 @@
       <div class="detail-body" id="detailBody"></div>`;
     detail.querySelector(".detail-close").onclick = closeDetail;
     detail.querySelectorAll(".tab").forEach(t => t.onclick = () => { currentTab = t.dataset.tab; renderDetail(); });
+    const ms = detail.querySelector("#masterySteps");
+    if (ms) ms.querySelectorAll("button").forEach(b => b.onclick = () => {
+      const lvl = parseInt(b.dataset.l);
+      Store.setMastery(d.id, Store.getMastery(d.id) === lvl ? lvl - 1 : lvl);  // click current level to step down
+      refreshFill(d.id); updateProgress(); renderDetail();
+    });
+    const lb = detail.querySelector("#learnBtn");
+    if (lb) lb.onclick = () => startLearn(d.id);
     renderTab(d, dd);
   }
 
@@ -335,14 +351,14 @@
       const f = document.getElementById("fcFront").value.trim();
       const b = document.getElementById("fcBack").value.trim();
       if (!f || !b) return;
-      Store.addCard(d.id, f, b);
+      Store.addCard(f, b, { prizeId: d.id, tags: [d.subfield, String(d.year)] });
       refreshFill(d.id); updateProgress(); updateDue(); renderTab(d, dd);
     };
     if (canSeed) document.getElementById("fcSeed").onclick = () => {
       Store.seedCards(d.id, seeds); updateDue(); renderTab(d, dd);
     };
     body.querySelectorAll(".fc-card").forEach(el => {
-      el.querySelector(".fc-del").onclick = () => { Store.deleteCard(d.id, el.dataset.id); refreshFill(d.id); updateProgress(); updateDue(); renderTab(d, dd); };
+      el.querySelector(".fc-del").onclick = () => { Store.deleteCard(el.dataset.id); refreshFill(d.id); updateProgress(); updateDue(); renderTab(d, dd); };
     });
   }
 
@@ -357,8 +373,9 @@
   // ---------- Review overlay (cross-prize SRS) ----------
   const reviewOverlay = document.getElementById("reviewOverlay");
   let reviewQueue = [], reviewIdx = 0, reviewShown = false;
-  function startReview() {
-    reviewQueue = Store.dueCards();
+  function startReview() { runReviewQueue(Store.dueCards()); }
+  function runReviewQueue(cards) {
+    reviewQueue = cards.slice();
     reviewIdx = 0;
     if (!reviewQueue.length) {
       reviewOverlay.innerHTML = `<div class="modal"><div class="modal-head"><h2>🎴 Review</h2><button class="modal-close">×</button></div>
@@ -410,8 +427,8 @@
   }
   function grade(g) {
     const c = reviewQueue[reviewIdx];
-    Store.gradeCard(c.prizeId, c.id, g);
-    refreshFill(c.prizeId);
+    Store.gradeCard(c.id, g);
+    if (c.prizeId) refreshFill(c.prizeId);
     reviewIdx++; renderReview();
   }
 
@@ -428,7 +445,21 @@
 
   function wireHeader() {
     document.getElementById("trailsBtn").onclick = () => openTrails();
+    document.getElementById("cardsBtn").onclick = openCards;
     document.getElementById("reviewBtn").onclick = startReview;
+    document.getElementById("themeBtn").onclick = () => {
+      const next = Store.getTheme() === "dark" ? "light" : "dark";
+      Store.setTheme(next); applyTheme(next);
+    };
+    let timelineOn = false;
+    document.getElementById("timelineBtn").onclick = (e) => {
+      timelineOn = !timelineOn;
+      graph.setMode(timelineOn ? "timeline" : "cluster");
+      e.currentTarget.classList.toggle("active-mode", timelineOn);
+      document.getElementById("graphHint").textContent = timelineOn
+        ? "Timeline: left→right by year, lanes by subfield · click a node"
+        : "Click any node to enter its world →";
+    };
     document.getElementById("exportBtn").onclick = () => {
       const blob = new Blob([Store.exportData()], { type: "application/json" });
       const a = document.createElement("a");
@@ -479,6 +510,14 @@
           <li><b>My notes</b> — your lab notebook, saved locally in this browser.</li>
           <li><b>Flashcards</b> — write your own or import starter decks; review them across all prizes with the 🎴 button (spaced repetition).</li>
         </ul>
+        <h3>Learn mode (▶ inside a prize)</h3>
+        <p>Distraction-free studying: just you and one idea at a time. It walks you through scope → history → the chemistry → key concepts → each jargon word → a quick self-test → a mastery checkpoint, with Back/Next (or ← →). This is the "actually learn it" path, as opposed to the explore-the-map view.</p>
+        <h3>Mastery levels</h3>
+        <p>Inside each prize, rate yourself: <b>Skimmed → Understand → Can explain → Can rebuild</b>. This is what brightens the node (pale = untouched, glowing = mastered) and feeds "recommended next". Click your current level again to step back down.</p>
+        <h3>Flashcards in one place (🗂 Cards)</h3>
+        <p>All your cards live in a single deck. Create a card anywhere, optionally tag it or link it to a prize, then browse/search/filter and "Study these" as one pile — real studying, not buried inside one prize. The 🎴 Review button runs spaced repetition over everything due.</p>
+        <h3>Timeline (📅) &amp; theme (🌙/☀️)</h3>
+        <p>Toggle <b>Timeline</b> to lay prizes left→right by year in subfield lanes — the chronology at a glance. Toggle the theme for light or dark.</p>
         <h3>Learning Trails (🧭 top bar)</h3>
         <p>Not sure what order to learn in? Trails are curated, ordered prerequisite paths through each thread (Foundations, Bonding, Structure, Synthesis, Life, Nucleus, Materials). Each step says <i>why it comes next</i>. "Focus this trail" draws the numbered path on the graph and dims everything else; use <b>prev/next</b> to walk it. Inside any prize, a banner shows which trail(s) it sits on and what comes before/after.</p>
         <h3>Study by vibe (✨ under search)</h3>
@@ -808,8 +847,190 @@
     }
   }
 
+  // ---------- Global Cards deck ----------
+  const cardsOverlay = document.getElementById("cardsOverlay");
+  function openCards() {
+    let q = "", tagF = "", dueOnly = false;
+    const prizeOpts = ['<option value="">— general (no prize) —</option>']
+      .concat(DATA.slice().sort((a, b) => a.year - b.year).map(d => `<option value="${d.id}">${d.year} · ${(d.laureates || [])[0] || ""}</option>`)).join("");
+    function render() {
+      const all = Store.allCards();
+      const tags = Store.allTags();
+      let list = all;
+      if (dueOnly) list = list.filter(c => c.due <= Date.now());
+      if (tagF) list = list.filter(c => (c.tags || []).includes(tagF));
+      if (q) { const s = q.toLowerCase(); list = list.filter(c => (c.front + " " + c.back + " " + (c.tags || []).join(" ")).toLowerCase().includes(s)); }
+      list = list.slice().sort((a, b) => a.due - b.due);
+      cardsOverlay.innerHTML = `<div class="modal" style="max-width:720px">
+        <div class="modal-head"><h2>🗂 Flashcards <span style="color:var(--text-faint);font-weight:400">${all.length} total · ${Store.dueCount()} due</span></h2><button class="modal-close">×</button></div>
+        <div class="modal-body">
+          <div class="card-compose">
+            <div class="row"><input id="ccFront" placeholder="Front (question / prompt)…"></div>
+            <div class="row"><textarea id="ccBack" placeholder="Back (answer)…"></textarea></div>
+            <div class="row">
+              <input id="ccTags" placeholder="tags (comma separated) — e.g. mechanisms, organic">
+              <select id="ccPrize" title="Optionally link to a prize">${prizeOpts}</select>
+            </div>
+            <button class="btn primary" id="ccAdd" style="width:100%;justify-content:center">+ Add to deck</button>
+          </div>
+          <div class="cards-toolbar">
+            <input id="ckSearch" placeholder="Search deck…" value="${esc(q)}" style="flex:1;min-width:140px">
+            <select id="ckTag"><option value="">all tags</option>${Object.keys(tags).sort().map(t => `<option value="${esc(t)}" ${t === tagF ? "selected" : ""}>${esc(t)} (${tags[t]})</option>`).join("")}</select>
+            <label class="radio" style="white-space:nowrap"><input type="checkbox" id="ckDue" ${dueOnly ? "checked" : ""}> due only</label>
+            <button class="btn primary" id="ckStudy">Study these (${list.length})</button>
+          </div>
+          <div class="deck-list">${list.length ? list.map(c => {
+            const d = c.prizeId && byId[c.prizeId];
+            return `<div class="fc-card" data-id="${c.id}">
+              <div class="fc-front">${esc(c.front)}</div>
+              <div class="fc-back">${esc(c.back)}</div>
+              <div class="fc-tags">${(c.tags || []).map(t => `<span class="fc-tag">${esc(t)}</span>`).join("")}${d ? `<span class="fc-tag" data-goto="${d.id}" style="cursor:pointer;color:var(--accent-2)">↗ ${d.year} ${(d.laureates || [])[0] || ""}</span>` : ""}</div>
+              <div class="fc-meta"><span>${c.seed ? "starter" : "yours"} · ${c.reps ? "seen " + c.reps + "×" : "new"} · due ${dueLabel(c.due)}</span><button class="fc-del">delete</button></div>
+            </div>`;
+          }).join("") : '<div class="empty-state"><p>No cards yet. Add one above — they all live here so you can study them together.</p></div>'}</div>
+        </div></div>`;
+      cardsOverlay.querySelector(".modal-close").onclick = () => cardsOverlay.hidden = true;
+      cardsOverlay.querySelector("#ccAdd").onclick = () => {
+        const f = cardsOverlay.querySelector("#ccFront").value.trim();
+        const b = cardsOverlay.querySelector("#ccBack").value.trim();
+        if (!f || !b) return;
+        const tg = cardsOverlay.querySelector("#ccTags").value.split(",").map(s => s.trim()).filter(Boolean);
+        const pid = cardsOverlay.querySelector("#ccPrize").value || null;
+        Store.addCard(f, b, { prizeId: pid, tags: tg });
+        if (pid) refreshFill(pid);
+        updateProgress(); updateDue(); render();
+      };
+      cardsOverlay.querySelector("#ckSearch").oninput = e => { q = e.target.value; render(); };
+      cardsOverlay.querySelector("#ckTag").onchange = e => { tagF = e.target.value; render(); };
+      cardsOverlay.querySelector("#ckDue").onchange = e => { dueOnly = e.target.checked; render(); };
+      cardsOverlay.querySelector("#ckStudy").onclick = () => { if (list.length) { cardsOverlay.hidden = true; runReviewQueue(list); } };
+      cardsOverlay.querySelectorAll(".fc-del").forEach(el => el.onclick = e => {
+        const id = e.target.closest(".fc-card").dataset.id;
+        const card = Store.allCards().find(c => c.id === id);
+        Store.deleteCard(id); if (card && card.prizeId) refreshFill(card.prizeId);
+        updateProgress(); updateDue(); render();
+      });
+      cardsOverlay.querySelectorAll("[data-goto]").forEach(el => el.onclick = () => { cardsOverlay.hidden = true; openDetail(el.dataset.goto); });
+    }
+    render();
+    cardsOverlay.hidden = false;
+  }
+
+  // ---------- Learn mode (distraction-free, one thing at a time) ----------
+  const learnEl = document.getElementById("learnMode");
+  let learn = null;
+  function startLearn(prizeId) {
+    const d = byId[prizeId]; if (!d) return;
+    const dd = d.deepDive || {};
+    const stages = [{ kind: "intro" }];
+    if (dd.scope) stages.push({ kind: "text", kicker: "Scope", title: "What actually won the prize", body: dd.scope });
+    if (dd.history) stages.push({ kind: "text", kicker: "History", title: "How we got here", body: dd.history });
+    if (dd.chemistryLogic) stages.push({ kind: "text", kicker: "The chemistry", title: "The logic, mechanistically", body: dd.chemistryLogic });
+    if (dd.concepts && dd.concepts.length) stages.push({ kind: "concepts", title: "The ideas to hold onto", items: dd.concepts });
+    (dd.jargon || []).forEach(j => stages.push({ kind: "jargon", term: j.term, def: j.definition }));
+    if (dd.whyItMatters) stages.push({ kind: "text", kicker: "Why it matters", title: "Why this is a big deal", body: dd.whyItMatters });
+    stages.push({ kind: "cards" });
+    stages.push({ kind: "mastery" });
+    learn = { id: prizeId, stages, i: 0, flip: false, cardIdx: 0 };
+    // ensure there are cards to flip
+    if (dd.flashcards && dd.flashcards.length && !Store.hasSeeded(prizeId)) Store.seedCards(prizeId, dd.flashcards);
+    learnEl.hidden = false;
+    document.body.style.overflow = "hidden";
+    renderLearn();
+  }
+  function exitLearn() {
+    learnEl.hidden = true; learn = null;
+    refreshFill(currentId); updateProgress(); updateDue();
+    if (currentId) renderDetail();
+  }
+  function renderLearn() {
+    if (!learn) return;
+    const d = byId[learn.id], dd = d.deepDive || {};
+    const st = learn.stages[learn.i];
+    const pct = Math.round((learn.i) / (learn.stages.length - 1) * 100);
+    let inner = "";
+    if (st.kind === "intro") {
+      inner = `<div class="learn-kicker">${d.year} · ${d.subfield}</div>
+        <h1 class="learn-h">${(d.laureates || []).join(" · ")}</h1>
+        <p>${esc(d.oneLiner || "")}</p>
+        ${d.motivation ? `<p class="muted">“${esc(d.motivation)}”</p>` : ""}
+        <p class="muted">You'll move through this one piece at a time — scope, history, the chemistry, the key ideas, the jargon, then a few cards. At the end you'll set how well you know it.</p>`;
+    } else if (st.kind === "text") {
+      inner = `<div class="learn-kicker">${st.kicker}</div><h1 class="learn-h">${esc(st.title)}</h1>${para(st.body)}`;
+    } else if (st.kind === "concepts") {
+      inner = `<div class="learn-kicker">Concepts</div><h1 class="learn-h">${esc(st.title)}</h1>` +
+        st.items.map(c => { const [h, ...r] = String(c).split(":"); return `<div class="learn-card"><b>${esc(h)}</b>${r.length ? ": " + esc(r.join(":").trim()) : ""}</div>`; }).join("");
+    } else if (st.kind === "jargon") {
+      inner = `<div class="learn-kicker">Jargon</div><h1 class="learn-h">Make sure this word is yours</h1>
+        <div class="learn-jargon"><div class="lj-term">${esc(st.term)}</div>
+        <div class="lj-def" id="ljDef" style="${learn.flip ? "" : "display:none"}">${esc(st.def)}</div></div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          ${learn.flip ? `<button class="btn ${Store.isKnown(learn.id, st.term) ? "primary" : ""}" id="ljKnow">${Store.isKnown(learn.id, st.term) ? "✓ I understand this" : "Mark: I understand this"}</button>` : `<button class="btn primary" id="ljReveal">Reveal meaning</button>`}
+        </div>`;
+    } else if (st.kind === "cards") {
+      const cards = Store.getCards(learn.id);
+      if (!cards.length) {
+        inner = `<div class="learn-kicker">Cards</div><h1 class="learn-h">Quick self-test</h1><p class="muted">No flashcards for this prize yet. You can add some from the prize's Flashcards tab, or just continue.</p>`;
+      } else {
+        const c = cards[Math.min(learn.cardIdx, cards.length - 1)];
+        inner = `<div class="learn-kicker">Self-test · card ${learn.cardIdx + 1}/${cards.length}</div><h1 class="learn-h">Recall before you reveal</h1>
+          <div class="learn-flip" id="learnFlip"><div class="lf-q">${esc(c.front)}</div>${learn.flip ? `<div class="lf-a">${esc(c.back)}</div>` : `<div class="muted" style="margin-top:12px;font-size:13px">click to reveal</div>`}</div>
+          ${learn.flip ? `<div style="display:flex;gap:8px;justify-content:center"><button class="btn" id="cardAgain">Shaky</button><button class="btn primary" id="cardGood">Got it →</button></div>` : ""}`;
+      }
+    } else if (st.kind === "mastery") {
+      const cur = Store.getMastery(learn.id);
+      inner = `<div class="learn-mastery-prompt"><div class="learn-kicker">Checkpoint</div>
+        <h1 class="learn-h">How well do you know this now?</h1>
+        <p class="muted">Be honest — this sets how bright the node glows and feeds your "recommended next".</p>
+        <div class="lmp-row">${[1, 2, 3, 4].map(l => `<button class="btn ${cur >= l ? "primary" : ""}" data-l="${l}">${Store.MASTERY[l]}</button>`).join("")}</div>
+        <p class="muted" style="margin-top:20px">Then close to return to the map and watch it light up.</p></div>`;
+    }
+    learnEl.innerHTML = `
+      <div class="learn-top">
+        <div class="lt-meta"><b>${d.year}</b> · ${(d.laureates || [])[0] || ""}</div>
+        <button class="btn ghost" id="learnClose">✕ Exit focus</button>
+      </div>
+      <div class="learn-progress"><i style="width:${pct}%"></i></div>
+      <div class="learn-stage"><div class="learn-inner">${inner}</div></div>
+      <div class="learn-bottom">
+        <button class="btn" id="learnPrev" ${learn.i === 0 ? "disabled" : ""}>‹ Back</button>
+        <div class="lb-mid">${learn.stages.map((_, k) => `<span class="learn-dot ${k === learn.i ? "on" : ""}"></span>`).join("")}</div>
+        <button class="btn primary" id="learnNext">${learn.i === learn.stages.length - 1 ? "Finish ✓" : "Next ›"}</button>
+      </div>`;
+    learnEl.querySelector("#learnClose").onclick = exitLearn;
+    learnEl.querySelector("#learnPrev").onclick = () => { if (learn.i > 0) { learn.i--; learn.flip = false; learn.cardIdx = 0; renderLearn(); } };
+    learnEl.querySelector("#learnNext").onclick = () => {
+      if (learn.i === learn.stages.length - 1) { exitLearn(); return; }
+      learn.i++; learn.flip = false; learn.cardIdx = 0; renderLearn();
+    };
+    const rv = learnEl.querySelector("#ljReveal"); if (rv) rv.onclick = () => { learn.flip = true; renderLearn(); };
+    const kn = learnEl.querySelector("#ljKnow"); if (kn) kn.onclick = () => { Store.toggleKnown(learn.id, st.term); renderLearn(); };
+    const fl = learnEl.querySelector("#learnFlip"); if (fl) fl.onclick = () => { if (!learn.flip) { learn.flip = true; renderLearn(); } };
+    const cg = learnEl.querySelector("#cardGood"); if (cg) cg.onclick = () => advanceCard(st, 2);
+    const ca = learnEl.querySelector("#cardAgain"); if (ca) ca.onclick = () => advanceCard(st, 0);
+    learnEl.querySelectorAll(".lmp-row button").forEach(b => b.onclick = () => {
+      const lvl = parseInt(b.dataset.l);
+      Store.setMastery(learn.id, Store.getMastery(learn.id) === lvl ? lvl - 1 : lvl);
+      renderLearn();
+    });
+  }
+  function advanceCard(st, grade) {
+    const cards = Store.getCards(learn.id);
+    const c = cards[Math.min(learn.cardIdx, cards.length - 1)];
+    if (c) Store.gradeCard(c.id, grade);
+    if (learn.cardIdx < cards.length - 1) { learn.cardIdx++; learn.flip = false; renderLearn(); }
+    else { learn.i++; learn.flip = false; learn.cardIdx = 0; renderLearn(); }
+  }
+
   // ---------- keyboard ----------
   document.addEventListener("keydown", e => {
+    if (!learnEl.hidden) {
+      if (e.key === "Escape") exitLearn();
+      else if (e.key === "ArrowRight") { const n = learnEl.querySelector("#learnNext"); if (n) n.click(); }
+      else if (e.key === "ArrowLeft") { const p = learnEl.querySelector("#learnPrev"); if (p && !p.disabled) p.click(); }
+      return;
+    }
+    if (!cardsOverlay.hidden && e.key === "Escape") { cardsOverlay.hidden = true; return; }
     if (!reviewOverlay.hidden) {
       if (e.code === "Space") { e.preventDefault(); if (!reviewShown) revealAnswer(); }
       else if (reviewShown && ["1", "2", "3", "4"].includes(e.key)) grade(parseInt(e.key) - 1);
@@ -840,12 +1061,21 @@
       document.getElementById("graphHint").textContent = "Dataset not loaded yet — data/prizes.js is empty.";
       return;
     }
+    applyTheme(Store.getTheme());
     renderRail();
     wireHeader();
     wireFinder();
     buildGraph();
     updateProgress();
     updateDue();
+  }
+
+  function applyTheme(t) {
+    document.documentElement.setAttribute("data-theme", t);
+    graph.setTheme(t);
+    graph.reheat();
+    const b = document.getElementById("themeBtn");
+    if (b) b.textContent = t === "dark" ? "☀️" : "🌙";
   }
   boot();
   window.__nobel = { graph, Store, DATA, openDetail };
