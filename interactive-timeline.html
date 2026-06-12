@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive History Timeline — Alexander to AI</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --line: #30363d;
+    --macedon: #f0b429;
+    --ptolemy: #2dd4bf;
+    --rome: #ef4444;
+    --tech-ancient: #a78bfa;
+    --mughal: #34d399;
+    --science: #60a5fa;
+    --industry: #fb923c;
+    --world: #f472b6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+  header {
+    text-align: center;
+    padding: 48px 20px 24px;
+    background: radial-gradient(ellipse at top, #1f2937 0%, var(--bg) 70%);
+  }
+  header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    background: linear-gradient(90deg, #f0b429, #ef4444, #60a5fa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 8px;
+  }
+  header p { color: var(--muted); max-width: 640px; margin: 0 auto; }
+
+  .controls {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(13, 17, 23, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+  .chip {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--text);
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.18s ease;
+    user-select: none;
+  }
+  .chip .dot {
+    display: inline-block;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    margin-right: 6px;
+    background: var(--c, var(--muted));
+  }
+  .chip:hover { transform: translateY(-1px); border-color: var(--c, var(--text)); }
+  .chip.active {
+    border-color: var(--c, var(--text));
+    box-shadow: 0 0 0 1px var(--c, var(--text)) inset;
+  }
+  .chip.inactive { opacity: 0.38; }
+  #search {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 7px 12px;
+    width: 200px;
+    font-size: 0.85rem;
+  }
+  #search:focus { outline: none; border-color: var(--science); }
+
+  .stats { text-align: center; color: var(--muted); font-size: 0.8rem; padding: 10px; }
+
+  /* era jump bar */
+  .jumpbar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 16px 0;
+  }
+  .jumpbar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    border-bottom: 1px dotted var(--line);
+  }
+  .jumpbar a:hover { color: var(--text); }
+
+  .timeline {
+    max-width: 880px;
+    margin: 30px auto 80px;
+    position: relative;
+    padding: 0 16px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(var(--line), var(--line));
+    transform: translateX(-50%);
+  }
+  .era-label {
+    position: relative;
+    text-align: center;
+    margin: 48px 0 24px;
+    z-index: 2;
+  }
+  .era-label span {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .event {
+    position: relative;
+    width: 50%;
+    padding: 0 36px 28px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .event.visible { opacity: 1; transform: translateY(0); }
+  .event.left { left: 0; text-align: right; }
+  .event.right { left: 50%; text-align: left; }
+  .event .node {
+    position: absolute;
+    top: 8px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--c);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--c);
+  }
+  .event.left .node { right: -7px; }
+  .event.right .node { left: -7px; }
+  .event .year {
+    font-weight: 700;
+    color: var(--c);
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+  }
+  .card {
+    display: inline-block;
+    text-align: left;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--c);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 6px;
+    cursor: pointer;
+    max-width: 100%;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+  .card:hover { transform: scale(1.02); border-color: var(--c); }
+  .card h3 { font-size: 1rem; margin-bottom: 2px; }
+  .card .tag { font-size: 0.7rem; color: var(--c); text-transform: uppercase; letter-spacing: 0.08em; }
+  .card .detail {
+    color: var(--muted);
+    font-size: 0.86rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, margin-top 0.35s ease;
+  }
+  .card.open .detail { max-height: 300px; margin-top: 8px; }
+  .hidden { display: none !important; }
+
+  footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 24px; border-top: 1px solid var(--line); }
+
+  @media (max-width: 680px) {
+    .timeline::before { left: 14px; }
+    .event, .event.left, .event.right { width: 100%; left: 0; text-align: left; padding: 0 8px 24px 44px; }
+    .event.left .node, .event.right .node { left: 8px; right: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>From Alexander to AI</h1>
+  <p>An interactive journey through 4,500 years — from the Great Pyramid through the conquerors of the ancient Mediterranean, the life of Jesus, the Mughal arrival in India, the gears of the Antikythera mechanism, and the revolutions of science and industry. World milestones are woven in for a sense of scale. Click any card to expand. Filter by era or search below.</p>
+</header>
+
+<div class="controls">
+  <button class="chip active" data-cat="all"><span class="dot" style="--c:#e6edf3"></span>All</button>
+  <button class="chip active" data-cat="macedon" style="--c:var(--macedon)"><span class="dot" style="--c:var(--macedon)"></span>Alexander</button>
+  <button class="chip active" data-cat="ptolemy" style="--c:var(--ptolemy)"><span class="dot" style="--c:var(--ptolemy)"></span>Ptolemies &amp; Cleopatra</button>
+  <button class="chip active" data-cat="rome" style="--c:var(--rome)"><span class="dot" style="--c:var(--rome)"></span>Caesar &amp; Antony</button>
+  <button class="chip active" data-cat="tech-ancient" style="--c:var(--tech-ancient)"><span class="dot" style="--c:var(--tech-ancient)"></span>Antikythera</button>
+  <button class="chip active" data-cat="mughal" style="--c:var(--mughal)"><span class="dot" style="--c:var(--mughal)"></span>Babur &amp; Mughals</button>
+  <button class="chip active" data-cat="science" style="--c:var(--science)"><span class="dot" style="--c:var(--science)"></span>Science</button>
+  <button class="chip active" data-cat="industry" style="--c:var(--industry)"><span class="dot" style="--c:var(--industry)"></span>Industrial Revolutions</button>
+  <button class="chip active" data-cat="world" style="--c:var(--world)"><span class="dot" style="--c:var(--world)"></span>World Milestones</button>
+  <input id="search" type="text" placeholder="Search events…">
+</div>
+
+<div class="stats"><span id="count"></span> events shown</div>
+<div class="jumpbar" id="jumpbar"></div>
+<div class="timeline" id="timeline"></div>
+
+<footer>Built as a single self-contained HTML file — no libraries, no network needed. Dates for ancient events follow standard scholarly consensus.</footer>
+
+<script>
+const EVENTS = [
+  // ===== World milestones (for a sense of scale) =====
+  { y: -2560, year: "c. 2560 BCE", cat: "world", title: "Great Pyramid of Giza completed", detail: "Khufu's pyramid is already over 2,200 years old when Alexander reaches Egypt — Cleopatra lived closer in time to the Moon landing than to its construction. The ultimate yardstick for historical scale." },
+  { y: -1750, year: "c. 1750 BCE", cat: "world", title: "Code of Hammurabi", detail: "The Babylonian king inscribes one of the earliest comprehensive written law codes on a basalt stele — 'an eye for an eye' enters the historical record." },
+  { y: -563, year: "c. 563 BCE", cat: "world", title: "Birth of the Buddha", detail: "Siddhartha Gautama is born in Lumbini (modern Nepal). Within a couple of centuries his teachings spread across India — and Buddhist emissaries would later reach the Hellenistic kingdoms left by Alexander." },
+  { y: -4, year: "c. 4 BCE", cat: "world", title: "Birth of Jesus of Nazareth", detail: "Born in Judea under Roman rule — just 26 years after Cleopatra's death, in the empire Augustus built from her kingdom. Most scholars place the birth around 6–4 BCE, during Herod the Great's reign. The traditional dating later splits the calendar into BC and AD." },
+  { y: 30, year: "c. 30–33 CE", cat: "world", title: "Crucifixion of Jesus", detail: "Executed in Jerusalem under the Roman prefect Pontius Pilate. Within three centuries Christianity grows from a small Jewish sect into the official religion of the Roman Empire." },
+  { y: 476, year: "476 CE", cat: "world", title: "Fall of the Western Roman Empire", detail: "The last western emperor, Romulus Augustulus, is deposed — roughly 500 years after Augustus founded the empire. The eastern half endures as Byzantium for another thousand years." },
+  { y: 622, year: "622 CE", cat: "world", title: "The Hijra — rise of Islam", detail: "Muhammad's migration from Mecca to Medina marks year one of the Islamic calendar. Within a century, Islamic rule stretches from Spain to the Indus — and Islamic scholars preserve much of the Greek science of Alexandria." },
+  { y: 1206, year: "1206 CE", cat: "world", title: "Genghis Khan unites the Mongols", detail: "Temujin is proclaimed Genghis Khan, launching the largest contiguous land empire in history. Babur, who brought Mughal rule to India three centuries later, was his direct descendant — 'Mughal' literally derives from 'Mongol'." },
+  { y: 1453, year: "1453 CE", cat: "world", title: "Fall of Constantinople; Gutenberg's press", detail: "The Ottomans take Constantinople, ending the Roman story begun by Augustus. Almost simultaneously (c. 1455), Gutenberg prints his Bible — movable type ignites the spread of knowledge that feeds the Renaissance and Scientific Revolution." },
+  { y: 1492, year: "1492 CE", cat: "world", title: "Columbus reaches the Americas", detail: "The Columbian voyages connect the hemispheres permanently — 34 years before Babur's victory at Panipat, the global age begins." },
+  { y: 1914, year: "1914–1918 CE", cat: "world", title: "World War I", detail: "The industrialized powers of the Second Industrial Revolution turn their machines on each other — empires fall (Ottoman, Austro-Hungarian, Russian, German) and the modern political map begins to form." },
+  { y: 1939, year: "1939–1945 CE", cat: "world", title: "World War II & the atomic age", detail: "The deadliest conflict in history ends with the atomic bomb — Einstein's physics weaponized — and gives birth to the computer (Colossus, ENIAC), radar, and the institutions of the modern world." },
+  { y: 1947.5, year: "1947 CE", cat: "world", title: "Indian independence", detail: "British rule ends and India and Pakistan are born — the subcontinent Babur conquered in 1526, and the British East India Company took from his Mughal descendants, becomes the world's largest democracy." },
+
+  // ===== Alexander the Great =====
+  { y: -356, year: "356 BCE", cat: "macedon", title: "Birth of Alexander the Great", detail: "Born in Pella, Macedon, to King Philip II and Queen Olympias. Legend ties his birth to the night the Temple of Artemis at Ephesus burned down." },
+  { y: -343, year: "343 BCE", cat: "macedon", title: "Aristotle becomes Alexander's tutor", detail: "Philip II hires Aristotle to educate the 13-year-old prince at Mieza, instilling a lifelong love of Homer, science, and philosophy that Alexander carried on campaign." },
+  { y: -336, year: "336 BCE", cat: "macedon", title: "Alexander becomes King of Macedon", detail: "After Philip II's assassination, the 20-year-old Alexander takes the throne and rapidly secures Greece, razing Thebes as a warning." },
+  { y: -333, year: "333 BCE", cat: "macedon", title: "Battle of Issus", detail: "Alexander defeats the Persian King Darius III in person for the first time, capturing the Persian royal family and opening the road to the Levant and Egypt." },
+  { y: -331, year: "331 BCE", cat: "macedon", title: "Alexandria founded; Battle of Gaugamela", detail: "Alexander founds Alexandria in Egypt — destined to become the intellectual capital of the ancient world — then crushes Darius III at Gaugamela, effectively ending the Persian Empire." },
+  { y: -326, year: "326 BCE", cat: "macedon", title: "Battle of the Hydaspes — Alexander in India", detail: "Alexander defeats King Porus on the Jhelum river in the Punjab, his costliest battle. His exhausted army refuses to march further east, and he turns back." },
+  { y: -323, year: "323 BCE", cat: "macedon", title: "Death of Alexander in Babylon", detail: "Dies at 32, possibly of fever or poisoning, leaving no clear heir. His generals — the Diadochi — carve up his empire, setting the stage for the Ptolemies in Egypt." },
+
+  // ===== Ptolemies =====
+  { y: -322, year: "323–305 BCE", cat: "ptolemy", title: "Ptolemy I Soter takes Egypt", detail: "Alexander's general Ptolemy seizes Egypt in the succession wars — and famously hijacks Alexander's funeral cortege, entombing the conqueror in Alexandria. In 305 BCE he declares himself pharaoh, founding a Greek dynasty that rules Egypt for nearly 300 years." },
+  { y: -295, year: "c. 295 BCE", cat: "ptolemy", title: "Library of Alexandria founded", detail: "Under Ptolemy I and II, the Mouseion and its Great Library aim to collect all the world's knowledge. Scholars there include Euclid, Eratosthenes (who measured the Earth), and Archimedes as a visitor — the intellectual ecosystem that later made devices like the Antikythera mechanism conceivable." },
+  { y: -280, year: "c. 280 BCE", cat: "ptolemy", title: "Lighthouse of Pharos completed", detail: "The Lighthouse of Alexandria, one of the Seven Wonders, rises over 100 metres tall under Ptolemy II Philadelphus — a beacon of the dynasty's wealth and engineering." },
+  { y: -69, year: "69 BCE", cat: "ptolemy", title: "Birth of Cleopatra VII", detail: "Born in Alexandria, the last great ruler of the Ptolemaic line. Famously the first Ptolemy in centuries to bother learning Egyptian — she spoke perhaps nine languages and was a shrewd political operator." },
+  { y: -51, year: "51 BCE", cat: "ptolemy", title: "Cleopatra takes the throne", detail: "At 18, Cleopatra becomes co-ruler with her 10-year-old brother Ptolemy XIII. Court intrigue soon forces her into exile — until Rome's civil war washes ashore." },
+  { y: -47, year: "47 BCE", cat: "ptolemy", title: "Birth of Caesarion", detail: "Cleopatra bears Ptolemy XV 'Caesarion' — 'little Caesar' — her son with Julius Caesar, and her stake in Rome's future. He would be killed by Octavian in 30 BCE." },
+  { y: -34, year: "34 BCE", cat: "ptolemy", title: "Donations of Alexandria", detail: "In a lavish ceremony, Antony distributes Rome's eastern territories to Cleopatra and their children. Rome is scandalized — Octavian uses it as proof Antony has 'gone native', justifying war." },
+  { y: -30, year: "30 BCE", cat: "ptolemy", title: "Death of Cleopatra — end of the Ptolemies", detail: "After Antony's suicide, Cleopatra takes her own life (the asp story comes from Plutarch, writing 130 years later). Egypt becomes a Roman province, ending both the Ptolemaic dynasty and the age of Hellenistic kingdoms begun by Alexander." },
+
+  // ===== Antikythera =====
+  { y: -150, year: "c. 150–100 BCE", cat: "tech-ancient", title: "Antikythera mechanism built", detail: "The world's oldest known geared computer, with 30+ bronze gears predicting solar and lunar eclipses, moon phases, planetary positions, and even the Olympic Games cycle. Most scholars date its construction to 150–100 BCE (some argue for c. 205 BCE). Nothing of comparable mechanical complexity appears again for over 1,400 years." },
+  { y: -65, year: "c. 65 BCE", cat: "tech-ancient", title: "The Antikythera shipwreck", detail: "A Roman cargo ship carrying Greek treasures — including the mechanism — sinks off the island of Antikythera, between Crete and the Peloponnese." },
+  { y: 1901, year: "1901 CE", cat: "tech-ancient", title: "Mechanism recovered by sponge divers", detail: "Greek sponge divers find the wreck in 1900; the corroded lump of gears is recovered in 1901 but only recognized as a geared device decades later. X-ray and CT studies (notably 2006) finally revealed its astonishing functions." },
+
+  // ===== Caesar & Antony =====
+  { y: -100, year: "100 BCE", cat: "rome", title: "Birth of Julius Caesar", detail: "Born into the patrician Julii family in Rome, which claimed descent from Venus. Rises through Roman politics as a populist with legendary ambition and debts to match." },
+  { y: -83, year: "83 BCE", cat: "rome", title: "Birth of Mark Antony", detail: "Marcus Antonius is born into a distinguished but financially ruined Roman family. After a wild youth, he proves himself a brilliant cavalry commander in Egypt and Judea." },
+  { y: -60, year: "60 BCE", cat: "rome", title: "First Triumvirate", detail: "Caesar forms an unofficial power-sharing alliance with Pompey the Great and Crassus, Rome's richest man — dominating the Republic's politics." },
+  { y: -58, year: "58–50 BCE", cat: "rome", title: "Caesar conquers Gaul", detail: "Eight years of campaigning bring modern France and Belgium under Rome, plus two expeditions to Britain. Caesar's own account, the 'Commentarii de Bello Gallico', doubles as the best war propaganda ever written." },
+  { y: -49, year: "49 BCE", cat: "rome", title: "Crossing the Rubicon", detail: "Ordered to disband his army, Caesar instead leads it across the Rubicon river into Italy — 'alea iacta est', the die is cast — igniting civil war against Pompey. Antony serves as his second-in-command." },
+  { y: -48, year: "48 BCE", cat: "rome", title: "Caesar meets Cleopatra", detail: "Pursuing the defeated Pompey to Egypt, Caesar finds him murdered — then meets Cleopatra (legend says smuggled to him rolled in a carpet or bed-sack). He backs her in Egypt's civil war and they become lovers." },
+  { y: -45, year: "45 BCE", cat: "rome", title: "The Julian calendar", detail: "Caesar, advised by the Alexandrian astronomer Sosigenes, reforms Rome's chaotic calendar into a 365.25-day solar year — the calendar Europe kept until 1582, and the reason July bears his name." },
+  { y: -44, year: "44 BCE", cat: "rome", title: "Ides of March — Caesar assassinated", detail: "Named dictator perpetuo, Caesar is stabbed 23 times in the Senate by conspirators led by Brutus and Cassius on 15 March 44 BCE. Antony's funeral oration turns the Roman mob against the assassins." },
+  { y: -43, year: "43 BCE", cat: "rome", title: "Second Triumvirate", detail: "Antony, Octavian (Caesar's 19-year-old heir), and Lepidus form a legal three-man dictatorship, then defeat Caesar's assassins at Philippi (42 BCE). Antony takes the rich Roman East." },
+  { y: -41, year: "41 BCE", cat: "rome", title: "Antony meets Cleopatra at Tarsus", detail: "Cleopatra arrives to meet Antony on a golden barge dressed as Venus — a stage-managed spectacle Shakespeare immortalized. Their political and romantic alliance produces three children and reshapes the East." },
+  { y: -31, year: "31 BCE", cat: "rome", title: "Battle of Actium", detail: "Octavian's admiral Agrippa crushes the combined fleet of Antony and Cleopatra off western Greece. The couple flee to Egypt; their cause collapses." },
+  { y: -30.5, year: "30 BCE", cat: "rome", title: "Death of Mark Antony", detail: "As Octavian enters Alexandria, Antony falls on his sword after (falsely) hearing Cleopatra is dead, and dies in her arms. Octavian becomes Augustus, the first Roman emperor — the Republic is over." },
+
+  // ===== Babur & Mughals =====
+  { y: 1483, year: "1483 CE", cat: "mughal", title: "Birth of Babur", detail: "Zahir-ud-din Muhammad Babur is born in Andijan, Fergana Valley (modern Uzbekistan) — descended from Timur on his father's side and Genghis Khan on his mother's. He inherits a tiny kingdom at age 11." },
+  { y: 1504, year: "1504 CE", cat: "mughal", title: "Babur captures Kabul", detail: "After repeatedly winning and losing Samarkand, Babur seizes Kabul and makes it his base for two decades — turning his gaze toward the wealth of Hindustan." },
+  { y: 1526, year: "1526 CE", cat: "mughal", title: "First Battle of Panipat — Babur comes to India", detail: "On 21 April 1526, Babur's ~12,000 men defeat Sultan Ibrahim Lodi's force of ~100,000 using field artillery and matchlock muskets — among the earliest decisive uses of gunpowder in India. The Delhi Sultanate falls and the Mughal Empire is born; it will rule much of India for over 300 years." },
+  { y: 1527, year: "1527 CE", cat: "mughal", title: "Battle of Khanwa", detail: "Babur defeats Rana Sanga of Mewar's massive Rajput confederacy, securing Mughal rule in northern India beyond a single lucky victory." },
+  { y: 1530, year: "1530 CE", cat: "mughal", title: "Death of Babur", detail: "Dies in Agra at 47, succeeded by his son Humayun. His candid memoir, the Baburnama — covering everything from battles to his love of melons and gardens — is one of the great autobiographies of world literature." },
+
+  // ===== Scientific discoveries =====
+  { y: 1543, year: "1543 CE", cat: "science", title: "Copernicus: heliocentrism", detail: "'De Revolutionibus Orbium Coelestium' is published as Copernicus lies dying — placing the Sun, not Earth, at the center and launching the Scientific Revolution." },
+  { y: 1610, year: "1610 CE", cat: "science", title: "Galileo's telescope", detail: "Galileo publishes 'Sidereus Nuncius': moons of Jupiter, phases of Venus, mountains on the Moon — direct observational evidence against the Earth-centred cosmos." },
+  { y: 1687, year: "1687 CE", cat: "science", title: "Newton's Principia", detail: "Universal gravitation and the three laws of motion unify the heavens and Earth under one mathematics — arguably the single most influential scientific book ever written." },
+  { y: 1859, year: "1859 CE", cat: "science", title: "Darwin: On the Origin of Species", detail: "Evolution by natural selection explains the diversity of life without a designer — the unifying theory of all biology." },
+  { y: 1865, year: "1865 CE", cat: "science", title: "Maxwell's equations", detail: "James Clerk Maxwell unifies electricity, magnetism, and light into one theory of electromagnetism — the physics behind the entire electrical age that follows." },
+  { y: 1905, year: "1905 CE", cat: "science", title: "Einstein's miracle year", detail: "Four papers in one year: special relativity, E=mc², the photoelectric effect (seeding quantum theory), and Brownian motion (proving atoms exist). General relativity follows in 1915." },
+  { y: 1928, year: "1928 CE", cat: "science", title: "Fleming discovers penicillin", detail: "A contaminated petri dish at St Mary's Hospital, London, yields the first true antibiotic — eventually saving hundreds of millions of lives." },
+  { y: 1953, year: "1953 CE", cat: "science", title: "Structure of DNA", detail: "Watson and Crick, building on Rosalind Franklin's X-ray data, reveal the double helix — the molecular basis of heredity and the start of modern genetics." },
+  { y: 1969, year: "1969 CE", cat: "science", title: "Apollo 11 Moon landing", detail: "Armstrong and Aldrin walk on the Moon — Newton's mechanics, Maxwell's radio, and the new computer age converging in one small step." },
+  { y: 2012, year: "2012 CE", cat: "science", title: "Higgs boson confirmed", detail: "CERN's Large Hadron Collider confirms the particle that gives others mass, completing the Standard Model nearly 50 years after Peter Higgs proposed it." },
+
+  // ===== Industrial revolutions =====
+  { y: 1764, year: "c. 1760–1840", cat: "industry", title: "First Industrial Revolution", detail: "Britain mechanizes: Hargreaves' spinning jenny (1764), Watt's improved steam engine (1769), coal, iron, canals, and the first railways (Stephenson's Rocket, 1829). Muscle power gives way to steam, and the modern economy is born." },
+  { y: 1870, year: "c. 1870–1914", cat: "industry", title: "Second Industrial Revolution", detail: "Steel (Bessemer), electricity, and chemicals transform the world: Bell's telephone (1876), Edison's practical light bulb (1879), Benz's automobile (1885), and Ford's assembly line (1913). Maxwell's physics becomes everyday life." },
+  { y: 1947, year: "c. 1947–2000s", cat: "industry", title: "Third Industrial Revolution (Digital)", detail: "The transistor (Bell Labs, 1947) starts the digital age: integrated circuits (1958), the microprocessor (1971), personal computers, ARPANET (1969), and Tim Berners-Lee's World Wide Web (1989–91). Information itself becomes the engine of the economy." },
+  { y: 2012.5, year: "c. 2010s–present", cat: "industry", title: "Fourth Industrial Revolution", detail: "AI and deep learning (ImageNet moment, 2012; transformers, 2017; large language models from 2020s), robotics, IoT, and biotech like CRISPR (2012) and AlphaFold (2020) blur the lines between physical, digital, and biological — the revolution we're living through now." },
+];
+
+const ERAS = [
+  { before: -2600, label: "The Deep Past" },
+  { before: -356, label: "The Hellenistic World" },
+  { before: -150, label: "Ancient Engineering" },
+  { before: -100, label: "Rome, Egypt & the End of the Republic" },
+  { before: 30, label: "Faith & Empires" },
+  { before: 1483, label: "Babur, the Mughals & the Early Modern World" },
+  { before: 1543, label: "The Scientific Revolution & Beyond" },
+];
+
+const tl = document.getElementById("timeline");
+const sorted = [...EVENTS].sort((a, b) => a.y - b.y);
+const colors = {
+  macedon: "var(--macedon)", ptolemy: "var(--ptolemy)", rome: "var(--rome)",
+  "tech-ancient": "var(--tech-ancient)", mughal: "var(--mughal)",
+  science: "var(--science)", industry: "var(--industry)", world: "var(--world)",
+};
+const catNames = {
+  macedon: "Alexander the Great", ptolemy: "Ptolemies & Cleopatra", rome: "Caesar & Antony",
+  "tech-ancient": "Antikythera", mughal: "Babur & Mughals",
+  science: "Scientific Discovery", industry: "Industrial Revolution",
+  world: "World Milestone",
+};
+
+let side = 0;
+let eraIdx = 0;
+sorted.forEach((e, i) => {
+  while (eraIdx < ERAS.length && e.y >= ERAS[eraIdx].before) {
+    const lbl = document.createElement("div");
+    lbl.className = "era-label";
+    lbl.id = "era-" + eraIdx;
+    lbl.innerHTML = `<span>${ERAS[eraIdx].label}</span>`;
+    tl.appendChild(lbl);
+    eraIdx++;
+  }
+  const div = document.createElement("div");
+  div.className = "event " + (side++ % 2 === 0 ? "left" : "right");
+  div.dataset.cat = e.cat;
+  div.dataset.text = (e.title + " " + e.detail + " " + e.year).toLowerCase();
+  div.style.setProperty("--c", colors[e.cat]);
+  div.innerHTML = `
+    <span class="node"></span>
+    <div class="year">${e.year}</div>
+    <div class="card">
+      <span class="tag">${catNames[e.cat]}</span>
+      <h3>${e.title}</h3>
+      <div class="detail">${e.detail}</div>
+    </div>`;
+  tl.appendChild(div);
+});
+
+// era jump links
+document.getElementById("jumpbar").innerHTML =
+  ERAS.map((e, i) => `<a href="#era-${i}">${e.label}</a>`).join(" · ");
+
+// expand/collapse
+tl.addEventListener("click", (ev) => {
+  const card = ev.target.closest(".card");
+  if (card) card.classList.toggle("open");
+});
+
+// scroll-in animation
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((en) => { if (en.isIntersecting) en.target.classList.add("visible"); });
+}, { threshold: 0.12 });
+document.querySelectorAll(".event").forEach((el) => obs.observe(el));
+
+// filtering
+const chips = [...document.querySelectorAll(".chip")];
+const active = new Set(Object.keys(colors));
+const searchBox = document.getElementById("search");
+
+function applyFilter() {
+  const q = searchBox.value.trim().toLowerCase();
+  let shown = 0;
+  document.querySelectorAll(".event").forEach((el) => {
+    const ok = active.has(el.dataset.cat) && (!q || el.dataset.text.includes(q));
+    el.classList.toggle("hidden", !ok);
+    if (ok) { shown++; el.classList.add("visible"); }
+  });
+  document.getElementById("count").textContent = shown;
+  // hide era labels with no visible events before next label
+  const nodes = [...tl.children];
+  nodes.forEach((n, i) => {
+    if (!n.classList.contains("era-label")) return;
+    let any = false;
+    for (let j = i + 1; j < nodes.length && !nodes[j].classList.contains("era-label"); j++) {
+      if (!nodes[j].classList.contains("hidden")) { any = true; break; }
+    }
+    n.classList.toggle("hidden", !any);
+  });
+}
+
+chips.forEach((chip) => {
+  chip.addEventListener("click", () => {
+    const cat = chip.dataset.cat;
+    if (cat === "all") {
+      Object.keys(colors).forEach((c) => active.add(c));
+      chips.forEach((c) => { c.classList.add("active"); c.classList.remove("inactive"); });
+    } else {
+      const allOn = active.size === Object.keys(colors).length;
+      if (allOn) {
+        // first individual click: isolate this category
+        active.clear();
+        active.add(cat);
+      } else if (active.has(cat)) {
+        active.delete(cat);
+        if (active.size === 0) Object.keys(colors).forEach((c) => active.add(c));
+      } else {
+        active.add(cat);
+      }
+      chips.forEach((c) => {
+        if (c.dataset.cat === "all") {
+          const on = active.size === Object.keys(colors).length;
+          c.classList.toggle("active", on);
+          c.classList.toggle("inactive", !on);
+        } else {
+          const on = active.has(c.dataset.cat);
+          c.classList.toggle("active", on);
+          c.classList.toggle("inactive", !on);
+        }
+      });
+    }
+    applyFilter();
+  });
+});
+
+searchBox.addEventListener("input", applyFilter);
+applyFilter();
+</script>
+</body>
+</html>
