@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Capable, explained — an interactive guide to "Ozempic for sleep"</title>
+<style>
+  :root{
+    --bg:#0b0f17; --bg2:#0f1521; --panel:#131b2b; --panel2:#172131;
+    --ink:#e8eef7; --muted:#9fb0c7; --faint:#6b7c97;
+    --line:#243349; --accent:#5ad1c9; --accent2:#7aa2ff;
+    --warm:#ffb86b; --pink:#ff8fb1; --green:#67e08a; --red:#ff7a7a;
+    --radius:16px; --maxw:980px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:linear-gradient(180deg,#0a0e15,#0b0f17 30%,#0b0f17);
+    color:var(--ink); font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent2)}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+  h1,h2,h3{line-height:1.2; letter-spacing:-.01em}
+  h2{font-size:clamp(22px,3.4vw,30px); margin:0 0 4px}
+  h3{font-size:18px; margin:22px 0 6px}
+  .kicker{color:var(--accent); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:12px}
+  p{color:var(--ink)} .muted{color:var(--muted)}
+
+  /* top bar */
+  header.top{position:sticky; top:0; z-index:50; backdrop-filter:blur(10px);
+    background:rgba(11,15,23,.78); border-bottom:1px solid var(--line)}
+  .top .wrap{display:flex; align-items:center; gap:16px; height:58px}
+  .brand{font-weight:800; letter-spacing:-.02em}
+  .brand span{color:var(--accent)}
+  nav.links{margin-left:auto; display:flex; gap:4px; flex-wrap:wrap}
+  nav.links a{color:var(--muted); text-decoration:none; font-size:13px; padding:6px 10px; border-radius:8px}
+  nav.links a:hover{color:var(--ink); background:var(--panel)}
+
+  /* hero */
+  .hero{padding:70px 0 30px; border-bottom:1px solid var(--line);
+    background:radial-gradient(1200px 400px at 70% -10%, rgba(122,162,255,.12), transparent 60%),
+               radial-gradient(900px 350px at 10% 0%, rgba(90,209,201,.10), transparent 55%)}
+  .hero h1{font-size:clamp(30px,6vw,52px); margin:10px 0 14px}
+  .hero h1 em{font-style:normal; color:var(--accent)}
+  .lede{font-size:clamp(17px,2.4vw,20px); color:var(--muted); max-width:720px}
+  .pill{display:inline-block; font-size:12px; color:var(--warm); border:1px solid #3a2f1c;
+    background:#1c1710; padding:4px 10px; border-radius:999px; margin-bottom:6px}
+
+  section{padding:48px 0; border-bottom:1px solid var(--line)}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:20px}
+  .grid{display:grid; gap:16px}
+  @media(min-width:760px){.cols-2{grid-template-columns:1fr 1fr}.cols-3{grid-template-columns:1fr 1fr 1fr}}
+
+  .callout{border-left:3px solid var(--accent); background:var(--panel2); padding:14px 16px; border-radius:0 12px 12px 0; margin:16px 0}
+  .callout.paper{border-color:var(--warm)}
+  .callout.bg{border-color:var(--accent2)}
+  .tag{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    padding:2px 8px; border-radius:6px; vertical-align:middle}
+  .tag.paper{background:#2a2110; color:var(--warm)}
+  .tag.bg{background:#15203a; color:var(--accent2)}
+
+  /* glossary tooltip */
+  .term{border-bottom:1px dotted var(--accent); cursor:help; color:var(--ink)}
+  .term:hover{color:var(--accent)}
+
+  /* buttons */
+  button.btn{font:inherit; cursor:pointer; border:1px solid var(--line); background:var(--panel2);
+    color:var(--ink); padding:9px 14px; border-radius:10px; transition:.15s}
+  button.btn:hover{border-color:var(--accent); color:#fff}
+  button.btn.primary{background:linear-gradient(180deg,#1c2c4a,#16243d); border-color:#34507f}
+  button.btn:disabled{opacity:.4; cursor:not-allowed}
+  .controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:14px 0}
+
+  /* toggle */
+  .switch{display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden}
+  .switch button{border:0; background:transparent; color:var(--muted); padding:8px 16px; cursor:pointer; font:inherit}
+  .switch button.on{background:var(--accent); color:#06231f; font-weight:700}
+
+  /* gene cards */
+  .gene{cursor:pointer; transition:.15s; position:relative; overflow:hidden}
+  .gene:hover{border-color:var(--accent); transform:translateY(-2px)}
+  .gene h3{margin:0 0 2px}
+  .gene .body{display:none; margin-top:10px; border-top:1px solid var(--line); padding-top:10px}
+  .gene.open .body{display:block}
+  .gene .chev{position:absolute; right:16px; top:18px; color:var(--faint); transition:.2s}
+  .gene.open .chev{transform:rotate(180deg)}
+
+  /* svg figures */
+  .fig{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:8px}
+  .figcap{color:var(--faint); font-size:13px; margin-top:8px; padding:0 8px 6px}
+  svg{display:block; width:100%; height:auto}
+  .node{cursor:pointer}
+  .node .lab{font:600 13px ui-sans-serif,system-ui; fill:var(--ink)}
+  .node .sub{font:11px ui-sans-serif,system-ui; fill:var(--muted)}
+  .flow{stroke:var(--faint); stroke-width:2.5; fill:none; marker-end:url(#arrow)}
+  .flow.inhibit{stroke:var(--red)}
+  .flow.active{stroke:var(--accent); stroke-width:3.5}
+  .pulse{animation:dash 1.2s linear infinite}
+  @keyframes dash{to{stroke-dashoffset:-24}}
+
+  .explainbox{min-height:64px; background:var(--panel2); border:1px solid var(--line);
+    border-radius:12px; padding:12px 14px; margin-top:12px; font-size:15px}
+  .explainbox b{color:var(--accent)}
+
+  /* step list */
+  ol.steps{counter-reset:s; list-style:none; padding:0; margin:0}
+  ol.steps li{position:relative; padding:10px 0 10px 44px; border-bottom:1px solid var(--line)}
+  ol.steps li:last-child{border-bottom:0}
+  ol.steps li::before{counter-increment:s; content:counter(s); position:absolute; left:0; top:10px;
+    width:28px; height:28px; border-radius:50%; background:var(--panel2); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--muted)}
+  ol.steps li.active::before{background:var(--accent); color:#06231f; border-color:var(--accent)}
+  ol.steps li.active{color:#fff}
+  ol.steps li.done::before{background:#1c3a2a; color:var(--green); border-color:#2c5a40; content:"✓"}
+
+  table.ref{width:100%; border-collapse:collapse; font-size:14px}
+  table.ref td{border-bottom:1px solid var(--line); padding:8px 6px; vertical-align:top}
+  table.ref td:first-child{color:var(--accent); width:34px; font-weight:700}
+
+  .legend{display:flex; gap:16px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin-top:8px}
+  .legend i{display:inline-block; width:14px; height:3px; vertical-align:middle; margin-right:6px; border-radius:2px}
+
+  .footer{padding:40px 0 80px; color:var(--faint); font-size:13px}
+  sup a{ text-decoration:none; color:var(--accent); font-weight:700}
+  .disclaim{font-size:13px; color:var(--faint); border:1px dashed var(--line); border-radius:12px; padding:12px 14px; margin-top:14px}
+
+  /* dock figure specifics */
+  .drugbox{font:600 12px ui-sans-serif}
+  .gprot{opacity:.35; transition:opacity .4s}
+  .gprot.on{opacity:1}
+  .spark{opacity:0}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div class="brand">Capable<span>·</span>decoded</div>
+  <nav class="links">
+    <a href="#tldr">TL;DR</a>
+    <a href="#idea">The idea</a>
+    <a href="#genes">The genes</a>
+    <a href="#pathway">The pathway</a>
+    <a href="#receptor">Drug + receptor</a>
+    <a href="#make">How they make it</a>
+    <a href="#roadmap">Plan</a>
+    <a href="#refs">Sources</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <span class="pill">An interactive explainer of the “Capable” research memo you uploaded</span>
+  <h1>They want to build <em>Ozempic for sleep</em>.<br/>Here’s what that actually means.</h1>
+  <p class="lede">Capable is a lab that wants to make a drug that lets healthy people sleep less — 4–6 hours a night — while staying healthy, by copying rare humans who are naturally built that way. This page walks through the biology and the chemistry behind that plan, with diagrams you can play with. Every claim is tagged as either <span class="tag paper">from the memo</span> or <span class="tag bg">established science</span>, with sources.</p>
+</div></div>
+
+<!-- ============ TLDR ============ -->
+<section id="tldr"><div class="wrap">
+  <span class="kicker">Start here</span>
+  <h2>The whole thing in 90 seconds</h2>
+  <div class="grid cols-3" style="margin-top:18px">
+    <div class="card">
+      <h3 style="color:var(--accent)">1 · The clue</h3>
+      <p class="muted">A few rare families carry gene variants that let them feel fully rested on ~6 hours of sleep, with <em>more</em> energy and seemingly <em>lower</em> disease risk — not less. Nature already built the thing Capable wants to make.<sup><a href="#refs">6–10</a></sup></p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--accent2)">2 · The target</h3>
+      <p class="muted">Those variants funnel into a few molecular “switches” — chiefly a gene called <span class="term" data-t="dec2">DEC2</span> and a brain signal called <span class="term" data-t="orexin">orexin</span> — that control how much sleep your brain demands.<sup><a href="#refs">1,6,7</a></sup></p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--warm)">3 · The drug</h3>
+      <p class="muted">They build molecules — especially <span class="term" data-t="peptide">peptides</span> (mini-proteins, the same drug class as Ozempic) — that nudge those switches, then test them in mice within a week.<sup><a href="#refs">15–17</a></sup></p>
+    </div>
+  </div>
+  <div class="callout">
+    <b>Why “Ozempic for sleep”?</b> Ozempic is a peptide that flips one powerful hormonal switch (the <span class="term" data-t="glp1">GLP-1</span> system) and gets a big whole-body effect. The memo’s bet is that sleep has a similar master switch you can flip with a peptide — so you reclaim waking hours without the harm of normal sleep deprivation. <span class="tag paper">from the memo</span>
+  </div>
+</div></section>
+
+<!-- ============ THE IDEA ============ -->
+<section id="idea"><div class="wrap">
+  <span class="kicker">What they're proposing</span>
+  <h2>“Induce a short-sleeper phenotype in adults”</h2>
+  <p>In plain terms: take a trait that some people are <em>born</em> with (needing little sleep), and turn it into something you can give an adult as a medicine.</p>
+
+  <div class="callout paper">
+    <span class="tag paper">from the memo</span> &nbsp; The memo’s own framing: <i>“use naturally occurring short-sleeper variants to develop a targeted therapy that safely decreases sleep need while preserving health… modulation of key sleep pathways such as DEC2 &amp; orexin will allow us to pioneer safe approaches to reclaim thousands of waking hours.”</i>
+  </div>
+
+  <h3>Two reasons they think this is more than a productivity hack</h3>
+  <div class="grid cols-2" style="margin-top:10px">
+    <div class="card">
+      <b style="color:var(--green)">Brain protection.</b>
+      <p class="muted" style="margin:6px 0 0">Short-sleeper mice accumulate <em>less</em> Alzheimer’s-type damage (beta-amyloid and tau “plaques”), and short-sleeper families appear to have low rates of neurodegeneration. So the same switch might also slow brain disease.<sup><a href="#refs">11–13</a></sup></p>
+    </div>
+    <div class="card">
+      <b style="color:var(--pink)">Real diseases first.</b>
+      <p class="muted" style="margin:6px 0 0">The first patients wouldn’t be biohackers — they’d be people with <span class="term" data-t="narcolepsy">narcolepsy</span>, idiopathic hypersomnia, and treatment-resistant depression, where excessive sleepiness or low energy is the disease.<sup><a href="#refs">14–17</a></sup> <span class="tag paper">from the memo</span></p>
+    </div>
+  </div>
+  <div class="disclaim">⚠️ <b>Reality check, not in the memo:</b> this is an early-stage research <em>plan</em>. As of the memo there is no approved drug, no human trial — the positive data shown is a peptide changing how long <em>mice</em> stay inactive overnight (n=15 per group). Everything below explains the <i>mechanism they’re betting on</i>, not a proven treatment.</div>
+</div></section>
+
+<!-- ============ THE GENES ============ -->
+<section id="genes"><div class="wrap">
+  <span class="kicker">The clues from nature</span>
+  <h2>The “short sleeper” genes — click each to open</h2>
+  <p class="muted">These are real, published human variants. Capable wants to mimic their <em>effect</em> with a drug instead of editing your DNA. Tap a card.</p>
+
+  <div class="grid cols-3" style="margin-top:16px" id="geneGrid">
+    <div class="card gene" data-g="dec2">
+      <span class="chev">▾</span>
+      <span class="tag bg">established</span>
+      <h3>DEC2 <span class="muted" style="font-weight:400;font-size:14px">(gene: BHLHE41)</span></h3>
+      <div class="muted" style="font-size:14px">The master dimmer switch</div>
+      <div class="body">
+        <p>DEC2 is a <span class="term" data-t="repressor">transcriptional repressor</span> — a protein whose job is to <b>turn other genes down</b>. One of the genes it sits on and silences is the gene for <span class="term" data-t="orexin">orexin</span>, the brain’s “stay awake” signal.</p>
+        <p>The famous short-sleeper mutation (<b>P384R</b>) <b>breaks DEC2’s grip</b> on the orexin gene. With the brake off, the brain makes more orexin → more wakefulness → less sleep needed. Mice carrying it sleep less but stay healthy for life.<sup><a href="#refs">1,6,7</a></sup></p>
+        <p class="muted" style="font-size:13.5px">Tellingly, an orexin <em>blocker</em> partly cancels the short-sleep effect — strong evidence that DEC2 works <i>through</i> orexin.<sup><a href="#refs">1</a></sup></p>
+      </div>
+    </div>
+
+    <div class="card gene" data-g="adrb1">
+      <span class="chev">▾</span>
+      <span class="tag bg">established</span>
+      <h3>ADRB1 <span class="muted" style="font-weight:400;font-size:14px">(β1-adrenergic receptor)</span></h3>
+      <div class="muted" style="font-size:14px">A wake-promoting receptor</div>
+      <div class="body">
+        <p>This is the receptor that adrenaline-type signals use. A short-sleeper family carries the <b>A187V</b> variant, found in “wake-promoting” neurons in a brain-stem region called the <b>dorsal pons</b>.</p>
+        <p>The variant makes those wake neurons <b>more excitable</b>, so the brain spends more time awake and needs less sleep (~1 hour less in mice).<sup><a href="#refs">9</a></sup></p>
+        <p class="muted" style="font-size:13.5px">A related ADRB1 finding: the mutant version improves REM sleep and reduces tau buildup in a mouse model of brain disease.<sup><a href="#refs">12</a></sup></p>
+      </div>
+    </div>
+
+    <div class="card gene" data-g="grm1">
+      <span class="chev">▾</span>
+      <span class="tag bg">established</span>
+      <h3>mGluR1 <span class="muted" style="font-weight:400;font-size:14px">(gene: GRM1)</span></h3>
+      <div class="muted" style="font-size:14px">A glutamate receptor</div>
+      <div class="body">
+        <p>mGluR1 reads <span class="term" data-t="glutamate">glutamate</span>, the brain’s main “go” signal. Two mutations in this receptor were found in natural short sleepers and shown to change sleep in mice.<sup><a href="#refs">8</a></sup></p>
+        <p class="muted" style="font-size:13.5px">It’s a third, independent route to the same destination — which is the memo’s point: several different genes all converge on “need less sleep, stay healthy.”</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout bg" style="margin-top:18px">
+    <span class="tag bg">established</span> &nbsp; <b>The pattern that matters:</b> DEC2, ADRB1, and mGluR1 are different molecules, but they all tilt the brain toward <em>wakefulness</em> without making people sick. That’s the green light Capable is acting on — if many natural “off-ramps” lead to safe short sleep, a drug aimed at one of them might too.
+  </div>
+</div></section>
+
+<!-- ============ THE PATHWAY ============ -->
+<section id="pathway"><div class="wrap">
+  <span class="kicker">The mechanism</span>
+  <h2>How the switch works — flip it yourself</h2>
+  <p class="muted">This is the DEC2 → orexin → wakefulness chain the memo names. Use the toggle to compare a normal brain with a short-sleeper brain (or a brain on Capable’s drug). Click any box for a plain explanation.</p>
+
+  <div class="controls">
+    <div class="switch" id="pwSwitch">
+      <button data-mode="normal" class="on">Normal sleeper</button>
+      <button data-mode="short">Short sleeper / on drug</button>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 900 340" role="img" aria-label="Sleep-wake pathway diagram">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#6b7c97"/>
+        </marker>
+        <marker id="arrowA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#5ad1c9"/>
+        </marker>
+      </defs>
+
+      <!-- DEC2 -->
+      <g class="node" data-n="dec2">
+        <rect x="20" y="120" rx="12" width="150" height="80" fill="#172131" stroke="#243349"/>
+        <text class="lab" x="95" y="150" text-anchor="middle">DEC2</text>
+        <text class="sub" x="95" y="170" text-anchor="middle">the brake</text>
+        <text class="sub" x="95" y="186" text-anchor="middle" id="dec2state">pressing the brake</text>
+      </g>
+
+      <!-- inhibits arrow -->
+      <path id="e1" class="flow inhibit" d="M170,160 L250,160" />
+      <text class="sub" x="210" y="150" text-anchor="middle" fill="#ff7a7a" id="e1lab">silences ⟂</text>
+
+      <!-- orexin gene/neurons -->
+      <g class="node" data-n="orexin">
+        <rect x="250" y="120" rx="12" width="170" height="80" fill="#172131" stroke="#243349"/>
+        <text class="lab" x="335" y="150" text-anchor="middle">Orexin neurons</text>
+        <text class="sub" x="335" y="170" text-anchor="middle">make “stay awake” signal</text>
+        <text class="sub" x="335" y="186" text-anchor="middle" id="orxstate">output: low</text>
+      </g>
+
+      <!-- orexin molecules -->
+      <path id="e2" class="flow" d="M420,160 L500,160" marker-end="url(#arrow)"/>
+      <g id="orexinDots"></g>
+
+      <!-- OX2R receptor -->
+      <g class="node" data-n="ox2r">
+        <rect x="500" y="120" rx="12" width="170" height="80" fill="#172131" stroke="#243349"/>
+        <text class="lab" x="585" y="150" text-anchor="middle">OX2R receptor</text>
+        <text class="sub" x="585" y="170" text-anchor="middle">the “antenna”</text>
+        <text class="sub" x="585" y="186" text-anchor="middle" id="ox2rstate">lightly activated</text>
+      </g>
+
+      <path id="e3" class="flow" d="M670,160 L750,160" marker-end="url(#arrow)"/>
+
+      <!-- wakefulness -->
+      <g class="node" data-n="wake">
+        <rect x="750" y="120" rx="12" width="130" height="80" fill="#172131" stroke="#243349"/>
+        <text class="lab" x="815" y="150" text-anchor="middle">Wakefulness</text>
+        <text class="sub" x="815" y="172" text-anchor="middle" id="wakestate">8 h sleep need</text>
+      </g>
+
+      <!-- drug injection point -->
+      <g id="drugTag" style="opacity:0">
+        <rect x="250" y="40" rx="10" width="170" height="44" fill="#1c1710" stroke="#3a2f1c"/>
+        <text x="335" y="60" text-anchor="middle" fill="#ffb86b" style="font:700 12px ui-sans-serif">Capable drug acts here</text>
+        <text x="335" y="76" text-anchor="middle" fill="#9fb0c7" style="font:11px ui-sans-serif">mimics “brake off”</text>
+        <path d="M335,84 L335,118" stroke="#ffb86b" stroke-width="2" stroke-dasharray="4 3"/>
+      </g>
+    </svg>
+    <div class="legend">
+      <span><i style="background:#ff7a7a"></i>red = blocking / silencing</span>
+      <span><i style="background:#5ad1c9"></i>teal = active signal flowing</span>
+      <span><i style="background:#6b7c97"></i>grey = weak signal</span>
+    </div>
+  </div>
+  <div class="explainbox" id="pwExplain">👆 Click any box above, or flip the toggle, to see what changes. <b>Right now:</b> normal sleeper — DEC2 presses the brake on orexin, so the wake signal stays modest and you need a full night.</div>
+  <p class="figcap">Simplified educational model based on Hirano et al. 2018 (DEC2 represses prepro-orexin) and orexin/OX2R wakefulness biology.<sup><a href="#refs">1,6,7,14</a></sup></p>
+</div></section>
+
+<!-- ============ DRUG + RECEPTOR ============ -->
+<section id="receptor"><div class="wrap">
+  <span class="kicker">“How the drugs fit into the receptors”</span>
+  <h2>Lock and key: docking a drug into a receptor</h2>
+  <p class="muted">A <span class="term" data-t="receptor">receptor</span> is a protein antenna on a cell. The orexin receptor <b>OX2R</b> is a <span class="term" data-t="gpcr">GPCR</span> — when the right molecule slots into its pocket, the receptor changes shape and fires a signal <em>inside</em> the cell. An <span class="term" data-t="agonist">agonist</span> is a key that turns it ON. Press the button to dock one.</p>
+
+  <div class="controls">
+    <button class="btn primary" id="dockBtn">▶ Dock the agonist</button>
+    <button class="btn" id="resetDock">Reset</button>
+    <label style="margin-left:auto; color:var(--muted); font-size:14px; display:flex; gap:8px; align-items:center">
+      drug type:
+      <select id="drugType" style="font:inherit; background:var(--panel2); color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:6px 8px">
+        <option value="agonist">Agonist (turns ON) — what Capable wants</option>
+        <option value="antagonist">Antagonist (blocks) — for comparison</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 900 380" role="img" aria-label="Drug docking into a GPCR receptor">
+      <!-- membrane -->
+      <rect x="0" y="150" width="900" height="80" fill="#0e1622"/>
+      <line x1="0" y1="150" x2="900" y2="150" stroke="#243349"/>
+      <line x1="0" y1="230" x2="900" y2="230" stroke="#243349"/>
+      <text x="14" y="145" fill="#6b7c97" style="font:11px ui-sans-serif">outside the cell</text>
+      <text x="14" y="248" fill="#6b7c97" style="font:11px ui-sans-serif">inside the cell</text>
+
+      <!-- receptor 7 helices (GPCR) -->
+      <g id="receptor">
+        <g id="recHelices" fill="#1b3a5e" stroke="#34507f">
+          <rect x="380" y="140" width="20" height="100" rx="9"/>
+          <rect x="406" y="140" width="20" height="100" rx="9"/>
+          <rect x="432" y="140" width="20" height="100" rx="9"/>
+          <rect x="458" y="140" width="20" height="100" rx="9"/>
+          <rect x="484" y="140" width="20" height="100" rx="9"/>
+          <rect x="510" y="140" width="20" height="100" rx="9"/>
+        </g>
+        <!-- binding pocket -->
+        <path id="pocket" d="M412,150 q43,-34 86,0 l0,30 q-43,18 -86,0 z" fill="#0e1622" stroke="#5ad1c9" stroke-dasharray="4 3"/>
+        <text x="455" y="132" text-anchor="middle" fill="#5ad1c9" style="font:600 12px ui-sans-serif">OX2R (a GPCR)</text>
+        <text x="455" y="252" text-anchor="middle" fill="#9fb0c7" style="font:11px ui-sans-serif">pocket</text>
+      </g>
+
+      <!-- G-protein inside -->
+      <g id="gprotein" class="gprot">
+        <ellipse cx="455" cy="300" rx="60" ry="30" fill="#172131" stroke="#34507f"/>
+        <text x="455" y="298" text-anchor="middle" fill="#7aa2ff" style="font:600 12px ui-sans-serif">G-protein</text>
+        <text x="455" y="314" text-anchor="middle" fill="#9fb0c7" style="font:10px ui-sans-serif">the cell's messenger</text>
+      </g>
+
+      <!-- the drug -->
+      <g id="drug" transform="translate(120,60)">
+        <path d="M0,18 q18,-30 40,0 l0,22 q-20,14 -40,0 z" fill="#ffb86b" stroke="#c98a3c"/>
+        <text x="20" y="14" text-anchor="middle" fill="#ffb86b" style="font:700 11px ui-sans-serif" id="drugLabel">agonist</text>
+      </g>
+
+      <!-- spark / signal -->
+      <g id="signal" class="spark">
+        <text x="650" y="305" fill="#67e08a" style="font:700 14px ui-sans-serif" id="signalText">⚡ signal fired → wakefulness</text>
+        <circle id="s1" cx="540" cy="300" r="5" fill="#67e08a"/>
+      </g>
+      <g id="blocked" class="spark">
+        <text x="640" y="305" fill="#ff7a7a" style="font:700 14px ui-sans-serif">✕ pocket blocked → no signal</text>
+      </g>
+    </svg>
+    <div class="legend">
+      <span><i style="background:#ffb86b"></i>drug molecule (key)</span>
+      <span><i style="background:#5ad1c9"></i>receptor pocket (lock)</span>
+      <span><i style="background:#7aa2ff"></i>G-protein (inside messenger)</span>
+    </div>
+  </div>
+  <div class="explainbox" id="dockExplain">Press <b>Dock the agonist</b>. The drug slides down into the receptor’s pocket; the receptor changes shape and switches on the G-protein inside the cell, which fires the “stay awake” signal.</div>
+
+  <div class="grid cols-2" style="margin-top:16px">
+    <div class="callout bg" style="margin:0">
+      <span class="tag bg">established</span> <b>Real example:</b> TAK-861 (oveporexton) is an experimental <b>OX2R-selective agonist</b> — a small molecule that docks into OX2R and fires the same signal orexin would. It promotes wakefulness in mice and monkeys and improves narcolepsy-like symptoms.<sup><a href="#refs">16</a></sup> This is exactly the kind of “key” Capable’s sleep program is chasing.
+    </div>
+    <div class="callout paper" style="margin:0">
+      <span class="tag paper">from the memo</span> <b>Why agonist matters:</b> the memo notes the first GLP-1 drugs hit <em>one</em> receptor; Eli Lilly’s tirzepatide wins by being an agonist at <em>two</em>; and that a team member made the first published <b>tetra-agonist</b> (one molecule, four receptors). More precise “keys” = better drugs.
+    </div>
+  </div>
+  <p class="figcap">GPCR activation is shown schematically. Mechanism per orexin/OX2R pharmacology; TAK-861 engages OX2R and downstream signalling like the natural orexin peptide.<sup><a href="#refs">16</a></sup></p>
+</div></section>
+
+<!-- ============ THE OZEMPIC ANALOGY ============ -->
+<section id="ozempic"><div class="wrap">
+  <span class="kicker">Why peptides, why "Ozempic"</span>
+  <h2>The Ozempic playbook they’re copying</h2>
+  <div class="grid cols-2" style="margin-top:8px">
+    <div class="card">
+      <h3 style="margin-top:0; color:var(--accent)">What Ozempic does</h3>
+      <p class="muted"><span class="term" data-t="glp1">GLP-1</span> is a natural gut hormone — a peptide. Ozempic (semaglutide) is a lab-built copy that docks into the <b>GLP-1 receptor</b> (also a GPCR) and flips a metabolic master-switch: less hunger, better blood sugar. One precise peptide, one big effect.<sup><a href="#refs">—</a></sup> <span class="tag bg">established</span></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0; color:var(--warm)">What Capable wants</h3>
+      <p class="muted">Same strategy, different switch: a precise peptide that docks into a <em>sleep</em> pathway (orexin / OX2R, and upstream DEC2) and flips a master-switch for wakefulness — “reclaim thousands of waking hours.” <span class="tag paper">from the memo</span></p>
+    </div>
+  </div>
+  <div class="callout">
+    <b>Bigger keys, then sharper keys.</b> Tirzepatide hits two receptors (GIP + GLP-1) and beats single-target semaglutide on weight loss — proof that <em>multi-target</em> peptides can outperform. Capable’s team includes people who push exactly this frontier: dual- and tetra-agonist peptides, and “stitched/stapled” peptides that survive longer in the body. <span class="tag bg">established</span> + <span class="tag paper">memo</span>
+  </div>
+</div></section>
+
+<!-- ============ HOW THEY MAKE IT ============ -->
+<section id="make"><div class="wrap">
+  <span class="kicker">"Explain how they would make it"</span>
+  <h2>Building a peptide drug, one amino acid at a time</h2>
+  <p class="muted">Peptides are short chains of <span class="term" data-t="aminoacid">amino acids</span> (protein building blocks). Labs build them on a tiny plastic bead using <span class="term" data-t="spps">solid-phase peptide synthesis (SPPS)</span> — the method Capable’s synthesizer runs in hours. It’s a repeating two-move cycle. Step through it:</p>
+
+  <div class="controls">
+    <button class="btn" id="spPrev">◀ Back</button>
+    <button class="btn primary" id="spNext">Next step ▶</button>
+    <button class="btn" id="spAuto">⏵ Auto-play</button>
+    <span class="muted" id="spCounter" style="margin-left:auto">step 0 / 6</span>
+  </div>
+
+  <div class="grid cols-2">
+    <div class="fig">
+      <svg viewBox="0 0 420 360" role="img" aria-label="Solid phase peptide synthesis animation">
+        <!-- resin bead -->
+        <circle cx="80" cy="300" r="46" fill="#22304a" stroke="#34507f"/>
+        <text x="80" y="304" text-anchor="middle" fill="#9fb0c7" style="font:600 12px ui-sans-serif">resin</text>
+        <text x="80" y="318" text-anchor="middle" fill="#6b7c97" style="font:10px ui-sans-serif">bead</text>
+        <!-- chain anchor -->
+        <line x1="120" y1="280" x2="150" y2="250" stroke="#34507f" stroke-width="3"/>
+        <!-- growing chain container -->
+        <g id="chain"></g>
+        <!-- floating cap label -->
+        <g id="capG" style="opacity:0">
+          <rect x="250" y="20" width="150" height="40" rx="8" fill="#1c1710" stroke="#3a2f1c"/>
+          <text x="325" y="38" text-anchor="middle" fill="#ffb86b" style="font:700 11px ui-sans-serif">Fmoc “cap”</text>
+          <text x="325" y="52" text-anchor="middle" fill="#9fb0c7" style="font:10px ui-sans-serif">protects the next link</text>
+        </g>
+        <!-- reagent flask -->
+        <g id="flaskG" style="opacity:0">
+          <text x="210" y="120" text-anchor="middle" fill="#5ad1c9" style="font:700 12px ui-sans-serif" id="flaskText">+ piperidine</text>
+        </g>
+      </svg>
+      <div class="figcap">Each colored block = one amino acid added to the chain.</div>
+    </div>
+
+    <div>
+      <ol class="steps" id="spSteps">
+        <li data-s="1"><b>Anchor.</b> Attach the first amino acid to the resin bead. Its reactive end wears a protective “cap” (an <span class="term" data-t="fmoc">Fmoc</span> group) so it can’t react yet.</li>
+        <li data-s="2"><b>Deprotect.</b> Wash with a base (<b>piperidine</b>) to pop the cap off — now the end is reactive and ready to bond.</li>
+        <li data-s="3"><b>Couple.</b> Add the next (still-capped) amino acid plus an <span class="term" data-t="activator">activator</span>. It forms a <span class="term" data-t="peptidebond">peptide bond</span>, extending the chain by one link.</li>
+        <li data-s="4"><b>Wash &amp; repeat.</b> Rinse, then loop steps 2–3 for every amino acid in the sequence. (Capable’s record-setting hardware does each link in seconds.)</li>
+        <li data-s="5"><b>Cleave.</b> Cut the finished chain off the bead (strong acid, TFA) and strip remaining protecting groups.</li>
+        <li data-s="6"><b>Purify &amp; test.</b> Clean it up, confirm the exact molecule, then dose it into mice — sometimes the same week.</li>
+      </ol>
+      <div class="explainbox" id="spExplain">Press <b>Next step</b> to build the peptide. SPPS is just “deprotect, couple, repeat” until the chain is the length you designed.</div>
+    </div>
+  </div>
+  <p class="figcap">Standard Fmoc solid-phase peptide synthesis (Merrifield method, Fmoc variant): iterative piperidine deprotection + activated coupling, then TFA cleavage.<sup><a href="#refs">B1</a></sup></p>
+
+  <h3>The pro move: “stapling” the peptide so it survives</h3>
+  <p class="muted">A loose peptide gets chewed up fast in the body. Capable’s team works on <b>stapled / stitched peptides</b>: you insert two special amino acids with reactive “arms,” then a catalyst (<span class="term" data-t="rcm">ring-closing metathesis</span>) fuses the arms into a hydrocarbon <b>staple</b>. That staple locks the peptide into its active <span class="term" data-t="helix">α-helix</span> shape, making it dramatically more stable and better at getting into cells.<sup><a href="#refs">B2</a></sup></p>
+
+  <div class="fig">
+    <svg viewBox="0 0 760 170" role="img" aria-label="Peptide stapling">
+      <!-- before -->
+      <text x="20" y="28" fill="#9fb0c7" style="font:600 13px ui-sans-serif">Before: floppy chain (degrades fast)</text>
+      <path d="M30,90 q20,-30 40,0 t40,0 t40,0 t40,0 t40,0 t40,0" fill="none" stroke="#6b7c97" stroke-width="3"/>
+      <circle cx="110" cy="75" r="6" fill="#ffb86b"/><circle cx="190" cy="75" r="6" fill="#ffb86b"/>
+      <text x="150" y="135" text-anchor="middle" fill="#6b7c97" style="font:11px ui-sans-serif">two “arm” amino acids, not yet joined</text>
+
+      <!-- arrow -->
+      <text x="400" y="95" fill="#5ad1c9" style="font:700 22px ui-sans-serif">→</text>
+      <text x="408" y="120" text-anchor="middle" fill="#5ad1c9" style="font:10px ui-sans-serif">catalyst</text>
+
+      <!-- after -->
+      <text x="470" y="28" fill="#9fb0c7" style="font:600 13px ui-sans-serif">After: stapled helix (stable)</text>
+      <path d="M480,95 a40,18 0 1 0 0.1,0" fill="none" stroke="#5ad1c9" stroke-width="3"/>
+      <path d="M520,70 q30,40 80,0" fill="none" stroke="#5ad1c9" stroke-width="3"/>
+      <path d="M520,70 q30,40 80,0" fill="none" stroke="#5ad1c9" stroke-width="3"/>
+      <line x1="540" y1="68" x2="600" y2="68" stroke="#67e08a" stroke-width="5" stroke-linecap="round"/>
+      <text x="570" y="55" text-anchor="middle" fill="#67e08a" style="font:700 11px ui-sans-serif">the staple</text>
+      <path d="M510,110 q40,-55 110,0" fill="none" stroke="#5ad1c9" stroke-width="3"/>
+    </svg>
+    <div class="figcap">Two olefin-bearing amino acids + ring-closing metathesis → a hydrocarbon staple that stabilizes the α-helix. The memo highlights team members behind “stitched” GLP-1 peptides and stapling chemistry.<sup><a href="#refs">B2</a></sup></div>
+  </div>
+</div></section>
+
+<!-- ============ ROADMAP ============ -->
+<section id="roadmap"><div class="wrap">
+  <span class="kicker">The plan</span>
+  <h2>From mouse to medicine</h2>
+  <p class="muted">The memo’s stated sequence. Hover/tap each stage.</p>
+  <div class="fig" style="padding:20px">
+    <svg viewBox="0 0 900 150" role="img" aria-label="Development roadmap">
+      <line x1="60" y1="80" x2="840" y2="80" stroke="#243349" stroke-width="3"/>
+      <g class="node" data-r="0"><circle cx="90" cy="80" r="12" fill="#5ad1c9"/><text x="90" y="120" text-anchor="middle" class="sub">Validate target<tspan x="90" dy="14">in mice</tspan></text></g>
+      <g class="node" data-r="1"><circle cx="280" cy="80" r="12" fill="#7aa2ff"/><text x="280" y="120" text-anchor="middle" class="sub">Mouse prototype<tspan x="280" dy="14">&lt; 1 year</tspan></text></g>
+      <g class="node" data-r="2"><circle cx="470" cy="80" r="12" fill="#7aa2ff"/><text x="470" y="120" text-anchor="middle" class="sub">Optimize +<tspan x="470" dy="14">safety studies</tspan></text></g>
+      <g class="node" data-r="3"><circle cx="660" cy="80" r="12" fill="#ffb86b"/><text x="660" y="120" text-anchor="middle" class="sub">IND-enabling<tspan x="660" dy="14">studies</tspan></text></g>
+      <g class="node" data-r="4"><circle cx="840" cy="80" r="12" fill="#ff8fb1"/><text x="840" y="120" text-anchor="middle" class="sub">First patients:<tspan x="840" dy="14">narcolepsy etc.</tspan></text></g>
+    </svg>
+  </div>
+  <div class="explainbox" id="rmExplain">First they prove a target changes sleep in mice, then build a mouse-ready drug (under a year, per the memo), optimize it and run safety studies, then the formal pre-human (“IND-enabling”) work, aiming first at severe narcolepsy, hypersomnia, and depression. <span class="tag paper">from the memo</span></div>
+</div></section>
+
+<!-- ============ GLOSSARY ============ -->
+<section id="glossary"><div class="wrap">
+  <span class="kicker">Plain-English dictionary</span>
+  <h2>Every jargon word, defined</h2>
+  <div class="grid cols-2" id="glossList"></div>
+</div></section>
+
+<!-- ============ REFERENCES ============ -->
+<section id="refs"><div class="wrap">
+  <span class="kicker">Cross-references</span>
+  <h2>Sources</h2>
+  <p class="muted">Numbered references are the memo’s own footnotes. “B” references are the established background science I used to build the diagrams (verified against the literature; not invented).</p>
+  <table class="ref">
+    <tr><td>1,6</td><td>Hirano, A. et al. (2018). <i>DEC2 modulates orexin expression and regulates sleep.</i> PNAS, 115(13), 3434. — DEC2 represses prepro-orexin; P384R increases orexin. <a href="https://www.pnas.org/doi/10.1073/pnas.1801693115">link</a></td></tr>
+    <tr><td>2</td><td>Boyden, L. M. et al. (2002). <i>High bone density due to a mutation in LDL-receptor-related protein 5.</i> NEJM, 346(20), 1513–1521.</td></tr>
+    <tr><td>3</td><td>Jordan, G. et al. (2010). <i>The dimensionality of color vision in carriers of anomalous trichromacy.</i> Journal of Vision, 10(8), 12.</td></tr>
+    <tr><td>4</td><td>Martin, A. et al. (2010). <i>A functional ABCC11 allele … human axillary odor.</i> J. Investigative Dermatology, 130(2), 529–540.</td></tr>
+    <tr><td>5</td><td>Amodei, D. <i>Machines of Loving Grace.</i> darioamodei.com</td></tr>
+    <tr><td>7</td><td>He, Y. et al. (2009). <i>The Transcriptional Repressor DEC2 Regulates Sleep Length in Mammals.</i> Science, 325(5942), 866.</td></tr>
+    <tr><td>8</td><td>Shi, G. et al. (2021). <i>Mutations in Metabotropic Glutamate Receptor 1 Contribute to Natural Short Sleep Trait.</i> Current Biology, 31(1), 13–24.</td></tr>
+    <tr><td>9</td><td>Shi, G. et al. (2019). <i>A rare mutation of β1-adrenergic receptor affects sleep/wake behaviors.</i> Neuron, 103(6), 1044. <a href="https://www.cell.com/neuron/fulltext/S0896-6273(19)30652-X">link</a></td></tr>
+    <tr><td>10</td><td>Beck, M. (2011). <i>The Sleepless Elite.</i> The Wall Street Journal.</td></tr>
+    <tr><td>11</td><td>Ying-Hui Fu, personal communications (cited in memo).</td></tr>
+    <tr><td>12</td><td>Dong, Q., Ptáček, L.J., &amp; Fu, Y. (2023). <i>Mutant β1-adrenergic receptor improves REM sleep and ameliorates tau accumulation…</i> PNAS, 120.</td></tr>
+    <tr><td>13</td><td>Dong, Q. et al. (2022). <i>Familial natural short sleep mutations reduce Alzheimer pathology in mice.</i> iScience, 25(4).</td></tr>
+    <tr><td>14</td><td>Sakurai, T. (2013). <i>Orexin deficiency and narcolepsy.</i> Current Opinion in Neurobiology, 23(5), 760–766.</td></tr>
+    <tr><td>15</td><td>Kantor, S. et al. (2013). <i>Orexin Gene Therapy Restores… Wakefulness in Narcoleptic Mice.</i> Sleep, 36(8), 1129.</td></tr>
+    <tr><td>16</td><td>Mitsukawa, K. et al. (2024). <i>TAK-861, a potent, orally available orexin receptor 2-selective agonist…</i> Scientific Reports, 14(1). <a href="https://www.nature.com/articles/s41598-024-70594-1">link</a></td></tr>
+    <tr><td>17</td><td>Arias-Carrión, O., &amp; Murillo-Rodríguez, E. (2014). <i>Effects of hypocretin/orexin cell transplantation on narcoleptic-like sleep…</i> PLoS ONE, 9(4), e95342.</td></tr>
+    <tr><td>B1</td><td><b>Background:</b> Fmoc solid-phase peptide synthesis (Merrifield method). Iterative piperidine deprotection + activated coupling, TFA cleavage. (Standard SPPS protocols.)</td></tr>
+    <tr><td>B2</td><td><b>Background:</b> Schafmeister, Po &amp; Verdine; Walensky et al. (2004) <i>Science</i> — all-hydrocarbon stapled α-helical peptides via ring-closing olefin metathesis. <a href="https://www.nature.com/articles/nprot.2011.324">protocol</a></td></tr>
+    <tr><td>B3</td><td><b>Background:</b> Semaglutide (GLP-1R agonist) &amp; tirzepatide (dual GIP/GLP-1R agonist, 39-aa peptide); class B GPCR activation. (FDA labels &amp; pharmacology reviews.)</td></tr>
+  </table>
+
+  <div class="footer">
+    <p><b>How to read the tags:</b> <span class="tag paper">from the memo</span> = stated in the Capable document you uploaded. <span class="tag bg">established</span> = published science I verified to explain the mechanism. Diagrams are simplified teaching models, not exact molecular structures.</p>
+    <p>Built as an interactive companion to the “Capable” memo. Nothing here is medical advice, and the therapy described is an early research proposal, not an approved drug.</p>
+  </div>
+</div></section>
+
+<script>
+/* ---------------- glossary data ---------------- */
+const GLOSS = {
+  dec2:["DEC2","A gene (formal name BHLHE41) that makes a protein acting as a brake on other genes — including the orexin ‘stay awake’ gene. A broken-brake mutation = short sleep."],
+  orexin:["Orexin (hypocretin)","A small brain signal made in the hypothalamus that keeps you awake and alert. Too little orexin = narcolepsy; more orexin = more wakefulness."],
+  peptide:["Peptide","A short chain of amino acids — basically a mini-protein. Ozempic and many modern drugs are peptides. Capable builds these."],
+  glp1:["GLP-1","A natural gut hormone (a peptide) that controls hunger and blood sugar. Ozempic is a copy of it. Used here as the model for ‘flip one switch, big effect.’"],
+  narcolepsy:["Narcolepsy","A disorder where people can’t stay reliably awake, often from too little orexin. The first intended patient group."],
+  repressor:["Transcriptional repressor","A protein that sits on a gene and turns its volume down, so less of that gene’s product gets made."],
+  glutamate:["Glutamate","The brain’s main excitatory (‘go’) chemical messenger. mGluR1 is one receptor that detects it."],
+  receptor:["Receptor","A protein antenna on a cell that detects a specific molecule and passes the message inward."],
+  gpcr:["GPCR","G-protein-coupled receptor — the most common receptor type drugs target. Shaped like a 7-pass coil through the cell membrane; when a molecule binds, it activates a ‘G-protein’ inside."],
+  agonist:["Agonist","A molecule that switches a receptor ON (like the natural signal does). The opposite, an antagonist, blocks it."],
+  aminoacid:["Amino acid","The building blocks of proteins and peptides — 20 standard ones, strung together like beads to make a chain."],
+  spps:["Solid-phase peptide synthesis","The standard way to build a peptide: anchor it to a bead and add one amino acid at a time in a repeating cycle."],
+  fmoc:["Fmoc group","A removable chemical ‘cap’ that protects an amino acid’s reactive end until you’re ready to attach the next one."],
+  activator:["Activator (coupling reagent)","A chemical that ‘switches on’ an amino acid so it readily forms a bond with the growing chain."],
+  peptidebond:["Peptide bond","The chemical link that joins one amino acid to the next, building the chain."],
+  rcm:["Ring-closing metathesis","A catalyst-driven reaction that fuses two reactive ‘arms’ into a ring — used to form the ‘staple’ that locks a peptide’s shape."],
+  helix:["α-helix","A common corkscrew shape that peptides fold into. Stapling locks the peptide into this active shape."]
+};
+
+/* tooltip */
+let tip;
+function showTip(el){
+  const k=el.dataset.t; const d=GLOSS[k]; if(!d) return;
+  hideTip();
+  tip=document.createElement('div');
+  tip.style.cssText="position:absolute;z-index:99;max-width:280px;background:#0e1622;border:1px solid #34507f;border-radius:10px;padding:10px 12px;color:#e8eef7;font-size:13px;line-height:1.5;box-shadow:0 8px 30px rgba(0,0,0,.5)";
+  tip.innerHTML="<b style='color:#5ad1c9'>"+d[0]+"</b><br>"+d[1];
+  document.body.appendChild(tip);
+  const r=el.getBoundingClientRect();
+  tip.style.left=Math.min(r.left+window.scrollX, window.scrollX+window.innerWidth-300)+"px";
+  tip.style.top=(r.bottom+window.scrollY+6)+"px";
+}
+function hideTip(){ if(tip){tip.remove(); tip=null;} }
+document.querySelectorAll('.term').forEach(t=>{
+  t.addEventListener('mouseenter',()=>showTip(t));
+  t.addEventListener('mouseleave',hideTip);
+  t.addEventListener('click',e=>{e.preventDefault();showTip(t);});
+});
+document.addEventListener('scroll',hideTip,true);
+
+/* build glossary section */
+const gl=document.getElementById('glossList');
+Object.values(GLOSS).forEach(d=>{
+  const c=document.createElement('div'); c.className='card';
+  c.innerHTML="<h3 style='margin:0 0 4px;color:#5ad1c9'>"+d[0]+"</h3><p class='muted' style='margin:0;font-size:14.5px'>"+d[1]+"</p>";
+  gl.appendChild(c);
+});
+
+/* ---------------- gene cards ---------------- */
+document.querySelectorAll('.gene').forEach(g=>{
+  g.addEventListener('click',e=>{
+    if(e.target.classList.contains('term'))return;
+    g.classList.toggle('open');
+  });
+});
+
+/* ---------------- pathway ---------------- */
+const pwExplain=document.getElementById('pwExplain');
+const PW={
+  normal:{
+    dec2:"pressing the brake", e1:"silences ⟂", orx:"output: low", ox2r:"lightly activated", wake:"8 h sleep need",
+    explain:"<b>Normal sleeper.</b> DEC2 presses the brake on the orexin gene, so the brain makes only modest amounts of the ‘stay awake’ signal. You need a full ~8 hours.",
+    e1class:"flow inhibit", e2active:false, drug:false
+  },
+  short:{
+    dec2:"brake released", e1:"brake OFF", orx:"output: HIGH", ox2r:"strongly activated", wake:"~6 h sleep need",
+    explain:"<b>Short sleeper / on drug.</b> The brake comes off DEC2 (naturally by mutation, or mimicked by Capable’s drug). More orexin floods out, OX2R fires harder, and the brain stays satisfied on less sleep — the effect they’re trying to bottle.",
+    e1class:"flow", e2active:true, drug:true
+  }
+};
+const NODE_EXP={
+  dec2:"<b>DEC2 — the brake.</b> Normally it clamps down on the orexin gene and keeps the wake signal low. Knock the brake off and you get more orexin, less sleep.",
+  orexin:"<b>Orexin neurons.</b> These make the brain’s ‘stay awake’ peptide. How loud they shout depends on how hard DEC2 is braking them.",
+  ox2r:"<b>OX2R receptor.</b> The antenna that hears orexin. The more orexin, the more this fires — and the more awake/alert you are. This is where drugs like TAK-861 plug in.",
+  wake:"<b>Wakefulness / sleep need.</b> The end result. Short-sleeper biology lands here: feeling rested on fewer hours."
+};
+function setPathway(mode){
+  const s=PW[mode];
+  document.getElementById('dec2state').textContent=s.dec2;
+  document.getElementById('e1lab').textContent=s.e1;
+  document.getElementById('orxstate').textContent=s.orx;
+  document.getElementById('ox2rstate').textContent=s.ox2r;
+  document.getElementById('wakestate').textContent=s.wake;
+  pwExplain.innerHTML=s.explain;
+  const e1=document.getElementById('e1'); e1.setAttribute('class',s.e1class);
+  document.getElementById('e1lab').setAttribute('fill', mode==='short'?'#67e08a':'#ff7a7a');
+  ['e2','e3'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.setAttribute('class', s.e2active?'flow active pulse':'flow');
+    el.style.strokeDasharray = s.e2active?'8 4':'none';
+  });
+  // orexin dots
+  const od=document.getElementById('orexinDots'); od.innerHTML='';
+  const n = mode==='short'?6:2;
+  for(let i=0;i<n;i++){
+    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',430+i*11); c.setAttribute('cy',160-((i%2)*8-4));
+    c.setAttribute('r',4); c.setAttribute('fill', mode==='short'?'#5ad1c9':'#6b7c97');
+    od.appendChild(c);
+  }
+  document.getElementById('drugTag').style.opacity = s.drug?1:0;
+}
+document.querySelectorAll('#pwSwitch button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#pwSwitch button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); setPathway(b.dataset.mode);
+  });
+});
+document.querySelectorAll('#pathway .node').forEach(n=>{
+  n.addEventListener('click',()=>{ pwExplain.innerHTML=NODE_EXP[n.dataset.n]; });
+});
+setPathway('normal');
+
+/* ---------------- drug docking ---------------- */
+const drug=document.getElementById('drug');
+const dockExplain=document.getElementById('dockExplain');
+const gprot=document.getElementById('gprotein');
+const signal=document.getElementById('signal');
+const blocked=document.getElementById('blocked');
+const drugLabel=document.getElementById('drugLabel');
+const drugType=document.getElementById('drugType');
+let dockAnim;
+function resetDock(){
+  if(dockAnim) cancelAnimationFrame(dockAnim);
+  drug.setAttribute('transform','translate(120,60)');
+  drug.querySelector('path').setAttribute('fill', drugType.value==='agonist'?'#ffb86b':'#9aa7bd');
+  drugLabel.textContent=drugType.value;
+  drugLabel.setAttribute('fill', drugType.value==='agonist'?'#ffb86b':'#9aa7bd');
+  gprot.classList.remove('on'); signal.style.opacity=0; blocked.style.opacity=0;
+  document.getElementById('pocket').setAttribute('stroke', drugType.value==='agonist'?'#5ad1c9':'#5ad1c9');
+  dockExplain.innerHTML = drugType.value==='agonist'
+    ? "Press <b>Dock the agonist</b>. The drug slides into OX2R’s pocket; the receptor changes shape, switches on the G-protein, and fires the ‘stay awake’ signal."
+    : "An <b>antagonist</b> fits the same pocket but does <i>not</i> activate it — it just sits there, blocking the real signal. Press dock to see the difference.";
+}
+function dock(){
+  resetDock();
+  const isAg=drugType.value==='agonist';
+  // target inside pocket ~ translate(435,118) so drug center ~455,150
+  const start={x:120,y:60}, end={x:435,y:118};
+  let t=0;
+  function frame(){
+    t+=0.025; if(t>1)t=1;
+    const e=1-Math.pow(1-t,3); // ease-out
+    const x=start.x+(end.x-start.x)*e, y=start.y+(end.y-start.y)*e;
+    drug.setAttribute('transform','translate('+x+','+y+')');
+    if(t<1){dockAnim=requestAnimationFrame(frame);}
+    else{
+      if(isAg){
+        gprot.classList.add('on'); signal.style.opacity=1;
+        dockExplain.innerHTML="✅ <b>Docked & activated.</b> The agonist fit the pocket, the receptor (a GPCR) flexed, and the G-protein inside switched on — firing the downstream wakefulness signal. This is what TAK-861 does at OX2R, and what Ozempic does at the GLP-1 receptor.<sup><a href='#refs'>16</a></sup>";
+      }else{
+        blocked.style.opacity=1;
+        dockExplain.innerHTML="🚫 <b>Docked but silent.</b> The antagonist plugs the pocket without flipping the switch, so no signal fires. Useful to <i>block</i> a receptor — the opposite of what Capable’s wake-up program wants.";
+      }
+    }
+  }
+  frame();
+}
+document.getElementById('dockBtn').addEventListener('click',dock);
+document.getElementById('resetDock').addEventListener('click',resetDock);
+drugType.addEventListener('change',resetDock);
+resetDock();
+
+/* ---------------- SPPS step-through ---------------- */
+const AA_COLORS=['#5ad1c9','#7aa2ff','#ff8fb1','#ffb86b','#67e08a'];
+const chain=document.getElementById('chain');
+const spExplain=document.getElementById('spExplain');
+const spCounter=document.getElementById('spCounter');
+const capG=document.getElementById('capG');
+const flaskG=document.getElementById('flaskG');
+const flaskText=document.getElementById('flaskText');
+let spStep=0, spTimer=null;
+const SP_TEXT={
+  0:"Press <b>Next step</b> to build the peptide. SPPS is just “deprotect, couple, repeat.”",
+  1:"<b>Step 1 — Anchor.</b> The first amino acid is bolted to the resin bead. Its top end wears a protective Fmoc ‘cap’ so nothing reacts prematurely.",
+  2:"<b>Step 2 — Deprotect.</b> Piperidine washes the cap off, exposing a reactive end that’s now hungry to bond.",
+  3:"<b>Step 3 — Couple.</b> A new capped amino acid + activator snaps on, forming a peptide bond. The chain is now 2 links long.",
+  4:"<b>Step 4 — Repeat.</b> Deprotect → couple, over and over, adding each amino acid in your designed sequence. Capable’s hardware does each in seconds.",
+  5:"<b>Step 5 — Cleave.</b> Strong acid (TFA) cuts the finished chain off the bead and removes the side protecting groups.",
+  6:"<b>Step 6 — Purify & test.</b> Clean it, confirm it’s the exact molecule you designed, and dose it into mice — sometimes the same week."
+};
+function drawChain(){
+  chain.innerHTML='';
+  // number of beads to show based on step
+  let n=0;
+  if(spStep>=1)n=1;
+  if(spStep>=3)n=2;
+  if(spStep>=4)n=4;
+  if(spStep>=5)n=4;
+  if(spStep>=6)n=4;
+  let x=150,y=250;
+  for(let i=0;i<n;i++){
+    const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    r.setAttribute('x',x); r.setAttribute('y',y-12); r.setAttribute('width',26); r.setAttribute('height',24);
+    r.setAttribute('rx',6); r.setAttribute('fill',AA_COLORS[i%AA_COLORS.length]); r.setAttribute('stroke','#0b0f17');
+    chain.appendChild(r);
+    if(i<n-1){
+      const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+      l.setAttribute('x1',x+26);l.setAttribute('y1',y);l.setAttribute('x2',x+38);l.setAttribute('y2',y-20);
+      l.setAttribute('stroke','#9fb0c7');l.setAttribute('stroke-width',2);
+      chain.appendChild(l);
+    }
+    x+=38; y-=20;
+  }
+  // cap on top bead (steps 1, and during 3/4 the new one)
+  capG.style.opacity = (spStep===1||spStep===3||spStep===4)?1:0;
+  // flask reagent
+  if(spStep===2){flaskText.textContent='+ piperidine (deprotect)';flaskG.style.opacity=1;}
+  else if(spStep===3||spStep===4){flaskText.textContent='+ amino acid + activator';flaskG.style.opacity=1;}
+  else if(spStep===5){flaskText.textContent='+ TFA (cleave off bead)';flaskG.style.opacity=1;}
+  else {flaskG.style.opacity=0;}
+  // if cleaved, detach chain (shift right, hide resin link visually by moving)
+  if(spStep>=5){ chain.setAttribute('transform','translate(60,-10)'); }
+  else { chain.setAttribute('transform','translate(0,0)'); }
+}
+function renderSteps(){
+  document.querySelectorAll('#spSteps li').forEach(li=>{
+    const s=+li.dataset.s;
+    li.classList.toggle('active', s===spStep);
+    li.classList.toggle('done', s<spStep);
+  });
+  spExplain.innerHTML=SP_TEXT[spStep];
+  spCounter.textContent='step '+spStep+' / 6';
+  drawChain();
+}
+function spGo(d){
+  spStep=Math.max(0,Math.min(6,spStep+d));
+  renderSteps();
+}
+document.getElementById('spNext').addEventListener('click',()=>spGo(1));
+document.getElementById('spPrev').addEventListener('click',()=>spGo(-1));
+document.getElementById('spAuto').addEventListener('click',function(){
+  if(spTimer){clearInterval(spTimer);spTimer=null;this.textContent='⏵ Auto-play';return;}
+  this.textContent='⏸ Pause';
+  if(spStep>=6)spStep=0;
+  spTimer=setInterval(()=>{
+    if(spStep>=6){clearInterval(spTimer);spTimer=null;this.textContent='⏵ Auto-play';return;}
+    spGo(1);
+  },1400);
+});
+renderSteps();
+
+/* ---------------- roadmap ---------------- */
+const RM=[
+ "<b>Validate the target in mice.</b> First confirm that nudging a chosen sleep switch (e.g. DEC2/orexin) actually changes sleep in adult mice. <span class='tag paper'>from the memo</span>",
+ "<b>Mouse prototype — under a year.</b> Build a drug that reproduces the short-sleeper effect in adult mice. <span class='tag paper'>from the memo</span>",
+ "<b>Optimize + safety studies.</b> Improve the molecule and run standard safety/tolerability testing. <span class='tag paper'>from the memo</span>",
+ "<b>IND-enabling studies.</b> The formal package of studies required before you’re allowed to test in humans. <span class='tag paper'>from the memo</span>",
+ "<b>First patients.</b> Target severe narcolepsy, idiopathic hypersomnia, and treatment-resistant depression first — a multi-billion-dollar unmet need. <span class='tag paper'>from the memo</span>"
+];
+const rmExplain=document.getElementById('rmExplain');
+document.querySelectorAll('#roadmap .node').forEach(n=>{
+  n.style.cursor='pointer';
+  n.addEventListener('click',()=>{rmExplain.innerHTML=RM[+n.dataset.r];});
+  n.addEventListener('mouseenter',()=>{rmExplain.innerHTML=RM[+n.dataset.r];});
+});
+</script>
+</body>
+</html>
