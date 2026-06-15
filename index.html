@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandhana - Wikipedia</title>
+<style>
+  :root{
+    --link:#3366cc; --link-visited:#795cb2; --link-red:#ba0000;
+    --border:#a2a9b1; --bg:#f8f9fa; --ph:#eaecf0;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:#fff;
+    font-family:sans-serif; color:#202122; font-size:14px; line-height:1.6;
+  }
+  a{color:var(--link); text-decoration:none}
+  a:hover{text-decoration:underline}
+  a.visited{color:var(--link-visited)}
+  a.new{color:var(--link-red)}
+
+  /* top bars */
+  .topbar{
+    border-bottom:1px solid var(--border); background:#fff;
+    display:flex; align-items:center; gap:18px;
+    padding:8px 16px; font-size:12.8px;
+  }
+  .topbar .logo{display:flex; align-items:center; gap:10px; font-weight:bold}
+  .topbar .logo .globe{font-size:26px}
+  .topbar .logo .wmark{font-family:'Linux Libertine','Georgia',serif; font-size:18px}
+  .topbar .logo .wmark small{display:block; font-size:9px; font-weight:normal; letter-spacing:.5px}
+  .search{margin-left:auto; display:flex}
+  .search input{
+    border:1px solid var(--border); padding:5px 8px; width:220px;
+    border-radius:2px 0 0 2px; outline:none;
+  }
+  .search button{
+    border:1px solid var(--border); border-left:none; background:var(--bg);
+    padding:5px 12px; cursor:pointer; border-radius:0 2px 2px 0;
+  }
+
+  .tabbar{
+    border-bottom:1px solid var(--border);
+    padding:0 16px; display:flex; gap:18px; font-size:12.8px;
+  }
+  .tabbar .left,.tabbar .right{display:flex; gap:18px}
+  .tabbar .right{margin-left:auto}
+  .tabbar span{padding:8px 2px; color:#54595d; cursor:pointer; border-bottom:2px solid transparent}
+  .tabbar span.active{color:#202122; border-bottom:2px solid #fff; margin-bottom:-1px; font-weight:bold}
+  .tabbar span:hover{color:var(--link)}
+
+  .layout{max-width:1000px; margin:0 auto; padding:14px 22px 60px}
+  h1.title{
+    font-family:'Linux Libertine','Georgia',serif; font-weight:normal;
+    font-size:28px; border-bottom:1px solid var(--border);
+    padding-bottom:4px; margin:6px 0 4px;
+  }
+  .subtitle{color:#54595d; font-size:13px; font-style:italic; margin-bottom:14px}
+
+  h2{
+    font-family:'Linux Libertine','Georgia',serif; font-weight:normal;
+    font-size:21px; border-bottom:1px solid var(--border);
+    padding-bottom:4px; margin:24px 0 10px;
+  }
+  h3{font-size:16px; margin:18px 0 6px}
+  p{margin:0 0 12px}
+  .edit{font-size:11px; color:var(--link); font-weight:normal}
+
+  /* infobox */
+  .infobox{
+    float:right; width:300px; margin:6px 0 18px 22px; clear:right;
+    border:1px solid var(--border); background:var(--bg);
+    font-size:12.6px; padding:0;
+  }
+  .infobox .ib-title{
+    text-align:center; font-weight:bold; font-size:14px;
+    padding:8px; background:#ccccff;
+  }
+  .infobox .ib-photo{
+    text-align:center; padding:10px;
+  }
+  .infobox .ib-photo .avatar{
+    width:150px; height:150px; border-radius:50%;
+    background:linear-gradient(135deg,#cdd9ff,#a2a9b1);
+    margin:0 auto 6px; display:flex; align-items:center; justify-content:center;
+    font-size:54px; color:#fff;
+  }
+  .infobox .ib-cap{color:#54595d; font-size:11px}
+  .infobox table{width:100%; border-collapse:collapse}
+  .infobox .sec{background:#ccccff; text-align:center; font-weight:bold; padding:4px}
+  .infobox th{text-align:left; vertical-align:top; padding:5px 8px; width:38%; font-weight:bold}
+  .infobox td{padding:5px 8px; vertical-align:top}
+  .infobox tr{border-top:1px solid #eaecf0}
+
+  /* table of contents */
+  .toc{
+    display:inline-block; border:1px solid var(--border); background:var(--bg);
+    padding:10px 16px 12px; margin:6px 0 16px; font-size:13px;
+  }
+  .toc .toc-h{text-align:center; font-weight:bold; margin-bottom:6px}
+  .toc ol{margin:0; padding-left:22px}
+  .toc ol ol{padding-left:20px}
+  .toc li{margin:2px 0}
+  .toc .num{color:#202122; margin-right:6px}
+
+  .hatnote{font-style:italic; color:#54595d; padding:2px 0 10px; border-bottom:0}
+
+  ul.refs{font-size:12px; padding-left:22px}
+  ul.refs li{margin:3px 0}
+  sup{font-size:10px}
+
+  .quote{border-left:3px solid var(--border); margin:0 0 14px; padding:2px 0 2px 14px; color:#54595d; font-style:italic}
+
+  .pillbox{display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 14px}
+  .pill{border:1px solid var(--border); background:var(--bg); border-radius:14px; padding:3px 12px; font-size:12.5px}
+
+  .cats{
+    border:1px solid var(--border); background:var(--bg);
+    padding:8px 12px; margin-top:34px; font-size:12.5px;
+  }
+  .cats b{font-weight:bold; margin-right:6px}
+  .cats a{margin-right:4px}
+
+  .footer{
+    max-width:1000px; margin:18px auto 0; padding:14px 22px 40px;
+    border-top:1px solid var(--border); color:#54595d; font-size:12px;
+  }
+  .editnote{
+    background:#fef6e7; border:1px solid #f3d57a; padding:8px 12px;
+    font-size:12.5px; margin:0 0 18px; border-radius:2px;
+  }
+  @media(max-width:760px){
+    .infobox{float:none; width:auto; margin:0 0 18px}
+    .search input{width:130px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">
+    <span class="globe">🌐</span>
+    <span class="wmark">WIKIPEDIA<small>The Free Encyclopedia</small></span>
+  </div>
+  <div class="search">
+    <input type="text" placeholder="Search Wikipedia" aria-label="Search">
+    <button>Search</button>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="left">
+    <span class="active">Article</span>
+    <span>Talk</span>
+  </div>
+  <div class="right">
+    <span>Read</span>
+    <span>Edit</span>
+    <span>View history</span>
+    <span>Tools ▾</span>
+  </div>
+</nav>
+
+<main class="layout">
+
+  <div class="editnote">
+    ✏️ <b>This is a parody portfolio.</b> Search-and-replace the placeholders
+    (look for <code>[brackets]</code>) with your own details, swap the 🧑 avatar
+    for a photo, and you're done. Not affiliated with Wikipedia.
+  </div>
+
+  <h1 class="title">Chandhana</h1>
+  <div class="subtitle">From Wikipedia, the free encyclopedia</div>
+  <p class="hatnote">This article is about the software developer. For other uses, see Chandhana (disambiguation).</p>
+
+  <!-- INFOBOX -->
+  <aside class="infobox">
+    <div class="ib-title">Chandhana</div>
+    <div class="ib-photo">
+      <div class="avatar">🧑‍💻</div>
+      <div class="ib-cap">Chandhana, c.&nbsp;2026</div>
+    </div>
+    <table>
+      <tr><th>Born</th><td>[Year] &nbsp;<br>[City, Country]</td></tr>
+      <tr><th>Nationality</th><td>[Nationality]</td></tr>
+      <tr><th>Occupation</th><td>Software developer · Engineer · Builder of things</td></tr>
+      <tr><th>Known&nbsp;for</th><td>Open-source projects, this suspiciously well-formatted webpage</td></tr>
+      <tr><th>Years active</th><td>[20XX]–present</td></tr>
+      <tr><td colspan="2" class="sec">Online presence</td></tr>
+      <tr><th>GitHub</th><td><a href="https://github.com/Chandhana01">@Chandhana01</a></td></tr>
+      <tr><th>Website</th><td><a href="#">[your-site.com]</a></td></tr>
+      <tr><th>Email</th><td><a href="mailto:chandhanas@gmail.com">chandhanas@gmail.com</a></td></tr>
+    </table>
+  </aside>
+
+  <p>
+    <b>Chandhana</b> (<span style="font-style:italic">/ˈtʃʌn.də.nɑː/</span>; born [Year]) is a
+    [nationality] <a href="#">software developer</a> and <a href="#">creator</a> best known for
+    building open-source projects, shipping side-projects at an alarming rate, and maintaining a
+    GitHub profile so polished that <a class="new" href="#">[citation needed]</a> people assumed
+    it was a real Wikipedia article.<sup>[1]</sup> Chandhana is widely recognised among friends and
+    family as "the one who's good with computers."<sup>[2]</sup>
+  </p>
+  <p>
+    Over the course of [a long and storied] career, Chandhana has contributed to numerous
+    repositories, debugged code at hours generally considered unhealthy, and turned an impressive
+    quantity of coffee into working software.<sup>[3]</sup>
+  </p>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-h">Contents</div>
+    <ol>
+      <li><span class="num">1</span><a href="#early">Early life and education</a></li>
+      <li><span class="num">2</span><a href="#career">Career</a>
+        <ol>
+          <li><span class="num">2.1</span><a href="#projects">Notable projects</a></li>
+          <li><span class="num">2.2</span><a href="#skills">Skills and tools</a></li>
+        </ol>
+      </li>
+      <li><span class="num">3</span><a href="#style">Working style</a></li>
+      <li><span class="num">4</span><a href="#trivia">Trivia</a></li>
+      <li><span class="num">5</span><a href="#contact">Contact</a></li>
+      <li><span class="num">6</span><a href="#refs">References</a></li>
+    </ol>
+  </div>
+
+  <h2 id="early">Early life and education <span class="edit">[edit]</span></h2>
+  <p>
+    Chandhana was born in [City, Country] and showed an early aptitude for [taking things apart /
+    asking "but how does it work?" / winning every argument about which programming language is
+    best].<sup>[1]</sup> They studied <b>[your field]</b> at <a href="#">[your university]</a>,
+    where they first discovered that semicolons are simultaneously essential and the source of all
+    suffering.
+  </p>
+  <p>
+    During this period, Chandhana developed a lifelong habit of starting many more projects than
+    any reasonable person could finish — a trait that historians describe as "extremely on brand."<sup>[2]</sup>
+  </p>
+
+  <h2 id="career">Career <span class="edit">[edit]</span></h2>
+  <p>
+    Chandhana works as a <b>[your role]</b> at <a href="#">[your company / freelance / studying]</a>,
+    focusing on [web development / data / AI / whatever you love].<sup>[3]</sup> Their work spans
+    front-end, back-end, and the mysterious in-between region known as "it works on my machine."
+  </p>
+
+  <h3 id="projects">Notable projects</h3>
+  <p>Selected works attributed to Chandhana include:</p>
+  <ul>
+    <li><b><a href="#">[Project One]</a></b> — a [short description]. Solved [a real problem] and got [X] GitHub stars.<sup>[4]</sup></li>
+    <li><b><a href="#">[Project Two]</a></b> — [what it does]. Built with [tech stack].</li>
+    <li><b><a href="#">[Project Three]</a></b> — [the fun one]. Described by reviewers as "actually kind of cool."<sup>[5]</sup></li>
+    <li><b><a class="new" href="#">[Secret Project]</a></b> — details withheld. <span style="color:#54595d">(this page is the project)</span></li>
+  </ul>
+
+  <h3 id="skills">Skills and tools</h3>
+  <p>Chandhana's documented toolkit includes:</p>
+  <div class="pillbox">
+    <span class="pill">JavaScript</span>
+    <span class="pill">Python</span>
+    <span class="pill">HTML / CSS</span>
+    <span class="pill">React</span>
+    <span class="pill">Node.js</span>
+    <span class="pill">Git</span>
+    <span class="pill">SQL</span>
+    <span class="pill">[Your stack]</span>
+    <span class="pill">Googling error messages</span>
+  </div>
+
+  <h2 id="style">Working style <span class="edit">[edit]</span></h2>
+  <blockquote class="quote">
+    "It's not a bug, it's an undocumented feature."<br>— Chandhana, allegedly<sup>[6]</sup>
+  </blockquote>
+  <p>
+    Colleagues describe Chandhana's approach as [methodical / chaotic-good / fueled by deadlines and
+    snacks]. They are noted for [clean commits / helpful code reviews / explaining things patiently /
+    naming variables after food].<sup>[2]</sup>
+  </p>
+
+  <h2 id="trivia">Trivia <span class="edit">[edit]</span></h2>
+  <ul>
+    <li>Has [X] tabs open right now. This is considered conservative.</li>
+    <li>Once fixed a bug by [restarting it / removing one line / staring at it menacingly].</li>
+    <li>Favourite key: <kbd>Ctrl</kbd>+<kbd>Z</kbd>.</li>
+    <li>Believes tabs > spaces, or spaces > tabs, and will not be taking questions.</li>
+    <li>[Add your own fun fact here.]</li>
+  </ul>
+
+  <h2 id="contact">Contact <span class="edit">[edit]</span></h2>
+  <p>
+    Chandhana can be reached via <a href="mailto:chandhanas@gmail.com">email</a> or found on
+    <a href="https://github.com/Chandhana01">GitHub</a>. Hiring managers, collaborators, and people
+    who want to say hi are all welcome.<sup>[7]</sup>
+  </p>
+
+  <h2 id="refs">References <span class="edit">[edit]</span></h2>
+  <ul class="refs">
+    <li id="r1">^ <i>The Definitive Guide to Being Pretty Good at Computers.</i> Self-published, 2026.</li>
+    <li id="r2">^ Family group chat, "messages 1–4,000." Retrieved 2026.</li>
+    <li id="r3">^ "Annual Coffee-to-Code Conversion Report." [Your Desk] Press.</li>
+    <li id="r4">^ GitHub Insights, "Contributions overview." <a href="https://github.com/Chandhana01">github.com/Chandhana01</a>.</li>
+    <li id="r5">^ A friend, in passing, probably.</li>
+    <li id="r6">^ Quote possibly apocryphal. Editors are encouraged to verify.</li>
+    <li id="r7">^ This sentence. You're reading it.</li>
+  </ul>
+
+  <div class="cats">
+    <b>Categories:</b>
+    <a href="#">Living people</a> ·
+    <a href="#">Software developers</a> ·
+    <a href="#">People who say "it works on my machine"</a> ·
+    <a href="#">[Your hometown] people</a> ·
+    <a class="new" href="#">Articles that are secretly portfolios</a>
+  </div>
+
+</main>
+
+<footer class="footer">
+  This page was last edited on 15 June 2026, by a very real human. ·
+  Text is a parody and not affiliated with the Wikimedia Foundation. ·
+  Built for fun. 🎉
+</footer>
+
+</body>
+</html>
