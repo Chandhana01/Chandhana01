@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Antikythera Thread — Greece &amp; Egypt, July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#fbf6ec;
+    --paper-2:#f4ecdd;
+    --card:#ffffff;
+    --ink:#2c2520;
+    --ink-soft:#5a5048;
+    --aegean:#1f6f8b;
+    --aegean-deep:#15506b;
+    --terracotta:#c0613b;
+    --terracotta-deep:#a14a29;
+    --gold:#b88a2e;
+    --gold-soft:#e9d6a8;
+    --olive:#6b7245;
+    --line:#e4d8c2;
+    --shadow:0 14px 40px -22px rgba(60,40,20,.45);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #fff8ec 0, rgba(255,248,236,0) 60%),
+      radial-gradient(1000px 500px at -10% 10%, #f7eedd 0, rgba(247,238,221,0) 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:"Work Sans",system-ui,sans-serif;
+    font-weight:400;
+    line-height:1.65;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.12;color:var(--ink);}
+  a{color:var(--aegean-deep);text-decoration:none;border-bottom:1px solid rgba(31,111,139,.3);}
+  a:hover{border-bottom-color:var(--aegean);}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px;}
+
+  /* greek-key top ribbon */
+  .ribbon{height:10px;background:
+    repeating-linear-gradient(90deg,var(--aegean) 0 14px,transparent 14px 18px,var(--gold) 18px 22px,transparent 22px 28px);
+    opacity:.85;}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,246,236,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;gap:18px;height:60px;overflow-x:auto;}
+  nav .brand{font-family:"Cormorant Garamond",serif;font-size:1.35rem;font-weight:700;color:var(--terracotta-deep);white-space:nowrap;border:0;}
+  nav .links{display:flex;gap:6px;margin-left:auto;}
+  nav a{font-size:.83rem;letter-spacing:.02em;text-transform:uppercase;color:var(--ink-soft);
+    padding:7px 11px;border-radius:999px;border:0;white-space:nowrap;font-weight:500;}
+  nav a:hover{background:var(--gold-soft);color:var(--ink);}
+
+  /* HERO */
+  header.hero{padding:64px 0 38px;}
+  .eyebrow{font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+  header.hero h1{font-size:clamp(2.6rem,6vw,4.4rem);margin:.18em 0 .1em;letter-spacing:-.01em;}
+  header.hero h1 em{font-style:italic;color:var(--terracotta);}
+  .lede{font-size:1.2rem;color:var(--ink-soft);max-width:60ch;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+  .pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:.86rem;
+    box-shadow:var(--shadow);display:inline-flex;gap:8px;align-items:center;}
+  .pill b{color:var(--aegean-deep);font-weight:600;}
+
+  /* SECTION */
+  section{padding:46px 0;border-top:1px solid var(--line);}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;}
+  .sec-num{font-family:"Cormorant Garamond",serif;font-size:1.5rem;color:var(--gold);font-weight:700;}
+  section h2{font-size:clamp(1.9rem,4vw,2.7rem);margin:0;}
+  .sec-sub{color:var(--ink-soft);max-width:72ch;margin:.4em 0 1.6em;font-size:1.05rem;}
+
+  /* cards & grid */
+  .grid{display:grid;gap:18px;}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  @media(max-width:820px){.g2,.g3{grid-template-columns:1fr;}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);}
+  .card h3{font-size:1.5rem;margin:0 0 .25em;}
+  .card h4{font-size:1.2rem;margin:0 0 .2em;}
+  .tag{display:inline-block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+    padding:3px 10px;border-radius:999px;margin-bottom:10px;}
+  .tag.research{background:#e2eef2;color:var(--aegean-deep);}
+  .tag.vibe{background:#f6e7df;color:var(--terracotta-deep);}
+  .tag.food{background:#eef0e0;color:var(--olive);}
+  .tag.pick{background:var(--terracotta);color:#fff;}
+
+  /* recommended flag */
+  .rec{position:relative;border:2px solid var(--terracotta);}
+  .rec::before{content:"★ MY PICK";position:absolute;top:-13px;left:18px;background:var(--terracotta);color:#fff;
+    font-family:"Work Sans";font-size:.7rem;letter-spacing:.14em;font-weight:700;padding:4px 12px;border-radius:999px;}
+
+  ul.clean{list-style:none;padding:0;margin:.4em 0;}
+  ul.clean li{padding:5px 0 5px 26px;position:relative;border-bottom:1px dashed var(--line);}
+  ul.clean li:last-child{border-bottom:0;}
+  ul.clean li::before{content:"▸";position:absolute;left:4px;color:var(--terracotta);}
+  ul.plain{padding-left:1.1em;margin:.4em 0;}
+  ul.plain li{margin:.3em 0;}
+
+  /* callout */
+  .note{border-left:4px solid var(--aegean);background:#eef5f7;border-radius:0 12px 12px 0;padding:14px 18px;margin:18px 0;}
+  .note.warm{border-left-color:var(--terracotta);background:#fbeee7;}
+  .note.gold{border-left-color:var(--gold);background:#faf3e0;}
+  .note b{color:var(--ink);}
+  .note .lbl{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--aegean-deep);display:block;margin-bottom:3px;}
+  .note.warm .lbl{color:var(--terracotta-deep);}
+  .note.gold .lbl{color:var(--gold);}
+
+  /* timeline */
+  .tl{position:relative;margin:10px 0;padding-left:6px;}
+  .tl-row{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start;}
+  @media(max-width:600px){.tl-row{grid-template-columns:90px 1fr;}}
+  .tl-date{font-weight:600;color:var(--aegean-deep);font-size:.95rem;}
+  .tl-place{font-family:"Cormorant Garamond",serif;font-size:1.3rem;font-weight:600;}
+  .tl-who{font-size:.8rem;color:var(--ink-soft);}
+  .who-solo{color:var(--terracotta-deep);font-weight:600;}
+
+  /* table */
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);font-size:.95rem;}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:var(--aegean);color:#fff;font-family:"Work Sans";font-weight:600;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;}
+  tr:last-child td{border-bottom:0;}
+  td.flagged{background:#fbeee7;}
+  .chip{font-size:.7rem;font-weight:700;color:#fff;background:var(--terracotta);padding:2px 8px;border-radius:999px;}
+
+  /* reading list */
+  .read{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;}
+  @media(max-width:700px){.read{grid-template-columns:1fr;}}
+  .read .item{padding:8px 0;border-bottom:1px solid var(--line);}
+  .read .item b{font-family:"Cormorant Garamond",serif;font-size:1.18rem;font-weight:600;}
+  .read .item .by{color:var(--ink-soft);font-size:.86rem;}
+  .read .item p{margin:.25em 0 0;font-size:.92rem;color:var(--ink-soft);}
+  .badge{font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:6px;margin-right:6px;}
+  .b-book{background:#e2eef2;color:var(--aegean-deep);}
+  .b-film{background:#f6e7df;color:var(--terracotta-deep);}
+  .b-doc{background:#eef0e0;color:var(--olive);}
+  .b-pod{background:#f0e6f2;color:#7a4a8a;}
+
+  footer{padding:46px 0 70px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:.9rem;}
+  footer .wrap{text-align:center;}
+  .src{font-size:.82rem;color:var(--ink-soft);}
+  .src a{color:var(--ink-soft);}
+  .two-col{columns:2;column-gap:34px;}
+  @media(max-width:700px){.two-col{columns:1;}}
+  .kicker{font-variant:small-caps;letter-spacing:.04em;color:var(--terracotta-deep);font-weight:600;}
+  hr.soft{border:0;border-top:1px dashed var(--line);margin:22px 0;}
+</style>
+</head>
+<body>
+<div class="ribbon"></div>
+<nav>
+  <div class="wrap">
+    <span class="brand">⌖ The Antikythera Thread</span>
+    <span class="links">
+      <a href="#spine">The Thread</a>
+      <a href="#route">Route</a>
+      <a href="#athens">Athens + Island</a>
+      <a href="#cairo">Cairo</a>
+      <a href="#luxor">Luxor</a>
+      <a href="#alex">Alexandria</a>
+      <a href="#hotels">Hotels</a>
+      <a href="#food">Food</a>
+      <a href="#wear">What to Wear</a>
+      <a href="#read">Read / Watch</a>
+    </span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Greece &amp; Egypt · 3–30 July 2026</div>
+    <h1>Following the gears<br />from <em>Athens</em> to <em>Alexandria</em></h1>
+    <p class="lede">A trip built around one question: after the Antikythera Mechanism, where does engineering of comparable
+      complexity show up next? The honest answer points at Alexandria — so this plan treats your route as an argument,
+      not just an itinerary. Plus pyramids you can climb inside, a horse at sunrise, lantern-lit markets, and dinners worth flying for.</p>
+    <div class="meta-row">
+      <span class="pill"><b>You</b> · solo 3 days in Athens, then with Rob</span>
+      <span class="pill"><b>Languages</b> · no Greek / no Arabic (fine — see notes)</span>
+      <span class="pill"><b>Food</b> · no pork or beef · you love spicy · Rob doesn't</span>
+      <span class="pill"><b>Pace</b> · big anchor activities + room to slow down</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ THE THREAD ============ -->
+<section id="spine">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">I.</span><h2>The research spine</h2></div>
+    <p class="sec-sub">Read this first — it tells you <em>why</em> each stop is on the list, so when you're standing in
+      front of an object you already have the story. The Mechanism is the start of the trail; Alexandria is where the
+      trail should lead; Islamic Cairo is the surprising place it re-emerges centuries later.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <span class="tag research">Athens · the object</span>
+        <h3>1. The Mechanism itself</h3>
+        <p>The real Antikythera Mechanism — all 82 corroded bronze fragments — lives in the
+          <b>National Archaeological Museum in Athens</b>, not on any island. It's a hand-cranked analog computer
+          (c. 100–205 BC) that modeled the cosmos and predicted eclipses. This is your literal first stop and the
+          reason Athens, not just "an island," matters.</p>
+      </div>
+      <div class="card">
+        <span class="tag research">Rhodes · the makers</span>
+        <h3>2. Who built it</h3>
+        <p>Scholarship keeps pointing at <b>Rhodes</b>: the ship carried Rhodian goods, the Moon model uses
+          <b>Hipparchus's</b> theory, and Cicero says <b>Posidonius</b> built a similar sky-machine there. A 2016
+          analysis even places the maker near 35°N — Rhodes. If "origins" is the obsession, Rhodes is the pilgrimage.</p>
+      </div>
+      <div class="card">
+        <span class="tag research">Alexandria · the answer</span>
+        <h3>3. Where complexity goes next</h3>
+        <p>Your instinct is right. The Hellenistic engineering tradition concentrates in <b>Alexandria</b>:
+          <b>Ctesibius</b> (pumps, the water organ, precision water-clocks) and <b>Hero/Heron</b> (the aeolipile steam
+          ball, programmable automata, the first vending machine) — all working out of the orbit of the
+          <b>Mouseion &amp; Library</b>. This is the densest cluster of "comparable complexity" anywhere after the Mechanism.</p>
+      </div>
+    </div>
+
+    <div class="note gold">
+      <span class="lbl">The twist worth chasing</span>
+      The trail doesn't end in antiquity. The Greek mechanical texts were <b>translated and extended in the Islamic
+      world</b> — the Banū Mūsā brothers' <em>Book of Ingenious Devices</em> (9th c.) and later al-Jazarī's automata are
+      the direct heirs of Ctesibius and Hero. That lineage is exactly why <b>Islamic Cairo</b> (§IV) belongs on a trip
+      about the Antikythera Mechanism: it's where the gears re-appear. You're tracing a 1,500-year relay race, and your
+      route happens to hit three of its batons.
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROUTE ============ -->
+<section id="route">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">II.</span><h2>The route, as flown</h2></div>
+    <p class="sec-sub">Pulled from your logistics sheet so the recommendations land on the right days. Emergency contact
+      flips from Shan to Rob mid-trip; your <span class="who-solo">solo Athens window</span> is the island decision.</p>
+    <div class="tl">
+      <div class="tl-row"><div class="tl-date">Jul 3–12</div><div><div class="tl-place">Portugal — Faro → Lisbon</div><div class="tl-who">SFO→FAO via Zurich · warm-up leg</div></div></div>
+      <div class="tl-row"><div class="tl-date">Jul 12–13</div><div><div class="tl-place">Lisbon → Luxor</div><div class="tl-who">easyJet via Milan Malpensa · overnight in Milan/airport</div></div></div>
+      <div class="tl-row"><div class="tl-date">Jul 13–15</div><div><div class="tl-place">Luxor</div><div class="tl-who">Pyramisa Hotel Luxor · temples + Valley of the Kings</div></div></div>
+      <div class="tl-row"><div class="tl-date">Jul 15–18</div><div><div class="tl-place">Cairo &amp; Giza</div><div class="tl-who">Gaia Pyramids Hotel, Giza · pyramids, Grand Egyptian Museum, Khan el-Khalili</div></div></div>
+      <div class="tl-row"><div class="tl-date">Jul 19–21</div><div><div class="tl-place">Athens <span class="who-solo">(solo, 3 days)</span></div><div class="tl-who">City Circus Athens · the Mechanism + your island day</div></div></div>
+      <div class="tl-row"><div class="tl-date">~Jul 22–24</div><div><div class="tl-place">Athens → Cairo (reunite with Rob)</div><div class="tl-who">EgyptAir · the spicy/non-spicy duo begins</div></div></div>
+      <div class="tl-row"><div class="tl-date">Jul 25–28</div><div><div class="tl-place">Alexandria</div><div class="tl-who">CAI→Alexandria &amp; back · the research payoff (your saved list, §V)</div></div></div>
+      <div class="tl-row"><div class="tl-date">Jul 29–30</div><div><div class="tl-place">Cairo → Chennai</div><div class="tl-who">Air India via Mumbai · OCI card, file arrival online</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ATHENS + ISLAND ============ -->
+<section id="athens">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">III.</span><h2>Athens &amp; the island decision</h2></div>
+    <p class="sec-sub">You told me: you won't go to an island without a <em>specific goal</em>, Santorini wins on looking
+      unlike anywhere else, and the rest have to earn it (a real research case, or a genuinely good party). Here's the
+      honest version — including the logistics nobody mentions.</p>
+
+    <div class="note warm">
+      <span class="lbl">Reality check on "day trip"</span>
+      From Athens, only the <b>Saronic islands</b> (Hydra, Aegina, Poros — 1–1.5 hr ferry) are true day trips.
+      Santorini, Crete, Rhodes and Mykonos are a <b>fly-and-overnight</b> (≈45–60 min flights). With 3 solo days, the
+      sane shape is: <b>1 full day in Athens for the Mechanism + Acropolis, then 1 night on one island.</b> Don't try to
+      do two islands — you'll spend the trip in transit.
+    </div>
+
+    <h3 style="margin-top:26px;font-size:1.7rem;">Day 1 — non-negotiable Athens (this is the whole reason you're here)</h3>
+    <div class="grid g2" style="margin-top:6px;">
+      <div class="card">
+        <span class="tag research">Morning</span>
+        <h4>National Archaeological Museum</h4>
+        <p>Go straight to the <b>Antikythera Shipwreck</b> gallery: the Mechanism's 82 fragments, plus the bronze
+          <em>Antikythera Youth</em> and the eerie melted glass from the same wreck. Then the bronze collection
+          (Artemision Zeus/Poseidon, the Jockey). Give it 2–3 hours. This is the single most important hour of your Greek leg.</p>
+      </div>
+      <div class="card">
+        <span class="tag vibe">Afternoon / evening</span>
+        <h4>Acropolis + Acropolis Museum, then Plaka</h4>
+        <p>Acropolis late afternoon when the heat and crowds drop; the Acropolis Museum's top floor frames the Parthenon
+          through glass. Wind down in <b>Plaka</b> (safest, prettiest quarter for a solo dinner). Skip Exarcheia's back
+          alleys after dark; Kolonaki and Plaka are easy and safe solo.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:30px;font-size:1.7rem;">Days 2–3 — pick ONE island. The case for each:</h3>
+    <div class="grid g2" style="margin-top:6px;">
+
+      <div class="card rec">
+        <span class="tag pick">Best all-round pick</span>
+        <h3>Santorini</h3>
+        <p><b>The goal:</b> it's the one island that delivers <em>both</em> of your wants at once. The caldera genuinely
+          looks like nowhere else on Earth (your stated reason) — <em>and</em> it hides <b>Akrotiri</b>, a Bronze-Age
+          city buried by a volcano and preserved up to <b>three storeys high</b>, with drainage and multi-level
+          architecture. That's "material culture of advanced complexity" you can walk through. Akrotiri is the deep
+          ancestor of the same Aegean engineering confidence that later produces the Mechanism.</p>
+        <ul class="clean">
+          <li>Anchor: Akrotiri excavation (cool, covered, ~1 hr) + Museum of Prehistoric Thera in Fira</li>
+          <li>Slow: sunset from Oia, a caldera-edge dinner, wine tasting (Assyrtiko grown in volcanic ash)</li>
+          <li>Logistics: fly ATH→JTR ~45 min; one night in Imerovigli/Fira</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="tag research">Best pure-research pick</span>
+        <h3>Rhodes</h3>
+        <p><b>The goal:</b> if the obsession is <em>origins</em>, this is the actual birthplace candidate for the
+          Mechanism — home of <b>Hipparchus</b> and <b>Posidonius</b>, the astronomy-and-gears capital of the Hellenistic
+          world. Standing in Rhodes is standing where the device may have been designed. Bonus: the medieval Old Town
+          (Street of the Knights) is a UNESCO time capsule, and the Colossus once stood at the harbor.</p>
+        <ul class="clean">
+          <li>Anchor: the walled Old Town + Archaeological Museum; Acropolis of Lindos for the view</li>
+          <li>The honest catch: there's no "Mechanism museum" here — the payoff is conceptual, not a single object</li>
+          <li>Logistics: fly ATH→RHO ~1 hr</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="tag vibe">Best party + substance</span>
+        <h3>Mykonos&nbsp;+&nbsp;Delos</h3>
+        <p><b>The goal:</b> the only option where a real party night and a serious archaeology hit sit 30 minutes apart.
+          By day, boat to <b>Delos</b> — an entire uninhabited sacred island that's one vast Hellenistic excavation
+          (the same era as the Mechanism). By night, Mykonos is Greece's headline party island. Good solo pick: walkable,
+          social, very safe, lots of solo travelers.</p>
+        <ul class="clean">
+          <li>Anchor: Delos day boat (mornings; it closes midday-ish — check the return)</li>
+          <li>Slow/loud: Little Venice sunset, then beach clubs as late as you like</li>
+          <li>Logistics: fly ATH→JMK ~35 min</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="tag research">Best for material culture</span>
+        <h3>Crete (Heraklion)</h3>
+        <p><b>The goal:</b> the heavyweight for "objects of complexity." The <b>Heraklion Archaeological Museum</b> holds
+          the <b>Phaistos Disc</b> — a still-undeciphered Minoan artifact often shelved alongside the Antikythera
+          Mechanism as Greece's great enigma — plus the Minoan frescoes. Then <b>Knossos</b>, with its Bronze-Age
+          plumbing and labyrinthine engineering. The most intellectually dense island, but it's a full commitment.</p>
+        <ul class="clean">
+          <li>Anchor: Heraklion Museum (Phaistos Disc) + Palace of Knossos</li>
+          <li>The catch: least "island-pretty" of your four; you're here for the archaeology</li>
+          <li>Logistics: fly ATH→HER ~50 min</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="lbl">If you make me choose</span>
+      <b>Santorini</b> for this trip — it's the rare pick that satisfies the heart (the look) and the head (Akrotiri's
+      advanced material culture), and it photographs like a dream after the desert. Keep <b>Rhodes</b> in your pocket as
+      the "I want to literally stand at the origin" alternative, and <b>Crete</b> if the Phaistos Disc pulls harder than
+      a sunset. Whatever you pick, <em>Day 1 in Athens with the Mechanism is fixed.</em>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAIRO ============ -->
+<section id="cairo">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">IV.</span><h2>Cairo &amp; Giza</h2></div>
+    <p class="sec-sub">Your "inside a pyramid / ride a horse / Arabian-nights market / what do I wear" wishlist lives here —
+      plus the new museum that changed the whole city, and the Islamic-Cairo link back to the gears.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag vibe">The big wish #1</span>
+        <h3>Go inside a pyramid</h3>
+        <p>You can, but choose deliberately:</p>
+        <ul class="clean">
+          <li><b>Great Pyramid (Khufu)</b> — the bucket-list one. Only <b>150 interior tickets/day</b> (~1,500 EGP); they
+            sell out, so be at the gate <b>before 8 am</b>. Expect a steep, hot, hunched climb up the Grand Gallery to a
+            bare granite King's Chamber. The thrill is <em>where you are</em>, not what's there.</li>
+          <li><b>Khafre or Menkaure</b> — far cheaper, less crowded, easier climb, and honestly a similar interior
+            experience. A great plan B if Khufu is sold out.</li>
+          <li><b>Insider move:</b> for an emptier, more atmospheric interior, ask your guide about the
+            <b>Bent &amp; Red Pyramids at Dahshur</b> (40 min south) — you can often walk down into the Red Pyramid nearly alone.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="tag vibe">The big wish #2</span>
+        <h3>Horse or camel at sunrise</h3>
+        <p>Yes — and do it at <b>sunrise</b>, when it's cool and the plateau is quiet. <b>Use an ethical, named
+          stable</b>; many roadside touts overwork their animals (Airbnb pulled all Giza animal rides over welfare
+          investigations). Vet your operator and ask about shade/rest/water.</p>
+        <ul class="clean">
+          <li>Look up well-reviewed outfits like <b>iRide Egypt</b>, <b>Cairo Horse Riding School</b> (rescue-focused),
+            or a stable your hotel vouches for.</li>
+          <li><b>Easiest of all:</b> the <b>Marriott Mena House</b> arranges horse/camel riding with its own instructors —
+            worth a meal or drink there even if you sleep elsewhere (see Hotels).</li>
+          <li>Horse > camel if you actually want to <em>ride</em>; camel is slower and more for the photo.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="tag research">Don't miss — it's new</span>
+        <h3>The Grand Egyptian Museum (GEM)</h3>
+        <p>Right by the pyramids in Giza, the long-awaited <b>GEM</b> is now open and it's the largest archaeological
+          museum in the world — including, for the first time, <b>Tutankhamun's complete treasure</b> in one place. Pair
+          it with the plateau. (The old Egyptian Museum on Tahrir is still worth it for the Royal Mummies, but GEM is the headline.)</p>
+      </div>
+
+      <div class="card">
+        <span class="tag vibe">The Arabian-nights wish</span>
+        <h3>Khan el-Khalili — the safe, public version</h3>
+        <p>This is exactly the "1,001 Nights but public and safe" market you're after. It's busiest and most magical
+          <b>after sunset</b>, lit by hundreds of brass lanterns, <b>patrolled by tourist police around the clock.</b></p>
+        <ul class="clean">
+          <li>Stick to the main lanes around <b>El-Hussein Square</b> and <b>Al-Muizz Street</b> (a whole street of lit
+            medieval monuments — stunning at night).</li>
+          <li>Sit at <b>El Fishawy</b>, the 200-year-old lantern-hung café, for mint tea and shisha — pure atmosphere.</li>
+          <li>Carry a <b>cross-body bag</b>, expect cheerful haggling (start at ~40–50% of the asking price), and you're fine.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note gold">
+      <span class="lbl">The hidden gem for your research thread</span>
+      <b>Islamic Cairo</b> isn't just pretty — it's where the gear-and-automata tradition you're tracing resurfaced.
+      The medieval scholars who preserved and extended Ctesibius and Hero (the Banū Mūsā, later al-Jazarī) belong to this
+      world. Walk <b>Al-Muizz Street</b> by night and you're literally inside the civilization that kept the Antikythera
+      lineage alive. For evening atmosphere, the <b>Tannoura (whirling dervish) Sufi show at Wikala al-Ghouri</b> is free,
+      public, and mesmerizing.
+    </div>
+  </div>
+</section>
+
+<!-- ============ LUXOR ============ -->
+<section id="luxor">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">V.</span><h2>Luxor (Jul 13–15)</h2></div>
+    <p class="sec-sub">Two days, so do one "high-intensity" dawn thing and one slow Nile thing. The world's greatest
+      open-air museum — you're staying at the Pyramisa on the west-bank side.</p>
+    <div class="grid g3">
+      <div class="card">
+        <span class="tag vibe">High-intensity, do it</span>
+        <h4>Hot-air balloon at dawn</h4>
+        <p>A 45–60 min sunrise flight over the Valley of the Kings, the Nile, and the green west bank. Egypt's signature
+          "wow" — book the early slot for cool air and soft light.</p>
+      </div>
+      <div class="card">
+        <span class="tag research">The anchors</span>
+        <h4>Karnak + Valley of the Kings</h4>
+        <p><b>Karnak's</b> Great Hypostyle Hall (134 colossal columns) is overwhelming in the best way. In the
+          <b>Valley of the Kings</b>, your ticket covers a few tombs; pay extra for a standout (Seti I or Nefertari if
+          open). Add <b>Hatshepsut's temple</b> nearby.</p>
+      </div>
+      <div class="card">
+        <span class="tag food">The slow evening</span>
+        <h4>Felucca on the Nile + Luxor Temple lit up</h4>
+        <p>Sail a traditional <b>felucca</b> at golden hour, then see <b>Luxor Temple</b> after dark when it's floodlit
+          and half-empty. Tea on the terrace of the <b>Sofitel Winter Palace</b> (Agatha Christie's haunt) is the classic slow hour.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ALEXANDRIA ============ -->
+<section id="alex">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">VI.</span><h2>Alexandria — the payoff (with Rob)</h2></div>
+    <p class="sec-sub">This is where the research spine cashes out. The city of Ctesibius, Hero, Euclid, Eratosthenes
+      and Hypatia — the densest concentration of ancient engineering genius after the Mechanism. Below are the four
+      places you've already saved, with the why attached.</p>
+
+    <div class="grid g2">
+      <div class="card rec">
+        <span class="tag pick">Your list · top of it</span>
+        <h3>Graeco-Roman Museum</h3>
+        <p><b>Why it's #1 for you:</b> this is the single best room in Egypt for the <em>material culture of the
+          Antikythera era</em> — Hellenistic Alexandria's coins, instruments, sculpture and daily objects from exactly
+          the centuries and culture that produced the Mechanism. If any one stop ties Athens to Alexandria, it's this.
+          Recently reopened after a long restoration.</p>
+      </div>
+      <div class="card">
+        <span class="tag research">Your list</span>
+        <h3>Bibliotheca Alexandrina</h3>
+        <p>The modern reincarnation of the <b>Library of Alexandria</b> (Snøhetta's sun-disc building on the Corniche).
+          Inside: a planetarium and museums; outside: you're standing where the <b>Mouseion</b> once gathered the people
+          who turned mathematics into machines. The symbolic heart of the whole trip.
+          <br /><span class="src">الأزاريطة والشاطبي، Bab Sharqi, Alexandria 21526</span></p>
+      </div>
+      <div class="card">
+        <span class="tag research">Your list</span>
+        <h3>Alexandria National Museum</h3>
+        <p>A graceful Italianate villa telling Alexandria's story across Pharaonic, Greco-Roman, Coptic and Islamic
+          layers — the clearest single narrative of how this one city kept reinventing itself. Good orientation before or
+          after the Graeco-Roman Museum.</p>
+      </div>
+      <div class="card">
+        <span class="tag vibe">Your list · the atmospheric one</span>
+        <h3>Catacombs of Kom el-Shoqafa</h3>
+        <p>A spiral staircase descends ~30 m into a 2nd-century underground necropolis where <b>Egyptian, Greek and Roman</b>
+          iconography literally fuse on the same walls — Anubis in a Roman tunic. It's the most vivid physical proof of
+          the cultural blending that made Alexandria a one-of-a-kind intellectual cauldron.
+          <br /><span class="src">12 متفرع من ش, Ras at-Tin, Alexandria</span></p>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="lbl">While you're there — two easy adds</span>
+      <b>Fort Qaitbey</b> sits on the exact spot of the <b>Lighthouse of Alexandria</b> (one of the Seven Wonders) — walk
+      out for the sea air and the where-it-stood frisson. And a slow sunset stroll on the <b>Corniche</b> is the local
+      ritual. Alexandria is cooler and breezier than Cairo — a relief in late July.
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOTELS ============ -->
+<section id="hotels">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">VII.</span><h2>Hotels — three tiers, compared</h2></div>
+    <p class="sec-sub">You asked to see all three levels with real examples and one flagged per place so you can compare.
+      My honest steer: <b>splurge where the building is part of the story</b> (Luxor's Winter Palace, Giza's pyramid-view
+      Mena House) and go high-end-but-selective elsewhere. The flagged cell in each row is what I'd actually book.</p>
+
+    <table>
+      <thead>
+        <tr><th>Place</th><th>Splurge — story &amp; food</th><th>High-end, selective</th><th>Characterful mid-range</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Giza / Cairo</b></td>
+          <td class="flagged"><span class="chip">★ pick</span> <b>Marriott Mena House</b> — 1869 palace at the foot of
+            the pyramids; rooms with a literal Great-Pyramid view, 40 acres of gardens, on-site riding. The view <em>is</em> the splurge.</td>
+          <td><b>Four Seasons Nile Plaza</b> or <b>St. Regis Cairo</b> — polished Nile-side luxury, top spas, strong restaurants, central.</td>
+          <td>Your booked <b>Gaia Pyramids Hotel</b> (rooftop pyramid views) — keep it, add one Mena House dinner.</td>
+        </tr>
+        <tr>
+          <td><b>Luxor</b></td>
+          <td class="flagged"><span class="chip">★ pick</span> <b>Sofitel Winter Palace</b> — 1907 grande dame on the
+            Nile; Agatha Christie wrote here. Garden, terrace tea, river-facing rooms. Pure period romance.</td>
+          <td><b>Hilton Luxor Resort &amp; Spa</b> — modern, big Nile-view pool, west-bank calm.</td>
+          <td>Your booked <b>Pyramisa Luxor</b> is solid — splurge instead on the Winter Palace <em>terrace</em> for a drink.</td>
+        </tr>
+        <tr>
+          <td><b>Athens</b> <span style="font-size:.8em;color:var(--ink-soft)">(solo)</span></td>
+          <td class="flagged"><span class="chip">★ pick</span> <b>The Dolli at Acropolis</b> — 46-room hôtel-maison,
+            Acropolis-view rooftop restaurant, voted #1 hotel in Greece. A jewel for a solo splurge night.</td>
+          <td><b>Electra Metropolis</b> or <b>Coco-Mat Athens BC</b> — superb rooftop Acropolis views, great value-luxury.</td>
+          <td>Your booked <b>City Circus Athens</b> (Psyri) is a fun, design-y, social base — ideal for solo. Keep it; splurge one night at the Dolli.</td>
+        </tr>
+        <tr>
+          <td><b>Santorini</b> <span style="font-size:.8em;color:var(--ink-soft)">(if chosen)</span></td>
+          <td class="flagged"><span class="chip">★ pick</span> A <b>caldera-edge cave suite in Imerovigli/Oia</b> with a
+            private plunge pool — this is the once-in-a-lifetime view you came for.</td>
+          <td>A Fira boutique with caldera view — walkable to the cable car &amp; museums.</td>
+          <td>Inland Pyrgos/Megalochori guesthouse — half the price, charm, a short drive to the rim.</td>
+        </tr>
+        <tr>
+          <td><b>Alexandria</b></td>
+          <td class="flagged"><span class="chip">★ pick</span> <b>Four Seasons Alexandria at San Stefano</b> — sea-view
+            balconies, private beach, the city's best dining. Easy, excellent base with Rob.</td>
+          <td><b>Steigenberger Cecil</b> — 1929 waterfront legend (Durrell, Churchill lore), full of Alexandria character.</td>
+          <td><b>Le Metropole Heritage Hotel</b> — restored Belle-Époque charm, walkable to the Bibliotheca.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ FOOD ============ -->
+<section id="food">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">VIII.</span><h2>Food — and the spicy / not-spicy problem, solved</h2></div>
+    <p class="sec-sub">No pork, no beef, you love heat, Rob doesn't, and you'd rather sit in a real restaurant than risk
+      street food. Egyptian cuisine is almost custom-built for this.</p>
+
+    <div class="note warm">
+      <span class="lbl">The key insight</span>
+      Egyptian food is <b>fragrant, not fiery</b> — cumin, coriander, garlic, lemon do the work, and the <b>heat comes on
+      the side</b>: <b>shatta</b> (chili sauce) and <b>dukkah</b> (nut-spice blend) are added by <em>you</em>. So you and
+      Rob order the same dish and you torch yours while his stays mild. The spicy/non-spicy problem basically doesn't
+      exist here. And no pork/beef is effortless: the staples are <b>chicken, lamb, fish, and legumes/veg.</b>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag food">Eat these (restaurant settings)</span>
+        <h4>Egyptian dishes to chase</h4>
+        <ul class="clean">
+          <li><b>Koshari</b> — the national dish: rice, macaroni, lentils, chickpeas, crispy onions, tomato-garlic-vinegar
+            sauce. Vegetarian, addictive, and you add the chili. Eat it at a sit-down spot like <b>Abou Tarek</b>.</li>
+          <li><b>Molokhia</b> — silky jute-leaf soup with garlic, over rice (get it with chicken).</li>
+          <li><b>Ful &amp; ta'amiya</b> — fava beans + fava-bean falafel; the classic breakfast.</li>
+          <li><b>Grilled fish in Alexandria</b> — the Mediterranean coast is Egypt's seafood capital; pick from ice and
+            they grill it. A must with Rob.</li>
+          <li><b>Hamam mahshi</b> — stuffed pigeon, if you're adventurous (poultry, so on-menu for you).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag food">Where to eat</span>
+        <h4>Restaurants over stalls</h4>
+        <ul class="clean">
+          <li><b>Khufu's</b> (Giza) — fine dining with a direct pyramid view; modern Egyptian. A splurge-night highlight.</li>
+          <li><b>Zooba</b> — Egyptian street-food classics in a clean, hip, sit-down setting. Perfect "street food without the street."</li>
+          <li><b>Abou El Sid</b> — old-Cairo atmosphere, full traditional menu, great for the duo.</li>
+          <li><b>Naguib Mahfouz Café</b> inside Khan el-Khalili — sit-down restaurant in the bazaar, named for the Nobel novelist.</li>
+          <li>Alexandria seafood: classic spots along the corniche (your hotel concierge will steer you to the day's best).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="lbl">Athens, solo — go fully spicy</span>
+      You said heat is totally welcome in Athens. Hit <b>Tuk Tuk</b> (Koukaki) for proper Thai curries with real chili,
+      <b>e&amp;o</b> for upscale pan-Asian (a 15-spice green curry), and for a blowout, <b>CTC</b> (Michelin-starred,
+      blind tasting menu) or <b>Aleria</b> for modern Greek in a courtyard. All comfortable for solo dining.
+    </div>
+    <div class="note gold">
+      <span class="lbl">A question you didn't ask but should</span>
+      Do a <b>spice-souk / cooking angle</b>: a market-to-table cooking class in Cairo or a guided tasting walk lets you
+      meet dukkah, shatta, and dozens of dried chilies hands-on, in a hosted (safe, clean) setting — exactly your "stories
+      behind the thing" instinct, applied to food. Ask your hotel to arrange one.
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT TO WEAR ============ -->
+<section id="wear">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">IX.</span><h2>What to wear</h2></div>
+    <p class="sec-sub">July in Egypt is genuinely hot (Luxor can hit the 40s°C / 100s°F). The trick is that
+      <em>covering up actually keeps you cooler</em> — loose natural fabric beats bare skin in desert sun.</p>
+    <div class="grid g3">
+      <div class="card">
+        <span class="tag vibe">Egypt — the formula</span>
+        <h4>Loose, light, covered</h4>
+        <ul class="clean">
+          <li><b>Linen &amp; cotton</b> in light colors — skip polyester (traps heat).</li>
+          <li>Loose maxi dresses, wide-leg trousers, long linen shirts. Aim to cover <b>shoulders &amp; knees.</b></li>
+          <li>A long-sleeve linen shirt at midday literally keeps you cooler at the pyramids and temples.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag vibe">Always in your bag</span>
+        <h4>A big scarf</h4>
+        <p>One large scarf does everything: shoulder cover, sun shield, and <b>head/hair covering for mosques</b> (which
+          need shoulders, hair, knees covered — some lend an abaya, but your own scarf gives you control). Closed-toe,
+          broken-in shoes for uneven temple ground.</p>
+      </div>
+      <div class="card">
+        <span class="tag vibe">Greece &amp; the island</span>
+        <h4>Relax the rules</h4>
+        <p>Athens and the islands are fully relaxed — sundresses, shorts, swimwear at the beach. Carry a light cover-up
+          for churches/monasteries (shoulders &amp; knees). Bring a real sun hat, SPF, and sandals you can walk marble in.</p>
+      </div>
+    </div>
+    <div class="note warm">
+      <span class="lbl">Solo-in-Athens &amp; Khan el-Khalili note</span>
+      Nothing about safety requires you to dress a certain way — but in Cairo's market, mid-length and half/full sleeves
+      simply draw less attention and let you blend in and enjoy it. Cross-body bag, phone away, licensed taxi or ride-app home.
+    </div>
+  </div>
+</section>
+
+<!-- ============ READ / WATCH ============ -->
+<section id="read">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">X.</span><h2>Read &amp; watch before you go</h2></div>
+    <p class="sec-sub">Your rule — "looking at things is fine, but only if I have the story." So here's the briefing
+      package, sorted by the thread, by Egypt, and by Greece. Start with the two starred items.</p>
+
+    <h3 style="font-size:1.5rem;margin-top:10px;">The Antikythera thread</h3>
+    <div class="read">
+      <div class="item"><span class="badge b-doc">Doc ★</span><b>The World's First Computer</b> <span class="by">/ NOVA "Ancient Computer" (Tony Freeth, 2012)</span><p>The best single primer on the Mechanism — watch this before the museum. BBC/PBS NOVA.</p></div>
+      <div class="item"><span class="badge b-book">Book</span><b>The Phaistos Disc &amp; Antikythera Mechanism</b> <span class="by">/ Charles River Editors</span><p>Short, ties together the two enigmas you can see in person (Athens + Crete).</p></div>
+      <div class="item"><span class="badge b-book">Read</span><b>"A Model of the Cosmos in the Antikythera Mechanism"</b> <span class="by">/ Freeth et al., 2021</span><p>The landmark reconstruction paper — skim the figures; it makes the gears click.</p></div>
+      <div class="item"><span class="badge b-book">Read</span><b>2025 "design-flaw" reanalysis</b> <span class="by">/ Archaeology Magazine</span><p>The live debate over whether it could even run — great fuel for standing-in-front-of-it thoughts.</p></div>
+    </div>
+
+    <h3 style="font-size:1.5rem;margin-top:26px;">Egypt — ancient &amp; modern</h3>
+    <div class="read">
+      <div class="item"><span class="badge b-book">Novel ★</span><b>The Alexandria Quartet</b> <span class="by">/ Lawrence Durrell</span><p>The atmosphere of Alexandria itself — start with <em>Justine</em>. Read at least one before §VI.</p></div>
+      <div class="item"><span class="badge b-book">Novel</span><b>Death on the Nile</b> <span class="by">/ Agatha Christie</span><p>Written partly at Luxor's Winter Palace — perfect to read on that very terrace.</p></div>
+      <div class="item"><span class="badge b-film">Film</span><b>Agora</b> <span class="by">/ Alejandro Amenábar (2009)</span><p>Hypatia, the Library, the end of Alexandria's intellectual golden age. Direct hit on your thread.</p></div>
+      <div class="item"><span class="badge b-book">History</span><b>The Oxford History of Ancient Egypt</b> <span class="by">/ ed. Ian Shaw</span><p>The reliable reference for Luxor/Giza context — dip in by chapter.</p></div>
+      <div class="item"><span class="badge b-book">Novel</span><b>River God</b> <span class="by">/ Wilbur Smith</span><p>Big, pacey ancient-Egypt page-turner if you want story over scholarship.</p></div>
+      <div class="item"><span class="badge b-book">Novel</span><b>Palace Walk</b> <span class="by">/ Naguib Mahfouz</span><p>Old Cairo through its Nobel laureate — read it, then sit in his namesake café in Khan el-Khalili.</p></div>
+    </div>
+
+    <h3 style="font-size:1.5rem;margin-top:26px;">Greece &amp; the islands</h3>
+    <div class="read">
+      <div class="item"><span class="badge b-book">History</span><b>The Greeks</b> <span class="by">/ H.D.F. Kitto</span><p>Slim classic that makes the Athens museums make sense.</p></div>
+      <div class="item"><span class="badge b-doc">Doc</span><b>Atlantis: The Evidence</b> <span class="by">/ Bettany Hughes</span><p>The Akrotiri / Thera eruption story — watch before Santorini.</p></div>
+      <div class="item"><span class="badge b-book">Myth</span><b>The King Must Die</b> <span class="by">/ Mary Renault</span><p>Theseus &amp; the Minotaur, grounded in real Minoan Crete — ideal if you pick Heraklion/Knossos.</p></div>
+      <div class="item"><span class="badge b-pod">Podcast</span><b>The Ancients</b> <span class="by">/ History Hit</span><p>Search their Antikythera, Alexandria, and Minoan episodes — perfect flight listening.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRACTICAL ============ -->
+<section id="practical">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">XI.</span><h2>Practical, fast</h2></div>
+    <div class="grid g3">
+      <div class="card">
+        <h4>No Greek / no Arabic?</h4>
+        <p>Totally fine in both — tourism runs on English. Download <b>offline Google Translate</b> (Arabic + Greek) and
+          the camera/photo mode for menus and signs. Learn <em>shukran</em> (thanks) / <em>efcharistó</em> — it goes a long way.</p>
+      </div>
+      <div class="card">
+        <h4>Getting around</h4>
+        <p>In Cairo, use <b>Uber / Careem</b> rather than street taxis — cheaper, metered, safer, no haggling. In Athens,
+          the metro reaches the Acropolis &amp; airport easily. For Egypt's sites, a <b>private guide/driver</b> is worth it.</p>
+      </div>
+      <div class="card">
+        <h4>Money &amp; tickets</h4>
+        <p>Carry some <b>cash (EGP)</b> for markets, tips (tipping/<em>baksheesh</em> is expected), and small site fees.
+          Book the <b>Khufu interior</b> and the <b>hot-air balloon</b> ahead; both have caps and sell out.</p>
+      </div>
+      <div class="card">
+        <h4>Solo in Athens</h4>
+        <p>Among Europe's easier solo-female cities. Stay in <b>Plaka / Koukaki / Kolonaki</b>; the museums and Acropolis
+          are daytime-easy. Avoid Exarcheia back-streets and Omonia late at night.</p>
+      </div>
+      <div class="card">
+        <h4>Heat strategy</h4>
+        <p>Egypt in July = <b>dawn and dusk for outdoor sites</b>, midday for museums and the hotel pool. Hydrate hard,
+          electrolytes, hat, SPF. The balloon and pyramid both reward early starts.</p>
+      </div>
+      <div class="card">
+        <h4>Health &amp; docs</h4>
+        <p>Multi-entry Egypt visa (online/e-visa is easiest), travel insurance, and stick to <b>bottled/filtered water</b>
+          in Egypt. Your sheet notes the OCI card + online arrival filing for the Chennai leg.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--terracotta-deep);margin:0 0 6px;">
+      “The trail of the gears runs through you on this trip.”</p>
+    <p>Built around your itinerary &amp; your saved Alexandria list · July 2026. Verify opening hours, interior-ticket caps,
+      and ferry/flight times close to travel — Egyptian site access changes often.</p>
+    <p class="src">Sources include: National Archaeological Museum Athens · Antikythera Mechanism Research Project ·
+      Wikipedia &amp; Smithsonian (Mechanism, Ctesibius, Library of Alexandria) · NOVA/BBC ·
+      egymonuments.com &amp; Giza visitor guides (interior tickets) · PETA &amp; ethical-stable reviews ·
+      Marriott / Sofitel / Four Seasons / The Dolli · Lonely Planet &amp; local guides (Alexandria, Khan el-Khalili) ·
+      Time Out &amp; This Is Athens (dining). Hotels &amp; restaurants are starting points — confirm current status.</p>
+  </div>
+</footer>
+</body>
+</html>
