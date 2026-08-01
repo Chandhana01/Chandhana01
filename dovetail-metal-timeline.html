@@ -1,0 +1,458 @@
+<title>The Dovetail Joint in Metal — a Timeline</title>
+<style>
+  :root {
+    --bg: #EDE9DC;
+    --card: #E7E2D1;
+    --fig: #EFEBDD;
+    --card-border: #CDC5AD;
+    --ink: #2F2A1F;
+    --ink-soft: #6A6250;
+    --wood: #8F6B1E;
+    --metal: #2E7A62;
+    --line: #B4AC96;
+    --band: #E2DBC6;
+    --pill: #F4EFDE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #201D14;
+      --card: #292518;
+      --fig: #242013;
+      --card-border: #4A4430;
+      --ink: #E9E2CD;
+      --ink-soft: #A9A188;
+      --wood: #D2A63E;
+      --metal: #6FC2A2;
+      --line: #58513C;
+      --band: #2B2717;
+      --pill: #332E1D;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #201D14; --card: #292518; --fig: #242013; --card-border: #4A4430;
+    --ink: #E9E2CD; --ink-soft: #A9A188; --wood: #D2A63E; --metal: #6FC2A2;
+    --line: #58513C; --band: #2B2717; --pill: #332E1D;
+  }
+  :root[data-theme="light"] {
+    --bg: #EDE9DC; --card: #E7E2D1; --fig: #EFEBDD; --card-border: #CDC5AD;
+    --ink: #2F2A1F; --ink-soft: #6A6250; --wood: #8F6B1E; --metal: #2E7A62;
+    --line: #B4AC96; --band: #E2DBC6; --pill: #F4EFDE;
+  }
+
+  html { background: var(--bg); }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .serif { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  header.page { padding: 56px 0 8px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 14px;
+  }
+  h1 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-weight: 400; font-size: clamp(30px, 5vw, 44px);
+    margin: 0 0 18px; text-wrap: balance;
+  }
+  .intro { max-width: 68ch; color: var(--ink); font-size: 16px; }
+  .intro p { margin: 0 0 12px; }
+  .intro em { color: var(--ink-soft); }
+
+  .legend { display: flex; gap: 26px; flex-wrap: wrap; margin: 26px 0 6px; font-size: 13px; color: var(--ink-soft); }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; border: 2.5px solid; background: var(--bg); display: inline-block; }
+  .dot.wood { border-color: var(--wood); }
+  .dot.metal { border-color: var(--metal); }
+
+  /* ---- timeline ---- */
+  .tl-scroll { overflow-x: auto; padding: 18px 0 30px; }
+  .tl { width: 1960px; position: relative; }
+  .cards { display: flex; justify-content: space-between; padding: 0 30px; }
+  .card {
+    width: 254px; background: var(--card);
+    border: 1px solid var(--card-border); border-radius: 6px;
+    overflow: hidden; box-sizing: border-box;
+  }
+  .card .fig { display: block; background: var(--fig); border-bottom: 1px solid var(--card-border); }
+  .card-body { padding: 13px 15px 16px; }
+  .chip {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase;
+    margin: 0 0 6px; font-variant-numeric: tabular-nums;
+  }
+  .chip.wood { color: var(--wood); }
+  .chip.metal { color: var(--metal); }
+  .card h3 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-weight: 400; font-size: 19px; line-height: 1.22; margin: 0 0 9px; text-wrap: balance;
+  }
+  .card .meta { font-size: 12.5px; color: var(--ink-soft); margin: 0; line-height: 1.45; }
+
+  .wires { display: block; }
+  .wires text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .wires .tick-label { font-size: 12px; fill: var(--ink-soft); }
+  .wires .pill-big { font-family: Georgia, serif; font-style: italic; font-size: 21px; fill: var(--wood); }
+  .wires .pill-small { font-size: 10px; letter-spacing: 0.14em; fill: var(--ink-soft); text-transform: uppercase; }
+
+  /* ---- figures (shared engraving style) ---- */
+  .fig .stroke { stroke: var(--ink); fill: none; }
+  .fig text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9.5px; fill: var(--ink-soft); letter-spacing: 0.08em; }
+
+  /* ---- sources ---- */
+  section.sources { padding: 26px 0 20px; }
+  h2 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-weight: 400; font-size: 27px; margin: 30px 0 8px;
+  }
+  .src-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 18px; }
+  .src {
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .src h3 { font-family: Georgia, serif; font-weight: 400; font-size: 17px; margin: 2px 0 8px; }
+  .src .num { font-size: 11px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }
+  .src .num.wood { color: var(--wood); } .src .num.metal { color: var(--metal); }
+  .src p { font-size: 13.5px; margin: 0 0 8px; color: var(--ink); }
+  .src ul { margin: 0; padding-left: 18px; font-size: 12.5px; color: var(--ink-soft); }
+  .src li { margin-bottom: 3px; }
+  a { color: var(--metal); text-decoration-color: color-mix(in srgb, var(--metal) 40%, transparent); }
+  a:focus-visible { outline: 2px solid var(--metal); outline-offset: 2px; border-radius: 2px; }
+
+  .notes {
+    border: 1px solid var(--card-border); border-left: 3px solid var(--wood);
+    background: var(--pill); border-radius: 0 6px 6px 0;
+    padding: 16px 20px; margin: 30px 0; font-size: 14px; max-width: 78ch;
+  }
+  .notes h3 { font-family: Georgia, serif; font-weight: 400; font-size: 18px; margin: 0 0 8px; }
+  .notes p { margin: 0 0 9px; }
+  .notes p:last-child { margin-bottom: 0; }
+
+  footer { color: var(--ink-soft); font-size: 12.5px; padding: 10px 0 48px; max-width: 78ch; }
+</style>
+
+<!-- shared hatch patterns for all figures -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="hWoodA" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="var(--wood)" stroke-width="1" opacity="0.45"/>
+    </pattern>
+    <pattern id="hWoodB" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="var(--wood)" stroke-width="1" opacity="0.45"/>
+    </pattern>
+    <pattern id="hStone" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="var(--line)" stroke-width="1" opacity="0.8"/>
+    </pattern>
+  </defs>
+</svg>
+
+<header class="page wrap">
+  <p class="eyebrow">From Saqqara to the slide rest · evidence-first history</p>
+  <h1>The Dovetail Joint in Metal</h1>
+  <div class="intro">
+    <p>The dovetail is one of the oldest fastenings we can physically hold: flared, wedge-shaped tails that lock
+    against withdrawal. It appears fully formed in Egyptian woodwork around 3000&nbsp;BCE. What took far longer
+    is the move into metal — first as a metal <em>cramp shaped like</em> a dovetail (Achaemenid and Greek masonry,
+    6th&nbsp;century&nbsp;BCE), then as metal repair clamps, and only in the gunsmith's and machinist's era as a true
+    <em>metal-to-metal fitted joint</em>. The Antikythera Mechanism sits on this line as a control point: the finest
+    surviving ancient metalwork, and it contains no attested dovetail at all.</p>
+  </div>
+  <div class="legend" role="list">
+    <span role="listitem"><i class="dot wood"></i> executed in wood</span>
+    <span role="listitem"><i class="dot metal"></i> executed in metal</span>
+  </div>
+</header>
+
+<div class="tl-scroll">
+  <div class="tl">
+    <div class="cards">
+
+      <!-- 1 · c. 3000 BCE · wooden dovetails -->
+      <article class="card">
+        <svg class="fig" viewBox="0 0 254 180" role="img" aria-label="Diagram of a through-dovetail joint between two boards">
+          <rect x="24" y="44" width="100" height="96" fill="url(#hWoodA)" class="stroke" stroke-width="1.6"/>
+          <rect x="130" y="44" width="100" height="96" fill="url(#hWoodB)" class="stroke" stroke-width="1.6"/>
+          <polygon points="124,54 156,47 156,77 124,70" fill="var(--fig)" class="stroke" stroke-width="1.4"/>
+          <polygon points="125,55 155,48.5 155,75.5 125,69" fill="url(#hWoodA)" stroke="none"/>
+          <polygon points="124,84 156,77 156,107 124,100" fill="var(--fig)" class="stroke" stroke-width="1.4"/>
+          <polygon points="125,85 155,78.5 155,105.5 125,99" fill="url(#hWoodA)" stroke="none"/>
+          <polygon points="124,114 156,107 156,137 124,130" fill="var(--fig)" class="stroke" stroke-width="1.4"/>
+          <polygon points="125,115 155,108.5 155,135.5 125,129" fill="url(#hWoodA)" stroke="none"/>
+          <text x="24" y="30">TAILS OF ONE BOARD LOCKED IN ANOTHER</text>
+          <text x="24" y="162">FACE VIEW · WOOD</text>
+        </svg>
+        <div class="card-body">
+          <p class="chip wood">c. 3000 BCE</p>
+          <h3>Wooden dovetails,<br>First Dynasty Egypt</h3>
+          <p class="meta">Boxes &amp; coffins from First Dynasty tombs · earliest surviving physical dovetails · later in Hetepheres' bed canopy (4th Dyn.)</p>
+        </div>
+      </article>
+
+      <!-- 2 · c. 2000–1200 BCE · wooden cramps in stone -->
+      <article class="card">
+        <svg class="fig" viewBox="0 0 254 180" role="img" aria-label="Diagram of a butterfly-shaped wooden cramp tying two stone blocks">
+          <rect x="24" y="50" width="103" height="84" fill="url(#hStone)" class="stroke" stroke-width="1.6"/>
+          <rect x="127" y="50" width="103" height="84" fill="url(#hStone)" class="stroke" stroke-width="1.6"/>
+          <line x1="127" y1="50" x2="127" y2="134" class="stroke" stroke-width="1.6"/>
+          <polygon points="93,76 127,87 161,76 161,108 127,97 93,108" fill="var(--wood)" opacity="0.82" class="stroke" stroke-width="1.4"/>
+          <text x="24" y="30">DOUBLE-ENDED DOVETAIL “CRAMP” ACROSS A JOINT</text>
+          <text x="24" y="162">PLAN VIEW · WOOD IN STONE</text>
+        </svg>
+        <div class="card-body">
+          <p class="chip wood">c. 2000–1200 BCE</p>
+          <h3>Wooden dovetail cramps in stone walls</h3>
+          <p class="meta">Egyptian builders' cramps · survivals: Middle Kingdom cramp (Met Museum), Sety&nbsp;I cramp (Liverpool) · sockets remain on temple blocks</p>
+        </div>
+      </article>
+
+      <!-- 3 · c. 550–515 BCE · metal swallowtail cramps -->
+      <article class="card">
+        <svg class="fig" viewBox="0 0 254 180" role="img" aria-label="Diagram of an iron swallowtail cramp set in lead between stone blocks">
+          <rect x="24" y="50" width="103" height="84" fill="url(#hStone)" class="stroke" stroke-width="1.6"/>
+          <rect x="127" y="50" width="103" height="84" fill="url(#hStone)" class="stroke" stroke-width="1.6"/>
+          <line x1="127" y1="50" x2="127" y2="134" class="stroke" stroke-width="1.6"/>
+          <rect x="76" y="74" width="102" height="36" rx="7" fill="var(--pill)" class="stroke" stroke-width="1" stroke-dasharray="3 2.5"/>
+          <polygon points="84,80 104,87 150,87 170,80 170,104 150,97 104,97 84,104" fill="var(--metal)" opacity="0.9" class="stroke" stroke-width="1.4"/>
+          <text x="182" y="72">Pb</text>
+          <text x="120" y="122">Fe</text>
+          <text x="24" y="30">IRON CRAMP, DOVETAIL ENDS, POURED IN LEAD</text>
+          <text x="24" y="162">PLAN VIEW · FIRST DOVETAILS MADE OF METAL</text>
+        </svg>
+        <div class="card-body">
+          <p class="chip metal">c. 550–515 BCE</p>
+          <h3>Swallowtail cramps executed in metal</h3>
+          <p class="meta">Pasargadae &amp; Persepolis: iron set in lead, many still in place · same form in archaic Greek temple masonry</p>
+        </div>
+      </article>
+
+      <!-- 4 · c. 150–60 BCE · Antikythera -->
+      <article class="card">
+        <svg class="fig" viewBox="0 0 254 180" role="img" aria-label="Diagram of an Antikythera-style toothed gear on a riveted bronze plate">
+          <rect x="34" y="26" width="186" height="132" rx="3" fill="var(--pill)" class="stroke" stroke-width="1.6"/>
+          <circle cx="44" cy="36" r="2.4" fill="var(--ink)"/><circle cx="210" cy="36" r="2.4" fill="var(--ink)"/>
+          <circle cx="44" cy="148" r="2.4" fill="var(--ink)"/><circle cx="210" cy="148" r="2.4" fill="var(--ink)"/>
+          <circle cx="120" cy="94" r="46" fill="var(--band)" class="stroke" stroke-width="1.3"/>
+          <circle cx="120" cy="94" r="50" fill="none" stroke="var(--metal)" stroke-width="9" stroke-dasharray="4 3.2"/>
+          <rect x="112" y="86" width="16" height="16" fill="var(--bg)" class="stroke" stroke-width="1.4"/>
+          <circle cx="193" cy="58" r="15" fill="var(--band)" class="stroke" stroke-width="1.2"/>
+          <circle cx="193" cy="58" r="18" fill="none" stroke="var(--metal)" stroke-width="6" stroke-dasharray="3 2.6"/>
+          <text x="40" y="20">BRONZE · PINS, RIVETS, SQUARE ARBORS — NO DOVETAIL</text>
+          <text x="40" y="172">TRIANGULAR-TOOTHED GEAR, SQUARE CENTRAL HOLE</text>
+        </svg>
+        <div class="card-body">
+          <p class="chip metal">c. 150–60 BCE</p>
+          <h3>The Antikythera Mechanism</h3>
+          <p class="meta">Precision bronze joined by pins, rivets &amp; burred shaft ends · no dovetail attested — the joint is absent from even the finest ancient metalwork</p>
+        </div>
+      </article>
+
+      <!-- 5 · 1st–2nd c. CE · Ostia dolia -->
+      <article class="card">
+        <svg class="fig" viewBox="0 0 254 180" role="img" aria-label="Diagram of a Roman storage jar with a crack stapled by lead double-dovetail clamps">
+          <path d="M83,34 C60,52 52,84 56,110 C60,140 88,156 127,158 C166,156 194,140 198,110 C202,84 194,52 171,34 Z" fill="var(--pill)" class="stroke" stroke-width="1.6"/>
+          <ellipse cx="127" cy="33" rx="45" ry="8.5" fill="var(--fig)" class="stroke" stroke-width="1.6"/>
+          <polyline points="150,46 142,66 152,84 144,104 152,122 147,142" class="stroke" stroke-width="1.2"/>
+          <polygon points="127,66 147,73 167,66 167,86 147,79 127,86" fill="var(--metal)" opacity="0.88" class="stroke" stroke-width="1.3"/>
+          <polygon points="126,106 146,113 166,106 166,126 146,119 126,126" fill="var(--metal)" opacity="0.88" class="stroke" stroke-width="1.3"/>
+          <text x="24" y="20">CRACKED DOLIUM STAPLED WITH Pb–Ag–Sn DOVETAILS</text>
+          <text x="24" y="172">ELEVATION · METAL DOVETAILS AS REPAIR CLAMPS</text>
+        </svg>
+        <div class="card-body">
+          <p class="chip metal">1st–2nd c. CE</p>
+          <h3>Lead double-dovetail repairs at Ostia</h3>
+          <p class="meta">Roman dolia mended with lead-alloy double-dovetail clamps · ICP-MS shows Pb with Ag &amp; Sn (Cheung &amp; Carpentieri) · bronze vessels patched similarly</p>
+        </div>
+      </article>
+
+      <!-- 6 · c. 1700s · gun barrel dovetails -->
+      <article class="card">
+        <svg class="fig" viewBox="0 0 254 180" role="img" aria-label="Cross-section of an octagonal gun barrel with a dovetailed front sight">
+          <polygon points="103.4,45 150.6,45 184,78.4 184,125.6 150.6,159 103.4,159 70,125.6 70,78.4" fill="var(--pill)" class="stroke" stroke-width="1.8"/>
+          <circle cx="127" cy="102" r="21" fill="var(--bg)" class="stroke" stroke-width="1.5"/>
+          <polygon points="113,45 141,45 147,58 107,58" fill="var(--bg)" class="stroke" stroke-width="1.3"/>
+          <polygon points="115,47 139,47 144,56.5 110,56.5" fill="var(--metal)" opacity="0.9"/>
+          <rect x="123.5" y="18" width="7" height="29.5" fill="var(--metal)" class="stroke" stroke-width="1.2"/>
+          <text x="24" y="172">SECTION · SIGHT BASE DRIVEN INTO FILED SLOT</text>
+          <text x="158" y="30">SIGHT</text>
+        </svg>
+        <div class="card-body">
+          <p class="chip metal">c. 1700s</p>
+          <h3>Hand-filed dovetails in iron barrels</h3>
+          <p class="meta">Gunsmiths saw &amp; file transverse dovetails for sights and barrel under-lugs · the first commonplace metal-to-metal fitted dovetail</p>
+        </div>
+      </article>
+
+      <!-- 7 · 1812–1841 · machine slideways -->
+      <article class="card">
+        <svg class="fig" viewBox="0 0 254 180" role="img" aria-label="Cross-section of a machine-tool dovetail slideway with carriage tongue in bed groove">
+          <rect x="34" y="96" width="186" height="56" fill="url(#hStone)" class="stroke" stroke-width="1.8"/>
+          <polygon points="94,96 160,96 176,146 78,146" fill="var(--fig)" class="stroke" stroke-width="1.5"/>
+          <polygon points="54,60 200,60 200,86 158,86 171,140 83,140 96,86 54,86" fill="var(--metal)" opacity="0.88" class="stroke" stroke-width="1.5"/>
+          <text x="24" y="30">CARRIAGE TONGUE HELD IN BED GROOVE</text>
+          <text x="24" y="172">SECTION · PRECISION SLIDING DOVETAIL</text>
+        </svg>
+        <div class="card-body">
+          <p class="chip metal">1812–1841</p>
+          <h3>Machine-tool dovetail slideways</h3>
+          <p class="meta">Zakharov's gun-barrel lathes, Tula 1812–25 · Whitworth-pattern dovetail beds become the British standard · still on milling machines today</p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- connectors, era band, axis -->
+    <svg class="wires" width="1960" height="262" viewBox="0 0 1960 262" aria-hidden="true">
+      <!-- shaded metal-era band -->
+      <polygon points="706,24 1803,24 1865,196 984,196" fill="var(--band)"/>
+      <line x1="706" y1="24" x2="984" y2="196" stroke="var(--line)" stroke-width="1" stroke-dasharray="4 4"/>
+
+      <!-- connectors -->
+      <polyline points="157,0 157,26 60,196 60,206"   fill="none" stroke="var(--wood)"  stroke-width="1.5"/>
+      <polyline points="431,0 431,26 453,196 453,206" fill="none" stroke="var(--wood)"  stroke-width="1.5"/>
+      <polyline points="706,0 706,26 984,196 984,206" fill="none" stroke="var(--metal)" stroke-width="1.5"/>
+      <polyline points="980,0 980,26 1145,196 1145,206" fill="none" stroke="var(--metal)" stroke-width="1.5"/>
+      <polyline points="1254,0 1254,26 1219,196 1219,206" fill="none" stroke="var(--metal)" stroke-width="1.5"/>
+      <polyline points="1529,0 1529,26 1833,196 1833,206" fill="none" stroke="var(--metal)" stroke-width="1.5"/>
+      <polyline points="1803,0 1803,26 1865,196 1865,206" fill="none" stroke="var(--metal)" stroke-width="1.5"/>
+
+      <!-- era-span pill -->
+      <rect x="1210" y="86" width="250" height="58" rx="5" fill="var(--pill)" stroke="var(--card-border)"/>
+      <text x="1335" y="112" text-anchor="middle" class="pill-big">~2,350 years</text>
+      <text x="1335" y="132" text-anchor="middle" class="pill-small">dovetail as a metal element</text>
+
+      <!-- axis -->
+      <line x1="34" y1="210" x2="1930" y2="210" stroke="var(--line)" stroke-width="1.5"/>
+      <g stroke="var(--line)" stroke-width="1.2">
+        <line x1="60"   y1="210" x2="60"   y2="217"/><line x1="247"  y1="210" x2="247"  y2="217"/>
+        <line x1="434"  y1="210" x2="434"  y2="217"/><line x1="621"  y1="210" x2="621"  y2="217"/>
+        <line x1="808"  y1="210" x2="808"  y2="217"/><line x1="995"  y1="210" x2="995"  y2="217"/>
+        <line x1="1182" y1="210" x2="1182" y2="217"/><line x1="1369" y1="210" x2="1369" y2="217"/>
+        <line x1="1556" y1="210" x2="1556" y2="217"/><line x1="1743" y1="210" x2="1743" y2="217"/>
+      </g>
+      <g class="tick-label" text-anchor="middle">
+        <text x="60"  y="238">3000 BCE</text><text x="247" y="238">2500 BCE</text>
+        <text x="434" y="238">2000 BCE</text><text x="621" y="238">1500 BCE</text>
+        <text x="808" y="238">1000 BCE</text><text x="995" y="238">500 BCE</text>
+        <text x="1182" y="238">1 CE</text><text x="1369" y="238">500 CE</text>
+        <text x="1556" y="238">1000 CE</text><text x="1743" y="238">1500 CE</text>
+      </g>
+
+      <!-- event markers -->
+      <g fill="var(--bg)" stroke-width="2.2">
+        <circle cx="60"   cy="210" r="5.5" stroke="var(--wood)"/>
+        <circle cx="453"  cy="210" r="5.5" stroke="var(--wood)"/>
+        <circle cx="984"  cy="210" r="5.5" stroke="var(--metal)"/>
+        <circle cx="1145" cy="210" r="5.5" stroke="var(--metal)"/>
+        <circle cx="1219" cy="210" r="5.5" stroke="var(--metal)"/>
+        <circle cx="1833" cy="210" r="5.5" stroke="var(--metal)"/>
+        <circle cx="1865" cy="210" r="5.5" stroke="var(--metal)"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<section class="sources wrap">
+  <h2>The evidence, entry by entry</h2>
+  <div class="src-grid">
+
+    <div class="src">
+      <p class="num wood">1 · Physical survivals</p>
+      <h3>First Dynasty wooden dovetails</h3>
+      <p>Dovetailed boxes and coffins survive from First Dynasty tombs (c. 3100–2900 BCE) — the joint arrives already well developed. Queen Hetepheres' bed canopy (4th Dynasty, c. 2550 BCE) uses dovetails and barefaced dovetails in its frame.</p>
+      <ul>
+        <li><a href="https://www.intechopen.com/chapters/1201517">Woodworking techniques in ancient Egypt (IntechOpen)</a></li>
+        <li><a href="https://workingbyhand.wordpress.com/2024/03/09/did-the-ancient-egyptians-use-dovetails/">Did the ancient Egyptians use dovetails? — survey of museum pieces</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num wood">2 · Physical survivals + sockets</p>
+      <h3>Wooden cramps tying stone</h3>
+      <p>Double-ended dovetail "cramps" of wood tied adjacent stone blocks; museum survivals include a Middle Kingdom builder's cramp and a New Kingdom cramp inscribed for Sety I. Dovetail sockets remain cut into temple blocks.</p>
+      <ul>
+        <li><a href="https://www.metmuseum.org/art/collection/search/544307">Builder's cramp, Middle Kingdom (Met Museum 544307)</a></li>
+        <li><a href="https://www.liverpoolmuseums.org.uk/artifact/wooden-cramp-of-king-sety-i">Wooden cramp of King Sety I (National Museums Liverpool)</a></li>
+        <li><a href="https://www.ucl.ac.uk/museums-static/digitalegypt/architecture/cramp.html">UCL Digital Egypt: cramps in building foundations</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num metal">3 · In-situ physical survivals</p>
+      <h3>First dovetails made of metal</h3>
+      <p>At Pasargadae (c. 546 BCE) and Persepolis (from c. 515 BCE), ashlar blocks were tied with swallowtail clamps of iron sealed in poured lead — some still in place. Archaic Greek masonry used the same swallowtail form in iron or bronze set in lead. The dovetail <em>shape</em> is now executed in metal, though it still grips stone, not metal.</p>
+      <ul>
+        <li><a href="https://www.iranicaonline.org/articles/construction-materials-and-techniques-in-persian-architecture/">Encyclopaedia Iranica: swallowtail clamps in Achaemenid construction</a></li>
+        <li><a href="https://www.ime.gr/chronos/04/en/culture/314arts_arch_masonry.html">Archaic Greek masonry techniques</a></li>
+        <li><a href="https://www.imeko.org/publications/tc4-Archaeo-2019/IMEKO-TC4-METROARCHAEO-2019-101.pdf">Clamp systems on the Athens Acropolis (IMEKO)</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num metal">4 · Negative control (CT evidence)</p>
+      <h3>Antikythera Mechanism — no dovetail</h3>
+      <p>The AMRP tomographies and the Voulgaris reconstructions document pins, rivets, square arbors, and burred-over shaft ends — no threaded fasteners and, per your own source review, no attested dovetail. The finest ancient metal assembly did without it; that absence is itself a datum on this timeline.</p>
+      <ul>
+        <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S2212054818300353">Voulgaris et al., Ancient machine tools for the Antikythera Mechanism parts</a></li>
+        <li><a href="https://arxiv.org/pdf/2407.15858">Voulgaris et al., reconstruction papers (arXiv)</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num metal">5 · Physical survivals + chemistry</p>
+      <h3>Roman lead double-dovetail clamps</h3>
+      <p>Dolia (1,000-litre storage jars) at Ostia were repaired with lead-alloy clamps shaped as double dovetails; ICP-MS analysis found lead hardened with silver and tin. Bronze vessels were likewise patched. Metal dovetail-shaped clamps are now routine repair hardware.</p>
+      <ul>
+        <li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5762596">Cheung &amp; Carpentieri, Life histories of the dolia of Ostia</a></li>
+        <li><a href="https://www.researchgate.net/figure/Evidence-of-dolium-rim-repair-with-a-lead-double-dovetail-clamp-photograph-by-E-Dodd_fig4_370066683">Photograph: dolium rim repaired with lead double-dovetail clamp</a></li>
+        <li><a href="https://exarc.net/issue-2012-3/ea/ancient-repairs-bronze-objects">EXARC: ancient repairs on bronze objects</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num metal">6 · Surviving arms + craft literature</p>
+      <h3>Dovetails filed into iron barrels</h3>
+      <p>On 18th-century longrifles, front sights and the under-lugs that pin barrel to stock sit in transverse dovetails sawn and filed into the octagonal iron barrel — a true metal-to-metal fitted dovetail, done by hand, surviving on thousands of period arms and still standard practice.</p>
+      <ul>
+        <li><a href="https://africanhuntinggazette.com/the-history-of-rifle-sights/">History of rifle sights (African Hunting Gazette)</a></li>
+        <li><a href="https://handwiki.org/wiki/Engineering:Dovetail_rail">Dovetail rail — engineering overview</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num metal">7 · Documented machines</p>
+      <h3>Dovetail slideways in machine tools</h3>
+      <p>Zakharov's special-purpose gun-barrel lathes at Tula (1812–25) ran their carriages on dovetail ways; by the 1830s–40s most British makers followed Whitworth in adopting dovetailed slideways. The dovetail becomes a precision <em>sliding</em> metal joint — the form still on milling machines and lathe cross-slides.</p>
+      <ul>
+        <li><a href="https://www.gracesguide.co.uk/Early_Lathes">Graces Guide: early lathes and slideways</a></li>
+        <li><a href="https://www.britannica.com/technology/machine-tool">Britannica: machine tool history</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="notes">
+    <h3>Reading notes &amp; caveats</h3>
+    <p><strong>Three grades of "dovetail in metal."</strong> The timeline deliberately distinguishes (a) the dovetail
+    <em>shape executed in</em> metal but gripping another material — Achaemenid/Greek cramps in stone, Roman clamps on
+    ceramic; (b) metal patches on metal objects (Roman bronze repair, usually riveted rather than dovetailed); and
+    (c) the fitted metal-to-metal dovetail, which is essentially a gunsmith's and machinist's development. No securely
+    documented fitted metal-to-metal dovetail from antiquity was found in this research pass.</p>
+    <p><strong>Antikythera.</strong> Included as a reference point at your request. Consistent with your source review,
+    no dovetail is attested in the fragments; its joining inventory is pins, rivets, square arbors, and burred shaft ends.</p>
+    <p><strong>Dates.</strong> Egyptian dynastic dates are conventional approximations; "c. 1700s" for barrel dovetails marks
+    the period when the practice is abundantly attested on surviving longrifles, not its first occurrence — transverse
+    sight dovetails may go back further into the 16th–17th centuries, but I found no securely dated earlier example.</p>
+    <p><strong>Illustrations.</strong> The plates are schematic reconstructions drawn for this page (not to scale).
+    This environment's network policy blocks image downloads, so photographs of the artifacts could not be embedded;
+    the source links above lead to the photographic evidence.</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  Compiled 2026-08-01 from the sources linked above. Companion to the Antikythera Mechanism fabrication-methods survey.
+</footer>
