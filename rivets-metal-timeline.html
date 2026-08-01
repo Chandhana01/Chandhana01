@@ -1,0 +1,503 @@
+<title>The Rivet after Antikythera — a Timeline</title>
+<style>
+  :root {
+    --bg: #EDE9DC;
+    --card: #E7E2D1;
+    --fig: #EFEBDD;
+    --card-border: #CDC5AD;
+    --ink: #2F2A1F;
+    --ink-soft: #6A6250;
+    --wood: #8F6B1E;   /* copper & bronze rivets */
+    --metal: #2E7A62;  /* iron rivets */
+    --line: #B4AC96;
+    --band: #E2DBC6;
+    --pill: #F4EFDE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #201D14; --card: #292518; --fig: #242013; --card-border: #4A4430;
+      --ink: #E9E2CD; --ink-soft: #A9A188; --wood: #D2A63E; --metal: #6FC2A2;
+      --line: #58513C; --band: #2B2717; --pill: #332E1D;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #201D14; --card: #292518; --fig: #242013; --card-border: #4A4430;
+    --ink: #E9E2CD; --ink-soft: #A9A188; --wood: #D2A63E; --metal: #6FC2A2;
+    --line: #58513C; --band: #2B2717; --pill: #332E1D;
+  }
+  :root[data-theme="light"] {
+    --bg: #EDE9DC; --card: #E7E2D1; --fig: #EFEBDD; --card-border: #CDC5AD;
+    --ink: #2F2A1F; --ink-soft: #6A6250; --wood: #8F6B1E; --metal: #2E7A62;
+    --line: #B4AC96; --band: #E2DBC6; --pill: #F4EFDE;
+  }
+
+  html { background: var(--bg); }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  header.page { padding: 56px 0 8px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 14px;
+  }
+  h1 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-weight: 400; font-size: clamp(30px, 5vw, 44px);
+    margin: 0 0 18px; text-wrap: balance;
+  }
+  .intro { max-width: 68ch; color: var(--ink); font-size: 16px; }
+  .intro p { margin: 0 0 12px; }
+  .intro em { color: var(--ink-soft); }
+
+  .legend { display: flex; gap: 26px; flex-wrap: wrap; margin: 26px 0 6px; font-size: 13px; color: var(--ink-soft); }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; border: 2.5px solid; background: var(--bg); display: inline-block; }
+  .dot.wood { border-color: var(--wood); }
+  .dot.metal { border-color: var(--metal); }
+
+  /* ---- timeline ---- */
+  .tl-scroll { overflow-x: auto; padding: 18px 0 30px; }
+  .tl { width: 1960px; position: relative; }
+  .cards { display: flex; justify-content: space-between; padding: 0 30px; }
+  .card {
+    width: 254px; background: var(--card);
+    border: 1px solid var(--card-border); border-radius: 6px;
+    overflow: hidden; box-sizing: border-box;
+  }
+  .figwrap { border-bottom: 1px solid var(--card-border); background: var(--fig); }
+  .figwrap img { display: block; width: 100%; height: 176px; object-fit: cover; }
+  .figwrap svg.fb { display: none; }
+  .figwrap.noimg img { display: none; }
+  .figwrap.noimg svg.fb, .figwrap.plate svg.fb { display: block; }
+  .fig { display: block; background: var(--fig); }
+  .card-body { padding: 13px 15px 16px; }
+  .chip {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase;
+    margin: 0 0 6px; font-variant-numeric: tabular-nums;
+  }
+  .chip.wood { color: var(--wood); }
+  .chip.metal { color: var(--metal); }
+  .card h3 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-weight: 400; font-size: 19px; line-height: 1.22; margin: 0 0 9px; text-wrap: balance;
+  }
+  .card .meta { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 7px; line-height: 1.45; }
+  .card .credit { font-size: 11px; color: var(--ink-soft); margin: 0; }
+  .card .credit a { color: var(--ink-soft); }
+
+  .wires { display: block; }
+  .wires text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .wires .tick-label { font-size: 12px; fill: var(--ink-soft); }
+  .wires .pill-big { font-family: Georgia, serif; font-style: italic; font-size: 21px; fill: var(--wood); }
+  .wires .pill-small { font-size: 10px; letter-spacing: 0.14em; fill: var(--ink-soft); text-transform: uppercase; }
+
+  /* ---- figures (shared engraving style) ---- */
+  .fig .stroke { stroke: var(--ink); fill: none; }
+  .fig text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9.5px; fill: var(--ink-soft); letter-spacing: 0.08em; }
+
+  /* ---- sources ---- */
+  section.sources { padding: 26px 0 20px; }
+  h2 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-weight: 400; font-size: 27px; margin: 30px 0 8px;
+  }
+  .src-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 18px; }
+  .src {
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .src h3 { font-family: Georgia, serif; font-weight: 400; font-size: 17px; margin: 2px 0 8px; }
+  .src .num { font-size: 11px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }
+  .src .num.wood { color: var(--wood); } .src .num.metal { color: var(--metal); }
+  .src p { font-size: 13.5px; margin: 0 0 8px; color: var(--ink); }
+  .src ul { margin: 0; padding-left: 18px; font-size: 12.5px; color: var(--ink-soft); }
+  .src li { margin-bottom: 3px; }
+  a { color: var(--metal); text-decoration-color: color-mix(in srgb, var(--metal) 40%, transparent); }
+  a:focus-visible { outline: 2px solid var(--metal); outline-offset: 2px; border-radius: 2px; }
+
+  .notes {
+    border: 1px solid var(--card-border); border-left: 3px solid var(--wood);
+    background: var(--pill); border-radius: 0 6px 6px 0;
+    padding: 16px 20px; margin: 30px 0; font-size: 14px; max-width: 78ch;
+  }
+  .notes h3 { font-family: Georgia, serif; font-weight: 400; font-size: 18px; margin: 0 0 8px; }
+  .notes p { margin: 0 0 9px; }
+  .notes p:last-child { margin-bottom: 0; }
+
+  footer { color: var(--ink-soft); font-size: 12.5px; padding: 10px 0 48px; max-width: 78ch; }
+</style>
+
+<!-- shared hatch pattern for the fallback plates -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="hStone" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="var(--line)" stroke-width="1" opacity="0.8"/>
+    </pattern>
+  </defs>
+</svg>
+
+<header class="page wrap">
+  <p class="eyebrow">The centuries around and after the Mechanism · evidence-first history</p>
+  <h1>The Rivet after Antikythera</h1>
+  <div class="intro">
+    <p>A rivet is a pin given a second head after insertion — the tail peened or clenched until nothing can pull back
+    through. By the Mechanism's lifetime it was already ancient (copper rivets hold dagger blades to hilts from
+    c.&nbsp;3000&nbsp;BCE), but the Antikythera Mechanism marks something new: riveting as <em>precision mechanical
+    assembly</em>, its disks and gears riveted together over square arbors. This timeline follows the rivet through the
+    Mechanism's own world and the centuries just after it — Rome's armouries and bronze vessels, the first surviving
+    rivet-built hull, the Byzantine geared sundial-calendar that continues the Mechanism's construction school, and the
+    ghost ship at Sutton Hoo, recovered from its rivet rows alone.</p>
+  </div>
+  <div class="legend" role="list">
+    <span role="listitem"><i class="dot wood"></i> copper &amp; bronze rivets</span>
+    <span role="listitem"><i class="dot metal"></i> iron rivets</span>
+  </div>
+</header>
+
+<div class="tl-scroll">
+  <div class="tl">
+    <div class="cards">
+
+      <!-- 1 · c. 300 BCE → · riveted mail -->
+      <article class="card">
+        <div class="figwrap">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lorica%20Hamata%20(Kettenhemd).jpg?width=640"
+               alt="Lorica hamata, Roman riveted mail armour"
+               loading="lazy" onerror="this.parentElement.classList.add('noimg')">
+          <svg class="fig fb" viewBox="0 0 254 180" role="img" aria-label="Diagram of four-in-one mail rings, one ring closed by a tiny rivet">
+            <circle cx="103" cy="80" r="26" class="stroke" stroke-width="5"/>
+            <circle cx="151" cy="80" r="26" class="stroke" stroke-width="5"/>
+            <circle cx="79" cy="118" r="26" class="stroke" stroke-width="5"/>
+            <circle cx="127" cy="118" r="26" stroke="var(--metal)" stroke-width="5" fill="none"/>
+            <circle cx="175" cy="118" r="26" class="stroke" stroke-width="5"/>
+            <circle cx="127" cy="92" r="3.5" fill="var(--metal)" class="stroke" stroke-width="1"/>
+            <text x="24" y="24">EVERY RING CLOSED BY A TINY RIVET</text>
+            <text x="24" y="166">IRON · TENS OF THOUSANDS PER SHIRT</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="chip metal">c. 300 BCE →</p>
+          <h3>Riveted mail — the world the Mechanism knew</h3>
+          <p class="meta">Each iron ring closed with its own minute rivet · Celtic invention adopted as Rome's lorica hamata (pictured, reconstruction) · in service before, during &amp; long after the Mechanism</p>
+          <p class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Lorica_Hamata_(Kettenhemd).jpg">Lorica hamata · Wikimedia Commons</a></p>
+        </div>
+      </article>
+
+      <!-- 2 · c. 150–60 BCE · Antikythera -->
+      <article class="card">
+        <div class="figwrap">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Antikythera%20Mechanism%20-%20National%20Archaeological%20Museum%2C%20Athens%20by%20Joy%20of%20Museum.jpg?width=640"
+               alt="Fragment of the Antikythera Mechanism, National Archaeological Museum, Athens"
+               loading="lazy" onerror="this.parentElement.classList.add('noimg')">
+          <svg class="fig fb" viewBox="0 0 254 180" role="img" aria-label="Diagram of an Antikythera-style toothed gear riveted to a disk">
+            <rect x="34" y="26" width="186" height="132" rx="3" fill="var(--pill)" class="stroke" stroke-width="1.6"/>
+            <circle cx="120" cy="94" r="46" fill="var(--band)" class="stroke" stroke-width="1.3"/>
+            <circle cx="120" cy="94" r="50" fill="none" stroke="var(--wood)" stroke-width="9" stroke-dasharray="4 3.2"/>
+            <rect x="112" y="86" width="16" height="16" fill="var(--bg)" class="stroke" stroke-width="1.4"/>
+            <circle cx="120" cy="62" r="3" fill="var(--wood)" class="stroke" stroke-width="1"/>
+            <circle cx="148" cy="110" r="3" fill="var(--wood)" class="stroke" stroke-width="1"/>
+            <circle cx="92" cy="110" r="3" fill="var(--wood)" class="stroke" stroke-width="1"/>
+            <text x="40" y="20">DISKS AND GEARS RIVETED TOGETHER</text>
+            <text x="40" y="172">BRONZE · RIVETING AS PRECISION ASSEMBLY</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="chip wood">c. 150–60 BCE</p>
+          <h3>Antikythera Mechanism, riveted gearwork</h3>
+          <p class="meta">Fragment A, NAM Athens (pictured) · disks &amp; gears riveted together over square arbors; plates fixed with pins, rivets &amp; burred shaft ends — CT-attested, no threaded fasteners</p>
+          <p class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Antikythera_Mechanism_-_National_Archaeological_Museum,_Athens_by_Joy_of_Museum.jpg">NAM Athens · Wikimedia Commons</a></p>
+        </div>
+      </article>
+
+      <!-- 3 · c. 9 BCE–250 CE · lorica segmentata -->
+      <article class="card">
+        <div class="figwrap">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Roman%20soldier%20in%20lorica%20segmentata%201.jpg?width=640"
+               alt="Reenactor wearing lorica segmentata, the Roman plate armour whose copper-alloy fittings are riveted to its iron plates"
+               loading="lazy" onerror="this.parentElement.classList.add('noimg')">
+          <svg class="fig fb" viewBox="0 0 254 180" role="img" aria-label="Diagram of overlapping armour plates with riveted hinge fittings">
+            <path d="M34,60 Q127,44 220,60 L220,80 Q127,64 34,80 Z" fill="var(--pill)" class="stroke" stroke-width="1.5"/>
+            <path d="M34,86 Q127,70 220,86 L220,106 Q127,90 34,106 Z" fill="var(--pill)" class="stroke" stroke-width="1.5"/>
+            <path d="M34,112 Q127,96 220,112 L220,132 Q127,116 34,132 Z" fill="var(--pill)" class="stroke" stroke-width="1.5"/>
+            <rect x="112" y="52" width="30" height="18" rx="2" fill="var(--wood)" opacity="0.9" class="stroke" stroke-width="1.2"/>
+            <circle cx="118" cy="61" r="2.4" fill="var(--ink)"/><circle cx="136" cy="61" r="2.4" fill="var(--ink)"/>
+            <text x="24" y="28">BRASS HINGES &amp; BUCKLES RIVETED TO IRON PLATES</text>
+            <text x="24" y="166">COPPER-ALLOY RIVETS · SEGMENTAL ARMOUR</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="chip wood">c. 9 BCE–250 CE</p>
+          <h3>Rome's segmental armour, held by rivets</h3>
+          <p class="meta">Lorica segmentata (pictured, reconstruction): brass hinges, buckles &amp; strap fittings riveted to iron plates · best evidence: the Corbridge hoard of armour parts</p>
+          <p class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Roman_soldier_in_lorica_segmentata_1.jpg">Lorica segmentata · Wikimedia Commons</a></p>
+        </div>
+      </article>
+
+      <!-- 4 · 1st–3rd c CE · riveted vessel repairs -->
+      <article class="card">
+        <div class="figwrap">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bronze%20Roman%20cupping%20vessel%2C%201-79%20CE%20Wellcome%20L0058046.jpg?width=640"
+               alt="Roman bronze vessel, 1–79 CE, Wellcome Collection — the class of object routinely maintained with riveted patches"
+               loading="lazy" onerror="this.parentElement.classList.add('noimg')">
+          <svg class="fig fb" viewBox="0 0 254 180" role="img" aria-label="Diagram of a bronze vessel wall with a riveted repair patch">
+            <path d="M60,40 Q50,110 90,150 L190,150 Q214,100 200,40" fill="var(--pill)" class="stroke" stroke-width="1.6"/>
+            <rect x="112" y="80" width="52" height="38" rx="3" fill="var(--wood)" opacity="0.85" class="stroke" stroke-width="1.3"/>
+            <circle cx="120" cy="88" r="2.6" fill="var(--ink)"/><circle cx="156" cy="88" r="2.6" fill="var(--ink)"/>
+            <circle cx="120" cy="110" r="2.6" fill="var(--ink)"/><circle cx="156" cy="110" r="2.6" fill="var(--ink)"/>
+            <text x="24" y="26">PATCH RIVETED OVER A CRACK OR HOLE</text>
+            <text x="24" y="170">BRONZE · REPAIR AS EVERYDAY RIVETING</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="chip wood">1st–3rd c. CE</p>
+          <h3>Riveted patches on Roman bronze vessels</h3>
+          <p class="meta">Bronze vessels (type pictured) mended with fitted patches fastened by rivets, and handles &amp; feet riveted on — repair riveting as routine Roman craft</p>
+          <p class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Bronze_Roman_cupping_vessel,_1-79_CE_Wellcome_L0058046.jpg">Roman bronze vessel, Wellcome (CC) · Wikimedia Commons</a></p>
+        </div>
+      </article>
+
+      <!-- 5 · c. 310–320 CE · Nydam boat -->
+      <article class="card">
+        <div class="figwrap">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nydamboat.2.jpg?width=640"
+               alt="The Nydam boat, c. 310–320 CE, the earliest surviving clinker hull held by iron rivets"
+               loading="lazy" onerror="this.parentElement.classList.add('noimg')">
+          <svg class="fig fb" viewBox="0 0 254 180" role="img" aria-label="Cross-section of clinker planking joined by an iron nail clenched over a rove">
+            <rect x="40" y="60" width="150" height="16" rx="2" transform="rotate(-8 40 60)" fill="var(--pill)" class="stroke" stroke-width="1.5"/>
+            <rect x="60" y="96" width="150" height="16" rx="2" transform="rotate(-8 60 96)" fill="var(--pill)" class="stroke" stroke-width="1.5"/>
+            <rect x="118" y="58" width="9" height="46" fill="var(--metal)" class="stroke" stroke-width="1.2"/>
+            <path d="M113,58 A10,7 0 0 1 132,58 Z" fill="var(--metal)" class="stroke" stroke-width="1.2"/>
+            <polygon points="108,104 137,104 127,112 118,112" fill="var(--metal)" class="stroke" stroke-width="1.2"/>
+            <text x="24" y="26">NAIL THROUGH OVERLAPPING PLANKS,</text>
+            <text x="24" y="40">CLENCHED OVER A DIAMOND ROVE</text>
+            <text x="24" y="166">IRON · CLINKER SHIPBUILDING BEGINS</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="chip metal">c. 310–320 CE</p>
+          <h3>Nydam boat — the first surviving riveted hull</h3>
+          <p class="meta">Oak clinker hull from the Nydam bog, Denmark (pictured): iron nails clenched over roves through overlapping planks — the rivet takes to the sea</p>
+          <p class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Nydamboat.2.jpg">Nydam boat · Wikimedia Commons</a></p>
+        </div>
+      </article>
+
+      <!-- 6 · c. 400–600 CE · Byzantine sundial-calendar -->
+      <article class="card">
+        <div class="figwrap plate">
+          <svg class="fig fb" viewBox="0 0 254 180" role="img" aria-label="Diagram of the Byzantine sundial-calendar: a dial plate with suspension arm and small gear train">
+            <circle cx="112" cy="96" r="56" fill="var(--pill)" class="stroke" stroke-width="1.6"/>
+            <circle cx="112" cy="96" r="44" fill="none" class="stroke" stroke-width="1"/>
+            <line x1="112" y1="52" x2="112" y2="64" class="stroke" stroke-width="1"/>
+            <line x1="112" y1="128" x2="112" y2="140" class="stroke" stroke-width="1"/>
+            <line x1="68" y1="96" x2="80" y2="96" class="stroke" stroke-width="1"/>
+            <line x1="144" y1="96" x2="156" y2="96" class="stroke" stroke-width="1"/>
+            <rect x="104" y="26" width="16" height="14" rx="3" fill="var(--pill)" class="stroke" stroke-width="1.3"/>
+            <circle cx="196" cy="76" r="20" fill="var(--band)" stroke="var(--wood)" stroke-width="5" stroke-dasharray="3 2.6"/>
+            <circle cx="196" cy="118" r="13" fill="var(--band)" stroke="var(--wood)" stroke-width="4" stroke-dasharray="2.6 2.3"/>
+            <text x="24" y="20">BRASS DIAL PLATE, MOON DISC &amp; GEARS</text>
+            <text x="24" y="170">THE MECHANISM'S CONSTRUCTION SCHOOL, CONTINUED</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="chip wood">c. 400–600 CE</p>
+          <h3>Byzantine sundial-calendar's geared brass</h3>
+          <p class="meta">Science Museum, London (1983-1393): dial plate, Moon disc with gear, arbors with wheels &amp; ratchet — low-zinc brass disc-and-gear work in the Antikythera tradition (drawing shown; photos at the museum link)</p>
+          <p class="credit">Photos: <a href="https://collection.sciencemuseumgroup.org.uk/objects/co1082/byzantine-sundial-calendar">Science Museum Group collection</a></p>
+        </div>
+      </article>
+
+      <!-- 7 · c. 625–900 CE · Sutton Hoo & Viking ships -->
+      <article class="card">
+        <div class="figwrap">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Oseberg%20Ship%20-%20Viking%20Ship%20Museum%20(Oslo).jpg?width=640"
+               alt="The Oseberg ship, a clinker-built Viking ship held together with iron rivets and roves, Viking Ship Museum, Oslo"
+               loading="lazy" onerror="this.parentElement.classList.add('noimg')">
+          <svg class="fig fb" viewBox="0 0 254 180" role="img" aria-label="Diagram of a ship outline traced by rows of rivet dots">
+            <path d="M30,120 Q127,150 224,120 Q200,96 127,92 Q54,96 30,120 Z" fill="var(--pill)" class="stroke" stroke-width="1.6"/>
+            <circle cx="60" cy="116" r="2" fill="var(--metal)"/><circle cx="82" cy="121" r="2" fill="var(--metal)"/>
+            <circle cx="104" cy="124" r="2" fill="var(--metal)"/><circle cx="127" cy="125" r="2" fill="var(--metal)"/>
+            <circle cx="150" cy="124" r="2" fill="var(--metal)"/><circle cx="172" cy="121" r="2" fill="var(--metal)"/>
+            <circle cx="194" cy="116" r="2" fill="var(--metal)"/>
+            <circle cx="66" cy="106" r="2" fill="var(--metal)"/><circle cx="96" cy="102" r="2" fill="var(--metal)"/>
+            <circle cx="127" cy="100" r="2" fill="var(--metal)"/><circle cx="158" cy="102" r="2" fill="var(--metal)"/>
+            <circle cx="188" cy="106" r="2" fill="var(--metal)"/>
+            <text x="24" y="26">AT SUTTON HOO THE WOOD WAS GONE —</text>
+            <text x="24" y="40">THE SHIP SURVIVED AS ROWS OF RIVETS</text>
+            <text x="24" y="170">IRON · THE RIVET AS ARCHAEOLOGICAL GHOST</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="chip metal">c. 625–900 CE</p>
+          <h3>Sutton Hoo's ghost ship &amp; the Viking hulls</h3>
+          <p class="meta">Sutton Hoo (c. 625): the 27 m ship recovered as rivet rows in sand · Oseberg &amp; Gokstad ships (9th c., Oseberg pictured) survive with thousands of rivets in place</p>
+          <p class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Oseberg_Ship_-_Viking_Ship_Museum_(Oslo).jpg">Oseberg ship, Oslo · Wikimedia Commons</a></p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- connectors, era band, axis -->
+    <svg class="wires" width="1960" height="262" viewBox="0 0 1960 262" aria-hidden="true">
+      <!-- shaded band: Antikythera → Byzantine geared tradition -->
+      <polygon points="431,24 1529,24 1164,196 428,196" fill="var(--band)"/>
+      <line x1="431" y1="24" x2="428" y2="196" stroke="var(--line)" stroke-width="1" stroke-dasharray="4 4"/>
+
+      <!-- connectors -->
+      <polyline points="157,0 157,26 183,196 183,206"   fill="none" stroke="var(--metal)" stroke-width="1.5"/>
+      <polyline points="431,0 431,26 428,196 428,206"   fill="none" stroke="var(--wood)"  stroke-width="1.5"/>
+      <polyline points="706,0 706,26 612,196 612,206"   fill="none" stroke="var(--wood)"  stroke-width="1.5"/>
+      <polyline points="980,0 980,26 735,196 735,206"   fill="none" stroke="var(--wood)"  stroke-width="1.5"/>
+      <polyline points="1254,0 1254,26 937,196 937,206" fill="none" stroke="var(--metal)" stroke-width="1.5"/>
+      <polyline points="1529,0 1529,26 1164,196 1164,206" fill="none" stroke="var(--wood)" stroke-width="1.5"/>
+      <polyline points="1803,0 1803,26 1409,196 1409,206" fill="none" stroke="var(--metal)" stroke-width="1.5"/>
+
+      <!-- era-span pill -->
+      <rect x="640" y="86" width="310" height="58" rx="5" fill="var(--pill)" stroke="var(--card-border)"/>
+      <text x="795" y="112" text-anchor="middle" class="pill-big">~600 years</text>
+      <text x="795" y="132" text-anchor="middle" class="pill-small">riveted gearwork · antikythera to byzantium</text>
+
+      <!-- axis -->
+      <line x1="34" y1="210" x2="1900" y2="210" stroke="var(--line)" stroke-width="1.5"/>
+      <g stroke="var(--line)" stroke-width="1.2">
+        <line x1="60"   y1="210" x2="60"   y2="217"/><line x1="305"  y1="210" x2="305"  y2="217"/>
+        <line x1="551"  y1="210" x2="551"  y2="217"/><line x1="796"  y1="210" x2="796"  y2="217"/>
+        <line x1="1041" y1="210" x2="1041" y2="217"/><line x1="1287" y1="210" x2="1287" y2="217"/>
+        <line x1="1532" y1="210" x2="1532" y2="217"/><line x1="1777" y1="210" x2="1777" y2="217"/>
+      </g>
+      <g class="tick-label" text-anchor="middle">
+        <text x="60"  y="238">400 BCE</text><text x="305" y="238">200 BCE</text>
+        <text x="551" y="238">1 CE</text><text x="796" y="238">200 CE</text>
+        <text x="1041" y="238">400 CE</text><text x="1287" y="238">600 CE</text>
+        <text x="1532" y="238">800 CE</text><text x="1777" y="238">1000 CE</text>
+      </g>
+
+      <!-- event markers -->
+      <g fill="var(--bg)" stroke-width="2.2">
+        <circle cx="183"  cy="210" r="5.5" stroke="var(--metal)"/>
+        <circle cx="428"  cy="210" r="5.5" stroke="var(--wood)"/>
+        <circle cx="612"  cy="210" r="5.5" stroke="var(--wood)"/>
+        <circle cx="735"  cy="210" r="5.5" stroke="var(--wood)"/>
+        <circle cx="937"  cy="210" r="5.5" stroke="var(--metal)"/>
+        <circle cx="1164" cy="210" r="5.5" stroke="var(--wood)"/>
+        <circle cx="1409" cy="210" r="5.5" stroke="var(--metal)"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<section class="sources wrap">
+  <h2>The evidence, entry by entry</h2>
+  <div class="src-grid">
+
+    <div class="src">
+      <p class="num metal">1 · Physical survivals</p>
+      <h3>Riveted mail armour</h3>
+      <p>Mail — interlocked iron rings, each typically closed by its own minute rivet — appears among the Celts around the 3rd century BCE and is adopted by Rome as the lorica hamata. It is the riveting technology of the Mechanism's own century, and remains standard armour into the 15th.</p>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Mail_(armour)">Mail armour — overview and archaeology</a></li>
+        <li><a href="https://commons.wikimedia.org/wiki/Category:Historical_mail_armour">Surviving mail, photographic corpus (Wikimedia Commons)</a></li>
+        <li>Image: <a href="https://commons.wikimedia.org/wiki/File:Lorica_Hamata_(Kettenhemd).jpg">Lorica hamata reconstruction (Wikimedia Commons)</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num wood">2 · CT evidence</p>
+      <h3>Antikythera Mechanism — riveting as precision assembly</h3>
+      <p>The AMRP tomographies show disks and gears riveted together, with square central holes seating on squared arbor ends; plates and fittings are fixed with pins, rivets, and burred-over shaft ends, with no threaded fasteners anywhere. The earliest surviving use of riveting not as gross fastening but as precision mechanical assembly — item 14 of your fabrication-methods list.</p>
+      <ul>
+        <li><a href="https://arxiv.org/pdf/2207.12009v1">Voulgaris et al., The reconstruction of the Antikythera Mechanism (arXiv)</a></li>
+        <li><a href="https://arxiv.org/pdf/2104.06181">Voulgaris et al., Assembling Fragment D — riveted disk and gear (arXiv)</a></li>
+        <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S2212054818300353">Voulgaris et al., Ancient machine tools for the Mechanism's parts</a></li>
+        <li>Image: <a href="https://commons.wikimedia.org/wiki/File:Antikythera_Mechanism_-_National_Archaeological_Museum,_Athens_by_Joy_of_Museum.jpg">Antikythera Mechanism, NAM Athens (Wikimedia Commons)</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num wood">3 · Physical survivals (hoard)</p>
+      <h3>Lorica segmentata's riveted fittings</h3>
+      <p>Rome's segmental plate armour — in service from the Augustan period to the 3rd century CE — is a system of iron plates whose brass hinges, buckles, tie-loops and strap fittings are attached with copper-alloy rivets. The Corbridge hoard (found 1964) preserves dismantled armour parts and is the type's key physical evidence.</p>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Lorica_segmentata">Lorica segmentata — overview and the Corbridge hoard</a></li>
+        <li><a href="https://commons.wikimedia.org/wiki/Category:Lorica_segmentata">Photographic corpus (Wikimedia Commons)</a></li>
+        <li>Image: <a href="https://commons.wikimedia.org/wiki/File:Roman_soldier_in_lorica_segmentata_1.jpg">Lorica segmentata reconstruction (Wikimedia Commons)</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num wood">4 · Physical survivals</p>
+      <h3>Riveted patches on Roman bronze vessels</h3>
+      <p>Roman bronze vessels were maintained in use for generations: cracks and holes were covered with fitted bronze patches fastened by rivets, and handles, feet and mounts were riveted on. Experimental and archaeological studies of ancient bronze repairs document the practice across the empire — everyday riveting in the same craft world that produced the Mechanism.</p>
+      <ul>
+        <li><a href="https://exarc.net/issue-2012-3/ea/ancient-repairs-bronze-objects">EXARC: ancient repairs on bronze objects</a></li>
+        <li><a href="https://oxfordre.com/classics/display/10.1093/acrefore/9780199381135.001.0001/acrefore-9780199381135-e-8056">Oxford Classical Dictionary: Roman bronze vessels</a></li>
+        <li>Image: <a href="https://commons.wikimedia.org/wiki/File:Bronze_Roman_cupping_vessel,_1-79_CE_Wellcome_L0058046.jpg">Roman bronze vessel, Wellcome Collection (Wikimedia Commons)</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num metal">5 · Physical survival (bog find)</p>
+      <h3>Nydam boat — the first surviving riveted hull</h3>
+      <p>The oak boat from the Nydam bog, Denmark (c. 310–320 CE, now at Gottorf Castle) is the earliest surviving clinker-built hull: overlapping planks joined by iron nails clenched over diamond-shaped roves — a rivet formed in place. It is the technique's oldest complete witness, three centuries after the Mechanism.</p>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Clinker_(boat_building)">Clinker construction — technique and chronology</a></li>
+        <li><a href="https://www.vikingeskibsmuseet.dk/en/news/iron-in-the-viking-ships-rivets-and-roves">Viking Ship Museum: rivets and roves</a></li>
+        <li>Image: <a href="https://commons.wikimedia.org/wiki/File:Nydamboat.2.jpg">The Nydam boat (Wikimedia Commons)</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num wood">6 · Physical survival + published study</p>
+      <h3>Byzantine sundial-calendar</h3>
+      <p>The London Byzantine sundial-calendar (Science Museum 1983-1393, c. 400–600 CE) is the second-oldest geared mechanism known after the Antikythera Mechanism: a brass dial plate, suspension arm, Moon disc with gear, and arbors carrying four wheels and a ratchet, all in low-zinc brass of uniform composition (Field &amp; Wright 1985). It is the Mechanism's disc-and-gear construction school, surviving into Byzantium. Note: its precise fastening details are not spelled out in the accessible summaries — see reading notes.</p>
+      <ul>
+        <li><a href="https://www.tandfonline.com/doi/abs/10.1080/00033798500200131">Field &amp; Wright 1985, Gears from the Byzantines (Annals of Science)</a></li>
+        <li><a href="https://collection.sciencemuseumgroup.org.uk/objects/co1082/byzantine-sundial-calendar">Science Museum Group: the object, with photographs</a></li>
+        <li><a href="https://collection.sciencemuseumgroup.org.uk/objects/co13/copy-of-the-gearing-of-the-byzantine-sundial-calendar-1983-1393">Science Museum Group: Wright's reconstruction of the gearing</a></li>
+        <li><a href="http://hist.science.online.fr/antikythera/DOCS/FLORENCE2009/byzantine-sundial.htm">M. T. Wright, A Byzantine Sundial-Calendar (Florence 2009)</a></li>
+      </ul>
+    </div>
+
+    <div class="src">
+      <p class="num metal">7 · Excavation record + survivals</p>
+      <h3>Sutton Hoo's ghost ship &amp; the Viking hulls</h3>
+      <p>At Sutton Hoo (c. 625 CE) the ship's timber had dissolved entirely in the acid sand: the 27-metre hull was recovered as a ghost, traced plank by plank from its rows of iron rivets. The Oseberg and Gokstad ships (9th century) survive intact, riveted with nail-and-rove through every overlapping strake.</p>
+      <ul>
+        <li><a href="https://saxonship.org/2019/08/23/why-are-ships-fixed-with-rivets/">Sutton Hoo Ship's Company: why ships are fixed with rivets</a></li>
+        <li><a href="https://saxonship.org/sutton-hoo-ship-rivet/">The Sutton Hoo ship rivet, described</a></li>
+        <li><a href="https://www.vikingeskibsmuseet.dk/en/news/iron-in-the-viking-ships-rivets-and-roves">Viking Ship Museum: rivets and roves</a></li>
+        <li>Image: <a href="https://commons.wikimedia.org/wiki/File:Oseberg_Ship_-_Viking_Ship_Museum_(Oslo).jpg">Oseberg ship, Oslo (Wikimedia Commons)</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="notes">
+    <h3>Reading notes &amp; caveats</h3>
+    <p><strong>What counts as a rivet.</strong> A rivet is distinguished from a nail by the deliberate second head:
+    the tail is peened, burred, or clenched after insertion so the joint cannot withdraw. That is why the clinker
+    nail-and-rove counts as riveting, and why the Mechanism's burred-over shaft ends belong to the same family.</p>
+    <p><strong>Scope.</strong> Per your direction, this timeline stays close to the Mechanism's era. The deep prehistory
+    (first copper rivets c. 3000 BCE at Alacahöyük; Bronze Age dagger rivets) and the industrial story (Fairbairn's
+    riveting machine 1837, the Forth Bridge's 6.5 million rivets, riveted airframes) are deliberately out of frame.</p>
+    <p><strong>Byzantine sundial-calendar.</strong> Included as the Mechanism's construction school surviving into
+    Byzantium — brass disc-with-gear and arbor work, per Field &amp; Wright 1985. Whether its Moon disc and gear are
+    riveted together in the Antikythera manner is not stated in the sources accessible from this environment, so the
+    card claims the tradition, not the fastener; Wright's papers would settle it.</p>
+    <p><strong>Images.</strong> Photographs are hot-linked from Wikimedia Commons (public-domain or free-licensed;
+    each caption links its source file). The claude.ai artifact viewer blocks external images by security policy —
+    open this HTML file directly in a browser to see the photographs; wherever an image cannot load, the schematic
+    plate for that entry is shown instead. Entry 6 uses a drawn plate: the Science Museum's photographs are on its
+    collection page but not freely licensed.</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  Compiled 2026-08-01 from the sources linked above. Companion to “The Dovetail Joint in Metal” and the Antikythera Mechanism fabrication-methods survey.
+</footer>
