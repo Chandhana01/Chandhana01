@@ -1,0 +1,472 @@
+<title>Synthetic Chemistry Roadmap</title>
+<style>
+  :root {
+    --bg: #F6F8F7;
+    --card: #FFFFFF;
+    --ink: #16211E;
+    --muted: #5A6B66;
+    --accent: #0E7A6B;
+    --accent-soft: #E3EFEC;
+    --amber: #B4560F;
+    --amber-soft: #F7EBDF;
+    --line: #D8DFDC;
+    --code-bg: #EDF1EF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101614;
+      --card: #171E1B;
+      --ink: #E4EAE7;
+      --muted: #93A29C;
+      --accent: #43BFA9;
+      --accent-soft: #17312C;
+      --amber: #E1954F;
+      --amber-soft: #33251A;
+      --line: #263029;
+      --code-bg: #1C2522;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101614;
+    --card: #171E1B;
+    --ink: #E4EAE7;
+    --muted: #93A29C;
+    --accent: #43BFA9;
+    --accent-soft: #17312C;
+    --amber: #E1954F;
+    --amber-soft: #33251A;
+    --line: #263029;
+    --code-bg: #1C2522;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Charter", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0 1.25rem;
+  }
+  .mono {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  }
+  main {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 3.5rem 0 5rem;
+  }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- header ---------- */
+  header { margin-bottom: 2.75rem; }
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.9rem;
+  }
+  h1 {
+    font-size: clamp(2rem, 5.5vw, 2.9rem);
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--muted);
+    margin: 0;
+    max-width: 40rem;
+  }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- generic ---------- */
+  h2 {
+    font-size: 1.45rem;
+    line-height: 1.25;
+    margin: 0 0 0.35rem;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  h3 {
+    font-size: 1.08rem;
+    margin: 2rem 0 0.6rem;
+    text-wrap: balance;
+  }
+  p { margin: 0 0 1rem; }
+  ul, ol { margin: 0 0 1rem; padding-left: 1.3rem; }
+  li { margin-bottom: 0.4rem; }
+  li::marker { color: var(--accent); }
+  em { font-style: italic; }
+
+  .hours {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .note {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1.5rem 0;
+  }
+  .note p { margin: 0; }
+  .note.hot { border-left-color: var(--amber); background: var(--amber-soft); }
+
+  .resources {
+    font-size: 0.94rem;
+    color: var(--muted);
+    border-top: 1px dashed var(--line);
+    padding-top: 0.7rem;
+    margin-top: 1.1rem;
+  }
+  .resources strong { color: var(--ink); }
+
+  code {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 0.86em;
+    background: var(--code-bg);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+
+  /* ---------- decode table ---------- */
+  .table-wrap { overflow-x: auto; margin: 1.25rem 0 0; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; min-width: 34rem; }
+  th {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--muted);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* ---------- day sections ---------- */
+  .day {
+    margin-top: 3.25rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+  }
+  .day-head { display: flex; align-items: baseline; gap: 0.9rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+  .day-chip {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    white-space: nowrap;
+  }
+  .block-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.35rem; }
+  .block-head h3 { margin: 2.2rem 0 0.35rem; }
+
+  /* ---------- voltammogram figure ---------- */
+  figure.cv {
+    margin: 1.4rem 0;
+    padding: 1.1rem 1.1rem 0.8rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  figure.cv svg { display: block; width: 100%; height: auto; max-width: 100%; }
+  figure.cv figcaption {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-top: 0.6rem;
+  }
+
+  /* ---------- cheat sheet ---------- */
+  .cheat {
+    margin-top: 3.25rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.5rem 1.6rem;
+  }
+  .cheat h2 { margin-bottom: 1rem; }
+  .cheat dl { margin: 0; font-size: 0.95rem; }
+  .cheat dt {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 0.9rem;
+  }
+  .cheat dt:first-of-type { margin-top: 0; }
+  .cheat dd { margin: 0.15rem 0 0; }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+</style>
+
+<main>
+  <header>
+    <p class="eyebrow">3-Day Crash Course &middot; Job-Targeted</p>
+    <h1>Synthetic Chemistry Roadmap</h1>
+    <p class="lede">Small-molecule synthesis, polymer chemistry, electrochemistry, analytical assays, and the industry landscape — built around the skill profile of the <strong>X (Google moonshot factory) PhD Residency</strong>, <em>Organic Synthesis of Polymers and Small Molecules</em>, and equally useful for pharma and materials roles.</p>
+  </header>
+
+  <section>
+    <h2>The posting, decoded</h2>
+    <p>What the job description actually asks for, translated into what to be fluent in:</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Requirement in posting</th><th>What to be fluent in</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Organic synthesis of small molecules &amp; polymers</td><td>Core mechanisms, named reactions, polymerization methods</td></tr>
+          <tr><td>Electrochemically reactive molecules / redox polymers</td><td>Cyclic voltammetry; redox motifs (quinones, TEMPO, ferrocene, viologens); conducting polymers</td></tr>
+          <tr><td>Characterization: HPLC, LC-MS, GC-MS, NMR, LC-QTOF, UV</td><td>How each instrument works, when to use it, how to design a <em>validated assay</em></td></tr>
+          <tr><td>Polymers for <strong>sensing</strong> applications</td><td>Electrochemical sensors; functionalized / conducting polymers</td></tr>
+          <tr><td>Python + automation of workflows</td><td>RDKit basics, scripting instrument data processing, DBTL loops</td></tr>
+          <tr><td>ML for chemical design (nice-to-have)</td><td>One-sentence fluency: property prediction, generative design, active learning</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <p><strong>How to use this:</strong> each day is ~6–8 hours in blocks. Aim for interview fluency, not mastery. Keep a notes file; end each day by writing a 10-line summary from memory.</p>
+    </div>
+  </section>
+
+  <!-- ================= DAY 1 ================= -->
+  <section class="day">
+    <div class="day-head">
+      <span class="day-chip">DAY 1</span>
+      <h2>Small-Molecule Synthesis + Characterization</h2>
+    </div>
+
+    <div class="block-head"><h3>Block 1 · Core organic chemistry refresher</h3><span class="hours">~2 hrs</span></div>
+    <ul>
+      <li><strong>Functional groups &amp; interconversions:</strong> alcohols, amines, carbonyls (aldehyde / ketone / ester / amide), carboxylic acids, halides, nitriles.</li>
+      <li><strong>Mechanism families:</strong> S<sub>N</sub>1/S<sub>N</sub>2, E1/E2, nucleophilic addition to carbonyls (Grignard, NaBH<sub>4</sub>/LiAlH<sub>4</sub>), aldol/Claisen condensations, electrophilic &amp; nucleophilic aromatic substitution.</li>
+      <li><strong>Named reactions to recognize on sight:</strong> Suzuki, Heck, Buchwald–Hartwig (Pd cross-couplings), Wittig, Diels–Alder, amide coupling (EDC/HATU), reductive amination, click chemistry (CuAAC — heavily used to functionalize polymers).</li>
+      <li><strong>Retrosynthesis logic:</strong> disconnect targets backward; protecting groups (Boc, TBS); convergent vs. linear routes. Practice on paracetamol and ibuprofen.</li>
+    </ul>
+    <p class="resources"><strong>Resources:</strong> Clayden <em>Organic Chemistry</em> (mechanism chapters) &middot; masterorganicchemistry.com &middot; Warren <em>The Disconnection Approach</em> (ch. 1–5)</p>
+
+    <div class="block-head"><h3>Block 2 · Redox-active small molecules — the job's core theme</h3><span class="hours">~2 hrs</span></div>
+    <p>Learn the electroactive motifs; these are the "small molecules" the posting means:</p>
+    <ul>
+      <li><strong>Quinones</strong> — quinone/hydroquinone couple, 2e⁻/2H⁺; flow-battery and sensing workhorse</li>
+      <li><strong>TEMPO &amp; nitroxide radicals</strong> — stable radicals; catholytes, oxidation catalysts</li>
+      <li><strong>Ferrocene</strong> — the reference redox couple; internal standard in voltammetry</li>
+      <li><strong>Viologens</strong> — methyl viologen, the classic anolyte; electrochromics</li>
+      <li><strong>Phenothiazines, anthraquinones, catechols</strong> — organic redox flow batteries, sensors</li>
+    </ul>
+    <p>For each, know: the redox couple, roughly where it sits vs. NHE/Fc⁺/Fc, what tuning substituents do (electron-donating groups shift potential negative, withdrawing groups positive), and one application.</p>
+    <p class="resources"><strong>Resources:</strong> review articles on organic redox flow batteries (Aziz / Aspuru-Guzik groups) and redox-active polymers — skim two, harvest the intro sections.</p>
+
+    <div class="block-head"><h3>Block 3 · Analytical characterization &amp; assay design</h3><span class="hours">~2–3 hrs</span></div>
+    <p>The posting stresses <em>building robust assays</em>, not just running instruments.</p>
+    <ul>
+      <li><strong>NMR (¹H/¹³C):</strong> interpret a simple spectrum — chemical shift, integration, multiplicity. Know what 2D (COSY, HSQC) adds.</li>
+      <li><strong>LC-MS / LC-QTOF:</strong> LC separates, MS identifies by m/z; QTOF gives high-resolution exact mass → molecular formula. Electrospray basics ([M+H]⁺, [M+Na]⁺ adducts).</li>
+      <li><strong>GC-MS:</strong> volatile / thermally stable analytes; EI fragmentation patterns.</li>
+      <li><strong>HPLC:</strong> reverse-phase vs. normal-phase, gradient elution, UV detection, purity by area %.</li>
+      <li><strong>UV-Vis:</strong> Beer–Lambert law, λ<sub>max</sub>, concentration assays.</li>
+      <li><strong>What makes an assay "validated":</strong> calibration-curve linearity, LOD/LOQ, reproducibility (RSD), internal standards, specificity. Be able to say: <em>"I'd build a calibration curve with an internal standard, confirm linearity R² &gt; 0.99, establish LOD/LOQ, and run replicates for precision."</em></li>
+      <li><strong>Practical lab reality:</strong> TLC monitoring, column chromatography, recrystallization, Schlenk/glovebox technique, workups.</li>
+    </ul>
+    <div class="note">
+      <p><strong>Interview-ready answer to prepare</strong> — "Walk me through how you'd confirm you made the compound you intended": TLC → crude NMR → purify → clean ¹H/¹³C NMR + HRMS exact mass + HPLC purity.</p>
+    </div>
+  </section>
+
+  <!-- ================= DAY 2 ================= -->
+  <section class="day">
+    <div class="day-head">
+      <span class="day-chip">DAY 2</span>
+      <h2>Polymer Chemistry + Electrochemistry</h2>
+    </div>
+
+    <div class="block-head"><h3>Block 1 · Polymer fundamentals</h3><span class="hours">~2 hrs</span></div>
+    <ul>
+      <li><strong>Mechanisms:</strong> free-radical (PS, PMMA, PVC), step-growth / condensation (nylon, PET, polyurethanes), ring-opening (PLA, PCL, silicones), Ziegler–Natta / metallocene (polyolefins).</li>
+      <li><strong>Controlled / living polymerization — know these well, they signal you're current:</strong>
+        <ul>
+          <li><strong>RAFT</strong> — reversible addition–fragmentation chain transfer; most functional-group tolerant</li>
+          <li><strong>ATRP</strong> — atom transfer radical polymerization; Cu-catalyzed</li>
+          <li><strong>ROMP</strong> — ring-opening metathesis; Grubbs catalysts</li>
+          <li><strong>Anionic</strong> — narrowest dispersity; block copolymers</li>
+          <li>Why they matter: control over molecular weight, low dispersity (Đ), block/graft architectures, end-group functionality.</li>
+        </ul>
+      </li>
+      <li><strong>Key terms:</strong> M<sub>n</sub> vs. M<sub>w</sub>, dispersity Đ = M<sub>w</sub>/M<sub>n</sub>, T<sub>g</sub>, T<sub>m</sub>, crystallinity, crosslinking.</li>
+      <li><strong>Characterization:</strong> GPC/SEC (molecular-weight distribution), DSC (T<sub>g</sub>/T<sub>m</sub>), TGA (thermal stability), NMR end-group analysis, FTIR.</li>
+      <li><strong>Post-polymerization modification:</strong> click chemistry, active esters — how you attach redox groups or receptors to a polymer backbone (directly relevant to "modifying polymers for sensing").</li>
+    </ul>
+    <p class="resources"><strong>Resources:</strong> Odian <em>Principles of Polymerization</em> (skim) &middot; pslc.ws &middot; NPTEL polymer chemistry lectures</p>
+
+    <div class="block-head"><h3>Block 2 · Electrochemistry crash course</h3><span class="hours">~2–3 hrs</span></div>
+    <div class="note hot">
+      <p><strong>Highest-leverage block for this job.</strong> If you only do one thing today, do this one properly.</p>
+    </div>
+    <ul>
+      <li><strong>The setup:</strong> 3-electrode cell — working, reference (Ag/AgCl, or Fc⁺/Fc as internal standard in organic solvent), counter. Supporting electrolyte (e.g., TBAPF<sub>6</sub> in MeCN).</li>
+      <li><strong>Cyclic voltammetry — be able to sketch and read one:</strong>
+        <ul>
+          <li>Reversible couple: ΔE<sub>p</sub> ≈ 59/n mV, i<sub>pa</sub>/i<sub>pc</sub> ≈ 1</li>
+          <li>E<sub>½</sub> = (E<sub>pa</sub> + E<sub>pc</sub>)/2 → the redox potential you report</li>
+          <li>Scan-rate dependence: i<sub>p</sub> ∝ √v (diffusion, Randles–Ševčík) vs. i<sub>p</sub> ∝ v (surface-adsorbed film — how you prove a redox polymer is on the electrode!)</li>
+          <li>Irreversibility → chemical follow-up reactions or slow kinetics</li>
+        </ul>
+      </li>
+      <li><strong>Other techniques, one line each:</strong> differential pulse voltammetry (DPV — sensitive, for sensing), chronoamperometry, electrochemical impedance spectroscopy (EIS), bulk electrolysis.</li>
+      <li><strong>Vocabulary:</strong> overpotential, faradaic vs. capacitive current, electron-transfer kinetics, diffusion coefficient.</li>
+    </ul>
+
+    <figure class="cv">
+      <svg viewBox="0 0 560 300" role="img" aria-label="Sketch of a reversible cyclic voltammogram: current versus potential trace forming the classic duck shape, with anodic and cathodic peaks marked and E-half between them">
+        <!-- axes -->
+        <line x1="50" y1="150" x2="530" y2="150" stroke="var(--line)" stroke-width="1.5"/>
+        <line x1="60" y1="20" x2="60" y2="280" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="535" y="168" font-size="13" fill="var(--muted)" font-family="ui-monospace,Menlo,monospace" text-anchor="end">E</text>
+        <text x="72" y="32" font-size="13" fill="var(--muted)" font-family="ui-monospace,Menlo,monospace">i</text>
+        <!-- forward (anodic) sweep -->
+        <path d="M 80 152 C 200 150, 260 140, 300 100 C 322 78, 340 70, 360 74 C 400 84, 450 108, 510 122"
+              fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- reverse (cathodic) sweep -->
+        <path d="M 510 128 C 440 140, 350 150, 300 190 C 275 210, 258 224, 238 220 C 200 212, 140 172, 80 158"
+              fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- peak markers -->
+        <circle cx="342" cy="71" r="3.5" fill="var(--accent)"/>
+        <text x="342" y="56" font-size="12" fill="var(--muted)" font-family="ui-monospace,Menlo,monospace" text-anchor="middle">Epa (oxidation)</text>
+        <circle cx="250" cy="222" r="3.5" fill="var(--amber)"/>
+        <text x="250" y="246" font-size="12" fill="var(--muted)" font-family="ui-monospace,Menlo,monospace" text-anchor="middle">Epc (reduction)</text>
+        <!-- E1/2 -->
+        <line x1="296" y1="90" x2="296" y2="205" stroke="var(--muted)" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="308" y="152" font-size="12" fill="var(--muted)" font-family="ui-monospace,Menlo,monospace">E½</text>
+      </svg>
+      <figcaption>A reversible cyclic voltammogram. Teal = forward (anodic) sweep, amber = reverse (cathodic) sweep. E½ sits midway between the two peaks; ΔEp ≈ 59/n mV indicates reversibility.</figcaption>
+    </figure>
+
+    <p class="resources"><strong>Resource:</strong> <em>"A Practical Beginner's Guide to Cyclic Voltammetry"</em> (Dempsey group, <em>J. Chem. Educ.</em> 2018) — <strong>read this paper in full; it's the single best 2 hours you can spend for this role.</strong></p>
+
+    <div class="block-head"><h3>Block 3 · Redox polymers, conducting polymers &amp; sensors</h3><span class="hours">~2 hrs</span></div>
+    <p>Where Blocks 1 and 2 combine — the actual job description:</p>
+    <ul>
+      <li><strong>Conducting polymers:</strong> PEDOT:PSS, polypyrrole, polyaniline, polythiophenes. Made by chemical or <strong>electropolymerization</strong> (grow the film directly on the electrode). Conjugated backbone → electronic conductivity; doping.</li>
+      <li><strong>Redox polymers:</strong> non-conjugated backbone with pendant redox groups (ferrocene-, TEMPO-, quinone-functionalized). Charge moves by electron hopping between sites.</li>
+      <li><strong>Applications to speak about:</strong>
+        <ul>
+          <li><strong>Biosensors:</strong> glucose sensors use redox-polymer "wired" enzymes (Heller-type osmium redox hydrogels) — the classic success story</li>
+          <li>Organic batteries / flow batteries (polymer catholytes and anolytes)</li>
+          <li>Electrochromic devices; molecularly imprinted polymer (MIP) sensors</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="note">
+      <p><strong>How you'd evaluate a new redox polymer</strong> — synthesize monomer → polymerize (RAFT/ATRP for control) → characterize (NMR, GPC, DSC) → film on electrode (drop-cast or electropolymerize) → CV (E½, surface coverage, scan-rate study, stability cycling) → sensing response (DPV vs. analyte concentration). Narrating this full <strong>design–build–test–learn loop</strong> is exactly what they're screening for.</p>
+    </div>
+  </section>
+
+  <!-- ================= DAY 3 ================= -->
+  <section class="day">
+    <div class="day-head">
+      <span class="day-chip">DAY 3</span>
+      <h2>Python &amp; Automation + Industry + Application Prep</h2>
+    </div>
+
+    <div class="block-head"><h3>Block 1 · Python, automation &amp; ML-for-chemistry</h3><span class="hours">~2–3 hrs</span></div>
+    <p>The posting requires Python proficiency and automation experience; ML familiarity is a plus.</p>
+    <ul>
+      <li><strong>RDKit, hands-on (2 hrs):</strong> <code>pip install rdkit</code>. Learn to parse SMILES, compute descriptors (MW, logP, TPSA), generate fingerprints, do a substructure search, draw molecules. Write one small script — e.g., load 20 quinone SMILES, compute descriptors, plot with matplotlib.</li>
+      <li><strong>Data / automation stack to name-drop honestly:</strong> pandas + matplotlib for instrument data (batch-processing CV or HPLC exports), <code>scipy</code> for peak fitting.</li>
+      <li><strong>Lab-automation landscape (30 min, reading):</strong> liquid handlers (Opentrons), high-throughput experimentation (HTE) in well plates, self-driving labs (Aspuru-Guzik's "Ada", Cronin's chemputer), Emerald Cloud Lab. Know the term <strong>DBTL (design–build–test–learn) loop</strong> — the posting uses it almost verbatim.</li>
+      <li><strong>ML for chemistry, one sentence each:</strong> property prediction (graph neural networks on molecules), generative models proposing new structures, <strong>active learning / Bayesian optimization</strong> picking the next best experiment (the moonshot-relevant one), AlphaFold as the flagship ML-for-science story. X will care that you know Alphabet's ecosystem: Isomorphic Labs, DeepMind's GNoME for materials.</li>
+    </ul>
+    <div class="note hot">
+      <p><strong>Portfolio move — do this:</strong> push your RDKit script to your GitHub. The application asks for a GitHub profile; a small "chemistry + Python" repo directly evidences the exact skill combination they want.</p>
+    </div>
+
+    <div class="block-head"><h3>Block 2 · Industry landscape — who hires this skill set</h3><span class="hours">~1 hr</span></div>
+    <ul>
+      <li><strong>Moonshot / deep-tech &amp; ML-driven labs:</strong> X (Google), DeepMind / Isomorphic Labs, Recursion, Insilico Medicine, Citrine, self-driving-lab startups.</li>
+      <li><strong>Energy storage &amp; electrochemistry:</strong> Form Energy, ESS, Sila, QuantumScape, Redflow; flow-battery startups (quinone/TEMPO chemistry commercialized).</li>
+      <li><strong>Sensors &amp; diagnostics:</strong> Abbott (FreeStyle Libre — a redox-polymer product!), Dexcom, Medtronic Diabetes, Siemens Healthineers.</li>
+      <li><strong>Big pharma &amp; CROs/CDMOs (classic synthesis jobs):</strong> Pfizer, Merck, Novartis, Roche/Genentech, AstraZeneca, Lilly; WuXi AppTec, Lonza, Evotec, Syngene, Aragen, Sai Life.</li>
+      <li><strong>Polymers &amp; specialty chemicals:</strong> BASF, Dow, DuPont, Covestro, Solvay, Arkema, Evonik, 3M, SABIC.</li>
+      <li><strong>Role names to search:</strong> research associate / scientist I (synthesis), electrochemist, polymer chemist, analytical scientist, HTE chemist, automation chemist, "AI residency" / "science resident" programs (X, Recursion, and several pharmas run them).</li>
+    </ul>
+
+    <div class="block-head"><h3>Block 3 · Application prep for the X residency</h3><span class="hours">~2 hrs</span></div>
+    <p>The form's written questions screen for storytelling — draft these now, while it's fresh:</p>
+    <ol>
+      <li><strong>"Describe a significant failure or unexpected chaos in a project — how did you pivot?"</strong> (3–4 sentences). Structure: concrete failure → what you diagnosed → the pivot → outcome and lesson. A failed synthesis route, a dead instrument before a deadline, or a contaminated-product story works well. Show calm, systematic debugging, not heroics.</li>
+      <li><strong>"Summarize your current thesis / research focus."</strong> 3–4 sentences, jargon-light, ending with why it matters. Practice saying it aloud in 30 seconds.</li>
+      <li><strong>"Describe a rabbit hole you went down out of pure curiosity."</strong> They're screening for genuine intellectual curiosity — pick something real (a weird reaction color change you chased, a paper trail you followed, learning to code to plot your own data). Specificity beats impressiveness.</li>
+      <li><strong>"How did you hear about X and what do you know about us?"</strong> Do 30 minutes of homework: X is Alphabet's moonshot factory (Waymo, Wing, Verily graduated from it), led by Astro Teller, "10x not 10%" philosophy, celebrates killing projects fast ("monkey first" — tackle the hardest part first). Watch the Wired25 Astro Teller video linked in the posting. Mention the Design Kitchen — the team named in the posting.</li>
+      <li><strong>Logistics answers ready:</strong> enrollment status, graduation date, relocation to Mountain View, work authorization / sponsorship (check with your university's international office if on a student visa — the posting explicitly flags this), start date + duration (they take 4 months to 1 year, rolling).</li>
+      <li><strong>Resume tune-up:</strong> lead with hands-on techniques matching the posting's exact words — organic synthesis, polymer synthesis, HPLC, LC-MS, GC-MS, NMR, any electrochemistry, Python. Quantify: "synthesized X monomers over N steps," "developed LC-MS assay with LOD of …". Mirror their vocabulary.</li>
+      <li><strong>LinkedIn:</strong> required field — make sure it's current and consistent with the resume before submitting.</li>
+    </ol>
+  </section>
+
+  <!-- ================= AFTER ================= -->
+  <section class="day">
+    <div class="day-head">
+      <span class="day-chip">AFTER</span>
+      <h2>Keep the Momentum</h2>
+    </div>
+    <ul>
+      <li>Read one CV-containing paper per day for a week; sketch the voltammogram and explain it aloud.</li>
+      <li>Work through Warren's retrosynthesis book properly; one disconnection problem daily.</li>
+      <li>Extend the RDKit script into a mini-project (e.g., a descriptor dashboard for 50 redox-active molecules) and pin it on GitHub.</li>
+      <li>Follow: <em>In the Pipeline</em> (Derek Lowe), <em>Chemjobber</em>, JACS / Macromolecules / OPRD abstract feeds, and X's blog.</li>
+      <li>If you can get any bench time: run one CV — many university labs will let you shadow. "I've run cyclic voltammetry" is worth more than a week of reading.</li>
+    </ul>
+  </section>
+
+  <!-- ================= CHEAT SHEET ================= -->
+  <section class="cheat">
+    <h2>One-Page Cheat Sheet</h2>
+    <dl>
+      <dt>Redox motifs</dt>
+      <dd>Quinone (2e⁻/2H⁺) · TEMPO (stable radical) · ferrocene (reference couple) · viologen (anolyte)</dd>
+      <dt>CV reading</dt>
+      <dd>Reversible ⇒ ΔEp ≈ 59/n mV · E½ = (Epa + Epc)/2 · ip ∝ √v = diffusing, ip ∝ v = surface-bound film</dd>
+      <dt>Controlled polymerizations</dt>
+      <dd>RAFT (most tolerant) · ATRP (Cu) · ROMP (Grubbs) · anionic (lowest Đ) · Đ = Mw/Mn</dd>
+      <dt>Conducting vs. redox polymer</dt>
+      <dd>Conjugated backbone conducts vs. pendant redox groups hop electrons</dd>
+      <dt>Assay validation</dt>
+      <dd>Calibration curve + internal standard + linearity + LOD/LOQ + replicate precision</dd>
+      <dt>Confirm a product</dt>
+      <dd>TLC → NMR → purify → ¹H/¹³C NMR + HRMS + HPLC purity</dd>
+      <dt>X-speak</dt>
+      <dd>Moonshot factory · 10x not 10% · monkey first · Design Kitchen · DBTL loop</dd>
+      <dt>Acronyms</dt>
+      <dd>CV, DPV, EIS, E½, GPC, DSC, TGA, RAFT, ATRP, ROMP, LC-QTOF, LOD/LOQ, HTE, DBTL, MIP</dd>
+    </dl>
+  </section>
+
+  <footer>
+    <p>Built as a 2–3 day sprint toward the X PhD Residency in organic synthesis of polymers and small molecules. Also lives as <code>synthetic-chemistry-roadmap.md</code> in the repo.</p>
+  </footer>
+</main>
