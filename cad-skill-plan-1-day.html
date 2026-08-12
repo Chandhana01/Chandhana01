@@ -1,0 +1,609 @@
+<title>CAD in a Day</title>
+<style>
+  :root {
+    --paper: #F7F9FB;
+    --surface: #FFFFFF;
+    --ink: #1C2733;
+    --muted: #5B6B7C;
+    --accent: #2B5FA5;
+    --accent-ink: #FFFFFF;
+    --line: #C9D4E0;
+    --line-soft: #E2E9F1;
+    --stamp: #B3641F;
+    --grid: rgba(43, 95, 165, 0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0E1726;
+      --surface: #152238;
+      --ink: #DCE6F2;
+      --muted: #8FA2BA;
+      --accent: #7FA8E0;
+      --accent-ink: #0E1726;
+      --line: #2B3B55;
+      --line-soft: #1D2C46;
+      --stamp: #E0A264;
+      --grid: rgba(127, 168, 224, 0.06);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0E1726;
+    --surface: #152238;
+    --ink: #DCE6F2;
+    --muted: #8FA2BA;
+    --accent: #7FA8E0;
+    --accent-ink: #0E1726;
+    --line: #2B3B55;
+    --line-soft: #1D2C46;
+    --stamp: #E0A264;
+    --grid: rgba(127, 168, 224, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .sheet {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .cond {
+    font-family: "Avenir Next Condensed", "Arial Narrow", "Helvetica Neue", system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .mono {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- Title block, like an engineering drawing ---- */
+  .titleblock {
+    border: 2px solid var(--ink);
+    background: var(--surface);
+    margin-bottom: 40px;
+  }
+  .titleblock h1 {
+    margin: 0;
+    padding: 28px 24px 20px;
+    font-family: "Avenir Next Condensed", "Arial Narrow", "Helvetica Neue", system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.05;
+    text-wrap: balance;
+    border-bottom: 1px solid var(--line);
+  }
+  .titleblock h1 em { font-style: normal; color: var(--accent); }
+  .tb-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+  .tb-cell {
+    padding: 10px 24px 12px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .tb-cell:last-child { border-right: none; }
+  .tb-cell .k {
+    display: block;
+    font-size: 0.66rem;
+    color: var(--muted);
+  }
+  .tb-cell .v { font-weight: 600; font-size: 0.95rem; }
+  .tb-progress {
+    grid-column: 1 / -1;
+    padding: 12px 24px 16px;
+    border-bottom: none;
+  }
+  .bar {
+    height: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    margin-top: 6px;
+  }
+  .bar > i {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bar > i { transition: none; }
+  }
+
+  .intro { color: var(--muted); max-width: 62ch; }
+  .intro strong { color: var(--ink); }
+
+  .goals {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 20px 24px;
+    margin: 28px 0 8px;
+  }
+  .goals h2 { margin-top: 0; }
+  .goals ol { margin: 0; padding-left: 22px; }
+  .goals li { margin: 6px 0; }
+
+  h2 {
+    font-family: "Avenir Next Condensed", "Arial Narrow", "Helvetica Neue", system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 1.05rem;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+
+  /* ---- Dimension-line divider between phases ---- */
+  .dim {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 44px 0 20px;
+    color: var(--muted);
+  }
+  .dim::before, .dim::after {
+    content: "";
+    flex: 1;
+    height: 9px;
+    border-bottom: 1px solid var(--line);
+  }
+  .dim::before { border-left: 1px solid var(--line); }
+  .dim::after { border-right: 1px solid var(--line); }
+  .dim span {
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+
+  /* ---- Schedule blocks ---- */
+  .block {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    margin: 20px 0;
+  }
+  .block.break { border-left-color: var(--line); }
+  .block-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 14px;
+    padding: 16px 22px 0;
+  }
+  .block-head .time {
+    font-size: 0.78rem;
+    color: var(--accent);
+    background: transparent;
+  }
+  .block.break .block-head .time { color: var(--muted); }
+  .block-head h3 {
+    margin: 2px 0 0;
+    width: 100%;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+  .block-body { padding: 10px 22px 20px; }
+  .block-body p { margin: 10px 0; }
+  .block-body .note { color: var(--muted); font-size: 0.92rem; }
+
+  ul.tasks { list-style: none; margin: 12px 0; padding: 0; }
+  ul.tasks li { margin: 2px 0; }
+  ul.tasks label {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 5px 8px;
+    margin: 0 -8px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  ul.tasks label:hover { background: var(--line-soft); }
+  ul.tasks input {
+    appearance: none;
+    flex: none;
+    width: 17px;
+    height: 17px;
+    margin-top: 4px;
+    border: 1.5px solid var(--muted);
+    background: var(--paper);
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+  }
+  ul.tasks input:focus-visible,
+  ul.tasks label:focus-within input {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  ul.tasks input:checked {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+  ul.tasks input:checked::after {
+    content: "";
+    width: 9px;
+    height: 5px;
+    border-left: 2px solid var(--accent-ink);
+    border-bottom: 2px solid var(--accent-ink);
+    transform: rotate(-45deg) translate(0.5px, -1px);
+  }
+  ul.tasks input:checked + span {
+    color: var(--muted);
+    text-decoration: line-through;
+    text-decoration-color: var(--line);
+  }
+
+  .drills {
+    border-top: 1px dashed var(--line);
+    margin-top: 14px;
+    padding-top: 12px;
+  }
+  .drills .k {
+    font-size: 0.72rem;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .drills ol { margin: 0; padding-left: 22px; }
+  .drills li { margin: 4px 0; }
+
+  .checkpoint {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 16px;
+    padding: 10px 14px;
+    border: 1px solid var(--stamp);
+    color: var(--ink);
+    background: transparent;
+    font-size: 0.92rem;
+  }
+  .checkpoint .stamp {
+    flex: none;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--stamp);
+    border: 1.5px solid var(--stamp);
+    padding: 2px 7px;
+    margin-top: 2px;
+    transform: rotate(-2deg);
+  }
+
+  /* ---- Habits table ---- */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 480px; }
+  th, td { text-align: left; padding: 10px 16px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  th {
+    font-family: "Avenir Next Condensed", "Arial Narrow", "Helvetica Neue", system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 18px 22px;
+    margin: 20px 0;
+  }
+  .panel h2 { margin-top: 2px; }
+  .panel ul, .panel ol { margin: 8px 0 4px; padding-left: 22px; }
+  .panel li { margin: 5px 0; }
+
+  a { color: var(--accent); }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+</style>
+
+<div class="sheet">
+
+  <header class="titleblock">
+    <h1>CAD in a Day<br><em>a one-day skill-building plan</em></h1>
+    <div class="tb-meta">
+      <div class="tb-cell"><span class="k cond">Duration</span><span class="v mono">~9–10 h</span></div>
+      <div class="tb-cell"><span class="k cond">Units</span><span class="v">Millimeters</span></div>
+      <div class="tb-cell"><span class="k cond">Software</span><span class="v">Fusion 360</span></div>
+      <div class="tb-cell"><span class="k cond">Rev</span><span class="v mono">A · 2026-08-12</span></div>
+      <div class="tb-cell tb-progress">
+        <span class="k cond">Progress — <span class="mono" id="count">0 / 0</span> tasks</span>
+        <div class="bar"><i id="fill"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <p class="intro">An intensive, hands-on plan to go from zero (or rusty) to confidently modeling real parts in parametric 3D CAD in a single day. <strong>Recommended software: Autodesk Fusion 360</strong> — free for personal use, beginner-friendly, industry-relevant. Alternatives: <strong>FreeCAD</strong> (fully free and open-source), <strong>Onshape</strong> (browser-based, free public plan), or <strong>SolidWorks</strong> if you have access. Every block below works in any parametric CAD tool. Check tasks off as you go — this page remembers your progress.</p>
+
+  <section class="goals">
+    <h2>Goal for the day</h2>
+    <ol>
+      <li>Sketch with dimensions and constraints (fully-defined sketches).</li>
+      <li>Turn sketches into solids with extrude, revolve, fillet, chamfer, shell, and patterns.</li>
+      <li>Model a real-world object from measurements.</li>
+      <li>Assemble multiple parts with joints/mates.</li>
+      <li>Export a technical drawing and an STL for 3D printing.</li>
+    </ol>
+  </section>
+
+  <div class="dim cond"><span>Morning — foundations</span></div>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="time mono">08:00 – 09:00</span>
+      <h3>Setup &amp; orientation</h3>
+    </div>
+    <div class="block-body">
+      <ul class="tasks" data-block="setup">
+        <li><label><input type="checkbox"><span>Install your CAD package and create an account if needed.</span></label></li>
+        <li><label><input type="checkbox"><span>Learn the viewport: orbit, pan, zoom, view cube / standard views (front, top, iso).</span></label></li>
+        <li><label><input type="checkbox"><span>Tour the interface: sketch mode vs. solid mode, the timeline, the model tree.</span></label></li>
+        <li><label><input type="checkbox"><span>Set units to millimeters and make a "sandbox" project folder.</span></label></li>
+      </ul>
+      <div class="checkpoint"><span class="stamp cond">CHK</span><span>You can navigate around a default cube comfortably without thinking about the mouse.</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="time mono">09:00 – 10:30</span>
+      <h3>Sketching fundamentals</h3>
+    </div>
+    <div class="block-body">
+      <p class="note">The single most important CAD skill. Don't rush this block.</p>
+      <ul class="tasks" data-block="sketch">
+        <li><label><input type="checkbox"><span>Draw basic entities: lines, rectangles, circles, arcs, polygons.</span></label></li>
+        <li><label><input type="checkbox"><span>Apply dimensions to every entity (smart/driven dimensions).</span></label></li>
+        <li><label><input type="checkbox"><span>Learn the core constraints: horizontal/vertical, coincident, tangent, parallel, perpendicular, equal, symmetric, concentric.</span></label></li>
+        <li><label><input type="checkbox"><span>Practice until sketches turn "fully defined" (color change or lock icon).</span></label></li>
+        <li><label><input type="checkbox"><span>Use construction lines and sketch mirroring.</span></label></li>
+      </ul>
+      <div class="drills">
+        <span class="k cond">Drills — do all three</span>
+        <ol>
+          <li>A 60×40&nbsp;mm rounded rectangle with 4 symmetric holes.</li>
+          <li>A "keyhole" slot shape using tangent arcs.</li>
+          <li>A hex profile centered on the origin, fully defined with 2 dimensions.</li>
+        </ol>
+      </div>
+      <div class="checkpoint"><span class="stamp cond">CHK</span><span>Every drill sketch is fully defined — zero loose entities.</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="time mono">10:30 – 12:00</span>
+      <h3>From sketch to solid</h3>
+    </div>
+    <div class="block-body">
+      <ul class="tasks" data-block="solid">
+        <li><label><input type="checkbox"><span><strong>Extrude:</strong> new body, join, cut, and intersect operations.</span></label></li>
+        <li><label><input type="checkbox"><span><strong>Revolve:</strong> model a simple flowerpot or chess pawn.</span></label></li>
+        <li><label><input type="checkbox"><span><strong>Fillet &amp; chamfer:</strong> edges vs. faces, when each is appropriate.</span></label></li>
+        <li><label><input type="checkbox"><span><strong>Shell:</strong> hollow out a box into an open container.</span></label></li>
+        <li><label><input type="checkbox"><span><strong>Holes:</strong> the dedicated hole tool (counterbore, countersink, tapped).</span></label></li>
+        <li><label><input type="checkbox"><span><strong>Patterns:</strong> rectangular and circular patterns; mirror for symmetric features.</span></label></li>
+      </ul>
+      <div class="drills">
+        <span class="k cond">Drills</span>
+        <ol>
+          <li>A dice: cube + filleted edges + patterned dimple cuts.</li>
+          <li>A simple bracket: L-profile extrusion, mounting holes, fillets at the stress corner.</li>
+          <li>A pulley or bottle cap using revolve + circular pattern.</li>
+        </ol>
+      </div>
+      <div class="checkpoint"><span class="stamp cond">CHK</span><span>You can predict what each feature will do before you click OK.</span></div>
+    </div>
+  </section>
+
+  <section class="block break">
+    <div class="block-head">
+      <span class="time mono">12:00 – 12:45</span>
+      <h3>Lunch break</h3>
+    </div>
+    <div class="block-body">
+      <p class="note">Step away from the screen — spatial reasoning consolidates during rest.</p>
+    </div>
+  </section>
+
+  <div class="dim cond"><span>Afternoon — real work</span></div>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="time mono">12:45 – 14:45</span>
+      <h3>Model real objects</h3>
+    </div>
+    <div class="block-body">
+      <p class="note">This is where skills become real. Grab calipers (or a ruler) and model physical objects near you.</p>
+      <ul class="tasks" data-block="real">
+        <li><label><input type="checkbox"><span><strong>Object 1 (simple, ~30 min):</strong> a whiteboard eraser, soap bar, or phone stand.</span></label></li>
+        <li><label><input type="checkbox"><span><strong>Object 2 (medium, ~45 min):</strong> a coffee mug (revolve body + swept handle) or a TV remote (lofted/filleted shell with button cutouts).</span></label></li>
+        <li><label><input type="checkbox"><span><strong>Object 3 (challenge, ~45 min):</strong> something with mating features — a jar with a threaded or snap-fit lid, or a pen with a cap.</span></label></li>
+      </ul>
+      <div class="drills">
+        <span class="k cond">Rules for this block</span>
+        <ol>
+          <li>Sketch on the correct plane deliberately; don't just accept the default.</li>
+          <li>Every sketch fully defined before moving on.</li>
+          <li>Name your features in the timeline/tree as you go.</li>
+        </ol>
+      </div>
+      <div class="checkpoint"><span class="stamp cond">CHK</span><span>Object 3's two parts actually fit each other dimensionally (verify with a section view).</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="time mono">14:45 – 15:45</span>
+      <h3>Assemblies</h3>
+    </div>
+    <div class="block-body">
+      <ul class="tasks" data-block="asm">
+        <li><label><input type="checkbox"><span>Insert multiple parts/components into one design.</span></label></li>
+        <li><label><input type="checkbox"><span>Learn joints/mates: rigid, revolute (hinge), slider, cylindrical.</span></label></li>
+        <li><label><input type="checkbox"><span>Set a component as grounded/fixed.</span></label></li>
+        <li><label><input type="checkbox"><span>Check motion: drag components and watch degrees of freedom.</span></label></li>
+      </ul>
+      <div class="drills">
+        <span class="k cond">Drill</span>
+        <ol>
+          <li>Build a 3-part hinge (two leaves + pin) and make it rotate. Bonus: add joint limits so it only opens 180°.</li>
+        </ol>
+      </div>
+      <div class="checkpoint"><span class="stamp cond">CHK</span><span>Your hinge moves correctly and nothing floats loose.</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="time mono">15:45 – 16:45</span>
+      <h3>Outputs: drawings &amp; 3D printing</h3>
+    </div>
+    <div class="block-body">
+      <ul class="tasks" data-block="out">
+        <li><label><input type="checkbox"><span>Create a 2D technical drawing from your bracket: front/top/side views, an isometric view, dimensions, and a title block.</span></label></li>
+        <li><label><input type="checkbox"><span>Add a section view and a detail view.</span></label></li>
+        <li><label><input type="checkbox"><span>Export the drawing as PDF.</span></label></li>
+        <li><label><input type="checkbox"><span>Export a part as STL/3MF and open it in a slicer (PrusaSlicer or Cura) to sanity-check printability — wall thickness, overhangs, orientation.</span></label></li>
+      </ul>
+      <div class="checkpoint"><span class="stamp cond">CHK</span><span>A PDF drawing another person could manufacture from, and a sliceable STL.</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="time mono">16:45 – 17:45</span>
+      <h3>Capstone project</h3>
+    </div>
+    <div class="block-body">
+      <p class="note">Design something useful from scratch, unguided. Pick one:</p>
+      <ul class="tasks" data-block="cap">
+        <li><label><input type="checkbox"><span>A desk phone stand with a cable slot, angled 60–70°.</span></label></li>
+        <li><label><input type="checkbox"><span>A parametric drawer organizer — change 2 dimensions and the whole model updates.</span></label></li>
+        <li><label><input type="checkbox"><span>A wall hook rated for your headphone weight, with 2 screw holes.</span></label></li>
+        <li><label><input type="checkbox"><span>A custom enclosure for a Raspberry Pi / Arduino (look up the board's mounting-hole spec).</span></label></li>
+      </ul>
+      <p class="note"><strong>Requirements:</strong> fully-defined sketches, at least one pattern or mirror, fillets on user-facing edges, exported STL.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="time mono">17:45 – 18:00</span>
+      <h3>Review &amp; next steps</h3>
+    </div>
+    <div class="block-body">
+      <ul class="tasks" data-block="review">
+        <li><label><input type="checkbox"><span>Scrub through your timelines/feature trees: could someone else follow your modeling intent?</span></label></li>
+        <li><label><input type="checkbox"><span>Write down the 3 things that slowed you down most — that's tomorrow's practice list.</span></label></li>
+        <li><label><input type="checkbox"><span>Save and organize all files.</span></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="dim cond"><span>Reference</span></div>
+
+  <h2>Key habits to build from day one</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Habit</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td>Fully define every sketch</td><td>Prevents models breaking when edited later.</td></tr>
+        <tr><td>Sketch centered on origin</td><td>Makes mirroring, patterns, and edits vastly easier.</td></tr>
+        <tr><td>Name features and components</td><td>Your model tree is documentation.</td></tr>
+        <tr><td>Model design <em>intent</em></td><td>Parametric edits should update the whole part correctly, not just the shape.</td></tr>
+        <tr><td>Fillets last</td><td>Fillets early in the timeline cause downstream failures.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2>If you only have 4 hours</h2>
+    <p>Setup (1 h) → sketching drills 1–2 (1 h) → sketch-to-solid drills 1–2 (1 h) → model one real object (45 min) → export an STL (15 min).</p>
+  </div>
+
+  <div class="panel">
+    <h2>Resources</h2>
+    <ul>
+      <li><strong>Fusion 360:</strong> Autodesk's official "Fusion 360 for beginners" learning path; <em>Product Design Online</em> on YouTube — the "Learn Fusion 360 in 30 Days" series.</li>
+      <li><strong>FreeCAD:</strong> <em>MangoJelly Solutions</em> beginner series on YouTube; the FreeCAD wiki tutorials.</li>
+      <li><strong>Onshape:</strong> Onshape Learning Center self-paced courses — free and excellent.</li>
+      <li><strong>Practice prompts:</strong> r/cad and "Too Tall Toby" daily CAD challenges — timed modeling from drawings, ideal from day 2 onward.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>After day 1 — where to go next</h2>
+    <ol>
+      <li><strong>Week 1:</strong> one "Too Tall Toby"-style timed model per day (20–30 min each).</li>
+      <li><strong>Week 2:</strong> lofts, sweeps, and basic surfacing; model something curvy, like a computer mouse.</li>
+      <li><strong>Week 3:</strong> parametric design with user variables and equations; design-for-3D-printing tolerances (clearance fits, snap fits).</li>
+      <li><strong>Ongoing:</strong> pick a real project you'll actually manufacture or print — nothing accelerates CAD like real constraints.</li>
+    </ol>
+  </div>
+
+  <footer>
+    <span class="cond">CAD in a Day — Rev A</span>
+    <span>Progress is saved in this browser.</span>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var KEY = "cad-day-plan-v1";
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+
+    var boxes = document.querySelectorAll('ul.tasks input[type="checkbox"]');
+    var fill = document.getElementById("fill");
+    var count = document.getElementById("count");
+
+    boxes.forEach(function (box, i) {
+      var block = box.closest("ul.tasks").dataset.block;
+      var idx = Array.prototype.indexOf.call(box.closest("ul.tasks").querySelectorAll("input"), box);
+      var id = block + ":" + idx;
+      box.dataset.id = id;
+      if (saved[id]) box.checked = true;
+      box.addEventListener("change", function () {
+        saved[id] = box.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+        update();
+      });
+    });
+
+    function update() {
+      var done = 0;
+      boxes.forEach(function (b) { if (b.checked) done++; });
+      var pct = boxes.length ? Math.round((done / boxes.length) * 100) : 0;
+      fill.style.width = pct + "%";
+      count.textContent = done + " / " + boxes.length;
+    }
+    update();
+  })();
+</script>
