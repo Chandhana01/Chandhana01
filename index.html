@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quote of the Day</title>
+<style>
+  :root {
+    --bg: #faf7f2;
+    --card: #ffffff;
+    --ink: #2b2822;
+    --muted: #8a8377;
+    --accent: #b0723a;
+    --rule: #e7e0d4;
+    --shadow: 0 18px 50px rgba(43, 40, 34, 0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1a17;
+      --card: #26231f;
+      --ink: #ece7dd;
+      --muted: #9b9486;
+      --accent: #d99a5f;
+      --rule: #3a362f;
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    background: var(--card);
+    max-width: 680px;
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 56px 52px 40px;
+  }
+  .kicker {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+  .mark {
+    font-size: 64px;
+    line-height: 0.5;
+    color: var(--accent);
+    opacity: 0.45;
+    display: block;
+    margin-bottom: 18px;
+  }
+  blockquote {
+    font-size: clamp(19px, 2.6vw, 24px);
+    line-height: 1.55;
+    font-style: italic;
+  }
+  .source {
+    margin-top: 26px;
+    font-style: normal;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .source::before { content: "— "; color: var(--accent); }
+  .footer {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .nav { display: flex; gap: 6px; align-items: center; }
+  .nav button {
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1;
+    padding: 7px 11px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav button:hover { color: var(--accent); border-color: var(--accent); }
+  .nav .count { min-width: 64px; text-align: center; }
+  .today-link {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    display: none;
+  }
+  .today-link.visible { display: inline; }
+  @media (max-width: 480px) {
+    .card { padding: 40px 28px 28px; }
+    .footer { flex-direction: column; gap: 14px; }
+  }
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="kicker">Quote of the day</div>
+    <span class="mark">&ldquo;</span>
+    <blockquote id="quote">Loading&hellip;</blockquote>
+    <div class="source" id="source" hidden></div>
+    <div class="footer">
+      <span id="date"></span>
+      <button class="today-link" id="backToToday">back to today</button>
+      <div class="nav">
+        <button id="prev" title="Previous quote" aria-label="Previous quote">&larr;</button>
+        <span class="count" id="count"></span>
+        <button id="next" title="Next quote" aria-label="Next quote">&rarr;</button>
+      </div>
+    </div>
+  </main>
+
+<script>
+// Fallback copy of the quotes for viewing the file directly (file://).
+// When served (e.g. GitHub Pages), quotes.json is fetched so this page
+// always matches the repo without editing it.
+const FALLBACK_QUOTES = [
+  {"text": "Ask for things. Ask for things that feel unreasonable, to make sure your intuitions about what's reasonable are accurate (of course, try not to be a jerk in the process). If you're only asking for things you get, you're not aiming high enough.", "source": ""},
+  {"text": "We have lived all our lives deep inside another era's singularity.", "source": ""},
+  {"text": "Like any language, SMILES is a formal system for representing information; in the context of chemistry, it acts like a cipher or code to translate molecular structures into linear character strings.", "source": "Scent, In Silico — Asimov Press"},
+  {"text": "Odor, however, has no reliable relationship to molecular structure or perceptual encoding, making it difficult to establish a computational coordinate system.", "source": "Scent, In Silico — Asimov Press"},
+  {"text": "Each molecule activates a distinct set of odorant receptors.", "source": "Scent, In Silico — Asimov Press"},
+  {"text": "We have a pretty solid proof of concept: biology. Every living thing is made up of vast numbers of molecular devices, so how can such molecular devices be impossible? Furthermore, we know that it is possible to develop more precise tools from less precise ones: That is what human civilization itself has done.", "source": "Nanotechnology's Spring — Works in Progress"},
+  {"text": "Storrs Hall estimates that we could have real nanotechnology within a decade if we pursued both the top-down Feynman path and the bottom-up Drexler path simultaneously, meeting in the middle.", "source": "Nanotechnology's Spring — Works in Progress"},
+  {"text": "A serious effort to develop nanotechnology need not cost that much. There are multiple nanotechnology roadmaps that have been developed, including by the Foresight Institute, the National Academies of Science, and Adam Marblestone. A particularly promising task, supported by Marblestone and others, suggests itself from recent progress in what is known as DNA origami, the use of DNA molecules for their structural rather than informational properties. Scientists are getting continually better at folding DNA into arbitrary shapes, including in three dimensions. The idea is to create a molecular 3D printer using DNA for the scaffolding and moving parts, and synthetic molecules called spiroligomers as Lego-like bricks that the printer could lay down.", "source": "Nanotechnology's Spring — Works in Progress"},
+  {"text": "An old professor of mine used to recommend flipping open an elementary chemistry textbook every day to a random page and reading ten pages from it.", "source": ""},
+  {"text": "The unserious person doesn't create value, they just use it up, and complain when it runs out.", "source": ""},
+  {"text": "\"Don't you realise!? If you start putting effort in now, you'll be king of the universe!\" ... because if your life isn't worth taking seriously, what is?", "source": ""},
+  {"text": "He meant they're incapable of doing anything other than exactly what they want right now, this second. In other words, they are not grown ups.", "source": ""},
+  {"text": "This is the potentially worrying thing about serious and unserious people - everyone can tell which one you are. If you show up late to a meeting and laugh it off because you had a late one the night before, people may laugh with you, but they'll know that you're an unserious person. If you say you'll do something, and let the deadline go by hoping that no one will notice, they will. They'll identify you as unreliable... if you show up to your life with a sense of urgency and purpose, people pick up on that. They are drawn to, and respect competence.", "source": ""}
+];
+
+let quotes = FALLBACK_QUOTES;
+let index = 0;
+let todayIndex = 0;
+
+// Same rotation as scripts/daily_quote.py: proleptic Gregorian ordinal mod count.
+// 1970-01-01 has ordinal 719163 in Python's date.toordinal().
+function todayOrdinal() {
+  const now = new Date();
+  return Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000) + 719163;
+}
+
+function render() {
+  const q = quotes[index];
+  document.getElementById("quote").textContent = q.text;
+  const src = document.getElementById("source");
+  src.hidden = !q.source;
+  src.textContent = q.source || "";
+  document.getElementById("count").textContent = (index + 1) + " / " + quotes.length;
+  const isToday = index === todayIndex;
+  document.getElementById("date").textContent = isToday
+    ? "🗓 " + new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })
+    : "browsing the collection";
+  document.getElementById("backToToday").classList.toggle("visible", !isToday);
+}
+
+function init(data) {
+  if (Array.isArray(data) && data.length) quotes = data;
+  todayIndex = todayOrdinal() % quotes.length;
+  index = todayIndex;
+  render();
+}
+
+document.getElementById("prev").addEventListener("click", () => {
+  index = (index - 1 + quotes.length) % quotes.length;
+  render();
+});
+document.getElementById("next").addEventListener("click", () => {
+  index = (index + 1) % quotes.length;
+  render();
+});
+document.getElementById("backToToday").addEventListener("click", () => {
+  index = todayIndex;
+  render();
+});
+
+fetch("quotes.json")
+  .then(r => (r.ok ? r.json() : null))
+  .then(init)
+  .catch(() => init(null));
+</script>
+</body>
+</html>
