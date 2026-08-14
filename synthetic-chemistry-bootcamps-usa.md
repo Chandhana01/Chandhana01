@@ -1,93 +1,79 @@
-# Synthetic Chemistry Bootcamps in America (2–3 Weeks)
+# Synthetic Chemistry Lab-Skills Bootcamps in America (2–3 Weeks)
 
-A researched guide to short, intensive (roughly 2–3 week) synthetic/organic chemistry bootcamps and programs in the United States, compiled August 2026. As with most lab sciences, true "bootcamps" at this length are rare — the closest fits are accelerated university lab courses, immersive research programs, and stackable professional short courses, grouped below by audience.
+A researched guide to short, intensive programs in the United States focused on **hands-on, physical laboratory skills** for synthetic chemistry — running reactions, workup, purification, and analytical characterization at the bench — compiled August 2026. Lecture-heavy academic courses are listed only where the lab component is substantial.
 
 ---
 
 ## Quick Comparison
 
-| Program | Audience | Length | Location | Cost (approx.) |
+| Program | Hands-on focus | Length | Location | Cost (approx.) |
 |---|---|---|---|---|
-| Bellevue College Summer Accelerated O-Chem | College students / post-bacc | Three 13-day lec+lab blocks (take 1, 2, or all 3) | Bellevue, WA | community college tuition (6 cr/block) |
-| UCLA Summer Intensive Chemistry | College students | 3 weeks per course | Los Angeles, CA | UCLA summer tuition |
-| Yale Summer Session — Organic Chemistry I | College students | ~4.5 weeks (May 25–Jun 26, 2026) | New Haven, CT | Yale summer tuition |
-| UW–Green Bay Organic Chemistry Bootcamp | Students prepping for o-chem/lab work | 4 days (Jan 5–8, 2026) | Green Bay, WI | $795 |
-| SSP Synthetic Chemistry | High school | 5 weeks (39 days, residential) | 10+ campuses nationwide | up to $11,800; free under $75k family income |
-| ACS "Organic Synthesis: Methods & Strategies" | Working chemists | 2 days (Aug 22–23, 2026) | Chicago, IL (at ACS Fall) | ACS short-course fee |
-| ACS Institute courses (incl. Process Chemistry) | Working chemists | days–weeks, in person + online | various / online | varies |
-| Scientific Update short courses (e.g., Synthetic Organic Electrochemistry) | Process/med chemists | 2–3 days each | rotating venues incl. US | varies |
+| UW–Green Bay Organic Chemistry Bootcamp | Synthesis, workup, purification, characterization | 4–5 days/session; two 2026 sessions (May 26–29, Jun 1–5) — back-to-back ≈ 2 weeks | Green Bay, WI | $795/session |
+| Axion Labs LC/GC Bootcamp | HPLC + GC operation, method development, troubleshooting (10 labs) | 5 days (Aug 3–7, Sep 21–25, 2026); stackable with advanced courses | Chicago, IL | ~$3–4k/course |
+| ACS "LC/GC Bootcamp" Master Class | Same Axion curriculum via ACS Institute | 5 days | Chicago, IL | ACS course fee |
+| Bellevue College Accelerated O-Chem (one block) | Full o-chem lab: reactions, extraction, distillation, chromatography | 13 days | Bellevue, WA | community-college tuition (6 cr) |
+| UCSD Extended Studies Organic Chemistry Laboratory | Separation, purification, synthesis techniques | ~1 quarter (part-time; open enrollment) | San Diego, CA | extension fee |
+| RI Bio Biotech Boot Camp | Wet-lab skills at URI's Pharmaceutical Development Institute | 2 weeks | Kingston, RI | check current cycle |
+| Montgomery College Biotechnology Boot Camp | Bench skills for biomanufacturing | short intensive | Rockville, MD | **free** |
 
 ---
 
-## For College Students / Career Preparation
+## Best Fits: Pure Bench-Skills Training
 
-These are the truest 2–3 week "synthetic chemistry bootcamp" experiences — compressed, full-time organic chemistry with a synthesis lab:
-
-### 1. Bellevue College — Summer Accelerated Organic Chemistry Series (Bellevue, WA)
-- **The best structural fit:** a full year of organic chemistry compressed into **three standalone 13-day intensive courses** (each ~2.5 weeks, 6 credits, lecture + lab), late June through late August.
-- Take just one 13-day block for a true 2–3 week synthesis bootcamp, or all three for the full-year sequence. Popular with pre-health and transfer students nationwide.
-- Site: https://www.bellevuecollege.edu/chemistry/summer-intensive-ochem/
-
-### 2. UCLA — Summer Intensive Courses (Los Angeles, CA)
-- UCLA Physical Sciences runs **3-week intensive summer courses** including chemistry offerings (prerequisites apply).
-- Site: https://physicalsciences.ucla.edu/summer/
-
-### 3. Yale Summer Session — Organic Chemistry I (New Haven, CT)
-- In-person intensive, **May 25 – June 26, 2026** (~4.5 weeks) — slightly over the 3-week mark but a strong immersive option with Yale credit.
-- Site: https://summer.yale.edu/academics/course-list/organic-chemistry-i
-
-### 4. UW–Green Bay — Organic Chemistry Bootcamp (Green Bay, WI)
-- Explicitly branded a bootcamp: **4 full days (Jan 5–8, 2026, 8am–6pm), $795**, focused on hands-on synthetic methods, reaction workup, and purification techniques. Shorter than 2 weeks, but pure lab-skills training.
+### 1. UW–Green Bay Organic Chemistry Bootcamp (Green Bay, WI)
+- **The most direct match for synthetic chemistry bench skills.** Explicitly a bootcamp covering basic organic lab technique: commonly used **synthetic methods, purification, and characterization of reaction products** — full days (8am–6pm) in the lab.
+- **2026 sessions: May 26–29 and June 1–5.** Taking both back-to-back gives you roughly two weeks of full-time bench training. **$795 per session.**
+- Open enrollment through their Office of Professional & Continuing Education (professionaled@uwgb.edu).
 - Site: https://www.uwgb.edu/chemistry/organic-chemistry-bootcamps/
 
-*Also notable:* Harvard DCE's Intensive Organic Chemistry and CSUDH/Santa Clara summer sequences are well-regarded but run ~7–10 weeks — beyond the 2–3 week window.
+### 2. Axion Labs LC/GC Bootcamp (Chicago, IL)
+- The industry-standard **hands-on chromatography** bootcamp: 5 days, 18 lectures + **10 hands-on labs** on real HPLC and GC instruments — operation, method development, troubleshooting. Purification/analysis is half the job in synthesis, and this is the deepest training available for it.
+- Since 1995 Axion has trained chemists from every major US pharma, chemical, and petroleum company. Also offered through the **ACS Institute** as "LC/GC Bootcamp: Hands-On Chromatography Master Class."
+- **2026 dates include Aug 3–7 and Sep 21–25.** Axion runs a 4-step course sequence (bootcamp → advanced HPLC → advanced GC → mass spec), so **two or three consecutive weeks in Chicago builds a complete separations skill set.**
+- Sites: https://axionlabs.com/lc-gc-bootcamp/ · https://axionlabs.com/hplc-gc-course-schedules/ · https://institute.acs.org/lc-gc-bootcamp-hands-on-chromatography-master-class.html
+
+### 3. ACS Center for Technical Skills Development
+- ACS's hands-on technical training arm (classroom + lab formats) for practicing chemists — e.g., practical gas chromatography at beginner through advanced levels. Browse for current in-person offerings and combine with the Axion/ACS bootcamp above.
+- Site: https://institute.acs.org/acs-center/technical-skills-development.html
+
+**Suggested 2–3 week DIY plan (professionals):** UW–Green Bay's two sessions (≈2 weeks of synthesis bench work) + one Axion LC/GC week (purification/analysis) = a complete hands-on synthetic chemistry skills bootcamp for roughly $5–6k total.
 
 ---
 
-## For High School Students
+## University Lab Courses with Heavy Bench Time
 
-### Summer Science Program (SSP) — Synthetic Chemistry Track
-- The flagship pre-college research experience in this field: **5 weeks (39 days), residential**, at 10+ university campuses (about 20 program cohorts in 2026). Students research and synthesize macrocyclic compounds in a real lab.
-- **Cost:** up to $11,800 all-inclusive, but **free for families earning under ~$75k** and discounted under ~$140k.
-- **Deadlines were early:** international Jan 29, domestic Feb 19 for 2026 — plan for the 2027 cycle.
-- Longer than 3 weeks, but it's the standout program specifically named "synthetic chemistry" for this age group.
-- Site: https://ssp.org/synthetic-chemistry/
+- **Bellevue College Summer Accelerated Organic Chemistry (Bellevue, WA)** — each **13-day block** is a 6-credit lecture+lab course; the lab component covers reactions, extraction, recrystallization, distillation, and chromatography. One block ≈ a 2.5-week bootcamp with real credit. https://www.bellevuecollege.edu/chemistry/summer-intensive-ochem/
+- **UC San Diego Extended Studies — Organic Chemistry Laboratory (CHEM-40012)** — a dedicated **lab-only course** (separation, purification, synthesis: distillation, recrystallization, melting point, chromatography) open to working adults via extension enrollment; runs part-time over a quarter rather than as a compressed block. https://extendedstudies.ucsd.edu/courses/organic-chemistry-laboratory-chem-40012
+- **MIT 5.301 Chemistry Lab Techniques** — the famous 4-week January bench-skills intensive (passing guarantees a research-lab job) — **MIT students only**, but its materials are free on OpenCourseWare and make an excellent self-study syllabus: https://ocw.mit.edu/courses/res-hs-003-chemlab-boot-camp/
 
 ---
 
-## For Working Chemists / Professionals
+## Adjacent Wet-Lab Career Bootcamps (biotech-leaning)
 
-No degree-substitute bootcamp exists, but short courses can be stacked into a 1–2 week intensive:
+If the goal is employable lab-technician skills generally (pipetting, sterile technique, instrumentation, documentation) rather than organic synthesis specifically:
 
-### ACS Institute / ACS Professional Education
-- **"Organic Synthesis: Methods and Strategies for the 21st Century Chemist"** — in person **Aug 22–23, 2026 in Chicago** (at ACS Fall 2026); builds practical judgment in modern synthesis strategy. Pairing it with the ACS national meeting week makes a natural ~10-day intensive.
-- **"Process Chemistry: What It Is and How It's Done"** — offered May 20–Jun 10 and Nov 2–23, 2026 (weekly online sessions).
-- 200+ courses total, in person and online: https://institute.acs.org/courses.html and https://proed.acs.org/content/proed/en/in-person.html
-
-### Scientific Update
-- Industry-focused training for process/medicinal chemists (e.g., **Synthetic Organic Electrochemistry** short course, chemical development, scale-up). Courses run 2–3 days at rotating venues including the US; several can be combined.
-- Site: https://www.scientificupdate.com/
+- **RI Bio Biotech Boot Camp (URI, Rhode Island)** — **2-week intensive** at URI's Pharmaceutical Development Institute; hands-on in a state-of-the-art lab, ends with a job fair. https://ri-bio.org/biotechbootcamp/
+- **Montgomery College Biotechnology Boot Camp (Rockville, MD)** — lectures + hands-on lab workshops on industry-standard equipment, **free of charge**. https://www.montgomerycollege.edu/workforce-development-continuing-education/biotechnology/biotechnology-boot-camp.html
+- **Wake Tech Biotechnology workforce training (NC)** — short non-credit hands-on courses incl. micropipetting with entry/exit skills testing. https://www.waketech.edu/programs-courses/non-credit/workforce-training/biotechnology
+- **Just A Start Biotechnology Career Accelerator (Cambridge, MA)** — 10+ hrs/week bench training on industry equipment (longer program, months not weeks). https://www.justastart.org/biotechnology-career-accelerator-program/
 
 ---
 
 ## Practical Notes
 
-- **Closest true 2–3 week fit:** one 13-day block of Bellevue College's accelerated series or a UCLA 3-week intensive (college credit, full-time lecture + synthesis lab).
-- **High schoolers:** SSP is the marquee option; it's 5 weeks and deadlines fall in January–February.
-- **Professionals:** stack ACS and Scientific Update short courses; anchor around ACS Fall 2026 in Chicago (August) for the densest single-trip option.
-- **Lab access matters:** unlike software bootcamps, hands-on synthesis requires institutional lab facilities — which is why nearly everything here is university- or society-run.
+- **For synthesis bench skills specifically:** UW–Green Bay is the standout — cheap, hands-on, explicitly a bootcamp, and its two 2026 sessions chain into ~2 weeks.
+- **For purification/analytical skills:** Axion's Chicago bootcamp is the gold standard, and its course sequence naturally fills 2–3 weeks.
+- **For credit + lab hours:** one Bellevue College 13-day block delivers the most supervised bench time per week.
+- **Safety/eligibility:** these programs supply lab access, PPE, and supervision — no research affiliation needed, which is exactly what makes them rare. Enrollment caps are small; book early.
 
 ---
 
 ## Sources
 
-- [Bellevue College Summer Accelerated Organic Chem Series](https://www.bellevuecollege.edu/chemistry/summer-intensive-ochem/)
-- [UCLA Physical Sciences Summer Courses](https://physicalsciences.ucla.edu/summer/)
-- [Yale Summer Session — Organic Chemistry I](https://summer.yale.edu/academics/course-list/organic-chemistry-i)
 - [UW–Green Bay Organic Chemistry Bootcamps](https://www.uwgb.edu/chemistry/organic-chemistry-bootcamps/)
-- [SSP Synthetic Chemistry](https://ssp.org/synthetic-chemistry/), [SSP Program Overview](https://ssp.org/program-overview/), [SSP Application](https://ssp.org/application/)
-- [ACS — Organic Synthesis: Methods and Strategies](https://institute.acs.org/organic-synthesis-methods-strategies.html)
-- [ACS — Process Chemistry course](https://institute.acs.org/process-chemistry.html), [ACS Institute Courses](https://institute.acs.org/courses.html), [ACS ProEd In-Person](https://proed.acs.org/content/proed/en/in-person.html)
-- [Scientific Update — Synthetic Organic Electrochemistry Short Course](https://www.scientificupdate.com/training_courses/synthetic-organic-electrochemistry-short-course/)
-- [Harvard DCE — Intensive Organic Chemistry](https://coursebrowser.dce.harvard.edu/course/intensive-organic-chemistry/)
-- [CSUDH Organic Chemistry](https://www.csudh.edu/ccpe/organic-chemistry), [Santa Clara Intensive Lab Sciences](https://www.scu.edu/summer/classes/intensive-lab-sciences/)
+- [Axion Labs LC/GC Bootcamp](https://axionlabs.com/lc-gc-bootcamp/), [Axion course schedules](https://axionlabs.com/hplc-gc-course-schedules/), [Axion Advanced GC](https://axionlabs.com/advanced-gc/)
+- [ACS Institute — LC/GC Bootcamp Master Class](https://institute.acs.org/lc-gc-bootcamp-hands-on-chromatography-master-class.html), [ACS Center for Technical Skills Development](https://institute.acs.org/acs-center/technical-skills-development.html)
+- [Bellevue College Summer Accelerated Organic Chem](https://www.bellevuecollege.edu/chemistry/summer-intensive-ochem/)
+- [UCSD Extended Studies — Organic Chemistry Laboratory](https://extendedstudies.ucsd.edu/courses/organic-chemistry-laboratory-chem-40012)
+- [MIT ChemLab Boot Camp (OCW)](https://ocw.mit.edu/courses/res-hs-003-chemlab-boot-camp/), [MIT 5.301 labs](https://ocw.mit.edu/courses/5-301-chemistry-laboratory-techniques-january-iap-2012/pages/labs/)
+- [RI Bio Biotech Boot Camp](https://ri-bio.org/biotechbootcamp/), [Montgomery College Biotech Boot Camp](https://www.montgomerycollege.edu/workforce-development-continuing-education/biotechnology/biotechnology-boot-camp.html), [Wake Tech Biotechnology](https://www.waketech.edu/programs-courses/non-credit/workforce-training/biotechnology), [Just A Start Career Accelerator](https://www.justastart.org/biotechnology-career-accelerator-program/)
