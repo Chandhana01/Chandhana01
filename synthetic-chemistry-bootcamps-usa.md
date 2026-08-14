@@ -18,6 +18,18 @@ A researched guide to short, intensive programs in the United States focused on 
 
 ---
 
+## Selected: Axion LC/GC Bootcamp — Sep 21–25, 2026
+
+- **Session:** Monday Sep 21 – Friday Sep 25, 2026 (on the published 2026 schedule alongside Apr 27–May 1, Jun 22–26, Aug 3–7, Nov 9–13).
+- **Cost:** **$3,995** for the in-person hands-on bootcamp (lectures + labs). Fee includes tuition, all lecture/lab materials, snacks, and all lunches. If you previously bought the virtual course, its price is credited toward the in-person fee.
+- **Prerequisites: none.** No advanced math, theoretical chemistry, or physics required — Axion states all students should start with this bootcamp regardless of education or work experience.
+- **Hours:** 8:30 AM – 4:30 PM daily (Friday ends 3:30 PM). 18 lectures + 10 hands-on labs on real HPLC/GC instruments.
+- **Location:** Axion Analytical Labs & Training Institute, 14 N Peoria St #100, Chicago, IL 60607.
+- **Logistics:** after registering, Axion sends a list of recommended hotels with negotiated discount codes.
+- **Register:** https://courses.axionlabs.com/course/lc-gc-bootcamp (also bookable via the [ACS Institute listing](https://institute.acs.org/lc-gc-bootcamp-hands-on-chromatography-master-class.html)). Confirm seat availability directly — classes are small and can sell out.
+
+---
+
 ## Best Fits: Pure Bench-Skills Training
 
 ### 1. UW–Green Bay Organic Chemistry Bootcamp (Green Bay, WI)
