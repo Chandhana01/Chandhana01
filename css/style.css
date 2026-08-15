@@ -1,0 +1,328 @@
+/* ------------------------------------------------------------------
+   Chandhana — portfolio
+   Minimal left-sidebar layout with a 3x4 image grid on the home page.
+   ------------------------------------------------------------------ */
+
+:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --text-soft: #6b6b6b;
+  --line: #e6e6e6;
+  --accent: #1a1a1a;
+  --sidebar-width: 240px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- layout ---------- */
+
+.wrap {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---------- sidebar ---------- */
+
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  padding: 64px 32px 48px 48px;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+}
+
+.sidebar .name {
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.sidebar .name a:hover {
+  opacity: 0.6;
+}
+
+.sidebar nav {
+  margin-top: 48px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+}
+
+.sidebar nav li {
+  margin-bottom: 14px;
+}
+
+.sidebar nav a {
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  transition: color 0.2s ease;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  color: var(--text);
+}
+
+.sidebar .foot {
+  position: absolute;
+  bottom: 40px;
+  left: 48px;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: #b5b5b5;
+  text-transform: uppercase;
+}
+
+/* ---------- main ---------- */
+
+.main {
+  flex: 1;
+  padding: 64px 64px 96px 48px;
+  max-width: 1200px;
+}
+
+/* ---------- home grid: 3 columns x 4 rows ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.grid figure a {
+  display: block;
+  overflow: hidden;
+  background: #f4f4f4;
+}
+
+.grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.25s ease, transform 0.4s ease;
+}
+
+.grid figure a:hover img {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.grid figcaption {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+/* ---------- inner pages ---------- */
+
+.page {
+  max-width: 640px;
+}
+
+.page h1 {
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.page p {
+  margin-bottom: 22px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.page .lede {
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.page ul.list {
+  list-style: none;
+}
+
+.page ul.list li {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.page ul.list li:first-child {
+  padding-top: 0;
+}
+
+.page ul.list .item-title {
+  display: block;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.page ul.list .item-title a:hover {
+  opacity: 0.6;
+}
+
+.page ul.list .item-meta {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.page ul.list .item-desc {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 6px;
+}
+
+/* contact */
+
+.contact-links {
+  list-style: none;
+  margin-top: 8px;
+}
+
+.contact-links li {
+  margin-bottom: 16px;
+}
+
+.contact-links .label {
+  display: inline-block;
+  width: 110px;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.contact-links a {
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.2s ease;
+}
+
+.contact-links a:hover {
+  border-color: var(--text);
+}
+
+/* art page grid (reuses .grid but 3 cols only when wide) */
+
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 900px;
+}
+
+.art-grid figure a {
+  display: block;
+  overflow: hidden;
+  background: #f4f4f4;
+}
+
+.art-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.25s ease;
+}
+
+.art-grid figure a:hover img {
+  opacity: 0.85;
+}
+
+.art-grid figcaption {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .wrap {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    padding: 40px 28px 8px;
+    text-align: center;
+  }
+
+  .sidebar nav {
+    margin-top: 20px;
+  }
+
+  .sidebar nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .sidebar nav li {
+    margin-bottom: 0;
+  }
+
+  .sidebar .foot {
+    display: none;
+  }
+
+  .main {
+    padding: 32px 28px 64px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .art-grid {
+    grid-template-columns: 1fr;
+  }
+}
