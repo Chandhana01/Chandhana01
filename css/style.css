@@ -1,14 +1,22 @@
 /* ------------------------------------------------------------------
    chandhana — portfolio
-   Top header (name + horizontal nav) with a full-bleed, gapless
-   3x4 image grid on the home page.
+   Layout: top header (name + horizontal nav) with a full-bleed,
+   gapless 3x4 image grid on the home page.
+   Fonts & colors matched to chandhana.com:
+     serif type, #fdfcfa background, #454545 headings,
+     #a12b39 links, #308A38 art green, #D68F89 quote pink.
    ------------------------------------------------------------------ */
 
 :root {
-  --bg: #ffffff;
-  --text: #3f3f3f;
-  --text-soft: #8a8a8a;
-  --line: #e6e6e6;
+  --bg: #fdfcfa;
+  --text: #000000;
+  --heading: #454545;
+  --soft: #999999;
+  --link: #a12b39;
+  --green: #308A38;
+  --pink: #D68F89;
+  --accent-bg: #ead9dc;
+  --line: #e6e0da;
   --header-h: 118px;
 }
 
@@ -25,9 +33,8 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  line-height: 1.65;
+  font-family: normal, serif;
+  line-height: 1.4;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -47,10 +54,8 @@ a {
 }
 
 .topbar .name {
-  font-size: 1.65rem;
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  color: var(--text);
+  font-size: 1.55rem;
+  color: var(--heading);
   white-space: nowrap;
 }
 
@@ -65,21 +70,28 @@ a {
 }
 
 .topbar nav a {
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-soft);
+  color: var(--heading);
   padding-bottom: 3px;
   transition: color 0.2s ease;
 }
 
 .topbar nav a:hover {
-  color: var(--text);
+  color: var(--link);
 }
 
 .topbar nav a.active {
-  color: #333;
-  border-bottom: 2px solid #333;
+  color: var(--link);
+  border-bottom: 2px solid var(--link);
+}
+
+/* the Art nav link stays green, like on chandhana.com */
+.topbar nav a.art-link:hover,
+.topbar nav a.art-link.active {
+  color: var(--green);
+  border-color: var(--green);
 }
 
 /* ---------- home: full-bleed gapless grid ---------- */
@@ -95,7 +107,7 @@ a {
   position: relative;
   display: block;
   overflow: hidden;
-  background: #f4f4f4;
+  background: var(--accent-bg);
 }
 
 .fullgrid img {
@@ -118,10 +130,10 @@ a {
   justify-content: center;
   text-align: center;
   padding: 16px;
-  background: rgba(0, 0, 0, 0.35);
-  color: #fff;
-  font-size: 0.78rem;
-  letter-spacing: 0.24em;
+  background: rgba(69, 69, 69, 0.45);
+  color: #fdfcfa;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   opacity: 0;
   transition: opacity 0.25s ease;
@@ -142,28 +154,73 @@ a {
 }
 
 .page h1 {
-  font-size: 0.95rem;
-  font-weight: 400;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  margin-bottom: 40px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
+  color: var(--heading);
+  font-size: 1.55rem;
+  font-weight: normal;
+  margin-bottom: 1.2rem;
+}
+
+.page h2 {
+  color: #944547;
+  font-size: 1em;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .page p {
-  margin-bottom: 22px;
+  margin-bottom: 1.2rem;
   font-size: 1rem;
-  color: #333;
 }
 
 .page .lede {
-  font-size: 1.15rem;
-  color: var(--text);
+  font-size: 1.05rem;
 }
+
+.page ul {
+  padding-left: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.page ul li {
+  margin-bottom: 0.35rem;
+}
+
+.page a.u {
+  color: var(--link);
+}
+
+.page a.u:hover {
+  text-decoration: underline;
+}
+
+.page a.g {
+  color: var(--green);
+}
+
+.page a.g:hover {
+  text-decoration: underline;
+}
+
+.page blockquote {
+  border-left: 2px solid #000000;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-size: 0.85em;
+}
+
+.page blockquote a {
+  color: var(--pink);
+}
+
+.page blockquote a:hover {
+  text-decoration: underline;
+}
+
+/* writing list */
 
 .page ul.list {
   list-style: none;
+  padding-left: 0;
 }
 
 .page ul.list li {
@@ -177,25 +234,26 @@ a {
 
 .page ul.list .item-title {
   display: block;
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 1.05rem;
   margin-bottom: 4px;
 }
 
+.page ul.list .item-title a {
+  color: var(--link);
+}
+
 .page ul.list .item-title a:hover {
-  opacity: 0.6;
+  text-decoration: underline;
 }
 
 .page ul.list .item-meta {
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-soft);
+  font-size: 0.85rem;
+  color: var(--soft);
+  font-style: italic;
 }
 
 .page ul.list .item-desc {
-  font-size: 0.9rem;
-  color: #555;
+  font-size: 0.95rem;
   margin-top: 6px;
 }
 
@@ -203,6 +261,7 @@ a {
 
 .contact-links {
   list-style: none;
+  padding-left: 0;
   margin-top: 8px;
 }
 
@@ -213,19 +272,21 @@ a {
 .contact-links .label {
   display: inline-block;
   width: 110px;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-soft);
+  font-size: 0.85rem;
+  color: var(--soft);
+  font-style: italic;
 }
 
 .contact-links a {
-  border-bottom: 1px solid var(--line);
-  transition: border-color 0.2s ease;
+  color: var(--link);
+}
+
+.contact-links a.g {
+  color: var(--green);
 }
 
 .contact-links a:hover {
-  border-color: var(--text);
+  text-decoration: underline;
 }
 
 /* art page grid */
@@ -240,7 +301,7 @@ a {
 .art-grid figure a {
   display: block;
   overflow: hidden;
-  background: #f4f4f4;
+  background: var(--accent-bg);
 }
 
 .art-grid img {
@@ -257,10 +318,9 @@ a {
 
 .art-grid figcaption {
   margin-top: 10px;
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-soft);
+  font-size: 0.85rem;
+  color: var(--soft);
+  font-style: italic;
 }
 
 /* ---------- responsive ---------- */

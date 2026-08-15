@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>chandhana</title>
-  <meta name="description" content="chandhana — self-taught artist, writer, and stand-up comic.">
+  <meta name="description" content="chandhana — I grew up in Chennai and now play with elements">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <header class="topbar">
-    <div class="name"><a href="index.html">Chandhana</a></div>
+    <div class="name"><a href="index.html">chandhana</a></div>
     <nav>
       <ul>
         <li><a href="about.html">About</a></li>
         <li><a href="writing.html">Writing</a></li>
-        <li><a href="art.html">Art</a></li>
+        <li><a href="art.html" class="art-link">Art</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -27,18 +27,30 @@
        The <span class="cap"> text only appears on hover — edit or delete freely. -->
   <div class="fullgrid">
     <a href="about.html"><img src="images/grid-01.svg" alt="Chennai"><span class="cap">Chennai</span></a>
-    <a href="about.html"><img src="images/grid-02.svg" alt="Guinness Record"><span class="cap">Guinness Record</span></a>
-    <a href="art.html"><img src="images/grid-03.svg" alt="Art"><span class="cap">Art</span></a>
-    <a href="writing.html"><img src="images/grid-04.svg" alt="Writing"><span class="cap">Writing</span></a>
-    <a href="about.html"><img src="images/grid-05.svg" alt="Stand-up Comedy"><span class="cap">Stand-up Comedy</span></a>
-    <a href="about.html"><img src="images/grid-06.svg" alt="Baby Rocket"><span class="cap">Baby Rocket</span></a>
-    <a href="about.html"><img src="images/grid-07.svg" alt="Baby Dagger"><span class="cap">Baby Dagger</span></a>
-    <a href="about.html"><img src="images/grid-08.svg" alt="House of Lords"><span class="cap">House of Lords</span></a>
-    <a href="about.html"><img src="images/grid-09.svg" alt="Elements at UNC"><span class="cap">Elements at UNC</span></a>
-    <a href="writing.html"><img src="images/grid-10.svg" alt="(why do) i hate chocolate"><span class="cap">(why do) i hate chocolate</span></a>
-    <a href="art.html"><img src="images/grid-11.svg" alt="The World Today"><span class="cap">The World Today</span></a>
-    <a href="contact.html"><img src="images/grid-12.svg" alt="Say Hello"><span class="cap">Say Hello</span></a>
+    <a href="about.html"><img src="images/grid-02.svg" alt="Hydrogen at Terraform"><span class="cap">Hydrogen at Terraform</span></a>
+    <a href="about.html"><img src="images/grid-03.svg" alt="Plasticlist"><span class="cap">Plasticlist</span></a>
+    <a href="about.html"><img src="images/grid-04.svg" alt="Argus Pathfinder"><span class="cap">Argus Pathfinder</span></a>
+    <a href="about.html"><img src="images/grid-05.svg" alt="Fetal Brains at IIT-M"><span class="cap">Fetal Brains at IIT-M</span></a>
+    <a href="about.html"><img src="images/grid-06.svg" alt="Guinness Record"><span class="cap">Guinness Record</span></a>
+    <a href="about.html"><img src="images/grid-07.svg" alt="Stand-up Comedy"><span class="cap">Stand-up Comedy</span></a>
+    <a href="about.html"><img src="images/grid-08.svg" alt="Baby Rocket"><span class="cap">Baby Rocket</span></a>
+    <a href="about.html"><img src="images/grid-09.svg" alt="Baby Dagger"><span class="cap">Baby Dagger</span></a>
+    <a href="about.html"><img src="images/grid-10.svg" alt="House of Lords"><span class="cap">House of Lords</span></a>
+    <a href="about.html"><img src="images/grid-11.svg" alt="Glacier, Plane, Reactor"><span class="cap">Glacier &middot; Plane &middot; Reactor</span></a>
+    <a href="writing.html"><img src="images/grid-12.svg" alt="(why do) i hate chocolate"><span class="cap">(why do) i hate chocolate</span></a>
   </div>
+
+  <!-- moon-phase easter egg, straight from chandhana.com -->
+  <script>
+    const moonPhases = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"];
+    let index = 0;
+
+    setInterval(() => {
+      const moon = moonPhases[index % moonPhases.length];
+      window.location.hash = moon;
+      index++;
+    }, 150);
+  </script>
 
 </body>
 </html>

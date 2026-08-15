@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
-  <rect width="800" height="800" fill="#e8d8d8"/>
-  <text x="400" y="385" font-family="Helvetica, Arial, sans-serif" font-size="30" letter-spacing="6" fill="#9a958d" text-anchor="middle">IMAGE 08</text>
-  <text x="400" y="430" font-family="Helvetica, Arial, sans-serif" font-size="16" letter-spacing="3" fill="#b0aba3" text-anchor="middle">DROP YOUR PHOTO IN /images</text>
+  <rect width="800" height="800" fill="#dde4dc"/>
+  <text x="400" y="385" font-family="Georgia, 'Times New Roman', serif" font-size="30" letter-spacing="4" fill="#a08d8f" text-anchor="middle">image 08</text>
+  <text x="400" y="430" font-family="Georgia, 'Times New Roman', serif" font-size="16" letter-spacing="2" fill="#b5a6a3" text-anchor="middle">drop your photo in /images</text>
 </svg>
