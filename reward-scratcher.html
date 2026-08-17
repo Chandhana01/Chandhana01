@@ -1,426 +1,331 @@
 <title>Scratchwork</title>
 <style>
-  /* ---------- tokens ---------- */
+  /* ============ whiteboard world — single committed theme ============ */
   :root {
-    --paper: #F3F5F9;          /* cool ticket paper, blue-biased */
-    --surface: #FFFFFF;
-    --surface-2: #E9EDF4;
-    --ink: #1D2B53;            /* deep ultramarine ink */
-    --ink-soft: #5A6685;
-    --line: #C9D2E0;
-    --accent: #E23D6D;         /* raspberry stamp */
-    --accent-ink: #FFFFFF;
-    --good: #2F9E63;
-    --foil-a: #E7C55A;
-    --foil-b: #B08A1F;
-    --foil-ink: #7A5E12;
-    --ticket-paper: #FDFCF8;
-    --shadow: 0 10px 30px rgba(29, 43, 83, 0.12);
+    --board: #FBFBF9;
+    --board-glare: rgba(215, 224, 232, 0.55);
+    --marker: #E0392E;          /* red dry-erase marker */
+    --marker-soft: rgba(224, 57, 46, 0.55);
+    --marker-faint: rgba(224, 57, 46, 0.14);
+    --pencil: #6B7280;          /* faint gray for meta text */
+    --ink-dark: #3A3F47;
+    --foil-a: #D9DCE1;          /* silver scratch foil */
+    --foil-b: #AeB4BD;
+    --good: #2E9E60;
     --focus: #2C5BD9;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #141926;
-      --surface: #1C2333;
-      --surface-2: #232C40;
-      --ink: #E8ECF5;
-      --ink-soft: #9AA6C2;
-      --line: #35405C;
-      --accent: #F06A92;
-      --accent-ink: #1A0E15;
-      --good: #4CC488;
-      --foil-a: #D9B84E;
-      --foil-b: #9C7A1A;
-      --foil-ink: #6B5310;
-      --ticket-paper: #262E44;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-      --focus: #7C9DF2;
-    }
-  }
-  :root[data-theme="dark"] {
-    --paper: #141926;
-    --surface: #1C2333;
-    --surface-2: #232C40;
-    --ink: #E8ECF5;
-    --ink-soft: #9AA6C2;
-    --line: #35405C;
-    --accent: #F06A92;
-    --accent-ink: #1A0E15;
-    --good: #4CC488;
-    --foil-a: #D9B84E;
-    --foil-b: #9C7A1A;
-    --foil-ink: #6B5310;
-    --ticket-paper: #262E44;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-    --focus: #7C9DF2;
   }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
+    background:
+      linear-gradient(118deg, transparent 30%, var(--board-glare) 42%, transparent 54%),
+      linear-gradient(100deg, transparent 62%, rgba(220, 228, 236, 0.35) 74%, transparent 86%),
+    var(--board);
+    color: var(--marker);
+    font-family: "Segoe Print", "Bradley Hand", "Chalkboard", "Marker Felt", "Comic Sans MS", cursive;
+    font-size: 17px;
+    line-height: 1.45;
     min-height: 100vh;
   }
-  button { font: inherit; cursor: pointer; }
-  input { font: inherit; }
-  :is(button, input, [tabindex]):focus-visible {
+  button { font: inherit; cursor: pointer; color: inherit; }
+  input, select { font: inherit; }
+  :is(button, input, select, [tabindex]):focus-visible {
     outline: 3px solid var(--focus);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
-  .mono {
-    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
-  }
-  .label {
-    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
+  /* hand-drawn border trick */
+  .sketchy {
+    border: 2.5px solid var(--marker);
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   }
 
-  .wrap {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 32px 20px 80px;
-  }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 34px 22px 90px; }
 
-  /* ---------- header ---------- */
-  header.masthead {
+  /* ============ masthead ============ */
+  .masthead {
     display: flex;
-    align-items: flex-end;
     justify-content: space-between;
+    align-items: flex-start;
     gap: 16px;
     flex-wrap: wrap;
-    padding-bottom: 20px;
-    margin-bottom: 28px;
-    border-bottom: 3px solid var(--ink);
+    margin-bottom: 8px;
   }
-  .masthead h1 {
+  h1 {
     margin: 0;
-    font-size: clamp(2.1rem, 6vw, 3.2rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 1;
+    font-size: clamp(1.9rem, 5vw, 2.7rem);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    transform: rotate(-1.2deg);
     text-wrap: balance;
   }
-  .masthead h1 .tail { color: var(--accent); }
-  .masthead .tagline { margin: 6px 0 0; color: var(--ink-soft); font-size: 0.95rem; }
-  .scoreboard { display: flex; gap: 10px; }
-  .score-chip {
-    background: var(--surface);
-    border: 1.5px solid var(--line);
-    border-radius: 10px;
-    padding: 8px 14px;
-    text-align: center;
-    min-width: 86px;
-  }
-  .score-chip .num {
+  h1 .underline {
     display: block;
-    font-size: 1.5rem;
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-    line-height: 1.1;
+    width: 8.5em;
+    max-width: 100%;
+    height: 8px;
+    margin-top: 2px;
+    border-radius: 50% 40% 55% 45% / 70% 60% 80% 50%;
+    background: linear-gradient(90deg, var(--marker), var(--marker-soft) 92%, transparent);
   }
+  .tagline { margin: 8px 0 0; color: var(--pencil); font-size: 0.92rem; max-width: 46ch; }
+  .col-head {
+    align-self: flex-end;
+    font-size: 1.35rem;
+    transform: rotate(2deg);
+    padding-right: 8px;
+  }
+  @media (max-width: 720px) { .col-head { display: none; } }
 
-  /* ---------- layout ---------- */
-  .cols {
+  /* ============ board rows ============ */
+  .rows { display: flex; flex-direction: column; gap: 30px; margin-top: 26px; }
+
+  .row {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 28px;
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) minmax(28px, 70px) 158px;
+    gap: 0 6px;
+    align-items: center;
   }
-  @media (max-width: 780px) {
-    .cols { grid-template-columns: minmax(0, 1fr); }
+  @media (max-width: 720px) {
+    .row { grid-template-columns: minmax(0, 1fr); }
+    .row .connector { display: none; }
+    .row .scratcher-cell { margin-top: 10px; justify-self: start; }
   }
 
-  .panel {
-    background: var(--surface);
-    border: 1.5px solid var(--line);
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: var(--shadow);
+  .task-cell { min-width: 0; }
+  .owner {
+    display: inline-block;
+    color: var(--marker);
+    opacity: 0.85;
+    font-size: 0.85rem;
+    transform: rotate(-1.5deg);
+    margin-bottom: 2px;
   }
-  .panel h2 {
-    margin: 0 0 4px;
-    font-size: 1.05rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
+  .owner::after { content: " →"; }
+  .task-title {
+    margin: 0;
+    font-size: 1.28rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+    transform: rotate(-0.4deg);
   }
-  .panel .sub { margin: 0 0 16px; font-size: 0.85rem; color: var(--ink-soft); }
+  .task-title.struck { text-decoration: line-through wavy; opacity: 0.75; }
 
-  /* ---------- tasks ---------- */
-  ul.tasks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-  .task {
-    border: 1.5px solid var(--line);
-    border-radius: 10px;
-    background: var(--surface);
-    overflow: hidden;
+  /* day tally boxes */
+  .days {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 8px;
   }
-  .task.done { border-color: var(--good); }
-  .task-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; }
-  .tick {
-    flex: none;
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    border: 2px solid var(--line);
+  .day-box {
+    width: 42px;
+    height: 44px;
+    border: 2.5px solid var(--marker);
+    border-radius: 12px 4px 14px 5px / 5px 14px 4px 12px;
+    margin-right: -2.5px;
     background: transparent;
-    color: transparent;
     display: grid;
     place-items: center;
-    font-size: 15px;
-    transition: background 0.15s, border-color 0.15s;
+    position: relative;
+    font-size: 0.8rem;
+    color: var(--marker-soft);
+    padding: 0;
   }
-  .task.done .tick { background: var(--good); border-color: var(--good); color: #fff; }
-  .task-text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
-  .task.done .task-text { color: var(--ink-soft); }
-  .task-actions { display: flex; gap: 6px; flex: none; }
-  .btn {
-    border: 1.5px solid var(--ink);
-    background: var(--surface);
-    color: var(--ink);
-    border-radius: 8px;
-    padding: 6px 12px;
+  .day-box:nth-child(odd) { transform: rotate(0.8deg); }
+  .day-box:nth-child(even) { transform: rotate(-0.7deg); }
+  .day-box .n { position: absolute; top: 2px; right: 5px; font-size: 0.62rem; }
+  .day-box .slash {
+    font-size: 1.55rem;
     font-weight: 700;
-    font-size: 0.85rem;
+    color: var(--marker);
+    line-height: 1;
+    transform: rotate(8deg);
   }
-  .btn:hover { background: var(--surface-2); }
-  .btn.primary { background: var(--ink); color: var(--paper); }
-  .btn.primary:hover { opacity: 0.9; background: var(--ink); }
-  .btn.accent { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-  .btn.accent:hover { opacity: 0.9; background: var(--accent); }
-  .btn.ghost { border-color: transparent; background: transparent; color: var(--ink-soft); padding: 6px 8px; }
-  .btn.ghost:hover { color: var(--accent); background: transparent; }
-  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .day-box.next { cursor: pointer; background: var(--marker-faint); }
+  .day-box.next:hover .hint-plus { opacity: 1; }
+  .day-box .hint-plus { font-size: 1.3rem; color: var(--marker); opacity: 0.5; }
+  .day-box:disabled { cursor: default; }
+  .day-box.next:disabled { cursor: pointer; } /* next box is a button, keep pointer */
 
-  .proof-form {
-    display: none;
-    padding: 0 12px 12px 54px;
-  }
-  .task.arming .proof-form { display: block; }
-  .proof-form .hint { font-size: 0.8rem; color: var(--ink-soft); margin: 0 0 6px; }
-  .proof-line { display: flex; gap: 8px; }
+  /* proof form */
+  .proof-form { margin-top: 10px; max-width: 480px; }
+  .proof-form .ask { margin: 0 0 4px; font-size: 0.95rem; }
+  .proof-form .rule { color: var(--pencil); font-size: 0.78rem; font-family: system-ui, sans-serif; margin: 0 0 6px; }
+  .proof-line { display: flex; gap: 8px; flex-wrap: wrap; }
   .proof-line input {
     flex: 1;
-    min-width: 0;
-    border: 1.5px solid var(--line);
-    border-radius: 8px;
-    padding: 8px 10px;
-    background: var(--surface);
-    color: var(--ink);
+    min-width: 200px;
+    border: 2px solid var(--marker-soft);
+    border-radius: 10px 3px 12px 4px / 4px 12px 3px 10px;
+    padding: 7px 10px;
+    background: #fff;
+    color: var(--ink-dark);
+    font-family: system-ui, sans-serif;
+    font-size: 0.9rem;
   }
-  .proof-line input::placeholder { color: var(--ink-soft); }
-  .proof-note {
-    display: none;
-    margin: 0;
-    padding: 0 12px 12px 54px;
-    font-size: 0.8rem;
-    color: var(--ink-soft);
-  }
-  .task.done .proof-note { display: block; }
-  .proof-note .stamp {
-    color: var(--good);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.68rem;
-    margin-right: 6px;
-  }
+  .proof-line input::placeholder { color: #9AA1AB; }
 
-  .add-line { display: flex; gap: 8px; margin-top: 14px; }
-  .add-line input {
-    flex: 1;
-    min-width: 0;
-    border: 1.5px dashed var(--line);
-    border-radius: 8px;
-    padding: 8px 10px;
+  .btn {
     background: transparent;
-    color: var(--ink);
+    border: 2.5px solid var(--marker);
+    border-radius: 14px 5px 16px 6px / 6px 16px 5px 14px;
+    padding: 5px 14px;
+    font-weight: 700;
+    font-size: 0.9rem;
   }
-  .add-line input::placeholder { color: var(--ink-soft); }
-
-  .empty-note { color: var(--ink-soft); font-size: 0.9rem; margin: 8px 0; }
-
-  /* ---------- progress ---------- */
-  .progress-wrap { margin-top: 18px; }
-  .progress-track {
-    height: 10px;
-    border-radius: 99px;
-    background: var(--surface-2);
-    border: 1px solid var(--line);
-    overflow: hidden;
+  .btn:hover { background: var(--marker-faint); }
+  .btn.fill { background: var(--marker); color: #fff; }
+  .btn.fill:hover { opacity: 0.9; }
+  .btn.quiet {
+    border-color: transparent;
+    color: var(--pencil);
+    font-size: 0.8rem;
+    padding: 4px 8px;
   }
-  .progress-fill {
-    height: 100%;
-    width: 0%;
-    background: var(--good);
-    border-radius: 99px;
-    transition: width 0.35s ease;
-  }
-  .progress-text { margin-top: 6px; }
+  .btn.quiet:hover { color: var(--marker); background: transparent; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* ---------- ticket ---------- */
-  .ticket {
+  .proof-log {
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--pencil);
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+  }
+  .proof-log li { margin-top: 2px; overflow-wrap: anywhere; }
+  .proof-log .d { color: var(--good); font-weight: 700; margin-right: 6px; }
+
+  /* dotted connector */
+  .connector {
+    height: 0;
+    border-top: 3.5px dotted var(--marker);
+    opacity: 0.75;
+    transform: rotate(-2deg);
+  }
+
+  /* ============ scratcher card ============ */
+  .scratcher-cell { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .scratcher {
     position: relative;
-    background: var(--ticket-paper);
-    border: 1.5px solid var(--line);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    padding: 18px 18px 22px;
+    width: 152px;
+    height: 96px;
+    border: 2.5px solid var(--marker);
+    border-radius: 18px 6px 20px 8px / 8px 20px 6px 18px;
     overflow: hidden;
+    background: #fff;
+    transform: rotate(1.4deg);
   }
-  .ticket::before, .ticket::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    background: var(--paper);
-    border: 1.5px solid var(--line);
-    transform: translateY(-50%);
-  }
-  .ticket::before { left: -14px; }
-  .ticket::after { right: -14px; }
-
-  .ticket-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 10px;
-    padding-bottom: 12px;
-    margin-bottom: 14px;
-    border-bottom: 2px dashed var(--line);
-  }
-  .ticket-head .brand {
-    font-weight: 900;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-  }
-  .ticket-head .serial { font-variant-numeric: tabular-nums; }
-
-  .scratch-zone {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 2px solid var(--line);
-    min-height: 170px;
-    background: var(--surface-2);
-  }
-  .reward-face {
+  .row:nth-child(even) .scratcher { transform: rotate(-1.6deg); }
+  .scratcher .face {
     position: absolute;
     inset: 0;
     display: grid;
     place-items: center;
     text-align: center;
-    padding: 18px;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(226, 61, 109, 0.10), transparent 55%),
-      radial-gradient(circle at 80% 80%, rgba(44, 91, 217, 0.10), transparent 55%),
-      var(--ticket-paper);
+    padding: 8px;
+    background: #FFFDF5;
   }
-  .reward-face .won-label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--accent);
-  }
-  .reward-face .reward-text {
-    font-size: clamp(1.25rem, 4vw, 1.7rem);
-    font-weight: 900;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-    text-wrap: balance;
+  .scratcher .face .win {
+    font-size: 0.86rem;
+    font-weight: 700;
+    line-height: 1.25;
     overflow-wrap: anywhere;
   }
-  canvas.foil {
+  .scratcher .face .tiny {
+    display: block;
+    font-size: 0.6rem;
+    color: var(--pencil);
+    font-family: system-ui, sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .scratcher canvas {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     touch-action: none;
     cursor: grab;
-    transition: opacity 0.6s ease;
+    transition: opacity 0.5s ease;
   }
-  canvas.foil.gone { opacity: 0; pointer-events: none; }
-
-  .locked-cover {
+  .scratcher canvas.gone { opacity: 0; pointer-events: none; }
+  .scratcher .locked {
     position: absolute;
     inset: 0;
     display: grid;
     place-items: center;
+    background: repeating-linear-gradient(-45deg, #F4F5F3 0 10px, #FBFBF9 10px 20px);
+    color: var(--pencil);
+    font-size: 0.72rem;
+    font-family: system-ui, sans-serif;
     text-align: center;
-    padding: 18px;
-    background: repeating-linear-gradient(
-      -45deg,
-      var(--surface-2) 0 14px,
-      var(--surface) 14px 28px
-    );
+    padding: 8px;
   }
-  .locked-cover .lock-icon { font-size: 1.8rem; display: block; margin-bottom: 6px; }
-  .locked-cover p { margin: 0; font-size: 0.9rem; color: var(--ink-soft); max-width: 34ch; }
-  .locked-cover .big { font-weight: 800; color: var(--ink); font-size: 1rem; }
+  .scratch-hint { font-size: 0.72rem; color: var(--pencil); font-family: system-ui, sans-serif; }
+  .row-tools { display: flex; gap: 2px; }
 
-  .ticket-foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-top: 14px;
-    flex-wrap: wrap;
-  }
-  .ticket-foot .note { font-size: 0.78rem; color: var(--ink-soft); }
-
-  /* ---------- rewards pool ---------- */
-  ul.pool { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-  .pool li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 10px;
-    border: 1.5px solid var(--line);
-    border-radius: 8px;
-    background: var(--surface);
-  }
-  .pool .chip {
-    flex: none;
-    width: 26px; height: 26px;
-    border-radius: 6px;
-    background: linear-gradient(135deg, var(--foil-a), var(--foil-b));
+  /* ============ add forms & pool ============ */
+  .bench {
+    margin-top: 48px;
     display: grid;
-    place-items: center;
-    color: var(--foil-ink);
-    font-weight: 900;
-    font-size: 0.75rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 34px;
   }
-  .pool .pool-text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  @media (max-width: 720px) { .bench { grid-template-columns: minmax(0, 1fr); } }
+  .bench h2 {
+    margin: 0 0 2px;
+    font-size: 1.3rem;
+    transform: rotate(-0.8deg);
+  }
+  .bench .sub { margin: 0 0 12px; color: var(--pencil); font-size: 0.8rem; font-family: system-ui, sans-serif; }
 
-  /* ---------- history ---------- */
-  .history { margin-top: 28px; }
-  ul.wins { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-  .wins li {
-    display: flex;
-    gap: 12px;
-    align-items: baseline;
-    padding: 8px 12px;
-    border-left: 4px solid var(--foil-b);
-    background: var(--surface);
-    border-radius: 0 8px 8px 0;
+  .add-task-form { display: flex; flex-direction: column; gap: 8px; }
+  .add-task-form .line { display: flex; gap: 8px; flex-wrap: wrap; }
+  .add-task-form input, .add-task-form select {
+    border: 2px solid var(--marker-soft);
+    border-radius: 10px 3px 12px 4px / 4px 12px 3px 10px;
+    padding: 7px 10px;
+    background: #fff;
+    color: var(--ink-dark);
+    font-family: system-ui, sans-serif;
+    font-size: 0.9rem;
   }
-  .wins .when { flex: none; color: var(--ink-soft); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+  .add-task-form input::placeholder { color: #9AA1AB; }
+  .add-task-form .grow { flex: 1; min-width: 180px; }
+
+  ul.pool { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .pool li { display: flex; align-items: center; gap: 8px; }
+  .pool .tick-mark { flex: none; font-size: 1rem; }
+  .pool .pool-text { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 1rem; }
+  .pool-line { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pool-line input {
+    flex: 1;
+    min-width: 180px;
+    border: 2px solid var(--marker-soft);
+    border-radius: 10px 3px 12px 4px / 4px 12px 3px 10px;
+    padding: 7px 10px;
+    background: #fff;
+    color: var(--ink-dark);
+    font-family: system-ui, sans-serif;
+    font-size: 0.9rem;
+  }
+  .empty-note { color: var(--pencil); font-size: 0.85rem; font-family: system-ui, sans-serif; }
+
+  /* ============ ledger ============ */
+  .ledger { margin-top: 44px; }
+  .ledger h2 { margin: 0 0 8px; font-size: 1.3rem; transform: rotate(-0.6deg); }
+  ul.wins { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .wins li { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .wins .when { color: var(--pencil); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.72rem; }
   .wins .what { font-weight: 700; overflow-wrap: anywhere; }
+  .wins .for { color: var(--pencil); font-size: 0.8rem; font-family: system-ui, sans-serif; }
 
-  /* ---------- confetti ---------- */
-  #confetti {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 50;
-  }
+  #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
 
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
@@ -430,91 +335,54 @@
 <div class="wrap">
   <header class="masthead">
     <div>
-      <h1>Scratch<span class="tail">work</span></h1>
-      <p class="tagline">Finish every task, log your proof, then scratch to see which reward you drew.</p>
+      <h1>Scratchwork<span class="underline" aria-hidden="true"></span></h1>
+      <p class="tagline">Every task has its own scratcher. Fill every box — with proof — and scratch to see what you won.</p>
     </div>
-    <div class="scoreboard">
-      <div class="score-chip">
-        <span class="label">Round</span>
-        <span class="num" id="stat-round">1</span>
-      </div>
-      <div class="score-chip">
-        <span class="label">Rewards won</span>
-        <span class="num" id="stat-wins">0</span>
-      </div>
-    </div>
+    <div class="col-head" aria-hidden="true">Scratchers ↓</div>
   </header>
 
-  <div class="cols">
-    <!-- ============ TASKS ============ -->
-    <section class="panel" aria-labelledby="tasks-h">
-      <h2 id="tasks-h">Today's tasks</h2>
-      <p class="sub">A task only counts once you write down what you actually did.</p>
+  <div class="rows" id="rows"></div>
+  <p class="empty-note" id="rows-empty" hidden>Board's empty — add your first task below.</p>
 
-      <ul class="tasks" id="task-list"></ul>
-      <p class="empty-note" id="tasks-empty" hidden>No tasks yet — add your first habit below.</p>
-
-      <div class="add-line">
-        <input id="new-task" type="text" maxlength="120" placeholder="Add a task or habit…" aria-label="New task" />
-        <button class="btn" id="add-task-btn">Add</button>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
-          <div class="progress-fill" id="progress-fill"></div>
+  <div class="bench">
+    <section aria-labelledby="add-h">
+      <h2 id="add-h">Add to the board</h2>
+      <p class="sub">One-shot task or a multi-day streak — each gets its own scratcher.</p>
+      <div class="add-task-form">
+        <div class="line">
+          <input class="grow" id="new-task" type="text" maxlength="120" placeholder="Task or habit (e.g. Workout 1h+)" aria-label="New task name" />
         </div>
-        <p class="label progress-text" id="progress-text">0 of 0 complete</p>
+        <div class="line">
+          <input id="new-owner" type="text" maxlength="30" placeholder="Who? (optional)" aria-label="Owner (optional)" style="width: 130px;" />
+          <select id="new-days" aria-label="How many times to complete">
+            <option value="1">one-shot</option>
+            <option value="3">3 days</option>
+            <option value="5">5 days</option>
+            <option value="7" selected>7 days in a row</option>
+            <option value="10">10 days</option>
+            <option value="14">14 days</option>
+            <option value="21">21 days</option>
+            <option value="30">30 days</option>
+          </select>
+          <button class="btn fill" id="add-task-btn">Add it</button>
+        </div>
       </div>
     </section>
 
-    <!-- ============ TICKET + POOL ============ -->
-    <div>
-      <section class="ticket" aria-labelledby="ticket-h">
-        <div class="ticket-head">
-          <span class="brand" id="ticket-h">★ Reward Scratcher ★</span>
-          <span class="label serial" id="ticket-serial">Nº 000001</span>
-        </div>
-
-        <div class="scratch-zone" id="scratch-zone">
-          <div class="reward-face" id="reward-face" hidden>
-            <div>
-              <span class="label won-label">You unlocked</span>
-              <span class="reward-text" id="reward-text"></span>
-            </div>
-          </div>
-          <canvas class="foil" id="foil" hidden aria-label="Scratch area — drag to scratch off the foil"></canvas>
-          <div class="locked-cover" id="locked-cover">
-            <div>
-              <span class="lock-icon" aria-hidden="true">🔒</span>
-              <p class="big" id="lock-title">Ticket locked</p>
-              <p id="lock-msg">Complete every task to unlock this round's scratcher.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="ticket-foot">
-          <span class="note" id="ticket-note">One reward is shuffled in secretly — even we don't tell you which.</span>
-          <button class="btn ghost" id="tear-btn" hidden>Can't scratch? Tear it open</button>
-          <button class="btn accent" id="next-round-btn" hidden>Start round <span id="next-round-num">2</span> →</button>
-        </div>
-      </section>
-
-      <section class="panel" style="margin-top: 22px;" aria-labelledby="pool-h">
-        <h2 id="pool-h">Reward pool</h2>
-        <p class="sub">These get shuffled — each unlocked ticket hides one of them at random.</p>
-        <ul class="pool" id="pool-list"></ul>
-        <p class="empty-note" id="pool-empty" hidden>The pool is empty — add a treat or two so the ticket has something to hide.</p>
-        <div class="add-line">
-          <input id="new-reward" type="text" maxlength="120" placeholder="Add a reward…" aria-label="New reward" />
-          <button class="btn" id="add-reward-btn">Add</button>
-        </div>
-      </section>
-    </div>
+    <section aria-labelledby="pool-h">
+      <h2 id="pool-h">Reward pool</h2>
+      <p class="sub">Shuffled secretly — each finished scratcher hides one of these at random.</p>
+      <ul class="pool" id="pool-list"></ul>
+      <p class="empty-note" id="pool-empty" hidden>Pool's empty — add a treat so the scratchers have something to hide.</p>
+      <div class="pool-line">
+        <input id="new-reward" type="text" maxlength="120" placeholder="Add a reward…" aria-label="New reward" />
+        <button class="btn" id="add-reward-btn">Add</button>
+      </div>
+    </section>
   </div>
 
-  <!-- ============ HISTORY ============ -->
-  <section class="history" aria-labelledby="hist-h" id="history-section" hidden>
-    <span class="label" id="hist-h">Winnings ledger</span>
+  <section class="ledger" id="ledger" hidden aria-labelledby="ledger-h">
+    <h2 id="ledger-h">Winnings so far ✓</h2>
     <ul class="wins" id="wins-list"></ul>
   </section>
 </div>
@@ -525,32 +393,35 @@
 (function () {
   "use strict";
 
+  var STORAGE_KEY = "scratchwork-v2";
+
   /* ---------------- state ---------------- */
-  var STORAGE_KEY = "scratchwork-v1";
   var state = {
-    round: 1,
     tasks: [
-      { id: uid(), text: "Drink a full glass of water", done: false, proof: "" },
-      { id: uid(), text: "20 minutes of focused study", done: false, proof: "" },
-      { id: uid(), text: "Tidy one small area", done: false, proof: "" }
+      mk("Egypt Article — publish", "Coby", 1),
+      mk("AM article — published", "Adam", 1),
+      mk("Workout 1h+ for 7 days in a row", "", 7),
+      mk("Chem Immersion 7 days", "", 7),
+      mk("No Youtube", "", 7),
+      mk("Read 1h", "", 7)
     ],
     rewards: [
-      "One episode of your favorite show",
-      "Fancy coffee or bubble tea",
-      "30 minutes of guilt-free gaming",
-      "Order dessert tonight"
+      "Fancy dinner out",
+      "One lazy Sunday, zero guilt",
+      "New book of your choice",
+      "Movie night + snacks",
+      "Sleep in with no alarm"
     ],
-    currentReward: null,   // assigned (hidden) when the round unlocks
-    revealed: false,
-    wins: []               // { reward, round, when }
+    wins: []   // { reward, task, when }
   };
 
-  function uid() {
-    return "t" + Math.random().toString(36).slice(2, 9);
+  function mk(text, owner, days) {
+    return { id: uid(), text: text, owner: owner, days: days, checks: [], reward: null, revealed: false };
   }
+  function uid() { return "t" + Math.random().toString(36).slice(2, 9); }
 
   function save() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* sandboxed — in-memory only */ }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* in-memory only */ }
   }
   function load() {
     try {
@@ -561,441 +432,475 @@
     } catch (e) { /* keep defaults */ }
   }
 
-  /* ---------------- els ---------------- */
   var $ = function (id) { return document.getElementById(id); };
-  var taskList = $("task-list"), poolList = $("pool-list");
+  var armingId = null;  // task currently showing its proof input
 
-  /* ---------------- rendering ---------------- */
-  var armingId = null; // task currently showing its proof input
+  function isComplete(t) { return t.checks.length >= t.days; }
+  function isScratchable(t) { return t.reward !== null && !t.revealed; }
 
-  function render() {
-    renderTasks();
-    renderPool();
-    renderTicket();
-    renderHistory();
-    $("stat-round").textContent = state.round;
-    $("stat-wins").textContent = state.wins.length;
-    save();
+  /* assign hidden rewards to any newly-completed tasks */
+  function assignRewards() {
+    state.tasks.forEach(function (t) {
+      if (isComplete(t) && t.reward === null && !t.revealed && state.rewards.length > 0) {
+        t.reward = state.rewards[Math.floor(Math.random() * state.rewards.length)];
+      }
+    });
   }
 
-  function renderTasks() {
-    taskList.textContent = "";
-    $("tasks-empty").hidden = state.tasks.length > 0;
+  /* ---------------- render ---------------- */
+  function render() {
+    assignRewards();
+    renderRows();
+    renderPool();
+    renderLedger();
+    save();
+    requestAnimationFrame(initAllFoils);
+  }
+
+  function renderRows() {
+    var rows = $("rows");
+    rows.textContent = "";
+    $("rows-empty").hidden = state.tasks.length > 0;
 
     state.tasks.forEach(function (t) {
-      var li = document.createElement("li");
-      li.className = "task" + (t.done ? " done" : "") + (armingId === t.id ? " arming" : "");
-
       var row = document.createElement("div");
-      row.className = "task-row";
+      row.className = "row";
 
-      var tick = document.createElement("span");
-      tick.className = "tick";
-      tick.setAttribute("aria-hidden", "true");
-      tick.textContent = "✓";
+      /* ----- task cell ----- */
+      var cell = document.createElement("div");
+      cell.className = "task-cell";
 
-      var txt = document.createElement("span");
-      txt.className = "task-text";
-      txt.textContent = t.text;
-
-      var actions = document.createElement("div");
-      actions.className = "task-actions";
-
-      if (!t.done) {
-        var doneBtn = document.createElement("button");
-        doneBtn.className = "btn primary";
-        doneBtn.textContent = armingId === t.id ? "Cancel" : "Done?";
-        doneBtn.addEventListener("click", function () {
-          armingId = armingId === t.id ? null : t.id;
-          renderTasks();
-          if (armingId === t.id) {
-            var inp = taskList.querySelector('[data-proof-for="' + t.id + '"]');
-            if (inp) inp.focus();
-          }
-        });
-        actions.appendChild(doneBtn);
-      } else if (!isUnlocked()) {
-        var undoBtn = document.createElement("button");
-        undoBtn.className = "btn ghost";
-        undoBtn.textContent = "Undo";
-        undoBtn.addEventListener("click", function () {
-          t.done = false;
-          t.proof = "";
-          render();
-        });
-        actions.appendChild(undoBtn);
+      if (t.owner) {
+        var ow = document.createElement("span");
+        ow.className = "owner";
+        ow.textContent = t.owner;
+        cell.appendChild(ow);
       }
 
-      var delBtn = document.createElement("button");
-      delBtn.className = "btn ghost";
-      delBtn.setAttribute("aria-label", "Remove task: " + t.text);
-      delBtn.textContent = "✕";
-      delBtn.addEventListener("click", function () {
-        state.tasks = state.tasks.filter(function (x) { return x.id !== t.id; });
-        if (armingId === t.id) armingId = null;
-        maybeUnlock();
-        render();
-      });
-      actions.appendChild(delBtn);
+      var title = document.createElement("p");
+      title.className = "task-title" + (isComplete(t) ? " struck" : "");
+      title.textContent = t.text;
+      cell.appendChild(title);
 
-      row.appendChild(tick);
-      row.appendChild(txt);
-      row.appendChild(actions);
-      li.appendChild(row);
+      /* day boxes */
+      var days = document.createElement("div");
+      days.className = "days";
+      for (var i = 0; i < t.days; i++) {
+        var filled = i < t.checks.length;
+        var isNext = i === t.checks.length && !isComplete(t);
+        var box = document.createElement("button");
+        box.className = "day-box" + (isNext ? " next" : "");
+        box.disabled = !isNext;
+        if (t.days > 1) {
+          var n = document.createElement("span");
+          n.className = "n";
+          n.setAttribute("aria-hidden", "true");
+          n.textContent = i + 1;
+          box.appendChild(n);
+        }
+        if (filled) {
+          var s = document.createElement("span");
+          s.className = "slash";
+          s.setAttribute("aria-hidden", "true");
+          s.textContent = "/";
+          box.appendChild(s);
+          box.setAttribute("aria-label", "Day " + (i + 1) + " done: " + t.checks[i].proof);
+          box.title = t.checks[i].proof;
+        } else if (isNext) {
+          var plus = document.createElement("span");
+          plus.className = "hint-plus";
+          plus.setAttribute("aria-hidden", "true");
+          plus.textContent = "+";
+          box.appendChild(plus);
+          box.setAttribute("aria-label", t.days > 1
+            ? "Log day " + (i + 1) + " of " + t.days + " for: " + t.text
+            : "Mark done: " + t.text);
+          box.addEventListener("click", (function (task) {
+            return function () {
+              armingId = armingId === task.id ? null : task.id;
+              render();
+              if (armingId === task.id) {
+                var inp = document.querySelector('[data-proof-for="' + task.id + '"]');
+                if (inp) inp.focus();
+              }
+            };
+          })(t));
+        } else {
+          box.setAttribute("aria-label", "Day " + (i + 1) + " — locked until earlier days are logged");
+        }
+        days.appendChild(box);
+      }
+      cell.appendChild(days);
 
-      // proof entry form (the required-input gate)
-      if (!t.done) {
+      /* proof form — the required-input gate */
+      if (armingId === t.id && !isComplete(t)) {
         var form = document.createElement("div");
         form.className = "proof-form";
-        var hint = document.createElement("p");
-        hint.className = "hint";
-        hint.textContent = "Proof required — write what you actually did before it counts.";
+        var ask = document.createElement("p");
+        ask.className = "ask";
+        ask.textContent = t.days > 1
+          ? "Day " + (t.checks.length + 1) + " — what did you actually do?"
+          : "Done? What did you actually do?";
+        var rule = document.createElement("p");
+        rule.className = "rule";
+        rule.textContent = "Proof required — the box only fills once you write something.";
         var line = document.createElement("div");
         line.className = "proof-line";
         var inp = document.createElement("input");
         inp.type = "text";
         inp.maxLength = 200;
-        inp.placeholder = "e.g. “Read pages 40–55 and took notes”";
+        inp.placeholder = "e.g. “45 min run + 20 min weights”";
         inp.setAttribute("data-proof-for", t.id);
-        inp.setAttribute("aria-label", "Proof of completion for: " + t.text);
+        inp.setAttribute("aria-label", "Proof for: " + t.text);
         var logBtn = document.createElement("button");
-        logBtn.className = "btn accent";
+        logBtn.className = "btn fill";
         logBtn.textContent = "Log it";
         logBtn.disabled = true;
         inp.addEventListener("input", function () {
           logBtn.disabled = inp.value.trim().length === 0;
         });
-        function commit() {
-          var v = inp.value.trim();
-          if (!v) return; // hard gate: empty proof never counts
-          t.done = true;
-          t.proof = v;
-          armingId = null;
-          maybeUnlock();
-          render();
-        }
+        var commit = (function (task, input) {
+          return function () {
+            var v = input.value.trim();
+            if (!v) return;              /* hard gate: no proof, no tally */
+            task.checks.push({ proof: v });
+            armingId = null;
+            render();
+          };
+        })(t, inp);
         logBtn.addEventListener("click", commit);
-        inp.addEventListener("keydown", function (e) {
-          if (e.key === "Enter") commit();
-        });
+        inp.addEventListener("keydown", function (e) { if (e.key === "Enter") commit(); });
+        var cancel = document.createElement("button");
+        cancel.className = "btn quiet";
+        cancel.textContent = "cancel";
+        cancel.addEventListener("click", function () { armingId = null; render(); });
         line.appendChild(inp);
         line.appendChild(logBtn);
-        form.appendChild(hint);
+        line.appendChild(cancel);
+        form.appendChild(ask);
+        form.appendChild(rule);
         form.appendChild(line);
-        li.appendChild(form);
-      } else {
-        var note = document.createElement("p");
-        note.className = "proof-note mono";
-        var stamp = document.createElement("span");
-        stamp.className = "stamp";
-        stamp.textContent = "Logged";
-        note.appendChild(stamp);
-        note.appendChild(document.createTextNode(t.proof));
-        li.appendChild(note);
+        cell.appendChild(form);
       }
 
-      taskList.appendChild(li);
-    });
+      /* proof log under multi-day tasks */
+      if (t.checks.length > 0) {
+        var logList = document.createElement("ul");
+        logList.className = "proof-log";
+        t.checks.forEach(function (c, idx) {
+          var li = document.createElement("li");
+          var d = document.createElement("span");
+          d.className = "d";
+          d.textContent = t.days > 1 ? "d" + (idx + 1) : "✓";
+          li.appendChild(d);
+          li.appendChild(document.createTextNode(c.proof));
+          logList.appendChild(li);
+        });
+        cell.appendChild(logList);
+      }
 
-    // progress
-    var total = state.tasks.length;
-    var done = state.tasks.filter(function (t) { return t.done; }).length;
-    var pct = total ? Math.round((done / total) * 100) : 0;
-    $("progress-fill").style.width = pct + "%";
-    $("progress-bar").setAttribute("aria-valuenow", pct);
-    $("progress-text").textContent = done + " of " + total + " complete";
+      /* tools: undo last / remove */
+      var tools = document.createElement("div");
+      tools.className = "row-tools";
+      if (t.checks.length > 0 && t.reward === null && !t.revealed) {
+        var undo = document.createElement("button");
+        undo.className = "btn quiet";
+        undo.textContent = "undo last";
+        undo.addEventListener("click", function () { t.checks.pop(); render(); });
+        tools.appendChild(undo);
+      }
+      if (t.revealed) {
+        var again = document.createElement("button");
+        again.className = "btn quiet";
+        again.textContent = "run it back ↻";
+        again.addEventListener("click", function () {
+          t.checks = [];
+          t.reward = null;
+          t.revealed = false;
+          render();
+        });
+        tools.appendChild(again);
+      }
+      var del = document.createElement("button");
+      del.className = "btn quiet";
+      del.setAttribute("aria-label", "Erase task: " + t.text);
+      del.textContent = "erase ✕";
+      del.addEventListener("click", function () {
+        state.tasks = state.tasks.filter(function (x) { return x.id !== t.id; });
+        if (armingId === t.id) armingId = null;
+        render();
+      });
+      tools.appendChild(del);
+      cell.appendChild(tools);
+
+      /* ----- connector ----- */
+      var conn = document.createElement("div");
+      conn.className = "connector";
+      conn.setAttribute("aria-hidden", "true");
+
+      /* ----- scratcher ----- */
+      var sCell = document.createElement("div");
+      sCell.className = "scratcher-cell";
+      var card = document.createElement("div");
+      card.className = "scratcher";
+
+      var face = document.createElement("div");
+      face.className = "face";
+      var faceInner = document.createElement("div");
+      var tiny = document.createElement("span");
+      tiny.className = "tiny";
+      tiny.textContent = "You won";
+      var win = document.createElement("div");
+      win.className = "win";
+      win.textContent = t.reward || "";
+      faceInner.appendChild(tiny);
+      faceInner.appendChild(win);
+      face.appendChild(faceInner);
+      card.appendChild(face);
+
+      var hint = document.createElement("span");
+      hint.className = "scratch-hint";
+
+      if (t.revealed) {
+        hint.textContent = "revealed ✓";
+      } else if (isScratchable(t)) {
+        var cv = document.createElement("canvas");
+        cv.setAttribute("data-foil-for", t.id);
+        cv.setAttribute("aria-label", "Scratch to reveal your reward for: " + t.text);
+        card.appendChild(cv);
+        attachScratch(cv, t);
+        hint.textContent = "scratch me!";
+        var tear = document.createElement("button");
+        tear.className = "btn quiet";
+        tear.textContent = "tear open";
+        tear.addEventListener("click", function () { reveal(t); });
+        sCell.appendChild(card);
+        sCell.appendChild(hint);
+        sCell.appendChild(tear);
+        row.appendChild(cell);
+        row.appendChild(conn);
+        row.appendChild(sCell);
+        $("rows").appendChild(row);
+        return;
+      } else {
+        var lock = document.createElement("div");
+        lock.className = "locked";
+        var left = t.days - t.checks.length;
+        if (isComplete(t) && state.rewards.length === 0) {
+          lock.textContent = "add a reward to the pool to unlock";
+        } else if (t.days > 1) {
+          lock.textContent = left + " of " + t.days + " to go";
+        } else {
+          lock.textContent = "locked until done";
+        }
+        card.appendChild(lock);
+        hint.textContent = t.days > 1 ? "finish the streak" : "finish the task";
+      }
+
+      sCell.appendChild(card);
+      sCell.appendChild(hint);
+
+      row.appendChild(cell);
+      row.appendChild(conn);
+      row.appendChild(sCell);
+      $("rows").appendChild(row);
+    });
   }
 
   function renderPool() {
-    poolList.textContent = "";
+    var list = $("pool-list");
+    list.textContent = "";
     $("pool-empty").hidden = state.rewards.length > 0;
     state.rewards.forEach(function (r, i) {
       var li = document.createElement("li");
-      var chip = document.createElement("span");
-      chip.className = "chip";
-      chip.setAttribute("aria-hidden", "true");
-      chip.textContent = "?";
+      var tick = document.createElement("span");
+      tick.className = "tick-mark";
+      tick.setAttribute("aria-hidden", "true");
+      tick.textContent = "→";
       var txt = document.createElement("span");
       txt.className = "pool-text";
       txt.textContent = r;
       var del = document.createElement("button");
-      del.className = "btn ghost";
+      del.className = "btn quiet";
       del.setAttribute("aria-label", "Remove reward: " + r);
       del.textContent = "✕";
       del.addEventListener("click", function () {
         state.rewards.splice(i, 1);
         render();
       });
-      li.appendChild(chip);
+      li.appendChild(tick);
       li.appendChild(txt);
       li.appendChild(del);
-      poolList.appendChild(li);
+      list.appendChild(li);
     });
   }
 
-  function renderHistory() {
-    var sec = $("history-section");
-    sec.hidden = state.wins.length === 0;
+  function renderLedger() {
+    $("ledger").hidden = state.wins.length === 0;
     var list = $("wins-list");
     list.textContent = "";
     state.wins.slice().reverse().forEach(function (w) {
       var li = document.createElement("li");
       var when = document.createElement("span");
-      when.className = "when mono";
-      when.textContent = "R" + w.round + " · " + w.when;
+      when.className = "when";
+      when.textContent = w.when;
       var what = document.createElement("span");
       what.className = "what";
       what.textContent = w.reward;
+      var f = document.createElement("span");
+      f.className = "for";
+      f.textContent = "— for “" + w.task + "”";
       li.appendChild(when);
       li.appendChild(what);
+      li.appendChild(f);
       list.appendChild(li);
     });
   }
 
-  /* ---------------- unlock logic ---------------- */
-  function allDone() {
-    return state.tasks.length > 0 && state.tasks.every(function (t) { return t.done; });
-  }
-  function isUnlocked() {
-    return state.currentReward !== null;
-  }
-  function maybeUnlock() {
-    if (isUnlocked() || state.revealed) return;
-    if (allDone() && state.rewards.length > 0) {
-      // shuffle: draw one reward at random, keep it hidden under the foil
-      var i = Math.floor(Math.random() * state.rewards.length);
-      state.currentReward = state.rewards[i];
-    }
-  }
-
-  function renderTicket() {
-    var serial = String(state.round).padStart(6, "0");
-    $("ticket-serial").textContent = "Nº " + serial;
-    $("next-round-num").textContent = state.round + 1;
-
-    var cover = $("locked-cover");
-    var foil = $("foil");
-    var face = $("reward-face");
-    var tearBtn = $("tear-btn");
-    var nextBtn = $("next-round-btn");
-    var note = $("ticket-note");
-
-    if (state.revealed && state.currentReward) {
-      // fully revealed
-      cover.style.display = "none";
-      face.hidden = false;
-      $("reward-text").textContent = state.currentReward;
-      foil.hidden = false;
-      foil.classList.add("gone");
-      tearBtn.hidden = true;
-      nextBtn.hidden = false;
-      note.textContent = "Enjoy it — you earned it. Start the next round when you're ready.";
-    } else if (isUnlocked()) {
-      // scratchable
-      cover.style.display = "none";
-      face.hidden = false;
-      $("reward-text").textContent = state.currentReward;
-      foil.hidden = false;
-      foil.classList.remove("gone");
-      tearBtn.hidden = false;
-      nextBtn.hidden = true;
-      note.textContent = "All tasks logged — scratch the gold foil to reveal your reward!";
-      initFoil();
-    } else {
-      // locked
-      cover.style.display = "grid";
-      face.hidden = true;
-      foil.hidden = true;
-      tearBtn.hidden = true;
-      nextBtn.hidden = true;
-      var remaining = state.tasks.filter(function (t) { return !t.done; }).length;
-      if (state.tasks.length === 0) {
-        $("lock-title").textContent = "No tasks yet";
-        $("lock-msg").textContent = "Add at least one task — the scratcher only unlocks once everything is done and logged.";
-      } else if (allDone() && state.rewards.length === 0) {
-        $("lock-title").textContent = "Tasks done, but the pool is empty";
-        $("lock-msg").textContent = "Add a reward to the pool and the ticket will unlock instantly.";
-      } else {
-        $("lock-title").textContent = "Ticket locked";
-        $("lock-msg").textContent = remaining + (remaining === 1 ? " task" : " tasks") + " left — log proof for each one to unlock the scratcher.";
-      }
-      note.textContent = "One reward is shuffled in secretly — even we don't tell you which.";
-    }
-  }
-
   /* ---------------- scratch foil ---------------- */
-  var foilReady = false;
-  var scratching = false;
-  var lastPt = null;
-  var strokeCount = 0;
+  function initAllFoils() {
+    document.querySelectorAll("canvas[data-foil-for]").forEach(function (cv) {
+      if (cv.getAttribute("data-foiled") === "1") return;
+      drawFoil(cv);
+      cv.setAttribute("data-foiled", "1");
+    });
+  }
 
-  function initFoil() {
-    var canvas = $("foil");
-    var zone = $("scratch-zone");
+  function drawFoil(canvas) {
+    var w = canvas.clientWidth || canvas.parentElement.clientWidth;
+    var h = canvas.clientHeight || canvas.parentElement.clientHeight;
+    if (!w || !h) return;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var w = zone.clientWidth, h = zone.clientHeight;
-    if (w === 0 || h === 0) return;
-    if (foilReady && canvas.width === Math.round(w * dpr)) return;
-
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
     var ctx = canvas.getContext("2d");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // gold foil ground
+    /* silver foil */
     var g = ctx.createLinearGradient(0, 0, w, h);
-    var styles = getComputedStyle(document.documentElement);
-    var foilA = styles.getPropertyValue("--foil-a").trim() || "#E7C55A";
-    var foilB = styles.getPropertyValue("--foil-b").trim() || "#B08A1F";
-    var foilInk = styles.getPropertyValue("--foil-ink").trim() || "#7A5E12";
-    g.addColorStop(0, foilA);
-    g.addColorStop(0.5, foilB);
-    g.addColorStop(1, foilA);
+    g.addColorStop(0, "#DDE0E5");
+    g.addColorStop(0.5, "#B9BEC7");
+    g.addColorStop(1, "#D6D9DE");
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
-
-    // sparkle flecks
-    for (var i = 0; i < 220; i++) {
-      var x = Math.random() * w, y = Math.random() * h;
-      ctx.fillStyle = Math.random() > 0.5 ? "rgba(255,255,255,0.35)" : "rgba(122,94,18,0.3)";
-      ctx.fillRect(x, y, 1.5, 1.5);
+    for (var i = 0; i < 90; i++) {
+      ctx.fillStyle = Math.random() > 0.5 ? "rgba(255,255,255,0.5)" : "rgba(90,96,105,0.25)";
+      ctx.fillRect(Math.random() * w, Math.random() * h, 1.4, 1.4);
     }
 
-    // diagonal SCRATCH text
-    ctx.save();
-    ctx.translate(w / 2, h / 2);
-    ctx.rotate(-0.18);
-    ctx.fillStyle = foilInk;
-    ctx.font = "800 15px ui-monospace, Menlo, Consolas, monospace";
-    ctx.textAlign = "center";
-    for (var row = -2; row <= 2; row++) {
-      ctx.globalAlpha = 0.55;
-      ctx.fillText("SCRATCH HERE ✦ SCRATCH HERE ✦ SCRATCH HERE", 0, row * 34);
-    }
-    ctx.restore();
-
-    foilReady = true;
-    strokeCount = 0;
-  }
-
-  function erasePoint(canvas, x, y) {
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var ctx = canvas.getContext("2d");
-    ctx.save();
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.lineWidth = 44;
+    /* red marker scribble, like the whiteboard sketch */
+    ctx.strokeStyle = "rgba(224, 57, 46, 0.85)";
+    ctx.lineWidth = 3.2;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.beginPath();
-    if (lastPt) {
-      ctx.moveTo(lastPt.x, lastPt.y);
+    var x = w * 0.12, y = h * 0.7;
+    ctx.moveTo(x, y);
+    var zig = 5 + Math.floor(Math.random() * 3);
+    for (var z = 0; z < zig; z++) {
+      x += (w * 0.72) / zig;
+      y = z % 2 === 0 ? h * (0.2 + Math.random() * 0.12) : h * (0.68 + Math.random() * 0.12);
       ctx.lineTo(x, y);
-      ctx.stroke();
-    } else {
-      ctx.arc(x, y, 22, 0, Math.PI * 2);
-      ctx.fill();
     }
-    ctx.restore();
-    lastPt = { x: x, y: y };
+    ctx.stroke();
   }
 
-  function scratchedPercent(canvas) {
-    var ctx = canvas.getContext("2d");
-    var step = 6; // sample grid
-    var data;
-    try {
-      data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    } catch (e) { return 0; }
-    var clear = 0, total = 0;
-    for (var y = 0; y < canvas.height; y += step) {
-      for (var x = 0; x < canvas.width; x += step) {
-        total++;
-        if (data[(y * canvas.width + x) * 4 + 3] < 40) clear++;
+  function attachScratch(canvas, task) {
+    var scratching = false;
+    var lastPt = null;
+    var moves = 0;
+
+    function erase(x, y) {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var ctx = canvas.getContext("2d");
+      ctx.save();
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.lineWidth = 26;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      if (lastPt) {
+        ctx.moveTo(lastPt.x, lastPt.y);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      } else {
+        ctx.arc(x, y, 13, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+      lastPt = { x: x, y: y };
+    }
+
+    function pct() {
+      var ctx = canvas.getContext("2d");
+      var data;
+      try { data = ctx.getImageData(0, 0, canvas.width, canvas.height).data; }
+      catch (e) { return 0; }
+      var clear = 0, total = 0, step = 5;
+      for (var y = 0; y < canvas.height; y += step) {
+        for (var x = 0; x < canvas.width; x += step) {
+          total++;
+          if (data[(y * canvas.width + x) * 4 + 3] < 40) clear++;
+        }
+      }
+      return total ? (clear / total) * 100 : 0;
+    }
+
+    function finishCheck() {
+      if (pct() > 55) {
+        canvas.classList.add("gone");
+        reveal(task);
       }
     }
-    return total ? (clear / total) * 100 : 0;
+
+    canvas.addEventListener("pointerdown", function (e) {
+      if (task.revealed) return;
+      scratching = true;
+      lastPt = null;
+      canvas.setPointerCapture(e.pointerId);
+      var r = canvas.getBoundingClientRect();
+      erase(e.clientX - r.left, e.clientY - r.top);
+    });
+    canvas.addEventListener("pointermove", function (e) {
+      if (!scratching) return;
+      var r = canvas.getBoundingClientRect();
+      erase(e.clientX - r.left, e.clientY - r.top);
+      moves++;
+      if (moves % 18 === 0) finishCheck();
+    });
+    function up() {
+      if (!scratching) return;
+      scratching = false;
+      lastPt = null;
+      finishCheck();
+    }
+    canvas.addEventListener("pointerup", up);
+    canvas.addEventListener("pointercancel", up);
   }
 
-  function reveal() {
-    if (state.revealed || !state.currentReward) return;
-    state.revealed = true;
+  function reveal(task) {
+    if (task.revealed || task.reward === null) return;
+    task.revealed = true;
     state.wins.push({
-      reward: state.currentReward,
-      round: state.round,
+      reward: task.reward,
+      task: task.text,
       when: new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" })
     });
     render();
     burstConfetti();
   }
 
-  (function bindScratch() {
-    var canvas = $("foil");
-    canvas.addEventListener("pointerdown", function (e) {
-      if (!isUnlocked() || state.revealed) return;
-      scratching = true;
-      lastPt = null;
-      canvas.setPointerCapture(e.pointerId);
-      var r = canvas.getBoundingClientRect();
-      erasePoint(canvas, e.clientX - r.left, e.clientY - r.top);
-    });
-    canvas.addEventListener("pointermove", function (e) {
-      if (!scratching) return;
-      var r = canvas.getBoundingClientRect();
-      erasePoint(canvas, e.clientX - r.left, e.clientY - r.top);
-      strokeCount++;
-      if (strokeCount % 24 === 0 && scratchedPercent(canvas) > 55) {
-        scratching = false;
-        canvas.classList.add("gone");
-        reveal();
-      }
-    });
-    function endStroke() {
-      if (!scratching) return;
-      scratching = false;
-      lastPt = null;
-      if (scratchedPercent(canvas) > 55) {
-        canvas.classList.add("gone");
-        reveal();
-      }
-    }
-    canvas.addEventListener("pointerup", endStroke);
-    canvas.addEventListener("pointercancel", endStroke);
-  })();
-
-  $("tear-btn").addEventListener("click", function () {
-    var canvas = $("foil");
-    canvas.classList.add("gone");
-    reveal();
-  });
-
-  window.addEventListener("resize", function () {
-    if (isUnlocked() && !state.revealed) {
-      foilReady = false;
-      initFoil();
-    }
-  });
-
-  /* ---------------- next round ---------------- */
-  $("next-round-btn").addEventListener("click", function () {
-    state.round++;
-    state.tasks.forEach(function (t) { t.done = false; t.proof = ""; });
-    state.currentReward = null;
-    state.revealed = false;
-    foilReady = false;
-    armingId = null;
-    render();
-  });
-
-  /* ---------------- add tasks / rewards ---------------- */
+  /* ---------------- add task / reward ---------------- */
   function addTask() {
-    var inp = $("new-task");
-    var v = inp.value.trim();
-    if (!v) return;
-    state.tasks.push({ id: uid(), text: v, done: false, proof: "" });
-    inp.value = "";
+    var name = $("new-task").value.trim();
+    if (!name) return;
+    var owner = $("new-owner").value.trim();
+    var days = parseInt($("new-days").value, 10) || 1;
+    state.tasks.push(mk(name, owner, days));
+    $("new-task").value = "";
+    $("new-owner").value = "";
     render();
-    inp.focus();
+    $("new-task").focus();
   }
   $("add-task-btn").addEventListener("click", addTask);
   $("new-task").addEventListener("keydown", function (e) { if (e.key === "Enter") addTask(); });
@@ -1006,8 +911,7 @@
     if (!v) return;
     state.rewards.push(v);
     inp.value = "";
-    maybeUnlock(); // pool was empty & tasks all done → unlock now
-    render();
+    render();   /* re-runs assignRewards for tasks waiting on an empty pool */
     inp.focus();
   }
   $("add-reward-btn").addEventListener("click", addReward);
@@ -1015,8 +919,7 @@
 
   /* ---------------- confetti ---------------- */
   function burstConfetti() {
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     var canvas = $("confetti");
     canvas.hidden = false;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1025,14 +928,14 @@
     var ctx = canvas.getContext("2d");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     var W = window.innerWidth, H = window.innerHeight;
-    var colors = ["#E23D6D", "#E7C55A", "#2C5BD9", "#2F9E63", "#B08A1F"];
+    var colors = ["#E0392E", "#F2A93B", "#2E9E60", "#2C5BD9", "#E86A5E"];
     var parts = [];
-    for (var i = 0; i < 120; i++) {
+    for (var i = 0; i < 110; i++) {
       parts.push({
-        x: W / 2 + (Math.random() - 0.5) * 120,
+        x: W / 2 + (Math.random() - 0.5) * 140,
         y: H * 0.4,
-        vx: (Math.random() - 0.5) * 11,
-        vy: -Math.random() * 11 - 3,
+        vx: (Math.random() - 0.5) * 10,
+        vy: -Math.random() * 10 - 3,
         s: Math.random() * 7 + 4,
         c: colors[i % colors.length],
         r: Math.random() * Math.PI,
@@ -1040,14 +943,11 @@
       });
     }
     var frames = 0;
-    function tick() {
+    (function tick() {
       frames++;
       ctx.clearRect(0, 0, W, H);
       parts.forEach(function (p) {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.28;
-        p.r += p.vr;
+        p.x += p.vx; p.y += p.vy; p.vy += 0.28; p.r += p.vr;
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.r);
@@ -1055,19 +955,13 @@
         ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * 0.6);
         ctx.restore();
       });
-      if (frames < 160) {
-        requestAnimationFrame(tick);
-      } else {
-        ctx.clearRect(0, 0, W, H);
-        canvas.hidden = true;
-      }
-    }
-    requestAnimationFrame(tick);
+      if (frames < 150) requestAnimationFrame(tick);
+      else { ctx.clearRect(0, 0, W, H); canvas.hidden = true; }
+    })();
   }
 
   /* ---------------- boot ---------------- */
   load();
-  maybeUnlock();
   render();
 })();
 </script>
