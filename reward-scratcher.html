@@ -1,201 +1,213 @@
 <title>Scratchwork</title>
 <style>
-  /* ============ whiteboard world — single committed theme ============ */
+  /* ============ tokens ============ */
   :root {
-    --board: #FBFBF9;
-    --board-glare: rgba(215, 224, 232, 0.55);
-    --marker: #E0392E;          /* red dry-erase marker */
-    --marker-soft: rgba(224, 57, 46, 0.55);
-    --marker-faint: rgba(224, 57, 46, 0.14);
-    --pencil: #6B7280;          /* faint gray for meta text */
-    --ink-dark: #3A3F47;
-    --foil-a: #D9DCE1;          /* silver scratch foil */
-    --foil-b: #AeB4BD;
+    --bg: #F5F6F8;
+    --surface: #FFFFFF;
+    --surface-2: #EDEFF3;
+    --ink: #1F2430;
+    --ink-soft: #6A7284;
+    --line: #D7DBE3;
+    --accent: #4056C7;
+    --accent-soft: rgba(64, 86, 199, 0.10);
+    --accent-ink: #FFFFFF;
     --good: #2E9E60;
+    --foil-a: #DDE0E5;
+    --foil-b: #B9BEC7;
     --focus: #2C5BD9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14171F;
+      --surface: #1C2029;
+      --surface-2: #262B37;
+      --ink: #E7EAF1;
+      --ink-soft: #98A0B3;
+      --line: #363D4C;
+      --accent: #7C8FEA;
+      --accent-soft: rgba(124, 143, 234, 0.14);
+      --accent-ink: #10131C;
+      --good: #4CC488;
+      --foil-a: #4A5060;
+      --foil-b: #343947;
+      --focus: #8FA6F5;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14171F;
+    --surface: #1C2029;
+    --surface-2: #262B37;
+    --ink: #E7EAF1;
+    --ink-soft: #98A0B3;
+    --line: #363D4C;
+    --accent: #7C8FEA;
+    --accent-soft: rgba(124, 143, 234, 0.14);
+    --accent-ink: #10131C;
+    --good: #4CC488;
+    --foil-a: #4A5060;
+    --foil-b: #343947;
+    --focus: #8FA6F5;
   }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    background:
-      linear-gradient(118deg, transparent 30%, var(--board-glare) 42%, transparent 54%),
-      linear-gradient(100deg, transparent 62%, rgba(220, 228, 236, 0.35) 74%, transparent 86%),
-    var(--board);
-    color: var(--marker);
-    font-family: "Segoe Print", "Bradley Hand", "Chalkboard", "Marker Felt", "Comic Sans MS", cursive;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     font-size: 14px;
-    line-height: 1.3;
+    line-height: 1.4;
     min-height: 100vh;
   }
   button { font: inherit; cursor: pointer; color: inherit; }
   input, select { font: inherit; }
   :is(button, input, select, [tabindex]):focus-visible {
-    outline: 3px solid var(--focus);
+    outline: 2.5px solid var(--focus);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
-  /* hand-drawn border trick */
-  .sketchy {
-    border: 2.5px solid var(--marker);
-    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-  }
-
-  .wrap { max-width: 1020px; margin: 0 auto; padding: 14px 18px 20px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 14px 18px 24px; }
 
   /* ============ board rows ============ */
   .rows { display: flex; flex-direction: column; gap: 8px; }
 
   .row {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(20px, 55px) 118px;
-    gap: 0 6px;
+    grid-template-columns: minmax(0, 1fr) minmax(16px, 44px) 122px;
+    gap: 0 8px;
     align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
   }
   @media (max-width: 720px) {
     .row { grid-template-columns: minmax(0, 1fr); }
     .row .connector { display: none; }
-    .row .scratcher-cell { margin-top: 10px; justify-self: start; }
+    .row .scratcher-cell { margin-top: 8px; justify-self: start; }
   }
 
   .task-cell { min-width: 0; }
   .owner {
     display: inline-block;
-    color: var(--marker);
-    opacity: 0.85;
-    font-size: 0.85rem;
-    transform: rotate(-1.5deg);
-    margin-bottom: 2px;
+    color: var(--ink-soft);
+    font-size: 0.78rem;
+    margin-bottom: 1px;
   }
-  .owner::after { content: " →"; }
   .task-title {
     margin: 0;
-    font-size: 1.02rem;
-    font-weight: 700;
+    font-size: 0.98rem;
+    font-weight: 650;
     overflow-wrap: anywhere;
-    transform: rotate(-0.4deg);
   }
-  .task-title.struck { text-decoration: line-through wavy; opacity: 0.75; }
+  .task-title.struck { text-decoration: line-through; color: var(--ink-soft); }
 
-  /* day tally boxes */
-  .days {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0;
-    margin-top: 3px;
-  }
+  /* day boxes */
+  .days { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
   .day-box {
     width: 30px;
-    height: 31px;
-    border: 2.5px solid var(--marker);
-    border-radius: 12px 4px 14px 5px / 5px 14px 4px 12px;
-    margin-right: -2.5px;
+    height: 30px;
+    border: 1.5px solid var(--line);
+    border-radius: 7px;
     background: transparent;
     display: grid;
     place-items: center;
     position: relative;
-    font-size: 0.8rem;
-    color: var(--marker-soft);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
     padding: 0;
   }
-  .day-box:nth-child(odd) { transform: rotate(0.8deg); }
-  .day-box:nth-child(even) { transform: rotate(-0.7deg); }
-  .day-box .n { position: absolute; top: 0px; right: 4px; font-size: 0.58rem; }
+  .day-box .n { position: absolute; top: 1px; right: 4px; font-size: 0.55rem; }
   .day-box .slash {
-    font-size: 1.2rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    color: var(--marker);
+    color: var(--accent-ink);
     line-height: 1;
-    transform: rotate(8deg);
   }
-  .day-box.next { cursor: pointer; background: var(--marker-faint); }
-  .day-box.next:hover .hint-plus { opacity: 1; }
-  .day-box .hint-plus { font-size: 1.05rem; color: var(--marker); opacity: 0.5; }
+  .day-box.filled { background: var(--accent); border-color: var(--accent); }
+  .day-box.filled .n { color: var(--accent-ink); opacity: 0.7; }
+  .day-box.next { cursor: pointer; background: var(--accent-soft); border-color: var(--accent); }
+  .day-box.next:hover { background: var(--accent); }
+  .day-box.next:hover .hint-plus { color: var(--accent-ink); }
+  .day-box .hint-plus { font-size: 1rem; color: var(--accent); font-weight: 600; }
   .day-box:disabled { cursor: default; }
-  .day-box.next:disabled { cursor: pointer; } /* next box is a button, keep pointer */
+  .day-box.next:disabled { cursor: pointer; }
 
   /* proof form */
-  .proof-form { margin-top: 5px; max-width: 480px; }
-  .proof-form .ask { margin: 0 0 2px; font-size: 0.9rem; }
-  .proof-form .rule { color: var(--pencil); font-size: 0.72rem; font-family: system-ui, sans-serif; margin: 0 0 4px; }
-  .proof-line { display: flex; gap: 8px; flex-wrap: wrap; }
+  .proof-form { margin-top: 6px; max-width: 480px; }
+  .proof-form .ask { margin: 0 0 2px; font-size: 0.85rem; font-weight: 600; }
+  .proof-form .rule { color: var(--ink-soft); font-size: 0.74rem; margin: 0 0 4px; }
+  .proof-line { display: flex; gap: 6px; flex-wrap: wrap; }
   .proof-line input {
     flex: 1;
     min-width: 200px;
-    border: 2px solid var(--marker-soft);
-    border-radius: 10px 3px 12px 4px / 4px 12px 3px 10px;
-    padding: 4px 8px;
-    background: #fff;
-    color: var(--ink-dark);
-    font-family: system-ui, sans-serif;
+    border: 1.5px solid var(--line);
+    border-radius: 7px;
+    padding: 5px 9px;
+    background: var(--surface);
+    color: var(--ink);
     font-size: 0.85rem;
   }
-  .proof-line input::placeholder { color: #9AA1AB; }
+  .proof-line input::placeholder { color: var(--ink-soft); }
 
   .btn {
-    background: transparent;
-    border: 2.5px solid var(--marker);
-    border-radius: 14px 5px 16px 6px / 6px 16px 5px 14px;
-    padding: 3px 12px;
-    font-weight: 700;
-    font-size: 0.85rem;
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: 7px;
+    padding: 4px 12px;
+    font-weight: 600;
+    font-size: 0.82rem;
   }
-  .btn:hover { background: var(--marker-faint); }
-  .btn.fill { background: var(--marker); color: #fff; }
-  .btn.fill:hover { opacity: 0.9; }
+  .btn:hover { background: var(--surface-2); }
+  .btn.fill { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn.fill:hover { opacity: 0.9; background: var(--accent); }
   .btn.quiet {
     border-color: transparent;
-    color: var(--pencil);
-    font-size: 0.72rem;
+    background: transparent;
+    color: var(--ink-soft);
+    font-size: 0.74rem;
     padding: 1px 6px;
   }
-  .btn.quiet:hover { color: var(--marker); background: transparent; }
+  .btn.quiet:hover { color: var(--accent); background: transparent; }
   .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
   .proof-log {
-    margin: 2px 0 0;
+    margin: 4px 0 0;
     padding: 0;
     list-style: none;
-    color: var(--pencil);
+    color: var(--ink-soft);
     font-family: ui-monospace, Menlo, Consolas, monospace;
-    font-size: 0.62rem;
+    font-size: 0.66rem;
     display: flex;
     flex-wrap: wrap;
     gap: 0 12px;
   }
   .proof-log li { overflow-wrap: anywhere; }
-  .proof-log .d { color: var(--good); font-weight: 700; margin-right: 6px; }
+  .proof-log .d { color: var(--good); font-weight: 700; margin-right: 5px; }
 
   /* dotted connector */
-  .connector {
-    height: 0;
-    border-top: 3.5px dotted var(--marker);
-    opacity: 0.75;
-    transform: rotate(-2deg);
-  }
+  .connector { height: 0; border-top: 2px dotted var(--line); }
 
   /* ============ scratcher card ============ */
-  .scratcher-cell { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+  .scratcher-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; }
   .scratcher {
     position: relative;
-    width: 116px;
+    width: 118px;
     height: 64px;
-    border: 2.5px solid var(--marker);
-    border-radius: 18px 6px 20px 8px / 8px 20px 6px 18px;
+    border: 1.5px solid var(--line);
+    border-radius: 9px;
     overflow: hidden;
-    background: #fff;
-    transform: rotate(1.4deg);
+    background: var(--surface);
   }
-  .row:nth-child(even) .scratcher { transform: rotate(-1.6deg); }
   .scratcher .face {
     position: absolute;
     inset: 0;
     display: grid;
     place-items: center;
     text-align: center;
-    padding: 8px;
-    background: #FFFDF5;
+    padding: 6px;
+    background: var(--accent-soft);
   }
   .scratcher .face .win {
     font-size: 0.72rem;
@@ -206,11 +218,10 @@
   .scratcher .face .tiny {
     display: block;
     font-size: 0.52rem;
-    color: var(--pencil);
-    font-family: system-ui, sans-serif;
+    color: var(--ink-soft);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
   }
   .scratcher canvas {
     position: absolute;
@@ -227,72 +238,76 @@
     inset: 0;
     display: grid;
     place-items: center;
-    background: repeating-linear-gradient(-45deg, #F4F5F3 0 10px, #FBFBF9 10px 20px);
-    color: var(--pencil);
-    font-size: 0.66rem;
-    font-family: system-ui, sans-serif;
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    font-size: 0.68rem;
     text-align: center;
     padding: 6px;
   }
-  .scratch-hint { font-size: 0.62rem; color: var(--pencil); font-family: system-ui, sans-serif; }
-  .row-tools { display: flex; gap: 2px; }
+  .scratch-hint { font-size: 0.64rem; color: var(--ink-soft); }
+  .row-tools { display: flex; gap: 2px; margin-top: 2px; }
 
   /* ============ add forms & pool ============ */
   .bench {
-    margin-top: 16px;
-    padding-top: 10px;
-    border-top: 2.5px dashed var(--marker-soft);
+    margin-top: 14px;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 20px;
+    gap: 14px;
   }
   @media (max-width: 720px) { .bench { grid-template-columns: minmax(0, 1fr); } }
-  .bench h2 {
-    margin: 0 0 6px;
-    font-size: 1.05rem;
-    transform: rotate(-0.8deg);
+  .bench section {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
   }
+  .bench h2 { margin: 0 0 8px; font-size: 0.92rem; font-weight: 700; }
 
   .add-task-form { display: flex; flex-direction: column; gap: 6px; }
-  .add-task-form .line { display: flex; gap: 8px; flex-wrap: wrap; }
+  .add-task-form .line { display: flex; gap: 6px; flex-wrap: wrap; }
   .add-task-form input, .add-task-form select {
-    border: 2px solid var(--marker-soft);
-    border-radius: 10px 3px 12px 4px / 4px 12px 3px 10px;
-    padding: 4px 8px;
-    background: #fff;
-    color: var(--ink-dark);
-    font-family: system-ui, sans-serif;
+    border: 1.5px solid var(--line);
+    border-radius: 7px;
+    padding: 5px 9px;
+    background: var(--surface);
+    color: var(--ink);
     font-size: 0.85rem;
   }
-  .add-task-form input::placeholder { color: #9AA1AB; }
+  .add-task-form input::placeholder { color: var(--ink-soft); }
   .add-task-form .grow { flex: 1; min-width: 180px; }
 
-  ul.pool { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+  ul.pool { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 2px; }
   .pool li { display: flex; align-items: center; gap: 8px; }
-  .pool .tick-mark { flex: none; font-size: 0.85rem; }
-  .pool .pool-text { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 0.9rem; }
-  .pool-line { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pool .tick-mark { flex: none; font-size: 0.8rem; color: var(--ink-soft); }
+  .pool .pool-text { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 0.85rem; }
+  .pool-line { display: flex; gap: 6px; flex-wrap: wrap; }
   .pool-line input {
     flex: 1;
     min-width: 180px;
-    border: 2px solid var(--marker-soft);
-    border-radius: 10px 3px 12px 4px / 4px 12px 3px 10px;
-    padding: 4px 8px;
-    background: #fff;
-    color: var(--ink-dark);
-    font-family: system-ui, sans-serif;
+    border: 1.5px solid var(--line);
+    border-radius: 7px;
+    padding: 5px 9px;
+    background: var(--surface);
+    color: var(--ink);
     font-size: 0.85rem;
   }
-  .empty-note { color: var(--pencil); font-size: 0.85rem; font-family: system-ui, sans-serif; }
+  .pool-line input::placeholder { color: var(--ink-soft); }
+  .empty-note { color: var(--ink-soft); font-size: 0.8rem; }
 
   /* ============ ledger ============ */
-  .ledger { margin-top: 14px; }
-  .ledger h2 { margin: 0 0 4px; font-size: 1.05rem; transform: rotate(-0.6deg); }
-  ul.wins { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+  .ledger {
+    margin-top: 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .ledger h2 { margin: 0 0 6px; font-size: 0.92rem; font-weight: 700; }
+  ul.wins { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
   .wins li { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
-  .wins .when { color: var(--pencil); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.72rem; }
-  .wins .what { font-weight: 700; overflow-wrap: anywhere; }
-  .wins .for { color: var(--pencil); font-size: 0.8rem; font-family: system-ui, sans-serif; }
+  .wins .when { color: var(--ink-soft); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.7rem; }
+  .wins .what { font-weight: 650; overflow-wrap: anywhere; font-size: 0.85rem; }
+  .wins .for { color: var(--ink-soft); font-size: 0.78rem; }
 
   #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
 
@@ -341,7 +356,7 @@
   </div>
 
   <section class="ledger" id="ledger" hidden aria-labelledby="ledger-h">
-    <h2 id="ledger-h">Winnings so far ✓</h2>
+    <h2 id="ledger-h">Winnings so far</h2>
     <ul class="wins" id="wins-list"></ul>
   </section>
 </div>
@@ -458,7 +473,7 @@
         var filled = i < t.checks.length;
         var isNext = i === t.checks.length && !isComplete(t);
         var box = document.createElement("button");
-        box.className = "day-box" + (isNext ? " next" : "");
+        box.className = "day-box" + (filled ? " filled" : "") + (isNext ? " next" : "");
         box.disabled = !isNext;
         if (t.days > 1) {
           var n = document.createElement("span");
@@ -471,7 +486,7 @@
           var s = document.createElement("span");
           s.className = "slash";
           s.setAttribute("aria-hidden", "true");
-          s.textContent = "/";
+          s.textContent = "✓";
           box.appendChild(s);
           box.setAttribute("aria-label", "Day " + (i + 1) + " done: " + t.checks[i].proof);
           box.title = t.checks[i].proof;
@@ -592,8 +607,8 @@
       }
       var del = document.createElement("button");
       del.className = "btn quiet";
-      del.setAttribute("aria-label", "Erase task: " + t.text);
-      del.textContent = "erase ✕";
+      del.setAttribute("aria-label", "Remove task: " + t.text);
+      del.textContent = "remove ✕";
       del.addEventListener("click", function () {
         state.tasks = state.tasks.filter(function (x) { return x.id !== t.id; });
         if (armingId === t.id) armingId = null;
@@ -685,7 +700,7 @@
       var tick = document.createElement("span");
       tick.className = "tick-mark";
       tick.setAttribute("aria-hidden", "true");
-      tick.textContent = "→";
+      tick.textContent = "•";
       var txt = document.createElement("span");
       txt.className = "pool-text";
       txt.textContent = r;
@@ -745,33 +760,26 @@
     var ctx = canvas.getContext("2d");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    /* silver foil */
+    var styles = getComputedStyle(document.documentElement);
+    var foilA = styles.getPropertyValue("--foil-a").trim() || "#DDE0E5";
+    var foilB = styles.getPropertyValue("--foil-b").trim() || "#B9BEC7";
+
     var g = ctx.createLinearGradient(0, 0, w, h);
-    g.addColorStop(0, "#DDE0E5");
-    g.addColorStop(0.5, "#B9BEC7");
-    g.addColorStop(1, "#D6D9DE");
+    g.addColorStop(0, foilA);
+    g.addColorStop(0.5, foilB);
+    g.addColorStop(1, foilA);
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
     for (var i = 0; i < 90; i++) {
-      ctx.fillStyle = Math.random() > 0.5 ? "rgba(255,255,255,0.5)" : "rgba(90,96,105,0.25)";
+      ctx.fillStyle = Math.random() > 0.5 ? "rgba(255,255,255,0.35)" : "rgba(40,44,52,0.18)";
       ctx.fillRect(Math.random() * w, Math.random() * h, 1.4, 1.4);
     }
 
-    /* red marker scribble, like the whiteboard sketch */
-    ctx.strokeStyle = "rgba(224, 57, 46, 0.85)";
-    ctx.lineWidth = 3.2;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.beginPath();
-    var x = w * 0.12, y = h * 0.7;
-    ctx.moveTo(x, y);
-    var zig = 5 + Math.floor(Math.random() * 3);
-    for (var z = 0; z < zig; z++) {
-      x += (w * 0.72) / zig;
-      y = z % 2 === 0 ? h * (0.2 + Math.random() * 0.12) : h * (0.68 + Math.random() * 0.12);
-      ctx.lineTo(x, y);
-    }
-    ctx.stroke();
+    ctx.fillStyle = "rgba(40,44,52,0.4)";
+    ctx.font = "700 10px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("S C R A T C H", w / 2, h / 2);
   }
 
   function attachScratch(canvas, task) {
@@ -897,7 +905,7 @@
     var ctx = canvas.getContext("2d");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     var W = window.innerWidth, H = window.innerHeight;
-    var colors = ["#E0392E", "#F2A93B", "#2E9E60", "#2C5BD9", "#E86A5E"];
+    var colors = ["#4056C7", "#F2A93B", "#2E9E60", "#E05656", "#7C8FEA"];
     var parts = [];
     for (var i = 0; i < 110; i++) {
       parts.push({
