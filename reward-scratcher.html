@@ -24,8 +24,8 @@
     var(--board);
     color: var(--marker);
     font-family: "Segoe Print", "Bradley Hand", "Chalkboard", "Marker Felt", "Comic Sans MS", cursive;
-    font-size: 17px;
-    line-height: 1.45;
+    font-size: 14px;
+    line-height: 1.3;
     min-height: 100vh;
   }
   button { font: inherit; cursor: pointer; color: inherit; }
@@ -42,49 +42,14 @@
     border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   }
 
-  .wrap { max-width: 1020px; margin: 0 auto; padding: 34px 22px 90px; }
-
-  /* ============ masthead ============ */
-  .masthead {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-  }
-  h1 {
-    margin: 0;
-    font-size: clamp(1.9rem, 5vw, 2.7rem);
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    transform: rotate(-1.2deg);
-    text-wrap: balance;
-  }
-  h1 .underline {
-    display: block;
-    width: 8.5em;
-    max-width: 100%;
-    height: 8px;
-    margin-top: 2px;
-    border-radius: 50% 40% 55% 45% / 70% 60% 80% 50%;
-    background: linear-gradient(90deg, var(--marker), var(--marker-soft) 92%, transparent);
-  }
-  .tagline { margin: 8px 0 0; color: var(--pencil); font-size: 0.92rem; max-width: 46ch; }
-  .col-head {
-    align-self: flex-end;
-    font-size: 1.35rem;
-    transform: rotate(2deg);
-    padding-right: 8px;
-  }
-  @media (max-width: 720px) { .col-head { display: none; } }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 14px 18px 20px; }
 
   /* ============ board rows ============ */
-  .rows { display: flex; flex-direction: column; gap: 30px; margin-top: 26px; }
+  .rows { display: flex; flex-direction: column; gap: 8px; }
 
   .row {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(28px, 70px) 158px;
+    grid-template-columns: minmax(0, 1fr) minmax(20px, 55px) 118px;
     gap: 0 6px;
     align-items: center;
   }
@@ -106,7 +71,7 @@
   .owner::after { content: " →"; }
   .task-title {
     margin: 0;
-    font-size: 1.28rem;
+    font-size: 1.02rem;
     font-weight: 700;
     overflow-wrap: anywhere;
     transform: rotate(-0.4deg);
@@ -118,11 +83,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0;
-    margin-top: 8px;
+    margin-top: 3px;
   }
   .day-box {
-    width: 42px;
-    height: 44px;
+    width: 30px;
+    height: 31px;
     border: 2.5px solid var(--marker);
     border-radius: 12px 4px 14px 5px / 5px 14px 4px 12px;
     margin-right: -2.5px;
@@ -136,9 +101,9 @@
   }
   .day-box:nth-child(odd) { transform: rotate(0.8deg); }
   .day-box:nth-child(even) { transform: rotate(-0.7deg); }
-  .day-box .n { position: absolute; top: 2px; right: 5px; font-size: 0.62rem; }
+  .day-box .n { position: absolute; top: 0px; right: 4px; font-size: 0.58rem; }
   .day-box .slash {
-    font-size: 1.55rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--marker);
     line-height: 1;
@@ -146,25 +111,25 @@
   }
   .day-box.next { cursor: pointer; background: var(--marker-faint); }
   .day-box.next:hover .hint-plus { opacity: 1; }
-  .day-box .hint-plus { font-size: 1.3rem; color: var(--marker); opacity: 0.5; }
+  .day-box .hint-plus { font-size: 1.05rem; color: var(--marker); opacity: 0.5; }
   .day-box:disabled { cursor: default; }
   .day-box.next:disabled { cursor: pointer; } /* next box is a button, keep pointer */
 
   /* proof form */
-  .proof-form { margin-top: 10px; max-width: 480px; }
-  .proof-form .ask { margin: 0 0 4px; font-size: 0.95rem; }
-  .proof-form .rule { color: var(--pencil); font-size: 0.78rem; font-family: system-ui, sans-serif; margin: 0 0 6px; }
+  .proof-form { margin-top: 5px; max-width: 480px; }
+  .proof-form .ask { margin: 0 0 2px; font-size: 0.9rem; }
+  .proof-form .rule { color: var(--pencil); font-size: 0.72rem; font-family: system-ui, sans-serif; margin: 0 0 4px; }
   .proof-line { display: flex; gap: 8px; flex-wrap: wrap; }
   .proof-line input {
     flex: 1;
     min-width: 200px;
     border: 2px solid var(--marker-soft);
     border-radius: 10px 3px 12px 4px / 4px 12px 3px 10px;
-    padding: 7px 10px;
+    padding: 4px 8px;
     background: #fff;
     color: var(--ink-dark);
     font-family: system-ui, sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .proof-line input::placeholder { color: #9AA1AB; }
 
@@ -172,9 +137,9 @@
     background: transparent;
     border: 2.5px solid var(--marker);
     border-radius: 14px 5px 16px 6px / 6px 16px 5px 14px;
-    padding: 5px 14px;
+    padding: 3px 12px;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .btn:hover { background: var(--marker-faint); }
   .btn.fill { background: var(--marker); color: #fff; }
@@ -182,21 +147,24 @@
   .btn.quiet {
     border-color: transparent;
     color: var(--pencil);
-    font-size: 0.8rem;
-    padding: 4px 8px;
+    font-size: 0.72rem;
+    padding: 1px 6px;
   }
   .btn.quiet:hover { color: var(--marker); background: transparent; }
   .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
   .proof-log {
-    margin: 6px 0 0;
+    margin: 2px 0 0;
     padding: 0;
     list-style: none;
     color: var(--pencil);
     font-family: ui-monospace, Menlo, Consolas, monospace;
-    font-size: 0.72rem;
+    font-size: 0.62rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 12px;
   }
-  .proof-log li { margin-top: 2px; overflow-wrap: anywhere; }
+  .proof-log li { overflow-wrap: anywhere; }
   .proof-log .d { color: var(--good); font-weight: 700; margin-right: 6px; }
 
   /* dotted connector */
@@ -208,11 +176,11 @@
   }
 
   /* ============ scratcher card ============ */
-  .scratcher-cell { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .scratcher-cell { display: flex; flex-direction: column; align-items: center; gap: 1px; }
   .scratcher {
     position: relative;
-    width: 152px;
-    height: 96px;
+    width: 116px;
+    height: 64px;
     border: 2.5px solid var(--marker);
     border-radius: 18px 6px 20px 8px / 8px 20px 6px 18px;
     overflow: hidden;
@@ -230,14 +198,14 @@
     background: #FFFDF5;
   }
   .scratcher .face .win {
-    font-size: 0.86rem;
+    font-size: 0.72rem;
     font-weight: 700;
     line-height: 1.25;
     overflow-wrap: anywhere;
   }
   .scratcher .face .tiny {
     display: block;
-    font-size: 0.6rem;
+    font-size: 0.52rem;
     color: var(--pencil);
     font-family: system-ui, sans-serif;
     letter-spacing: 0.12em;
@@ -261,65 +229,66 @@
     place-items: center;
     background: repeating-linear-gradient(-45deg, #F4F5F3 0 10px, #FBFBF9 10px 20px);
     color: var(--pencil);
-    font-size: 0.72rem;
+    font-size: 0.66rem;
     font-family: system-ui, sans-serif;
     text-align: center;
-    padding: 8px;
+    padding: 6px;
   }
-  .scratch-hint { font-size: 0.72rem; color: var(--pencil); font-family: system-ui, sans-serif; }
+  .scratch-hint { font-size: 0.62rem; color: var(--pencil); font-family: system-ui, sans-serif; }
   .row-tools { display: flex; gap: 2px; }
 
   /* ============ add forms & pool ============ */
   .bench {
-    margin-top: 48px;
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 2.5px dashed var(--marker-soft);
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 34px;
+    gap: 20px;
   }
   @media (max-width: 720px) { .bench { grid-template-columns: minmax(0, 1fr); } }
   .bench h2 {
-    margin: 0 0 2px;
-    font-size: 1.3rem;
+    margin: 0 0 6px;
+    font-size: 1.05rem;
     transform: rotate(-0.8deg);
   }
-  .bench .sub { margin: 0 0 12px; color: var(--pencil); font-size: 0.8rem; font-family: system-ui, sans-serif; }
 
-  .add-task-form { display: flex; flex-direction: column; gap: 8px; }
+  .add-task-form { display: flex; flex-direction: column; gap: 6px; }
   .add-task-form .line { display: flex; gap: 8px; flex-wrap: wrap; }
   .add-task-form input, .add-task-form select {
     border: 2px solid var(--marker-soft);
     border-radius: 10px 3px 12px 4px / 4px 12px 3px 10px;
-    padding: 7px 10px;
+    padding: 4px 8px;
     background: #fff;
     color: var(--ink-dark);
     font-family: system-ui, sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .add-task-form input::placeholder { color: #9AA1AB; }
   .add-task-form .grow { flex: 1; min-width: 180px; }
 
-  ul.pool { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  ul.pool { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-direction: column; gap: 1px; }
   .pool li { display: flex; align-items: center; gap: 8px; }
-  .pool .tick-mark { flex: none; font-size: 1rem; }
-  .pool .pool-text { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 1rem; }
+  .pool .tick-mark { flex: none; font-size: 0.85rem; }
+  .pool .pool-text { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 0.9rem; }
   .pool-line { display: flex; gap: 8px; flex-wrap: wrap; }
   .pool-line input {
     flex: 1;
     min-width: 180px;
     border: 2px solid var(--marker-soft);
     border-radius: 10px 3px 12px 4px / 4px 12px 3px 10px;
-    padding: 7px 10px;
+    padding: 4px 8px;
     background: #fff;
     color: var(--ink-dark);
     font-family: system-ui, sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .empty-note { color: var(--pencil); font-size: 0.85rem; font-family: system-ui, sans-serif; }
 
   /* ============ ledger ============ */
-  .ledger { margin-top: 44px; }
-  .ledger h2 { margin: 0 0 8px; font-size: 1.3rem; transform: rotate(-0.6deg); }
-  ul.wins { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .ledger { margin-top: 14px; }
+  .ledger h2 { margin: 0 0 4px; font-size: 1.05rem; transform: rotate(-0.6deg); }
+  ul.wins { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
   .wins li { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
   .wins .when { color: var(--pencil); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.72rem; }
   .wins .what { font-weight: 700; overflow-wrap: anywhere; }
@@ -333,21 +302,12 @@
 </style>
 
 <div class="wrap">
-  <header class="masthead">
-    <div>
-      <h1>Scratchwork<span class="underline" aria-hidden="true"></span></h1>
-      <p class="tagline">Every task has its own scratcher. Fill every box — with proof — and scratch to see what you won.</p>
-    </div>
-    <div class="col-head" aria-hidden="true">Scratchers ↓</div>
-  </header>
-
   <div class="rows" id="rows"></div>
   <p class="empty-note" id="rows-empty" hidden>Board's empty — add your first task below.</p>
 
   <div class="bench">
     <section aria-labelledby="add-h">
       <h2 id="add-h">Add to the board</h2>
-      <p class="sub">One-shot task or a multi-day streak — each gets its own scratcher.</p>
       <div class="add-task-form">
         <div class="line">
           <input class="grow" id="new-task" type="text" maxlength="120" placeholder="Task or habit (e.g. Workout 1h+)" aria-label="New task name" />
@@ -371,7 +331,6 @@
 
     <section aria-labelledby="pool-h">
       <h2 id="pool-h">Reward pool</h2>
-      <p class="sub">Shuffled secretly — each finished scratcher hides one of these at random.</p>
       <ul class="pool" id="pool-list"></ul>
       <p class="empty-note" id="pool-empty" hidden>Pool's empty — add a treat so the scratchers have something to hide.</p>
       <div class="pool-line">
@@ -398,19 +357,20 @@
   /* ---------------- state ---------------- */
   var state = {
     tasks: [
-      mk("Egypt Article — publish", "Coby", 1),
-      mk("AM article — published", "Adam", 1),
+      mk("Egypt Article — publish", "", 1),
+      mk("AM article — published", "", 1),
       mk("Workout 1h+ for 7 days in a row", "", 7),
       mk("Chem Immersion 7 days", "", 7),
       mk("No Youtube", "", 7),
       mk("Read 1h", "", 7)
     ],
     rewards: [
-      "Fancy dinner out",
-      "One lazy Sunday, zero guilt",
-      "New book of your choice",
-      "Movie night + snacks",
-      "Sleep in with no alarm"
+      "Gym membership",
+      "Gym clothes",
+      "Gym training session #1",
+      "Gym training session #2",
+      "Gym training session #3",
+      "Gym training session #4"
     ],
     wins: []   // { reward, task, when }
   };
@@ -429,6 +389,15 @@
       if (!raw) return;
       var s = JSON.parse(raw);
       if (s && Array.isArray(s.tasks) && Array.isArray(s.rewards)) state = s;
+      state.tasks.forEach(function (t) {
+        if (t.owner === "Coby" || t.owner === "Adam") t.owner = "";
+      });
+      /* swap old placeholder rewards for the real pool, keep user-added ones */
+      var oldSeeds = ["Fancy dinner out", "One lazy Sunday, zero guilt", "New book of your choice", "Movie night + snacks", "Sleep in with no alarm"];
+      state.rewards = state.rewards.filter(function (r) { return oldSeeds.indexOf(r) === -1; });
+      ["Gym membership", "Gym clothes", "Gym training session #1", "Gym training session #2", "Gym training session #3", "Gym training session #4"].forEach(function (r) {
+        if (state.rewards.indexOf(r) === -1) state.rewards.push(r);
+      });
     } catch (e) { /* keep defaults */ }
   }
 
