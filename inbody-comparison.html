@@ -153,13 +153,13 @@
   }
 
   /* segmental: shared %-scale with a 100% reference line */
-  .seg-chart { position: relative; }
+  .seg-chart { position: relative; --scale-max: 120; }
   .seg-ref {
     position: absolute; top: 0; bottom: 22px; width: 0;
-    border-left: 1.5px dashed var(--baseline); left: calc(100% * 100 / 120);
+    border-left: 1.5px dashed var(--baseline); left: calc(100% * 100 / var(--scale-max));
   }
   .seg-ref-label {
-    position: absolute; bottom: 0; transform: translateX(-50%); left: calc(100% * 100 / 120);
+    position: absolute; bottom: 0; transform: translateX(-50%); left: calc(100% * 100 / var(--scale-max));
     font-size: 11px; color: var(--muted); white-space: nowrap;
   }
   .seg-rows { display: flex; flex-direction: column; gap: 14px; padding-bottom: 26px; }
@@ -195,6 +195,18 @@
   .caveat { color: var(--muted); font-size: 12.5px; max-width: 72ch; margin: 0; }
   .caveat strong { color: var(--ink-2); font-weight: 600; }
 
+  .imp-title { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 14px 0 4px; }
+  table.imp { font-size: 12px; }
+  table.imp th, table.imp td { padding: 5px 8px; }
+
+  @media print {
+    body { padding: 0; }
+    .toggle { display: none; }
+    .panel, .tile, .test-card { break-inside: avoid; }
+    .tests, .tiles { break-inside: avoid; }
+    .table-scroll { overflow-x: visible; }
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     .bar, .seg-bar { transition: opacity 120ms ease; }
   }
@@ -224,7 +236,7 @@
     <div class="test-card may">
       <p class="test-tag"><span class="dot"></span>Test 2 · May 29, 2026 · 9:14 am</p>
       <h2>Fitness SF</h2>
-      <p class="meta">InBody570 · Age 21 · height entered 170.2 cm (5′7″)</p>
+      <p class="meta">InBody570 · ID 9199143328 · Age 21 · height entered 170.2 cm (5′7″)</p>
     </div>
   </section>
 
@@ -346,6 +358,37 @@
     </div>
   </section>
 
+  <section class="panel" aria-label="Segmental fat analysis">
+    <h2>Segmental Fat Analysis</h2>
+    <p class="note">May test only — the InBody270S doesn't report segmental fat. Percent of the ideal fat mass per segment; dashed line marks 100%.</p>
+    <div class="seg-chart" style="--scale-max: 150;">
+      <div class="seg-ref" aria-hidden="true"></div>
+      <span class="seg-ref-label" aria-hidden="true">100% of ideal</span>
+      <div class="seg-rows">
+        <div>
+          <p class="seg-label">Right Arm</p>
+          <div class="seg-bar-line"><div class="seg-bar may" style="width: 71.8%"></div><span class="seg-val">107.7% · <span class="u" data-lb="2.4 lb" data-kg="1.1 kg">2.4 lb</span></span></div>
+        </div>
+        <div>
+          <p class="seg-label">Left Arm</p>
+          <div class="seg-bar-line"><div class="seg-bar may" style="width: 71.3%"></div><span class="seg-val">107.0% · <span class="u" data-lb="2.4 lb" data-kg="1.1 kg">2.4 lb</span></span></div>
+        </div>
+        <div>
+          <p class="seg-label">Trunk</p>
+          <div class="seg-bar-line"><div class="seg-bar may" style="width: 93.3%"></div><span class="seg-val">139.9% · <span class="u" data-lb="17.6 lb" data-kg="8.0 kg">17.6 lb</span></span></div>
+        </div>
+        <div>
+          <p class="seg-label">Right Leg</p>
+          <div class="seg-bar-line"><div class="seg-bar may" style="width: 63.1%"></div><span class="seg-val">94.6% · <span class="u" data-lb="5.5 lb" data-kg="2.5 kg">5.5 lb</span></span></div>
+        </div>
+        <div>
+          <p class="seg-label">Left Leg</p>
+          <div class="seg-bar-line"><div class="seg-bar may" style="width: 62.9%"></div><span class="seg-val">94.4% · <span class="u" data-lb="5.5 lb" data-kg="2.5 kg">5.5 lb</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="panel" aria-label="All metrics">
     <h2>Every Shared Metric</h2>
     <p class="note">Converted values shown in the selected unit; Δ is Test 2 minus Test 1.</p>
@@ -377,9 +420,10 @@
   <section class="extras" aria-label="Measured on one device only">
     <div class="panel">
       <h2>Only on the Feb test (InBody270S)</h2>
-      <div class="kv"><span class="k">Whole-body phase angle</span><span class="v">4.5°</span></div>
+      <div class="kv"><span class="k">Whole-body phase angle (50 kHz)</span><span class="v">4.5°</span></div>
       <div class="kv"><span class="k">Skeletal Muscle Index (SMI)</span><span class="v">5.8 kg/m²</span></div>
-      <div class="kv"><span class="k">Recommended fat-free mass gain</span><span class="v u" data-lb="+20.3 lb" data-kg="+9.2 kg">+20.3 lb</span></div>
+      <div class="kv"><span class="k">Fat-free mass vs normal range</span><span class="v u" data-lb="88.6 lb (97.9–119.7 lb)" data-kg="40.2 kg (44.4–54.3 kg)">88.6 lb (97.9–119.7 lb)</span></div>
+      <div class="kv"><span class="k">Recommended change</span><span class="v u" data-lb="0.0 lb fat · +20.3 lb lean" data-kg="0.0 kg fat · +9.2 kg lean">0.0 lb fat · +20.3 lb lean</span></div>
     </div>
     <div class="panel">
       <h2>Only on the May test (InBody570)</h2>
@@ -387,6 +431,19 @@
       <div class="kv"><span class="k">ECW / TBW ratio</span><span class="v">0.381</span></div>
       <div class="kv"><span class="k">Intracellular / extracellular water</span><span class="v">18.6 L / 11.5 L</span></div>
       <div class="kv"><span class="k">Recommended change</span><span class="v u" data-lb="−4.6 lb fat · +12.6 lb lean" data-kg="−2.1 kg fat · +5.7 kg lean">−4.6 lb fat · +12.6 lb lean</span></div>
+      <p class="imp-title">Impedance Z(Ω) by segment</p>
+      <div class="table-scroll">
+        <table class="imp">
+          <thead>
+            <tr><th>Freq</th><th>RA</th><th>LA</th><th>Trunk</th><th>RL</th><th>LL</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="metric">5 kHz</td><td>490.0</td><td>500.1</td><td>30.4</td><td>381.8</td><td>389.9</td></tr>
+            <tr><td class="metric">50 kHz</td><td>449.4</td><td>460.4</td><td>27.0</td><td>341.9</td><td>349.9</td></tr>
+            <tr><td class="metric">500 kHz</td><td>396.0</td><td>403.5</td><td>20.2</td><td>301.3</td><td>308.9</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
