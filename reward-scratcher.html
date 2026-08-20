@@ -388,6 +388,14 @@
   "use strict";
 
   var STORAGE_KEY = "scratchwork-v2";
+  var SEEDS = [
+    "Gym membership",
+    "Gym clothes",
+    "Gym training session #1",
+    "Gym training session #2",
+    "Gym training session #3",
+    "Gym training session #4"
+  ];
 
   /* ---------------- state ---------------- */
   var state = {
@@ -400,14 +408,7 @@
       mk("No Youtube", "", 7),
       mk("Read 1h", "", 7)
     ],
-    rewards: [
-      "Gym membership",
-      "Gym clothes",
-      "Gym training session #1",
-      "Gym training session #2",
-      "Gym training session #3",
-      "Gym training session #4"
-    ],
+    rewards: SEEDS.slice(),
     archive: []   // { text, reward, when }
   };
 
@@ -438,9 +439,6 @@
       });
       var oldSeeds = ["Fancy dinner out", "One lazy Sunday, zero guilt", "New book of your choice", "Movie night + snacks", "Sleep in with no alarm"];
       state.rewards = state.rewards.filter(function (r) { return oldSeeds.indexOf(r) === -1; });
-      ["Gym membership", "Gym clothes", "Gym training session #1", "Gym training session #2", "Gym training session #3", "Gym training session #4"].forEach(function (r) {
-        if (state.rewards.indexOf(r) === -1) state.rewards.push(r);
-      });
       /* old wins ledger → archive; claimed rewards leave the pool */
       if (Array.isArray(state.wins)) {
         state.wins.forEach(function (w) {
@@ -456,6 +454,35 @@
       state.tasks.forEach(function (t) {
         if (isComplete(t) && t.completedSeq === 0) t.completedSeq = ++state.seq;
       });
+      /* ensure gym seeds exist — but never re-add a reward that was already won */
+      SEEDS.forEach(function (r) {
+        var won = state.archive.some(function (a) { return a.reward === r; });
+        if (!won && state.rewards.indexOf(r) === -1) state.rewards.push(r);
+      });
+      /* one-time fix: earlier wins were drawn at random; re-map them to strict
+         pool order (first finished task owns reward 1, next owns reward 2, …)
+         and return the wrongly-drawn rewards to the pool */
+      if (!state.orderFixed) {
+        state.orderFixed = true;
+        if (state.archive.length > 0) {
+          var combined = state.archive.map(function (a) { return a.reward; }).concat(state.rewards);
+          var ordered = [];
+          SEEDS.forEach(function (c) {
+            if (combined.indexOf(c) !== -1 && ordered.indexOf(c) === -1) ordered.push(c);
+          });
+          combined.forEach(function (r) {
+            if (SEEDS.indexOf(r) === -1) ordered.push(r);
+          });
+          state.archive.forEach(function (a, i) {
+            if (ordered[i]) a.reward = ordered[i];
+          });
+          state.rewards = ordered.slice(state.archive.length);
+        }
+        /* unrevealed assignments from the random era get re-dealt in order */
+        state.tasks.forEach(function (t) {
+          if (t.reward !== null && !t.revealed) t.reward = null;
+        });
+      }
     } catch (e) { /* keep defaults */ }
   }
 
