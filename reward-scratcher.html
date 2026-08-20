@@ -2,14 +2,14 @@
 <style>
   /* ============ tokens ============ */
   :root {
-    --bg: #F5F6F8;
+    --bg: #F6F7F9;
     --surface: #FFFFFF;
-    --surface-2: #EDEFF3;
-    --ink: #1F2430;
-    --ink-soft: #6A7284;
-    --line: #D7DBE3;
+    --surface-2: #EEF0F4;
+    --ink: #20242E;
+    --ink-soft: #6C7383;
+    --line: #E2E5EB;
     --accent: #4056C7;
-    --accent-soft: rgba(64, 86, 199, 0.10);
+    --accent-soft: rgba(64, 86, 199, 0.08);
     --accent-ink: #FFFFFF;
     --good: #2E9E60;
     --foil-a: #DDE0E5;
@@ -23,9 +23,9 @@
       --surface-2: #262B37;
       --ink: #E7EAF1;
       --ink-soft: #98A0B3;
-      --line: #363D4C;
+      --line: #313847;
       --accent: #7C8FEA;
-      --accent-soft: rgba(124, 143, 234, 0.14);
+      --accent-soft: rgba(124, 143, 234, 0.12);
       --accent-ink: #10131C;
       --good: #4CC488;
       --foil-a: #4A5060;
@@ -39,9 +39,9 @@
     --surface-2: #262B37;
     --ink: #E7EAF1;
     --ink-soft: #98A0B3;
-    --line: #363D4C;
+    --line: #313847;
     --accent: #7C8FEA;
-    --accent-soft: rgba(124, 143, 234, 0.14);
+    --accent-soft: rgba(124, 143, 234, 0.12);
     --accent-ink: #10131C;
     --good: #4CC488;
     --foil-a: #4A5060;
@@ -55,109 +55,122 @@
     background: var(--bg);
     color: var(--ink);
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: 13px;
+    line-height: 1.35;
     min-height: 100vh;
   }
   button { font: inherit; cursor: pointer; color: inherit; }
   input, select { font: inherit; }
-  :is(button, input, select, [tabindex]):focus-visible {
-    outline: 2.5px solid var(--focus);
-    outline-offset: 2px;
+  :is(button, input, select, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
     border-radius: 4px;
   }
 
-  .wrap { max-width: 980px; margin: 0 auto; padding: 14px 18px 24px; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 12px 14px 20px; }
 
-  /* ============ board rows ============ */
-  .rows { display: flex; flex-direction: column; gap: 8px; }
-
-  .row {
+  /* ============ task grid: two columns ============ */
+  .rows {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(16px, 44px) 122px;
-    gap: 0 8px;
-    align-items: center;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+  }
+  @media (max-width: 640px) { .rows { grid-template-columns: minmax(0, 1fr); } }
+
+  .card {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 10px 12px;
+    border-radius: 9px;
+    padding: 8px 10px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 4px 8px;
   }
-  @media (max-width: 720px) {
-    .row { grid-template-columns: minmax(0, 1fr); }
-    .row .connector { display: none; }
-    .row .scratcher-cell { margin-top: 8px; justify-self: start; }
-  }
-
   .task-cell { min-width: 0; }
-  .owner {
-    display: inline-block;
-    color: var(--ink-soft);
-    font-size: 0.78rem;
-    margin-bottom: 1px;
-  }
+  .owner { display: block; color: var(--ink-soft); font-size: 0.72rem; }
   .task-title {
     margin: 0;
-    font-size: 0.98rem;
+    font-size: 0.86rem;
     font-weight: 650;
     overflow-wrap: anywhere;
   }
   .task-title.struck { text-decoration: line-through; color: var(--ink-soft); }
 
   /* day boxes */
-  .days { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .days { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; }
   .day-box {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     border: 1.5px solid var(--line);
-    border-radius: 7px;
+    border-radius: 6px;
     background: transparent;
     display: grid;
     place-items: center;
     position: relative;
-    font-size: 0.75rem;
-    color: var(--ink-soft);
     padding: 0;
+    color: var(--ink-soft);
   }
-  .day-box .n { position: absolute; top: 1px; right: 4px; font-size: 0.55rem; }
-  .day-box .slash {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--accent-ink);
-    line-height: 1;
-  }
+  .day-box .n { position: absolute; top: 0; right: 3px; font-size: 0.5rem; }
+  .day-box .slash { font-size: 0.78rem; font-weight: 700; color: var(--accent-ink); line-height: 1; }
   .day-box.filled { background: var(--accent); border-color: var(--accent); }
   .day-box.filled .n { color: var(--accent-ink); opacity: 0.7; }
   .day-box.next { cursor: pointer; background: var(--accent-soft); border-color: var(--accent); }
   .day-box.next:hover { background: var(--accent); }
   .day-box.next:hover .hint-plus { color: var(--accent-ink); }
-  .day-box .hint-plus { font-size: 1rem; color: var(--accent); font-weight: 600; }
+  .day-box .hint-plus { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
   .day-box:disabled { cursor: default; }
   .day-box.next:disabled { cursor: pointer; }
 
-  /* proof form */
-  .proof-form { margin-top: 6px; max-width: 480px; }
-  .proof-form .ask { margin: 0 0 2px; font-size: 0.85rem; font-weight: 600; }
-  .proof-form .rule { color: var(--ink-soft); font-size: 0.74rem; margin: 0 0 4px; }
-  .proof-line { display: flex; gap: 6px; flex-wrap: wrap; }
-  .proof-line input {
-    flex: 1;
-    min-width: 200px;
+  /* subtasks */
+  .subs { list-style: none; margin: 5px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .subs li { display: flex; align-items: center; gap: 6px; min-width: 0; }
+  .sub-check {
+    flex: none;
+    width: 16px;
+    height: 16px;
     border: 1.5px solid var(--line);
-    border-radius: 7px;
-    padding: 5px 9px;
+    border-radius: 5px;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--accent-ink);
+  }
+  .sub-check.open { cursor: pointer; border-color: var(--accent); background: var(--accent-soft); }
+  .sub-check.open:hover { background: var(--accent); }
+  .sub-check.done { background: var(--accent); border-color: var(--accent); }
+  .sub-text { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 0.8rem; }
+  .sub-text.struck { text-decoration: line-through; color: var(--ink-soft); }
+  .sub-del { visibility: hidden; }
+  .subs li:hover .sub-del { visibility: visible; }
+
+  /* proof + add-sub forms */
+  .mini-form { margin-top: 5px; }
+  .mini-form .ask { margin: 0 0 2px; font-size: 0.78rem; font-weight: 600; }
+  .mini-form .rule { color: var(--ink-soft); font-size: 0.68rem; margin: 0 0 3px; }
+  .mini-line { display: flex; gap: 5px; flex-wrap: wrap; }
+  .mini-line input {
+    flex: 1;
+    min-width: 150px;
+    border: 1.5px solid var(--line);
+    border-radius: 6px;
+    padding: 3px 8px;
     background: var(--surface);
     color: var(--ink);
-    font-size: 0.85rem;
+    font-size: 0.78rem;
   }
-  .proof-line input::placeholder { color: var(--ink-soft); }
+  .mini-line input::placeholder { color: var(--ink-soft); }
 
   .btn {
     background: var(--surface);
     border: 1.5px solid var(--line);
-    border-radius: 7px;
-    padding: 4px 12px;
+    border-radius: 6px;
+    padding: 3px 10px;
     font-weight: 600;
-    font-size: 0.82rem;
+    font-size: 0.76rem;
   }
   .btn:hover { background: var(--surface-2); }
   .btn.fill { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
@@ -166,37 +179,22 @@
     border-color: transparent;
     background: transparent;
     color: var(--ink-soft);
-    font-size: 0.74rem;
-    padding: 1px 6px;
+    font-size: 0.7rem;
+    padding: 1px 5px;
   }
   .btn.quiet:hover { color: var(--accent); background: transparent; }
   .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  .proof-log {
-    margin: 4px 0 0;
-    padding: 0;
-    list-style: none;
-    color: var(--ink-soft);
-    font-family: ui-monospace, Menlo, Consolas, monospace;
-    font-size: 0.66rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 12px;
-  }
-  .proof-log li { overflow-wrap: anywhere; }
-  .proof-log .d { color: var(--good); font-weight: 700; margin-right: 5px; }
+  .row-tools { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 4px; }
 
-  /* dotted connector */
-  .connector { height: 0; border-top: 2px dotted var(--line); }
-
-  /* ============ scratcher card ============ */
-  .scratcher-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  /* ============ scratcher ============ */
+  .scratcher-cell { display: flex; flex-direction: column; align-items: center; gap: 1px; align-self: center; }
   .scratcher {
     position: relative;
-    width: 118px;
-    height: 64px;
-    border: 1.5px solid var(--line);
-    border-radius: 9px;
+    width: 96px;
+    height: 54px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
     overflow: hidden;
     background: var(--surface);
   }
@@ -206,22 +204,17 @@
     display: grid;
     place-items: center;
     text-align: center;
-    padding: 6px;
+    padding: 4px;
     background: var(--accent-soft);
   }
-  .scratcher .face .win {
-    font-size: 0.72rem;
-    font-weight: 700;
-    line-height: 1.25;
-    overflow-wrap: anywhere;
-  }
+  .scratcher .face .win { font-size: 0.64rem; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
   .scratcher .face .tiny {
     display: block;
-    font-size: 0.52rem;
+    font-size: 0.46rem;
     color: var(--ink-soft);
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
   }
   .scratcher canvas {
     position: absolute;
@@ -240,74 +233,97 @@
     place-items: center;
     background: var(--surface-2);
     color: var(--ink-soft);
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     text-align: center;
-    padding: 6px;
+    padding: 4px;
   }
-  .scratch-hint { font-size: 0.64rem; color: var(--ink-soft); }
-  .row-tools { display: flex; gap: 2px; margin-top: 2px; }
+  .scratch-hint { font-size: 0.58rem; color: var(--ink-soft); }
 
-  /* ============ add forms & pool ============ */
+  /* ============ bench ============ */
   .bench {
-    margin-top: 14px;
+    margin-top: 10px;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 14px;
+    gap: 8px;
+    align-items: start;
   }
-  @media (max-width: 720px) { .bench { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 640px) { .bench { grid-template-columns: minmax(0, 1fr); } }
   .bench section {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 12px;
+    border-radius: 9px;
+    padding: 9px 10px;
   }
-  .bench h2 { margin: 0 0 8px; font-size: 0.92rem; font-weight: 700; }
+  .bench h2 { margin: 0 0 6px; font-size: 0.8rem; font-weight: 700; }
 
-  .add-task-form { display: flex; flex-direction: column; gap: 6px; }
-  .add-task-form .line { display: flex; gap: 6px; flex-wrap: wrap; }
+  .add-task-form { display: flex; flex-direction: column; gap: 5px; }
+  .add-task-form .line { display: flex; gap: 5px; flex-wrap: wrap; }
   .add-task-form input, .add-task-form select {
     border: 1.5px solid var(--line);
-    border-radius: 7px;
-    padding: 5px 9px;
+    border-radius: 6px;
+    padding: 3px 8px;
     background: var(--surface);
     color: var(--ink);
-    font-size: 0.85rem;
+    font-size: 0.78rem;
   }
   .add-task-form input::placeholder { color: var(--ink-soft); }
-  .add-task-form .grow { flex: 1; min-width: 180px; }
+  .add-task-form .grow { flex: 1; min-width: 150px; }
 
-  ul.pool { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-  .pool li { display: flex; align-items: center; gap: 8px; }
-  .pool .tick-mark { flex: none; font-size: 0.8rem; color: var(--ink-soft); }
-  .pool .pool-text { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 0.85rem; }
-  .pool-line { display: flex; gap: 6px; flex-wrap: wrap; }
+  ol.pool { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-direction: column; gap: 1px; counter-reset: pool; }
+  .pool li { display: flex; align-items: center; gap: 5px; min-width: 0; }
+  .pool li::before {
+    counter-increment: pool;
+    content: counter(pool) ".";
+    flex: none;
+    width: 16px;
+    color: var(--ink-soft);
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  .pool .pool-text { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 0.78rem; }
+  .pool .updown { visibility: hidden; display: flex; gap: 0; }
+  .pool li:hover .updown, .pool li:hover .pool-del { visibility: visible; }
+  .pool .pool-del { visibility: hidden; }
+  .pool-line { display: flex; gap: 5px; flex-wrap: wrap; }
   .pool-line input {
     flex: 1;
-    min-width: 180px;
+    min-width: 150px;
     border: 1.5px solid var(--line);
-    border-radius: 7px;
-    padding: 5px 9px;
+    border-radius: 6px;
+    padding: 3px 8px;
     background: var(--surface);
     color: var(--ink);
-    font-size: 0.85rem;
+    font-size: 0.78rem;
   }
   .pool-line input::placeholder { color: var(--ink-soft); }
-  .empty-note { color: var(--ink-soft); font-size: 0.8rem; }
+  .pool-note { margin: 0 0 5px; color: var(--ink-soft); font-size: 0.68rem; }
+  .empty-note { color: var(--ink-soft); font-size: 0.75rem; }
 
-  /* ============ ledger ============ */
-  .ledger {
-    margin-top: 14px;
+  /* ============ archive ============ */
+  details.archive { margin-top: 10px; }
+  details.archive summary {
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 4px 2px;
+    user-select: none;
+    width: fit-content;
+  }
+  details.archive summary:hover { color: var(--ink); }
+  .archive-body {
+    margin-top: 4px;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 12px;
+    border-radius: 9px;
+    padding: 8px 10px;
   }
-  .ledger h2 { margin: 0 0 6px; font-size: 0.92rem; font-weight: 700; }
-  ul.wins { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-  .wins li { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
-  .wins .when { color: var(--ink-soft); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.7rem; }
-  .wins .what { font-weight: 650; overflow-wrap: anywhere; font-size: 0.85rem; }
-  .wins .for { color: var(--ink-soft); font-size: 0.78rem; }
+  ul.arch-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+  .arch-list li { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; min-width: 0; }
+  .arch-list .when { color: var(--ink-soft); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.64rem; flex: none; }
+  .arch-list .a-task { font-size: 0.78rem; overflow-wrap: anywhere; }
+  .arch-list .a-reward { font-size: 0.78rem; font-weight: 650; color: var(--good); overflow-wrap: anywhere; }
 
   #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
 
@@ -322,32 +338,34 @@
 
   <div class="bench">
     <section aria-labelledby="add-h">
-      <h2 id="add-h">Add to the board</h2>
+      <h2 id="add-h">Add a task</h2>
       <div class="add-task-form">
         <div class="line">
-          <input class="grow" id="new-task" type="text" maxlength="120" placeholder="Task or habit (e.g. Workout 1h+)" aria-label="New task name" />
+          <input class="grow" id="new-task" type="text" maxlength="120" placeholder="Task or habit" aria-label="New task name" />
         </div>
         <div class="line">
-          <input id="new-owner" type="text" maxlength="30" placeholder="Who? (optional)" aria-label="Owner (optional)" style="width: 130px;" />
+          <input id="new-owner" type="text" maxlength="30" placeholder="Who? (optional)" aria-label="Owner (optional)" style="width: 110px;" />
           <select id="new-days" aria-label="How many times to complete">
-            <option value="1">one-shot</option>
+            <option value="1" selected>one-shot</option>
             <option value="3">3 days</option>
             <option value="5">5 days</option>
-            <option value="7" selected>7 days in a row</option>
+            <option value="7">7 days</option>
             <option value="10">10 days</option>
             <option value="14">14 days</option>
             <option value="21">21 days</option>
             <option value="30">30 days</option>
           </select>
-          <button class="btn fill" id="add-task-btn">Add it</button>
+          <button class="btn fill" id="add-task-btn">Add</button>
         </div>
+        <p class="pool-note">Add subtasks from the “+ subtask” button on any card — the big task earns the scratcher.</p>
       </div>
     </section>
 
     <section aria-labelledby="pool-h">
       <h2 id="pool-h">Reward pool</h2>
-      <ul class="pool" id="pool-list"></ul>
-      <p class="empty-note" id="pool-empty" hidden>Pool's empty — add a treat so the scratchers have something to hide.</p>
+      <p class="pool-note">In order — the first task you finish gets reward 1, the next gets 2, and so on. Won rewards leave the pool.</p>
+      <ol class="pool" id="pool-list"></ol>
+      <p class="empty-note" id="pool-empty" hidden>Pool's empty — add a reward so scratchers can unlock.</p>
       <div class="pool-line">
         <input id="new-reward" type="text" maxlength="120" placeholder="Add a reward…" aria-label="New reward" />
         <button class="btn" id="add-reward-btn">Add</button>
@@ -355,10 +373,12 @@
     </section>
   </div>
 
-  <section class="ledger" id="ledger" hidden aria-labelledby="ledger-h">
-    <h2 id="ledger-h">Winnings so far</h2>
-    <ul class="wins" id="wins-list"></ul>
-  </section>
+  <details class="archive" id="archive" hidden>
+    <summary id="archive-summary">Archive</summary>
+    <div class="archive-body">
+      <ul class="arch-list" id="arch-list"></ul>
+    </div>
+  </details>
 </div>
 
 <canvas id="confetti" hidden></canvas>
@@ -371,6 +391,7 @@
 
   /* ---------------- state ---------------- */
   var state = {
+    seq: 0,
     tasks: [
       mk("Egypt Article — publish", "", 1),
       mk("AM article — published", "", 1),
@@ -387,58 +408,152 @@
       "Gym training session #3",
       "Gym training session #4"
     ],
-    wins: []   // { reward, task, when }
+    archive: []   // { text, reward, when }
   };
 
   function mk(text, owner, days) {
-    return { id: uid(), text: text, owner: owner, days: days, checks: [], reward: null, revealed: false };
+    return { id: uid(), text: text, owner: owner, days: days, checks: [], subtasks: [], reward: null, revealed: false, completedSeq: 0 };
   }
   function uid() { return "t" + Math.random().toString(36).slice(2, 9); }
 
   function save() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* in-memory only */ }
   }
+
   function load() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
       var s = JSON.parse(raw);
-      if (s && Array.isArray(s.tasks) && Array.isArray(s.rewards)) state = s;
+      if (!(s && Array.isArray(s.tasks) && Array.isArray(s.rewards))) return;
+      state = s;
+
+      /* ------- migrations from earlier versions ------- */
+      if (!Array.isArray(state.archive)) state.archive = [];
+      if (typeof state.seq !== "number") state.seq = 0;
       state.tasks.forEach(function (t) {
         if (t.owner === "Coby" || t.owner === "Adam") t.owner = "";
+        if (!Array.isArray(t.subtasks)) t.subtasks = [];
+        if (typeof t.completedSeq !== "number") t.completedSeq = 0;
       });
-      /* swap old placeholder rewards for the real pool, keep user-added ones */
       var oldSeeds = ["Fancy dinner out", "One lazy Sunday, zero guilt", "New book of your choice", "Movie night + snacks", "Sleep in with no alarm"];
       state.rewards = state.rewards.filter(function (r) { return oldSeeds.indexOf(r) === -1; });
       ["Gym membership", "Gym clothes", "Gym training session #1", "Gym training session #2", "Gym training session #3", "Gym training session #4"].forEach(function (r) {
         if (state.rewards.indexOf(r) === -1) state.rewards.push(r);
       });
+      /* old wins ledger → archive; claimed rewards leave the pool */
+      if (Array.isArray(state.wins)) {
+        state.wins.forEach(function (w) {
+          state.archive.push({ text: w.task, reward: w.reward, when: w.when || "" });
+          var i = state.rewards.indexOf(w.reward);
+          if (i !== -1) state.rewards.splice(i, 1);
+        });
+        delete state.wins;
+      }
+      /* previously-revealed tasks living on the board → archived (already logged above via wins) */
+      state.tasks = state.tasks.filter(function (t) { return !t.revealed; });
+      /* completed tasks predating seq tracking get an order now */
+      state.tasks.forEach(function (t) {
+        if (isComplete(t) && t.completedSeq === 0) t.completedSeq = ++state.seq;
+      });
     } catch (e) { /* keep defaults */ }
   }
 
   var $ = function (id) { return document.getElementById(id); };
-  var armingId = null;  // task currently showing its proof input
+  var armingTask = null;          // task id showing its day-proof input
+  var armingSub = null;           // { taskId, subIndex } showing subtask-proof input
+  var addingSubFor = null;        // task id showing its "new subtask" input
 
-  function isComplete(t) { return t.checks.length >= t.days; }
+  function isComplete(t) {
+    if (t.subtasks.length > 0) return t.subtasks.every(function (s) { return s.done; });
+    return t.checks.length >= t.days;
+  }
   function isScratchable(t) { return t.reward !== null && !t.revealed; }
+  function markCompletedIfNeeded(t) {
+    if (isComplete(t) && t.completedSeq === 0) t.completedSeq = ++state.seq;
+    if (!isComplete(t)) t.completedSeq = 0;
+  }
 
-  /* assign hidden rewards to any newly-completed tasks */
+  /* rewards are handed out IN POOL ORDER, by order of task completion */
   function assignRewards() {
+    var taken = {};
     state.tasks.forEach(function (t) {
-      if (isComplete(t) && t.reward === null && !t.revealed && state.rewards.length > 0) {
-        t.reward = state.rewards[Math.floor(Math.random() * state.rewards.length)];
+      if (t.reward !== null && !t.revealed) taken[t.reward] = (taken[t.reward] || 0) + 1;
+    });
+    var waiting = state.tasks
+      .filter(function (t) { return isComplete(t) && t.reward === null && !t.revealed; })
+      .sort(function (a, b) { return a.completedSeq - b.completedSeq; });
+    waiting.forEach(function (t) {
+      for (var i = 0; i < state.rewards.length; i++) {
+        var r = state.rewards[i];
+        if ((taken[r] || 0) > 0) { taken[r]--; continue; }
+        t.reward = r;
+        taken[r] = 0;
+        break;
       }
     });
   }
 
   /* ---------------- render ---------------- */
   function render() {
+    state.tasks.forEach(markCompletedIfNeeded);
     assignRewards();
     renderRows();
     renderPool();
-    renderLedger();
+    renderArchive();
     save();
     requestAnimationFrame(initAllFoils);
+  }
+
+  function proofForm(askText, placeholder, onCommit, focusKey) {
+    var form = document.createElement("div");
+    form.className = "mini-form";
+    var ask = document.createElement("p");
+    ask.className = "ask";
+    ask.textContent = askText;
+    var rule = document.createElement("p");
+    rule.className = "rule";
+    rule.textContent = "Proof required — it only counts once you write something.";
+    var line = document.createElement("div");
+    line.className = "mini-line";
+    var inp = document.createElement("input");
+    inp.type = "text";
+    inp.maxLength = 200;
+    inp.placeholder = placeholder;
+    inp.setAttribute("data-focus-key", focusKey);
+    var logBtn = document.createElement("button");
+    logBtn.className = "btn fill";
+    logBtn.textContent = "Log it";
+    logBtn.disabled = true;
+    inp.addEventListener("input", function () {
+      logBtn.disabled = inp.value.trim().length === 0;
+    });
+    function commit() {
+      var v = inp.value.trim();
+      if (!v) return;                 /* hard gate */
+      onCommit(v);
+    }
+    logBtn.addEventListener("click", commit);
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") commit(); });
+    var cancel = document.createElement("button");
+    cancel.className = "btn quiet";
+    cancel.textContent = "cancel";
+    cancel.addEventListener("click", function () {
+      armingTask = null; armingSub = null;
+      render();
+    });
+    line.appendChild(inp);
+    line.appendChild(logBtn);
+    line.appendChild(cancel);
+    form.appendChild(ask);
+    form.appendChild(rule);
+    form.appendChild(line);
+    return form;
+  }
+
+  function focusPending() {
+    var el = document.querySelector("[data-focus-key][data-want-focus]");
+    if (el) { el.removeAttribute("data-want-focus"); el.focus(); }
   }
 
   function renderRows() {
@@ -447,10 +562,9 @@
     $("rows-empty").hidden = state.tasks.length > 0;
 
     state.tasks.forEach(function (t) {
-      var row = document.createElement("div");
-      row.className = "row";
+      var card = document.createElement("div");
+      card.className = "card";
 
-      /* ----- task cell ----- */
       var cell = document.createElement("div");
       cell.className = "task-cell";
 
@@ -466,229 +580,259 @@
       title.textContent = t.text;
       cell.appendChild(title);
 
-      /* day boxes */
-      var days = document.createElement("div");
-      days.className = "days";
-      for (var i = 0; i < t.days; i++) {
-        var filled = i < t.checks.length;
-        var isNext = i === t.checks.length && !isComplete(t);
-        var box = document.createElement("button");
-        box.className = "day-box" + (filled ? " filled" : "") + (isNext ? " next" : "");
-        box.disabled = !isNext;
-        if (t.days > 1) {
-          var n = document.createElement("span");
-          n.className = "n";
-          n.setAttribute("aria-hidden", "true");
-          n.textContent = i + 1;
-          box.appendChild(n);
-        }
-        if (filled) {
-          var s = document.createElement("span");
-          s.className = "slash";
-          s.setAttribute("aria-hidden", "true");
-          s.textContent = "✓";
-          box.appendChild(s);
-          box.setAttribute("aria-label", "Day " + (i + 1) + " done: " + t.checks[i].proof);
-          box.title = t.checks[i].proof;
-        } else if (isNext) {
-          var plus = document.createElement("span");
-          plus.className = "hint-plus";
-          plus.setAttribute("aria-hidden", "true");
-          plus.textContent = "+";
-          box.appendChild(plus);
-          box.setAttribute("aria-label", t.days > 1
-            ? "Log day " + (i + 1) + " of " + t.days + " for: " + t.text
-            : "Mark done: " + t.text);
-          box.addEventListener("click", (function (task) {
-            return function () {
-              armingId = armingId === task.id ? null : task.id;
-              render();
-              if (armingId === task.id) {
-                var inp = document.querySelector('[data-proof-for="' + task.id + '"]');
-                if (inp) inp.focus();
-              }
-            };
-          })(t));
-        } else {
-          box.setAttribute("aria-label", "Day " + (i + 1) + " — locked until earlier days are logged");
-        }
-        days.appendChild(box);
-      }
-      cell.appendChild(days);
+      var hasSubs = t.subtasks.length > 0;
 
-      /* proof form — the required-input gate */
-      if (armingId === t.id && !isComplete(t)) {
-        var form = document.createElement("div");
-        form.className = "proof-form";
-        var ask = document.createElement("p");
-        ask.className = "ask";
-        ask.textContent = t.days > 1
-          ? "Day " + (t.checks.length + 1) + " — what did you actually do?"
-          : "Done? What did you actually do?";
-        var rule = document.createElement("p");
-        rule.className = "rule";
-        rule.textContent = "Proof required — the box only fills once you write something.";
+      /* ----- subtasks (they define completion when present) ----- */
+      if (hasSubs) {
+        var subs = document.createElement("ul");
+        subs.className = "subs";
+        t.subtasks.forEach(function (st, si) {
+          var li = document.createElement("li");
+          var chk = document.createElement("button");
+          chk.className = "sub-check " + (st.done ? "done" : "open");
+          chk.textContent = st.done ? "✓" : "";
+          if (st.done) {
+            chk.disabled = true;
+            chk.title = st.proof;
+            chk.setAttribute("aria-label", "Done: " + st.text + " — " + st.proof);
+          } else {
+            chk.setAttribute("aria-label", "Mark subtask done: " + st.text);
+            chk.addEventListener("click", function () {
+              var already = armingSub && armingSub.taskId === t.id && armingSub.subIndex === si;
+              armingSub = already ? null : { taskId: t.id, subIndex: si };
+              armingTask = null;
+              render();
+            });
+          }
+          var txt = document.createElement("span");
+          txt.className = "sub-text" + (st.done ? " struck" : "");
+          txt.textContent = st.text;
+          if (st.done) txt.title = st.proof;
+          var del = document.createElement("button");
+          del.className = "btn quiet sub-del";
+          del.textContent = "✕";
+          del.setAttribute("aria-label", "Remove subtask: " + st.text);
+          del.addEventListener("click", function () {
+            t.subtasks.splice(si, 1);
+            armingSub = null;
+            render();
+          });
+          li.appendChild(chk);
+          li.appendChild(txt);
+          li.appendChild(del);
+          subs.appendChild(li);
+        });
+        cell.appendChild(subs);
+
+        if (armingSub && armingSub.taskId === t.id && !isComplete(t)) {
+          var st2 = t.subtasks[armingSub.subIndex];
+          if (st2 && !st2.done) {
+            var f = proofForm(
+              "“" + st2.text + "” — what did you actually do?",
+              "e.g. “finished the draft, sent for review”",
+              function (v) {
+                st2.done = true;
+                st2.proof = v;
+                armingSub = null;
+                render();
+              },
+              "sub-" + t.id
+            );
+            f.querySelector("input").setAttribute("data-want-focus", "1");
+            cell.appendChild(f);
+          }
+        }
+      }
+
+      /* ----- day boxes (only when no subtasks) ----- */
+      if (!hasSubs) {
+        var days = document.createElement("div");
+        days.className = "days";
+        for (var i = 0; i < t.days; i++) {
+          var filled = i < t.checks.length;
+          var isNext = i === t.checks.length && !isComplete(t);
+          var box = document.createElement("button");
+          box.className = "day-box" + (filled ? " filled" : "") + (isNext ? " next" : "");
+          box.disabled = !isNext;
+          if (t.days > 1) {
+            var n = document.createElement("span");
+            n.className = "n";
+            n.setAttribute("aria-hidden", "true");
+            n.textContent = i + 1;
+            box.appendChild(n);
+          }
+          if (filled) {
+            var sl = document.createElement("span");
+            sl.className = "slash";
+            sl.setAttribute("aria-hidden", "true");
+            sl.textContent = "✓";
+            box.appendChild(sl);
+            box.title = t.checks[i].proof;
+            box.setAttribute("aria-label", "Day " + (i + 1) + " done: " + t.checks[i].proof);
+          } else if (isNext) {
+            var plus = document.createElement("span");
+            plus.className = "hint-plus";
+            plus.setAttribute("aria-hidden", "true");
+            plus.textContent = "+";
+            box.appendChild(plus);
+            box.setAttribute("aria-label", t.days > 1
+              ? "Log day " + (i + 1) + " of " + t.days + " for: " + t.text
+              : "Mark done: " + t.text);
+            box.addEventListener("click", function () {
+              armingTask = armingTask === t.id ? null : t.id;
+              armingSub = null;
+              render();
+            });
+          } else {
+            box.setAttribute("aria-label", "Day " + (i + 1) + " — locked until earlier days are logged");
+          }
+          days.appendChild(box);
+        }
+        cell.appendChild(days);
+
+        if (armingTask === t.id && !isComplete(t)) {
+          var f2 = proofForm(
+            t.days > 1 ? "Day " + (t.checks.length + 1) + " — what did you actually do?" : "Done? What did you actually do?",
+            "e.g. “45 min run + 20 min weights”",
+            function (v) {
+              t.checks.push({ proof: v });
+              armingTask = null;
+              render();
+            },
+            "task-" + t.id
+          );
+          f2.querySelector("input").setAttribute("data-want-focus", "1");
+          cell.appendChild(f2);
+        }
+      }
+
+      /* ----- add-subtask inline form ----- */
+      if (addingSubFor === t.id) {
+        var af = document.createElement("div");
+        af.className = "mini-form";
         var line = document.createElement("div");
-        line.className = "proof-line";
+        line.className = "mini-line";
         var inp = document.createElement("input");
         inp.type = "text";
-        inp.maxLength = 200;
-        inp.placeholder = "e.g. “45 min run + 20 min weights”";
-        inp.setAttribute("data-proof-for", t.id);
-        inp.setAttribute("aria-label", "Proof for: " + t.text);
-        var logBtn = document.createElement("button");
-        logBtn.className = "btn fill";
-        logBtn.textContent = "Log it";
-        logBtn.disabled = true;
-        inp.addEventListener("input", function () {
-          logBtn.disabled = inp.value.trim().length === 0;
-        });
-        var commit = (function (task, input) {
-          return function () {
-            var v = input.value.trim();
-            if (!v) return;              /* hard gate: no proof, no tally */
-            task.checks.push({ proof: v });
-            armingId = null;
-            render();
-          };
-        })(t, inp);
-        logBtn.addEventListener("click", commit);
-        inp.addEventListener("keydown", function (e) { if (e.key === "Enter") commit(); });
-        var cancel = document.createElement("button");
-        cancel.className = "btn quiet";
-        cancel.textContent = "cancel";
-        cancel.addEventListener("click", function () { armingId = null; render(); });
+        inp.maxLength = 120;
+        inp.placeholder = "New subtask…";
+        inp.setAttribute("data-focus-key", "addsub-" + t.id);
+        inp.setAttribute("data-want-focus", "1");
+        var add = document.createElement("button");
+        add.className = "btn fill";
+        add.textContent = "Add";
+        function commitSub() {
+          var v = inp.value.trim();
+          if (!v) return;
+          t.subtasks.push({ text: v, done: false, proof: "" });
+          render();
+        }
+        add.addEventListener("click", commitSub);
+        inp.addEventListener("keydown", function (e) { if (e.key === "Enter") commitSub(); });
+        var cls = document.createElement("button");
+        cls.className = "btn quiet";
+        cls.textContent = "done";
+        cls.addEventListener("click", function () { addingSubFor = null; render(); });
         line.appendChild(inp);
-        line.appendChild(logBtn);
-        line.appendChild(cancel);
-        form.appendChild(ask);
-        form.appendChild(rule);
-        form.appendChild(line);
-        cell.appendChild(form);
+        line.appendChild(add);
+        line.appendChild(cls);
+        af.appendChild(line);
+        cell.appendChild(af);
       }
 
-      /* proof log under multi-day tasks */
-      if (t.checks.length > 0) {
-        var logList = document.createElement("ul");
-        logList.className = "proof-log";
-        t.checks.forEach(function (c, idx) {
-          var li = document.createElement("li");
-          var d = document.createElement("span");
-          d.className = "d";
-          d.textContent = t.days > 1 ? "d" + (idx + 1) : "✓";
-          li.appendChild(d);
-          li.appendChild(document.createTextNode(c.proof));
-          logList.appendChild(li);
-        });
-        cell.appendChild(logList);
-      }
-
-      /* tools: undo last / remove */
+      /* ----- tools ----- */
       var tools = document.createElement("div");
       tools.className = "row-tools";
-      if (t.checks.length > 0 && t.reward === null && !t.revealed) {
+      if (!isComplete(t)) {
+        var addSub = document.createElement("button");
+        addSub.className = "btn quiet";
+        addSub.textContent = "+ subtask";
+        addSub.addEventListener("click", function () {
+          addingSubFor = addingSubFor === t.id ? null : t.id;
+          render();
+        });
+        tools.appendChild(addSub);
+      }
+      if (!hasSubs && t.checks.length > 0 && t.reward === null) {
         var undo = document.createElement("button");
         undo.className = "btn quiet";
         undo.textContent = "undo last";
         undo.addEventListener("click", function () { t.checks.pop(); render(); });
         tools.appendChild(undo);
       }
-      if (t.revealed) {
-        var again = document.createElement("button");
-        again.className = "btn quiet";
-        again.textContent = "run it back ↻";
-        again.addEventListener("click", function () {
-          t.checks = [];
-          t.reward = null;
-          t.revealed = false;
-          render();
-        });
-        tools.appendChild(again);
-      }
-      var del = document.createElement("button");
-      del.className = "btn quiet";
-      del.setAttribute("aria-label", "Remove task: " + t.text);
-      del.textContent = "remove ✕";
-      del.addEventListener("click", function () {
+      var del2 = document.createElement("button");
+      del2.className = "btn quiet";
+      del2.setAttribute("aria-label", "Remove task: " + t.text);
+      del2.textContent = "remove ✕";
+      del2.addEventListener("click", function () {
         state.tasks = state.tasks.filter(function (x) { return x.id !== t.id; });
-        if (armingId === t.id) armingId = null;
+        if (armingTask === t.id) armingTask = null;
+        if (armingSub && armingSub.taskId === t.id) armingSub = null;
+        if (addingSubFor === t.id) addingSubFor = null;
         render();
       });
-      tools.appendChild(del);
+      tools.appendChild(del2);
       cell.appendChild(tools);
-
-      /* ----- connector ----- */
-      var conn = document.createElement("div");
-      conn.className = "connector";
-      conn.setAttribute("aria-hidden", "true");
 
       /* ----- scratcher ----- */
       var sCell = document.createElement("div");
       sCell.className = "scratcher-cell";
-      var card = document.createElement("div");
-      card.className = "scratcher";
-
+      var sc = document.createElement("div");
+      sc.className = "scratcher";
       var face = document.createElement("div");
       face.className = "face";
-      var faceInner = document.createElement("div");
+      var fIn = document.createElement("div");
       var tiny = document.createElement("span");
       tiny.className = "tiny";
       tiny.textContent = "You won";
       var win = document.createElement("div");
       win.className = "win";
       win.textContent = t.reward || "";
-      faceInner.appendChild(tiny);
-      faceInner.appendChild(win);
-      face.appendChild(faceInner);
-      card.appendChild(face);
+      fIn.appendChild(tiny);
+      fIn.appendChild(win);
+      face.appendChild(fIn);
+      sc.appendChild(face);
 
       var hint = document.createElement("span");
       hint.className = "scratch-hint";
 
-      if (t.revealed) {
-        hint.textContent = "revealed ✓";
-      } else if (isScratchable(t)) {
+      if (isScratchable(t)) {
         var cv = document.createElement("canvas");
         cv.setAttribute("data-foil-for", t.id);
         cv.setAttribute("aria-label", "Scratch to reveal your reward for: " + t.text);
-        card.appendChild(cv);
+        sc.appendChild(cv);
         attachScratch(cv, t);
         hint.textContent = "scratch me!";
+        sCell.appendChild(sc);
+        sCell.appendChild(hint);
         var tear = document.createElement("button");
         tear.className = "btn quiet";
         tear.textContent = "tear open";
         tear.addEventListener("click", function () { reveal(t); });
-        sCell.appendChild(card);
-        sCell.appendChild(hint);
         sCell.appendChild(tear);
-        row.appendChild(cell);
-        row.appendChild(conn);
-        row.appendChild(sCell);
-        $("rows").appendChild(row);
-        return;
       } else {
         var lock = document.createElement("div");
         lock.className = "locked";
-        var left = t.days - t.checks.length;
         if (isComplete(t) && state.rewards.length === 0) {
-          lock.textContent = "add a reward to the pool to unlock";
+          lock.textContent = "add a reward to unlock";
+        } else if (hasSubs) {
+          var leftS = t.subtasks.filter(function (s) { return !s.done; }).length;
+          lock.textContent = leftS + " subtask" + (leftS === 1 ? "" : "s") + " left";
         } else if (t.days > 1) {
-          lock.textContent = left + " of " + t.days + " to go";
+          lock.textContent = (t.days - t.checks.length) + " of " + t.days + " to go";
         } else {
-          lock.textContent = "locked until done";
+          lock.textContent = "locked";
         }
-        card.appendChild(lock);
-        hint.textContent = t.days > 1 ? "finish the streak" : "finish the task";
+        sc.appendChild(lock);
+        sCell.appendChild(sc);
       }
 
-      sCell.appendChild(card);
-      sCell.appendChild(hint);
-
-      row.appendChild(cell);
-      row.appendChild(conn);
-      row.appendChild(sCell);
-      $("rows").appendChild(row);
+      card.appendChild(cell);
+      card.appendChild(sCell);
+      rows.appendChild(card);
     });
+
+    focusPending();
   }
 
   function renderPool() {
@@ -697,46 +841,70 @@
     $("pool-empty").hidden = state.rewards.length > 0;
     state.rewards.forEach(function (r, i) {
       var li = document.createElement("li");
-      var tick = document.createElement("span");
-      tick.className = "tick-mark";
-      tick.setAttribute("aria-hidden", "true");
-      tick.textContent = "•";
       var txt = document.createElement("span");
       txt.className = "pool-text";
       txt.textContent = r;
+      var ud = document.createElement("span");
+      ud.className = "updown";
+      var up = document.createElement("button");
+      up.className = "btn quiet";
+      up.textContent = "↑";
+      up.disabled = i === 0;
+      up.setAttribute("aria-label", "Move up: " + r);
+      up.addEventListener("click", function () {
+        state.rewards.splice(i - 1, 0, state.rewards.splice(i, 1)[0]);
+        render();
+      });
+      var dn = document.createElement("button");
+      dn.className = "btn quiet";
+      dn.textContent = "↓";
+      dn.disabled = i === state.rewards.length - 1;
+      dn.setAttribute("aria-label", "Move down: " + r);
+      dn.addEventListener("click", function () {
+        state.rewards.splice(i + 1, 0, state.rewards.splice(i, 1)[0]);
+        render();
+      });
+      ud.appendChild(up);
+      ud.appendChild(dn);
       var del = document.createElement("button");
-      del.className = "btn quiet";
+      del.className = "btn quiet pool-del";
       del.setAttribute("aria-label", "Remove reward: " + r);
       del.textContent = "✕";
       del.addEventListener("click", function () {
         state.rewards.splice(i, 1);
         render();
       });
-      li.appendChild(tick);
       li.appendChild(txt);
+      li.appendChild(ud);
       li.appendChild(del);
       list.appendChild(li);
     });
   }
 
-  function renderLedger() {
-    $("ledger").hidden = state.wins.length === 0;
-    var list = $("wins-list");
+  function renderArchive() {
+    var d = $("archive");
+    d.hidden = state.archive.length === 0;
+    $("archive-summary").textContent = "Archive (" + state.archive.length + ")";
+    var list = $("arch-list");
     list.textContent = "";
-    state.wins.slice().reverse().forEach(function (w) {
+    state.archive.slice().reverse().forEach(function (a) {
       var li = document.createElement("li");
       var when = document.createElement("span");
       when.className = "when";
-      when.textContent = w.when;
-      var what = document.createElement("span");
-      what.className = "what";
-      what.textContent = w.reward;
-      var f = document.createElement("span");
-      f.className = "for";
-      f.textContent = "— for “" + w.task + "”";
+      when.textContent = a.when;
+      var task = document.createElement("span");
+      task.className = "a-task";
+      task.textContent = a.text;
+      var arrow = document.createElement("span");
+      arrow.className = "when";
+      arrow.textContent = "→";
+      var rw = document.createElement("span");
+      rw.className = "a-reward";
+      rw.textContent = a.reward;
       li.appendChild(when);
-      li.appendChild(what);
-      li.appendChild(f);
+      li.appendChild(task);
+      li.appendChild(arrow);
+      li.appendChild(rw);
       list.appendChild(li);
     });
   }
@@ -770,13 +938,12 @@
     g.addColorStop(1, foilA);
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
-    for (var i = 0; i < 90; i++) {
+    for (var i = 0; i < 60; i++) {
       ctx.fillStyle = Math.random() > 0.5 ? "rgba(255,255,255,0.35)" : "rgba(40,44,52,0.18)";
-      ctx.fillRect(Math.random() * w, Math.random() * h, 1.4, 1.4);
+      ctx.fillRect(Math.random() * w, Math.random() * h, 1.3, 1.3);
     }
-
     ctx.fillStyle = "rgba(40,44,52,0.4)";
-    ctx.font = "700 10px system-ui, sans-serif";
+    ctx.font = "700 9px system-ui, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText("S C R A T C H", w / 2, h / 2);
@@ -793,7 +960,7 @@
       ctx.save();
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.globalCompositeOperation = "destination-out";
-      ctx.lineWidth = 26;
+      ctx.lineWidth = 22;
       ctx.lineCap = "round";
       ctx.beginPath();
       if (lastPt) {
@@ -801,7 +968,7 @@
         ctx.lineTo(x, y);
         ctx.stroke();
       } else {
-        ctx.arc(x, y, 13, 0, Math.PI * 2);
+        ctx.arc(x, y, 11, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.restore();
@@ -855,14 +1022,18 @@
     canvas.addEventListener("pointercancel", up);
   }
 
+  /* reveal → archive the task, retire the reward from the pool */
   function reveal(task) {
     if (task.revealed || task.reward === null) return;
     task.revealed = true;
-    state.wins.push({
+    state.archive.push({
+      text: task.text,
       reward: task.reward,
-      task: task.text,
       when: new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" })
     });
+    var i = state.rewards.indexOf(task.reward);
+    if (i !== -1) state.rewards.splice(i, 1);
+    state.tasks = state.tasks.filter(function (x) { return x.id !== task.id; });
     render();
     burstConfetti();
   }
@@ -888,7 +1059,7 @@
     if (!v) return;
     state.rewards.push(v);
     inp.value = "";
-    render();   /* re-runs assignRewards for tasks waiting on an empty pool */
+    render();
     inp.focus();
   }
   $("add-reward-btn").addEventListener("click", addReward);
