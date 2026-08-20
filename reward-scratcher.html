@@ -501,6 +501,30 @@
           if (t.reward !== null && !t.revealed) t.reward = null;
         });
       }
+      /* one-time correction (user-confirmed): only "Gym membership" was truly
+         earned — every other archived entry returns its reward to the pool and
+         puts its task back on the board to be earned properly */
+      if (!state.clothesFixed) {
+        state.clothesFixed = true;
+        var keep = [];
+        state.archive.forEach(function (a) {
+          if (a.reward === "Gym membership") { keep.push(a); return; }
+          if (state.rewards.indexOf(a.reward) === -1) state.rewards.push(a.reward);
+          var exists = state.tasks.some(function (t) { return t.text === a.text; });
+          if (!exists) state.tasks.push(mk(a.text, "", 1));
+        });
+        state.archive = keep;
+        /* keep the pool in canonical order: gym seeds first, then extras */
+        var pool2 = state.rewards.slice();
+        var ordered2 = [];
+        SEEDS.forEach(function (c) {
+          if (pool2.indexOf(c) !== -1 && ordered2.indexOf(c) === -1) ordered2.push(c);
+        });
+        pool2.forEach(function (r) {
+          if (SEEDS.indexOf(r) === -1) ordered2.push(r);
+        });
+        state.rewards = ordered2;
+      }
     } catch (e) { /* keep defaults */ }
   }
 
