@@ -69,14 +69,23 @@
 
   .wrap { max-width: 900px; margin: 0 auto; padding: 12px 14px 20px; }
 
-  /* ============ task grid: two columns ============ */
-  .rows {
+  /* ============ board: singles left, streaks right ============ */
+  .board {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
     align-items: start;
   }
-  @media (max-width: 640px) { .rows { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 640px) { .board { grid-template-columns: minmax(0, 1fr); } }
+  .col-label {
+    margin: 0 0 4px;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .col-stack { display: flex; flex-direction: column; gap: 8px; }
 
   .card {
     background: var(--surface);
@@ -333,7 +342,16 @@
 </style>
 
 <div class="wrap">
-  <div class="rows" id="rows"></div>
+  <div class="board" id="board">
+    <div>
+      <p class="col-label" id="label-single">Single tasks</p>
+      <div class="col-stack" id="col-single"></div>
+    </div>
+    <div>
+      <p class="col-label" id="label-multi">Multi-day</p>
+      <div class="col-stack" id="col-multi"></div>
+    </div>
+  </div>
   <p class="empty-note" id="rows-empty" hidden>Board's empty — add your first task below.</p>
 
   <div class="bench">
@@ -584,9 +602,15 @@
   }
 
   function renderRows() {
-    var rows = $("rows");
-    rows.textContent = "";
+    var colSingle = $("col-single");
+    var colMulti = $("col-multi");
+    colSingle.textContent = "";
+    colMulti.textContent = "";
     $("rows-empty").hidden = state.tasks.length > 0;
+    var singles = state.tasks.filter(function (t) { return t.days === 1; });
+    var multis = state.tasks.filter(function (t) { return t.days > 1; });
+    $("label-single").hidden = singles.length === 0;
+    $("label-multi").hidden = multis.length === 0;
 
     state.tasks.forEach(function (t) {
       var card = document.createElement("div");
@@ -770,7 +794,7 @@
       /* ----- tools ----- */
       var tools = document.createElement("div");
       tools.className = "row-tools";
-      if (!isComplete(t)) {
+      if (!isComplete(t) && t.days === 1) {
         var addSub = document.createElement("button");
         addSub.className = "btn quiet";
         addSub.textContent = "+ subtask";
@@ -856,7 +880,7 @@
 
       card.appendChild(cell);
       card.appendChild(sCell);
-      rows.appendChild(card);
+      (t.days === 1 ? colSingle : colMulti).appendChild(card);
     });
 
     focusPending();
